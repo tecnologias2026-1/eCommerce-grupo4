@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar sesión</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Spectral+SC:wght@600&family=Spectral:wght@600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/auth.css" />
+  </head>
+  <body>
+    <main class="auth-page" data-node-id="493:10589">
+      <h1 class="auth-page__title" data-node-id="I493:10127;484:10116">Iniciar sesion</h1>
+
+      <form class="auth-form" action="#" method="post" aria-label="Formulario de inicio de sesión">
+        <label class="auth-form__label" for="identifier" data-node-id="I493:10574;484:10108">Correo/usuario</label>
+        <input
+          class="auth-form__input"
+          id="identifier"
+          name="identifier"
+          type="text"
+          placeholder="Email/User"
+          autocomplete="username"
+          inputmode="email"
+        />
+
+        <label class="auth-form__label" for="password" data-node-id="I493:10143;484:10108">Contraseña</label>
+        <div class="auth-form__password-row" data-node-id="493:10168">
+          <input
+            class="auth-form__input"
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Contraseña"
+            autocomplete="current-password"
+          />
+
+          <button class="auth-form__eye" type="button" aria-label="Icono de ver contraseña" data-node-id="493:10152">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M12 5c4.418 0 8.18 2.909 9.5 7-1.32 4.091-5.082 7-9.5 7-4.418 0-8.18-2.909-9.5-7C3.82 7.909 7.582 5 12 5Zm0 2C8.785 7 5.794 9.039 4.62 12c1.174 2.961 4.165 5 7.38 5 3.215 0 6.206-2.039 7.38-5C18.206 9.039 15.215 7 12 7Zm0 2.5A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5Z"
+                fill="currentColor"
+              />
+              <path d="M4 4 20 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+
+        <button class="auth-form__submit" type="button" data-node-id="493:10577">
+          <span class="auth-form__submit-text" data-node-id="I493:10577;356:17004">Ingresar</span>
+        </button>
+      </form>
+    </main>
+  </body>
+</html>
