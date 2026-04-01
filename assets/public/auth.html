@@ -103,6 +103,20 @@
         </button>
       </form>
     </main>
+    <div id="recovery-modal" class="modal-overlay" aria-hidden="true">
+      <div class="modal-content">
+        <h2 class="modal-title">RECUPERAR CONTRASEÑA</h2>
+        <p class="modal-description">Introduce tu dirección de correo electrónico</p>
+        <div class="modal-form-group">
+          <input type="email" class="modal-input" placeholder="Correo electrónico" id="recovery-email" />
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="modal-btn modal-btn--primary" id="recovery-send">Enviar</button>
+          <button type="button" class="modal-btn modal-btn--secondary" id="recovery-back">Volver</button>
+        </div>
+      </div>
+    </div>
     <script src="/js/auth-password-toggle.js" defer></script>
+    <script src="/js/auth-modal.js" defer></script>
   </body>
 </html>
