@@ -110,6 +110,41 @@ body.auth-body {
   width: 100%;
 }
 
+.auth-form__password-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: flex-start;
+  gap: 14px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.auth-form__forgot {
+  font-family: "Spectral", serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: normal;
+  color: var(--primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  align-self: flex-start;
+  padding: 0;
+  margin: 0;
+}
+
+.auth-form__forgot:hover {
+  color: #3da8b3;
+}
+
+.auth-form__forgot:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
 /* Espacio entre etiqueta e input (como en el mockup) */
 .auth-form__group .auth-form__label {
   margin-bottom: 0;
@@ -359,6 +394,10 @@ body.auth-body {
 
   .auth-form__password-row {
     max-width: none;
+  }
+
+  .auth-form__forgot {
+    font-size: clamp(1.125rem, 3.2vw + 0.65rem, 1.5rem);
   }
 }
 
