@@ -14,28 +14,16 @@
     <link rel="stylesheet" href="/css/venue.css" />
   </head>
   <body class="venue-body">
-    <header class="venue-header" data-node-id="475:839">
-      <div class="venue-details">
-        <h1 class="venue-title">PAZ DEL RÍO</h1>
-        <div class="venue-info-row">
-          <span class="venue-price">COL$ 3.000.000</span>
-          <button class="venue-info-btn" aria-label="Información adicional">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V11H13V17ZM13 9H11V7H13V9Z" fill="currentColor"/>
-            </svg>
-          </button>
-        </div>
-        <p class="venue-guests">100 invitados</p>
-      </div>
-      <button class="venue-close-btn" aria-label="Cerrar">
-        <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M34.5 11.5L11.5 34.5M11.5 11.5L34.5 34.5" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </header>
+    <venue-header 
+      title="PAZ DEL RÍO" 
+      price="COL$ 3.000.000" 
+      guests="100 invitados">
+    </venue-header>
 
     <main class="venue-content">
-      <!-- Future sections can be added here -->
+      <!-- Contenido específico de esta sede -->
     </main>
+
+    <script src="/js/venue-component.js" defer></script>
   </body>
 </html>
