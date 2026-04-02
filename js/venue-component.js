@@ -33,3 +33,26 @@ class VenueHeader extends HTMLElement {
 }
 
 customElements.define("venue-header", VenueHeader);
+
+class VenueVideo extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    const src = this.getAttribute("src") || "";
+
+    this.innerHTML = `
+      <section class="venue-video-container">
+        <div class="venue-video-wrapper">
+          <video class="venue-video" autoplay loop muted playsinline>
+            <source src="${src}" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+          </video>
+        </div>
+      </section>
+    `;
+  }
+}
+
+customElements.define("venue-video", VenueVideo);
