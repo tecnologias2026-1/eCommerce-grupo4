@@ -19,8 +19,16 @@
     </venue-header>
 
     <main class="venue-content">
-        <venue-video src="/assets/videos/venue-placeholder.mp4"></venue-video>
-        <!-- Estimated Budget Section -->
+        <section class="venue-video-container">
+            <div class="venue-video-wrapper">
+                <video class="venue-video" autoplay loop muted playsinline>
+                    <source src="/assets/videos/venue-placeholder.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de video.
+                </video>
+            </div>
+        </section>
+
+        <!-- Estimated Budget Section — Improved graphic design -->
         <section class="venue-estimation" id="estimation-section">
             <h3 class="venue-estimation__title">Presupuesto Estimado</h3>
             <div class="venue-estimation__details" id="estimation-container">
@@ -38,37 +46,32 @@
                     <span class="venue-estimation__extra-info" id="extra-guests-info"></span>
                 </div>
             </div>
-            <p class="venue-estimation__note">* El valor final puede variar según servicios adicionales seleccionados.
-            </p>
+            <p class="venue-estimation__note">* El valor final puede variar según servicios adicionales seleccionados.</p>
         </section>
 
-        <!-- Feature Cards (Figma 475:841) -->
+        <!-- Feature Cards (Figma 475:841) — Matching Figma design -->
         <section class="venue-features-grid" data-name="Feature cards" data-node-id="475:841">
             <div class="venue-feature-card">
                 <div class="venue-feature-card__img-container">
-                    <img src="http://localhost:3845/assets/71852b02e6fde02c1b6b480b21dd3ff91491b52e.png"
-                        alt="Entorno Natural" class="venue-feature-card__img">
+                    <img src="http://localhost:3845/assets/71852b02e6fde02c1b6b480b21dd3ff91491b52e.png" alt="Entorno Natural" class="venue-feature-card__img">
                 </div>
                 <h5 class="venue-feature-card__title">Entorno Natural</h5>
             </div>
             <div class="venue-feature-card">
                 <div class="venue-feature-card__img-container">
-                    <img src="http://localhost:3845/assets/09d3151851c5520b45217d771f20778ebc470ce8.png"
-                        alt="Salón Principal" class="venue-feature-card__img">
+                    <img src="http://localhost:3845/assets/09d3151851c5520b45217d771f20778ebc470ce8.png" alt="Salón Principal" class="venue-feature-card__img">
                 </div>
                 <h5 class="venue-feature-card__title">Salón Principal</h5>
             </div>
             <div class="venue-feature-card">
                 <div class="venue-feature-card__img-container">
-                    <img src="http://localhost:3845/assets/05844c763423568ace6227193f555d76757ba54e.png"
-                        alt="Zona de Ceremonia" class="venue-feature-card__img">
+                    <img src="http://localhost:3845/assets/05844c763423568ace6227193f555d76757ba54e.png" alt="Zona de Ceremonia" class="venue-feature-card__img venue-feature-card__img--ceremony">
                 </div>
                 <h5 class="venue-feature-card__title">Zona de Ceremonia</h5>
             </div>
             <div class="venue-feature-card">
                 <div class="venue-feature-card__img-container">
-                    <img src="http://localhost:3845/assets/f0a861dd3b93801a0aec08c9118f055888ddc1d8.png"
-                        alt="Senderos Iluminados" class="venue-feature-card__img">
+                    <img src="http://localhost:3845/assets/f0a861dd3b93801a0aec08c9118f055888ddc1d8.png" alt="Senderos Iluminados" class="venue-feature-card__img">
                 </div>
                 <h5 class="venue-feature-card__title">Senderos Iluminados</h5>
             </div>
@@ -87,7 +90,6 @@
             const basePriceNum = parseInt(originalPriceStr.replace(/[^0-9]/g, "")) || 0;
             const baseGuestsNum = parseInt(originalGuestsStr.replace(/[^0-9]/g, "")) || 100;
 
-            // Use selected guests if > 0, otherwise use base guests from card
             const selectedGuests = (guestsSelection && parseInt(guestsSelection) > 0)
                 ? parseInt(guestsSelection)
                 : baseGuestsNum;
@@ -98,15 +100,21 @@
             const extraGuests = Math.max(0, selectedGuests - baseGuestsNum);
             const extraCost = extraGuests * pricePerGuest;
 
-            document.getElementById('final-guest-count').textContent = selectedGuests;
-            document.getElementById('base-rent').textContent = 'COL$ ' + basePriceNum.toLocaleString('es-CO');
-            document.getElementById('projected-total').textContent = 'COL$ ' + Math.round(total).toLocaleString('es-CO');
+            const finalGuestsEl = document.getElementById('final-guest-count');
+            const baseRentEl = document.getElementById('base-rent');
+            const projectedTotalEl = document.getElementById('projected-total');
+            const extraInfoEl = document.getElementById('extra-guests-info');
 
-            if (extraGuests > 0) {
-                document.getElementById('extra-guests-info').textContent =
-                    `+ ${extraGuests} invitados adicionales (+ COL$ ${Math.round(extraCost).toLocaleString('es-CO')})`;
-            } else {
-                document.getElementById('extra-guests-info').textContent = "Capacidad base";
+            if (finalGuestsEl) finalGuestsEl.textContent = selectedGuests;
+            if (baseRentEl) baseRentEl.textContent = 'COL$ ' + basePriceNum.toLocaleString('es-CO');
+            if (projectedTotalEl) projectedTotalEl.textContent = 'COL$ ' + Math.round(total).toLocaleString('es-CO');
+
+            if (extraInfoEl) {
+                if (extraGuests > 0) {
+                    extraInfoEl.textContent = `+ ${extraGuests} invitados adicionales (+ COL$ ${Math.round(extraCost).toLocaleString('es-CO')})`;
+                } else {
+                    extraInfoEl.textContent = "Capacidad base";
+                }
             }
         });
     </script>

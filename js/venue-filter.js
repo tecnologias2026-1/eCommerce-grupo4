@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             venueCards.forEach(card => {
                 const venueGuests = parseInt(card.getAttribute('data-guests')) || 0;
-                if (venueGuests >= count) {
+                // Allowance: 50% more guests than the base capacity (1.5x)
+                if (venueGuests * 1.5 >= count) {
                     card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
@@ -26,7 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const count = parseInt(storedGuests) || 0;
         venueCards.forEach(card => {
             const venueGuests = parseInt(card.getAttribute('data-guests')) || 0;
-            if (venueGuests >= count) {
+            // Allowance: 50% more guests than the base capacity (1.5x)
+            if (venueGuests * 1.5 >= count) {
                 card.style.display = 'flex';
             } else {
                 card.style.display = 'none';
