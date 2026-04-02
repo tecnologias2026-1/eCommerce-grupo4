@@ -47,8 +47,15 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             e.stopPropagation();
             
-            // Toggle current card
-            card.classList.toggle('venue-card--selected');
+            const isSelected = card.classList.contains('venue-card--selected');
+            
+            // First, deselect all cards
+            venueCards.forEach(c => c.classList.remove('venue-card--selected'));
+            
+            // If the card was NOT already selected, select it now (only 1 option)
+            if (!isSelected) {
+                card.classList.add('venue-card--selected');
+            }
         });
     });
 });
