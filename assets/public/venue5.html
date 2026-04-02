@@ -20,10 +20,125 @@
 
     <main class="venue-content">
         <venue-video src="/assets/videos/venue5-placeholder.mp4"></venue-video>
-        <!-- Contenido específico de esta sede -->
+
+        <!-- Estimated Budget Section — Improved graphic design -->
+        <section class="venue-estimation" id="estimation-section">
+            <h3 class="venue-estimation__title">Precio Estimado para la hacienda</h3>
+            <div class="venue-estimation__details" id="estimation-container">
+                <div class="venue-estimation__card">
+                    <span class="venue-estimation__label">Invitados</span>
+                    <span class="venue-estimation__value" id="final-guest-count">0</span>
+                </div>
+                <div class="venue-estimation__card">
+                    <span class="venue-estimation__label">Alquiler Base (100 invitados)</span>
+                    <span class="venue-estimation__value" id="base-rent">COL$ 3.000.000</span>
+                </div>
+                <div class="venue-estimation__card total">
+                    <span class="venue-estimation__label" id="total-label">Total Proyectado</span>
+                    <span class="venue-estimation__value total" id="projected-total">COL$ 3.000.000</span>
+                    <span class="venue-estimation__extra-info" id="extra-guests-info"></span>
+                </div>
+            </div>
+            <p class="venue-estimation__note">* El valor final puede variar según servicios adicionales seleccionados.
+            </p>
+        </section>
+
+
+        <!-- Features Section (Figma 488:2350) -->
+        <section class="venue-features-grid" data-name="Feature cards" data-node-id="488:2350">
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="/assets/images/jardines ornamentales v5.png" alt="Jardines Ornamentales" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Jardines Ornamentales</h5>
+            </div>
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="/assets/images/senderos naturales v5.png" alt="Senderos Naturales" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Senderos Naturales</h5>
+            </div>
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="/assets/images/vista hacienda v5.png" alt="Vista de la Hacienda" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Vista de la Hacienda</h5>
+            </div>
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="/assets/images/salon de celebracion v5.png" alt="Salón de Celebración" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Salón de Celebración</h5>
+            </div>
+        </section>
+
+        <!-- Details Section (Figma 488:2351) -->
+        <footer class="venue-footer" data-name="Details" data-node-id="488:2351">
+            <div class="venue-footer__container">
+                <div class="venue-footer__section">
+                    <h5 class="venue-footer__title">Detalles del lugar</h5>
+                    <p class="venue-footer__text">La Hacienda Botania destaca por sus jardines cuidadosamente diseñados y espacios abiertos que brindan un ambiente natural y elegante. Ideal para bodas íntimas y románticas en contacto con la naturaleza.</p>
+                </div>
+                <div class="venue-footer__section">
+                    <h5 class="venue-footer__title">Incluye</h5>
+                    <ul class="venue-footer__list">
+                        <li class="venue-footer__item">Uso exclusivo de la hacienda</li>
+                        <li class="venue-footer__item">Jardines para ceremonia</li>
+                        <li class="venue-footer__item">Iluminación básica del lugar</li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Navigation Section -->
+        <nav class="venue-navigation">
+            <a href="venue4.html" class="venue-navigation__link venue-navigation__link--prev">
+                &larr; Hacienda Anterior
+            </a>
+        </nav>
     </main>
 
     <script src="/js/venue-component.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const guestsSelection = localStorage.getItem('selectedGuests');
+            const venueHeader = document.querySelector('venue-header');
+
+            const originalPriceStr = venueHeader.getAttribute('price');
+            const originalGuestsStr = venueHeader.getAttribute('guests');
+
+            const basePriceNum = parseInt(originalPriceStr.replace(/[^0-9]/g, "")) || 0;
+            const baseGuestsNum = parseInt(originalGuestsStr.replace(/[^0-9]/g, "")) || 100;
+
+            const selectedGuests = (guestsSelection && parseInt(guestsSelection) > 0)
+                ? parseInt(guestsSelection)
+                : baseGuestsNum;
+
+            const pricePerGuest = basePriceNum / baseGuestsNum;
+            const total = pricePerGuest * selectedGuests;
+
+            const extraGuests = Math.max(0, selectedGuests - baseGuestsNum);
+            const extraCost = extraGuests * pricePerGuest;
+
+            const finalGuestsEl = document.getElementById('final-guest-count');
+            const baseRentEl = document.getElementById('base-rent');
+            const projectedTotalEl = document.getElementById('projected-total');
+            const extraInfoEl = document.getElementById('extra-guests-info');
+
+            if (finalGuestsEl) finalGuestsEl.textContent = selectedGuests;
+            if (baseRentEl) baseRentEl.textContent = 'COL$ ' + basePriceNum.toLocaleString('es-CO');
+            if (projectedTotalEl) projectedTotalEl.textContent = 'COL$ ' + Math.round(total).toLocaleString('es-CO');
+
+            if (extraInfoEl) {
+                if (extraGuests > 0) {
+                    extraInfoEl.textContent = `+ ${extraGuests} invitados adicionales (+ COL$ ${Math.round(extraCost).toLocaleString('es-CO')})`;
+                } else {
+                    extraInfoEl.textContent = "Capacidad base";
+                }
+            }
+        });
+    </script>
+
 </body>
 
 </html>

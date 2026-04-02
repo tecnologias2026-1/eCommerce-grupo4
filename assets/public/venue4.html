@@ -20,10 +20,127 @@
 
     <main class="venue-content">
         <venue-video src="/assets/videos/venue4-placeholder.mp4"></venue-video>
-        <!-- Contenido específico de esta sede -->
+
+        <!-- Estimated Budget Section — Improved graphic design -->
+        <section class="venue-estimation" id="estimation-section">
+            <h3 class="venue-estimation__title">Precio Estimado para la hacienda</h3>
+            <div class="venue-estimation__details" id="estimation-container">
+                <div class="venue-estimation__card">
+                    <span class="venue-estimation__label">Invitados</span>
+                    <span class="venue-estimation__value" id="final-guest-count">0</span>
+                </div>
+                <div class="venue-estimation__card">
+                    <span class="venue-estimation__label">Alquiler Base (350 invitados)</span>
+                    <span class="venue-estimation__value" id="base-rent">COL$ 7.000.000</span>
+                </div>
+                <div class="venue-estimation__card total">
+                    <span class="venue-estimation__label" id="total-label">Total Proyectado</span>
+                    <span class="venue-estimation__value total" id="projected-total">COL$ 7.000.000</span>
+                    <span class="venue-estimation__extra-info" id="extra-guests-info"></span>
+                </div>
+            </div>
+            <p class="venue-estimation__note">* El valor final puede variar según servicios adicionales seleccionados.
+            </p>
+        </section>
+
+        <!-- Features Section (Figma 488:2082) -->
+        <section class="venue-features-grid" data-name="Feature cards" data-node-id="488:2082">
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="/assets/images/ceremonia romantica v4.png" alt="Ceremonia Romántica" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Ceremonia Romántica</h5>
+            </div>
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="/assets/images/jardines y senderos v4.png" alt="Jardines y Senderos" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Jardines y Senderos</h5>
+            </div>
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="/assets/images/salon elegante v4.png" alt="Salón Elegante" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Salón Elegante</h5>
+            </div>
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="/assets/images/acceso principal v4.png" alt="Acceso Principal" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Acceso Principal</h5>
+            </div>
+        </section>
+
+        <!-- Details Section (Figma 488:2083) -->
+        <footer class="venue-footer" data-name="Details" data-node-id="488:2083">
+            <div class="venue-footer__container">
+                <div class="venue-footer__section">
+                    <h5 class="venue-footer__title">Detalles del lugar</h5>
+                    <p class="venue-footer__text">La Hacienda Arkadia ofrece un concepto moderno y elegante, combinando arquitectura contemporánea con espacios naturales. Ideal para bodas sofisticadas que buscan una experiencia exclusiva y memorable cerca de Bogotá.</p>
+                </div>
+                <div class="venue-footer__section">
+                    <h5 class="venue-footer__title">Incluye</h5>
+                    <ul class="venue-footer__list">
+                        <li class="venue-footer__item">Jardines y áreas sociales</li>
+                        <li class="venue-footer__item">Parqueadero privado</li>
+                        <li class="venue-footer__item">Iluminación ambiental básica</li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Navigation Section -->
+        <nav class="venue-navigation">
+            <a href="venue2.html" class="venue-navigation__link venue-navigation__link--prev">
+                &larr; Hacienda Anterior
+            </a>
+            <a href="venue5.html" class="venue-navigation__link venue-navigation__link--next">
+                Siguiente Hacienda &rarr;
+            </a>
+        </nav>
     </main>
 
     <script src="/js/venue-component.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const guestsSelection = localStorage.getItem('selectedGuests');
+            const venueHeader = document.querySelector('venue-header');
+
+            const originalPriceStr = venueHeader.getAttribute('price');
+            const originalGuestsStr = venueHeader.getAttribute('guests');
+
+            const basePriceNum = parseInt(originalPriceStr.replace(/[^0-9]/g, "")) || 0;
+            const baseGuestsNum = parseInt(originalGuestsStr.replace(/[^0-9]/g, "")) || 100;
+
+            const selectedGuests = (guestsSelection && parseInt(guestsSelection) > 0)
+                ? parseInt(guestsSelection)
+                : baseGuestsNum;
+
+            const pricePerGuest = basePriceNum / baseGuestsNum;
+            const total = pricePerGuest * selectedGuests;
+
+            const extraGuests = Math.max(0, selectedGuests - baseGuestsNum);
+            const extraCost = extraGuests * pricePerGuest;
+
+            const finalGuestsEl = document.getElementById('final-guest-count');
+            const baseRentEl = document.getElementById('base-rent');
+            const projectedTotalEl = document.getElementById('projected-total');
+            const extraInfoEl = document.getElementById('extra-guests-info');
+
+            if (finalGuestsEl) finalGuestsEl.textContent = selectedGuests;
+            if (baseRentEl) baseRentEl.textContent = 'COL$ ' + basePriceNum.toLocaleString('es-CO');
+            if (projectedTotalEl) projectedTotalEl.textContent = 'COL$ ' + Math.round(total).toLocaleString('es-CO');
+
+            if (extraInfoEl) {
+                if (extraGuests > 0) {
+                    extraInfoEl.textContent = `+ ${extraGuests} invitados adicionales (+ COL$ ${Math.round(extraCost).toLocaleString('es-CO')})`;
+                } else {
+                    extraInfoEl.textContent = "Capacidad base";
+                }
+            }
+        });
+    </script>
+
 </body>
 
 </html>

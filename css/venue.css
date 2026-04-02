@@ -190,8 +190,8 @@
 }
 
 .venue-estimation__label {
-  font-family: "Inter", sans-serif;
-  font-weight: 500;
+  font-family: "Spectral SC", serif;
+  font-weight: 600;
   font-size: 14px;
   color: var(--muted);
   text-transform: uppercase;
@@ -202,8 +202,8 @@
 }
 
 .venue-estimation__value {
-  font-family: "Spectral", serif;
-  font-weight: 800;
+  font-family: "Spectral SC", serif;
+  font-weight: 600;
   font-size: 28px;
   color: #000;
 }
@@ -214,7 +214,7 @@
 }
 
 .venue-estimation__extra-info {
-  font-family: "Spectral", serif;
+  font-family: "Spectral SC", serif;
   font-weight: 600;
   font-size: 16px;
   color: rgba(255, 255, 255, 0.9);
@@ -300,5 +300,146 @@
   }
   .total .venue-estimation__value {
     font-size: 28px;
+  }
+}
+
+/* Venue Details Footer — Figma 475:842 */
+.venue-footer {
+  background: #fafaff;
+  padding: 0 120px 120px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.venue-footer__container {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  max-width: 1040px;
+  width: 100%;
+}
+
+.venue-footer__section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.venue-footer__section:last-child {
+  align-items: flex-start;
+}
+
+.venue-footer__title {
+  margin: 0;
+  font-family: "Spectral SC", serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.venue-footer__text {
+  margin: 0;
+  font-family: "Spectral", serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: normal;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.venue-footer__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.venue-footer__item {
+  font-family: "Spectral", serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: normal;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+@media (max-width: 1024px) {
+  .venue-footer {
+    padding: 0 40px 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .venue-footer {
+    padding: 0 20px 80px;
+  }
+  .venue-footer__container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-top: 40px;
+  }
+  .venue-footer__text,
+  .venue-footer__item {
+    font-size: 18px;
+  }
+}
+
+/* Venue Navigation — Anterior/Siguiente */
+.venue-navigation {
+  max-width: 1040px;
+  margin: 40px auto 80px;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.venue-navigation__link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-family: "Spectral SC", serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #000;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.venue-navigation__link:hover {
+  background-color: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(84, 192, 203, 0.3);
+}
+
+.venue-navigation__link--next {
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .venue-navigation {
+    flex-direction: column;
+    padding: 0 20px;
+  }
+  .venue-navigation__link {
+    width: 100%;
+    justify-content: center;
+  }
+  .venue-navigation__link--next {
+    margin-left: 0;
   }
 }
