@@ -5,42 +5,22 @@ class VenueHeader extends HTMLElement {
 
   connectedCallback() {
     const title = this.getAttribute("title") || "PAZ DEL RÍO";
-    const originalPrice = this.getAttribute("price") || "COL$ 0.000";
-    const originalGuestsStr = this.getAttribute("guests") || "100 invitados";
-    
-    // Attempt to get dynamic guests from localStorage
-    const savedGuests = localStorage.getItem('selectedGuests');
-    const selectedGuestsCount = savedGuests ? parseInt(savedGuests) : 0;
-    
-    // Parse numeric parts for calculation
-    const basePriceNum = parseInt(originalPrice.replace(/[^0-9]/g, "")) || 0;
-    const baseGuestsNum = parseInt(originalGuestsStr.replace(/[^0-9]/g, "")) || 100;
-    
-    // Recalculate based on selection OR original card capacity
-    const finalizedGuests = selectedGuestsCount > 0 ? selectedGuestsCount : baseGuestsNum;
-    
-    const pricePerGuest = basePriceNum / baseGuestsNum;
-    const calculatedTotal = pricePerGuest * finalizedGuests;
-    
-    let displayPrice = `COL$ ${Math.round(calculatedTotal).toLocaleString('es-CO')}`;
-    let displayGuests = `${finalizedGuests} invitados (Presupuesto Estimado)`;
-    
-    // If it's exactly the base count and no choice was made, we could keep original label, 
-    // but the user wants it to be an estimation.
+    const price = this.getAttribute("price") || "COL$ 0.000";
+    const guests = this.getAttribute("guests") || "0 invitados";
 
     this.innerHTML = `
       <header class="venue-header">
         <div class="venue-details">
           <h1 class="venue-title">${title}</h1>
           <div class="venue-info-row">
-            <span class="venue-price">${displayPrice}</span>
+            <span class="venue-price">${price}</span>
             <button class="venue-info-btn" aria-label="Información adicional">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V11H13V17ZM13 9H11V7H13V9Z" fill="currentColor"/>
               </svg>
             </button>
           </div>
-          <p class="venue-guests">${displayGuests}</p>
+          <p class="venue-guests">${guests}</p>
         </div>
         <a href="/assets/public/place.html" class="venue-close-btn" aria-label="Volver a lugares">
           <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -1,10 +1,14 @@
+/* Venue Gallery Styles based on Figma Design (node 420:139) */
+
 .venue-gallery {
     background-color: #fafaff;
     display: flex;
     flex-direction: column;
     gap: 64px;
-    padding: 64px 120px;
+    padding: 64px;
     width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
     box-sizing: border-box;
 }
 
@@ -17,7 +21,7 @@
 
 .venue-gallery__title {
     margin: 0;
-    font-family: "Spectral SC", serif;
+    font-family: 'Spectral SC', serif;
     font-weight: 600;
     font-size: 48px;
     line-height: 1.1;
@@ -28,7 +32,7 @@
 
 .venue-gallery__subtitle {
     margin: 0;
-    font-family: "Spectral", serif;
+    font-family: 'Spectral', serif;
     font-weight: 600;
     font-size: 24px;
     line-height: normal;
@@ -43,42 +47,30 @@
 }
 
 .venue-card {
-    background: #eaeaea;
+    background-color: #eaeaea;
     border-radius: 6px;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     height: 600px;
-    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, outline 0.2s ease;
-    cursor: pointer;
+    overflow: hidden;
     position: relative;
-}
-
-.venue-card--selected {
-    box-shadow: 0 0 0 4px var(--primary, #54c0cb);
-}
-
-.venue-card--selected .venue-card__image-wrapper {
-    position: relative;
-}
-
-.venue-card--selected .venue-card__image-wrapper::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border: 4px solid var(--primary, #54c0cb);
-    background: rgba(84, 192, 203, 0.05); /* Very subtle blue overlay */
-    pointer-events: none;
+    text-decoration: none;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s;
+    border: 4px solid transparent;
 }
 
 .venue-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.venue-card--selected {
+    border: 6px solid #54c0cb;
 }
 
 .venue-card__image-wrapper {
     flex: 1;
-    position: relative;
     overflow: hidden;
 }
 
@@ -90,101 +82,114 @@
 }
 
 .venue-card__content {
-    padding: 16px 16px 46px;
+    padding: 24px 16px;
     display: flex;
     flex-direction: column;
+    flex: 1;
+    gap: 8px;
 }
 
 .venue-card__title {
     margin: 0;
-    font-family: "Spectral SC", serif;
+    font-family: 'Spectral SC', serif;
     font-weight: 600;
     font-size: 24px;
-    line-height: normal;
     color: #000;
     text-transform: uppercase;
 }
 
-.venue-card__price,
-.venue-card__guests {
+.venue-card__price {
     margin: 0;
-    font-family: "Spectral", serif;
+    font-family: 'Spectral', serif;
     font-weight: 600;
     font-size: 24px;
-    line-height: normal;
+    color: rgba(0, 0, 0, 0.55);
+}
+
+.venue-card__guests {
+    margin: 0;
+    font-family: 'Spectral', serif;
+    font-weight: 600;
+    font-size: 24px;
     color: rgba(0, 0, 0, 0.55);
 }
 
 .venue-card__more-btn {
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    margin-top: 16px;
-    padding: 8px 24px;
-    background: var(--primary, #54c0cb);
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    font-family: "Spectral", serif;
-    font-weight: 800;
-    font-size: 16px;
-    cursor: pointer;
-    text-transform: uppercase;
+    margin-top: auto;
     text-decoration: none;
-    display: inline-block;
-    text-align: center;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
 }
 
 .venue-card:hover .venue-card__more-btn {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
 }
 
 .venue-gallery__actions {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    gap: 128px;
     width: 100%;
-    margin-top: 20px;
+}
+
+.venue-gallery__skip-link {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: #000;
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    cursor: pointer;
+    white-space: nowrap;
 }
 
 .venue-gallery__next-btn {
-    width: 100%;
-    max-width: 1152px;
+    flex: 1;
+    max-width: 400px;
 }
 
+/* Response Design */
 @media (max-width: 1200px) {
     .venue-gallery {
-        padding: 40px 40px;
+        padding: 40px 20px;
+        gap: 40px;
     }
-    
-    .venue-gallery__title {
-        font-size: 36px;
-    }
-    
+
     .venue-gallery__grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .venue-card {
+        height: 500px;
     }
 }
 
 @media (max-width: 768px) {
-    .venue-gallery {
-        padding: 40px 20px;
-        gap: 32px;
+    .venue-gallery__grid {
+        grid-template-columns: 1fr;
     }
 
     .venue-gallery__title {
-        font-size: 28px;
+        font-size: 32px;
     }
 
     .venue-gallery__subtitle {
         font-size: 18px;
     }
 
-    .venue-gallery__grid {
-        grid-template-columns: 1fr;
+    .venue-gallery__actions {
+        flex-direction: column;
+        gap: 32px;
+        align-items: center;
     }
 
-    .venue-card {
-        height: 500px;
+    .venue-gallery__next-btn {
+        width: 100%;
+        max-width: 100%;
     }
 }

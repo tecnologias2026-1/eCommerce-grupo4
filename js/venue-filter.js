@@ -1,68 +1,52 @@
 document.addEventListener('DOMContentLoaded', () => {
     const guestInput = document.getElementById('guest-count');
-    const venueCards = document.querySelectorAll('.venue-card');
     const venueGrid = document.getElementById('venue-grid');
+    const venueCards = document.querySelectorAll('.venue-card');
 
-    // Create a "No results" message element
-    const noResults = document.createElement('div');
-    noResults.className = 'venue-gallery__no-results';
-    noResults.innerHTML = `
-        <p class="venue-gallery__subtitle">No se encontraron haciendas para esa cantidad de invitados.</p>
-        <p style="font-family: 'Spectral', serif; color: rgba(0,0,0,0.4); font-size: 18px;">Intenta con otro número.</p>
-    `;
-    noResults.style.display = 'none';
-    noResults.style.width = '100%';
-    noResults.style.textAlign = 'center';
-    noResults.style.gridColumn = '1 / -1';
-    noResults.style.padding = '40px 0';
-    venueGrid.appendChild(noResults);
+    if (guestInput) {
+        guestInput.addEventListener('input', () => {
+            const count = parseInt(guestInput.value) || 0;
+            localStorage.setItem('selectedGuests', count);
+            
+            venueCards.forEach(card => {
+                const venueGuests = parseInt(card.getAttribute('data-guests')) || 0;
+                if (venueGuests >= count) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
 
-    guestInput.addEventListener('input', () => {
-        const count = parseInt(guestInput.value) || 0;
-        localStorage.setItem('selectedGuests', count);
-        let visibleCount = 0;
-
+    // Load initial value from localStorage if exists
+    const storedGuests = localStorage.getItem('selectedGuests');
+    if (storedGuests && guestInput) {
+        guestInput.value = storedGuests;
+        const count = parseInt(storedGuests) || 0;
         venueCards.forEach(card => {
-            const capacity = parseInt(card.dataset.guests);
-            
-            // Logic: Show if within +/- 50 range, or if input is 0 (show all)
-            // Or if the capacity is greater than the count (it fits)
-            // User said "más o menos en relación", so a range is better.
-            const range = 50;
-            const isInRange = (count === 0) || (capacity >= count - range && capacity <= count + range);
-            
-            if (isInRange) {
+            const venueGuests = parseInt(card.getAttribute('data-guests')) || 0;
+            if (venueGuests >= count) {
                 card.style.display = 'flex';
-                card.style.opacity = '0';
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                }, 10);
-                visibleCount++;
             } else {
                 card.style.display = 'none';
             }
         });
+    }
 
-        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
-    });
-
-    // Selection logic (Toggleable)
+    // Handle Selection on Card Click (Image or Text Box)
     venueCards.forEach(card => {
         card.addEventListener('click', (e) => {
-            // Prevent Card selection if the "Ver más" button is clicked
+            // If the user clicked the "Ver más" button, don't toggle selection
             if (e.target.closest('.venue-card__more-btn')) {
                 return;
             }
+
+            e.preventDefault();
+            e.stopPropagation();
             
-            const isSelected = card.classList.contains('venue-card--selected');
-            
-            // First, remove selection from all cards
-            venueCards.forEach(c => c.classList.remove('venue-card--selected'));
-            
-            // If it wasn't selected, select it now (toggle on)
-            if (!isSelected) {
-                card.classList.add('venue-card--selected');
-            }
+            // Toggle current card
+            card.classList.toggle('venue-card--selected');
         });
     });
 });
