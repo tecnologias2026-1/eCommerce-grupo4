@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/feature.css">
     <link rel="stylesheet" href="/css/venue-options.css">
+    <link rel="stylesheet" href="/css/venue-gallery.css">
 </head>
 
 <body>
@@ -32,9 +33,98 @@
         </div>
         <div class="venue-options-selector__field">
             <span class="venue-options-selector__label">Invitados:</span>
-            <input type="number" id="guest-count" class="venue-options-selector__input" min="0" value="0">
+            <input type="number" id="guest-count" class="venue-options-selector__input" min="0" placeholder="0">
         </div>
     </header>
+
+    <section class="venue-gallery" data-name="Gallery" data-node-id="470:291">
+        <header class="venue-gallery__header">
+            <h3 class="venue-gallery__title">Lugares grandiosos que tenemos para ti</h3>
+            <p class="venue-gallery__subtitle">Selecciona un lugar para ver todos los detalles y continuar con tu plan</p>
+        </header>
+        
+        <div class="venue-gallery__grid" id="venue-grid">
+            <!-- Hacienda Paz del Río -->
+            <article class="venue-card" data-guests="100">
+                <div class="venue-card__image-wrapper">
+                    <img src="http://localhost:3845/assets/54e8a10eab0500956b340db1133b1fe876305f09.png" alt="Hacienda Paz del Río" class="venue-card__image">
+                </div>
+                <div class="venue-card__content">
+                    <h5 class="venue-card__title">HACIENDA PAZ DEL RÍO</h5>
+                    <p class="venue-card__price">COL$ 3.000.000</p>
+                    <p class="venue-card__guests">100 invitados aprox</p>
+                </div>
+            </article>
+
+            <!-- Hacienda San Juan -->
+            <article class="venue-card" data-guests="300">
+                <div class="venue-card__image-wrapper">
+                    <img src="http://localhost:3845/assets/641c3e11b41deedf38f2843e23de39441c095b73.png" alt="Hacienda San Juan" class="venue-card__image">
+                </div>
+                <div class="venue-card__content">
+                    <h5 class="venue-card__title">HACIENDA SAN JUAN</h5>
+                    <p class="venue-card__price">COL$ 6.500.000</p>
+                    <p class="venue-card__guests">300 invitados aprox</p>
+                </div>
+            </article>
+
+            <!-- Hacienda Las Marías -->
+            <article class="venue-card" data-guests="170">
+                <div class="venue-card__image-wrapper">
+                    <img src="http://localhost:3845/assets/6fa3dc9a6c9bd4c8af4ef57448303ed360e93631.png" alt="Hacienda Las Marías" class="venue-card__image">
+                </div>
+                <div class="venue-card__content">
+                    <h5 class="venue-card__title">Hacienda Las Marías</h5>
+                    <p class="venue-card__price">COL$ 4.500.000</p>
+                    <p class="venue-card__guests">170 invitados aprox</p>
+                </div>
+            </article>
+
+            <!-- Hacienda El Cedro -->
+            <article class="venue-card" data-guests="200">
+                <div class="venue-card__image-wrapper">
+                    <img src="http://localhost:3845/assets/d04ce817ae595c5146c0b94a10cb24fc109ad410.png" alt="Hacienda El Cedro" class="venue-card__image">
+                </div>
+                <div class="venue-card__content">
+                    <h5 class="venue-card__title">Hacienda El Cedro</h5>
+                    <p class="venue-card__price">COL$ 5.000.000</p>
+                    <p class="venue-card__guests">200 invitados aprox</p>
+                </div>
+            </article>
+
+            <!-- Hacienda Arkadia -->
+            <article class="venue-card" data-guests="350">
+                <div class="venue-card__image-wrapper">
+                    <img src="http://localhost:3845/assets/30e595c9471b360de237e2cc38c9ed3a7cdd4bed.png" alt="Hacienda Arkadia" class="venue-card__image">
+                </div>
+                <div class="venue-card__content">
+                    <h5 class="venue-card__title">Hacienda Arkadia</h5>
+                    <p class="venue-card__price">COL$ 7.000.000</p>
+                    <p class="venue-card__guests">350 invitados aprox</p>
+                </div>
+            </article>
+
+            <!-- Hacienda Botania -->
+            <article class="venue-card" data-guests="100">
+                <div class="venue-card__image-wrapper">
+                    <img src="http://localhost:3845/assets/6c6bd8410f59428ad2f06b2416d528321c4bd93b.png" alt="Hacienda Botania" class="venue-card__image">
+                </div>
+                <div class="venue-card__content">
+                    <h5 class="venue-card__title">Hacienda Botania</h5>
+                    <p class="venue-card__price">COL$ 3.000.000</p>
+                    <p class="venue-card__guests">100 invitados aprox</p>
+                </div>
+            </article>
+        </div>
+
+        <div class="venue-gallery__actions">
+            <button class="btn-primary venue-gallery__next-btn">
+                <span class="btn-primary__text">Continua planeando</span>
+            </button>
+        </div>
+    </section>
+
+    <script src="/js/venue-filter.js"></script>
 </body>
 
 </html>
