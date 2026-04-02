@@ -1,0 +1,146 @@
+/* Venue Option Header — Alineado con Figma 475:839 */
+
+.venue-body {
+  background: var(--bg);
+  margin: 0;
+  min-height: 100vh;
+}
+
+.venue-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 80px 120px 20px;
+  background: var(--bg);
+  width: 100%;
+}
+
+.venue-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.venue-title {
+  margin: 0;
+  font-family: "Spectral SC", serif;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 1.1;
+  letter-spacing: var(--title-letter-spacing);
+  color: #000;
+  text-transform: uppercase;
+}
+
+.venue-info-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.venue-price,
+.venue-guests {
+  font-family: "Spectral", serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: normal;
+  color: var(--muted);
+}
+
+.venue-info-btn {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+}
+
+.venue-info-btn:hover {
+  color: var(--primary);
+}
+
+.venue-close-btn {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.venue-close-btn:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 1024px) {
+  .venue-header {
+    padding: 60px 40px 20px;
+  }
+  .venue-title {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .venue-header {
+    padding: 40px 20px 20px;
+  }
+  .venue-title {
+    font-size: 28px;
+  }
+  .venue-price,
+  .venue-guests {
+    font-size: 18px;
+  }
+  .venue-close-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .venue-close-btn svg {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Venue Video Component */
+.venue-video-container {
+  width: 100%;
+  padding: 40px 64px;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.venue-video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  background: #000;
+}
+
+.venue-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .venue-video-container {
+    padding: 20px;
+  }
+}
