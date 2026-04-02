@@ -1,0 +1,111 @@
+.venue-options-selector {
+    background-color: #fafaff;
+    border: 1px solid #dfdfdf;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 80px 120px 20px;
+    position: relative;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    box-sizing: border-box;
+    gap: 48px;
+}
+
+.venue-options-selector__details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.venue-options-selector__title {
+    margin: 0;
+    font-family: "Spectral SC", serif;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.1;
+    color: #000;
+    letter-spacing: -0.96px;
+    text-transform: uppercase;
+}
+
+.venue-options-selector__field {
+    background: #ffffff;
+    border: 0.5px solid #cecece;
+    border-radius: 7px;
+    padding: 12px 16px;
+    height: 76px;
+    width: 220px;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.venue-options-selector__field:focus-within {
+    border-color: var(--primary, #54c0cb);
+    box-shadow: 0 0 0 1px rgba(84, 192, 203, 0.1);
+}
+
+.venue-options-selector__input {
+    border: none;
+    background: transparent;
+    font-family: "Spectral", serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #000;
+    width: 100%;
+    outline: none;
+    padding: 0;
+    margin-top: 4px;
+}
+
+.venue-options-selector__input::-webkit-inner-spin-button,
+.venue-options-selector__input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.venue-options-selector__input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.venue-options-selector__label {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #979797;
+    letter-spacing: -0.07px;
+}
+
+@media (max-width: 1200px) {
+    .venue-options-selector {
+        padding: 60px 40px 20px;
+    }
+    
+    .venue-options-selector__title {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 768px) {
+    .venue-options-selector {
+        padding: 40px 20px 20px;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .venue-options-selector__title {
+        font-size: 28px;
+    }
+
+    .venue-options-selector__field {
+        width: 100%;
+        height: 60px;
+    }
+}
