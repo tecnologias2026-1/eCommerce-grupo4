@@ -1,0 +1,148 @@
+.venue-features-grid {
+    background-color: #fafaff;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+    padding: 80px 120px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.venue-feature-card {
+    background: #fafaff;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.venue-feature-card__img-container {
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.venue-feature-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.venue-feature-card__title {
+    margin: 0;
+    font-family: "Spectral SC", serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: normal;
+    color: #000;
+    text-transform: uppercase;
+}
+
+/* Estimation Section styling */
+.venue-estimation {
+    background-color: var(--bg, #fafaff);
+    padding: 64px 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border, rgba(0,0,0,0.1));
+}
+
+.venue-estimation__title {
+    margin: 0;
+    font-family: "Spectral SC", serif;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.1;
+    color: #000;
+    text-transform: uppercase;
+}
+
+.venue-estimation__details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 100%;
+}
+
+.venue-estimation__card {
+    background: #fff;
+    border: 1px solid var(--border, rgba(0,0,0,0.1));
+    border-radius: 12px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.2s ease;
+}
+
+.venue-estimation__card:hover {
+    transform: translateY(-4px);
+}
+
+.venue-estimation__card.total {
+    background: var(--primary, #54c0cb);
+    border-color: var(--primary, #54c0cb);
+}
+
+.venue-estimation__label {
+    font-family: "Spectral", serif;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.55);
+}
+
+.venue-estimation__card.total .venue-estimation__label {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.venue-estimation__value {
+    font-family: "Spectral", serif;
+    font-weight: 800;
+    font-size: 32px;
+    color: #000;
+}
+
+.venue-estimation__value.total {
+    color: #fff;
+    font-size: 40px;
+}
+
+.venue-estimation__extra-info {
+    font-family: "Spectral", serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 4px;
+}
+
+.venue-estimation__note {
+    font-family: "Spectral", serif;
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 14px;
+}
+
+@media (max-width: 1024px) {
+    .venue-estimation {
+        padding: 40px 40px;
+    }
+    .venue-estimation__details {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .venue-estimation {
+        padding: 40px 20px;
+    }
+    .venue-estimation__details {
+        grid-template-columns: 1fr;
+    }
+    .venue-estimation__title {
+        font-size: 32px;
+    }
+}

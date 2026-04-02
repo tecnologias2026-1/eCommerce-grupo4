@@ -12,6 +12,7 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/venue.css" />
+    <link rel="stylesheet" href="/css/venue-features.css" />
 </head>
 
 <body class="venue-body">
@@ -20,10 +21,92 @@
 
     <main class="venue-content">
         <venue-video src="/assets/videos/venue-placeholder.mp4"></venue-video>
-        <!-- Contenido específico de esta sede -->
+        
+        <!-- Estimated Budget Section -->
+        <section class="venue-estimation" id="estimation-section">
+            <h3 class="venue-estimation__title">Presupuesto Estimado</h3>
+            <div class="venue-estimation__details" id="estimation-container">
+                <div class="venue-estimation__card">
+                    <span class="venue-estimation__label">Invitados</span>
+                    <span class="venue-estimation__value" id="final-guest-count">0</span>
+                </div>
+                <div class="venue-estimation__card">
+                    <span class="venue-estimation__label">Alquiler Base</span>
+                    <span class="venue-estimation__value" id="base-rent">COL$ 3.000.000</span>
+                </div>
+                <div class="venue-estimation__card total">
+                    <span class="venue-estimation__label" id="total-label">Total Proyectado</span>
+                    <span class="venue-estimation__value total" id="projected-total">COL$ 3.000.000</span>
+                    <span class="venue-estimation__extra-info" id="extra-guests-info"></span>
+                </div>
+            </div>
+            <p class="venue-estimation__note">* El valor final puede variar según servicios adicionales seleccionados.</p>
+        </section>
+
+        <!-- Feature Cards (Figma 475:841) -->
+        <section class="venue-features-grid" data-name="Feature cards" data-node-id="475:841">
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="http://localhost:3845/assets/71852b02e6fde02c1b6b480b21dd3ff91491b52e.png" alt="Entorno Natural" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Entorno Natural</h5>
+            </div>
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="http://localhost:3845/assets/09d3151851c5520b45217d771f20778ebc470ce8.png" alt="Salón Principal" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Salón Principal</h5>
+            </div>
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="http://localhost:3845/assets/05844c763423568ace6227193f555d76757ba54e.png" alt="Zona de Ceremonia" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Zona de Ceremonia</h5>
+            </div>
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="http://localhost:3845/assets/f0a861dd3b93801a0aec08c9118f055888ddc1d8.png" alt="Senderos Iluminados" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Senderos Iluminados</h5>
+            </div>
+        </section>
     </main>
 
     <script src="/js/venue-component.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const guestsSelection = localStorage.getItem('selectedGuests');
+            const venueHeader = document.querySelector('venue-header');
+            
+            const originalPriceStr = venueHeader.getAttribute('price');
+            const originalGuestsStr = venueHeader.getAttribute('guests');
+            
+            const basePriceNum = parseInt(originalPriceStr.replace(/[^0-9]/g, "")) || 0;
+            const baseGuestsNum = parseInt(originalGuestsStr.replace(/[^0-9]/g, "")) || 100;
+            
+            // Use selected guests if > 0, otherwise use base guests from card
+            const selectedGuests = (guestsSelection && parseInt(guestsSelection) > 0) 
+                ? parseInt(guestsSelection) 
+                : baseGuestsNum;
+            
+            const pricePerGuest = basePriceNum / baseGuestsNum;
+            const total = pricePerGuest * selectedGuests;
+            
+            const extraGuests = Math.max(0, selectedGuests - baseGuestsNum);
+            const extraCost = extraGuests * pricePerGuest;
+
+            document.getElementById('final-guest-count').textContent = selectedGuests;
+            document.getElementById('base-rent').textContent = 'COL$ ' + basePriceNum.toLocaleString('es-CO');
+            document.getElementById('projected-total').textContent = 'COL$ ' + Math.round(total).toLocaleString('es-CO');
+            
+            if (extraGuests > 0) {
+                document.getElementById('extra-guests-info').textContent = 
+                    `+ ${extraGuests} invitados adicionales (+ COL$ ${Math.round(extraCost).toLocaleString('es-CO')})`;
+            } else {
+                document.getElementById('extra-guests-info').textContent = "Capacidad base";
+            }
+        });
+    </script>
 </body>
 
 </html>

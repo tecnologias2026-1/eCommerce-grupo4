@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     guestInput.addEventListener('input', () => {
         const count = parseInt(guestInput.value) || 0;
+        localStorage.setItem('selectedGuests', count);
         let visibleCount = 0;
 
         venueCards.forEach(card => {
