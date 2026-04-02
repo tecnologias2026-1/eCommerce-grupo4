@@ -44,4 +44,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
         noResults.style.display = visibleCount === 0 ? 'block' : 'none';
     });
+
+    // Selection logic (Toggleable)
+    venueCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            // Prevent Card selection if the "Ver más" button is clicked
+            if (e.target.closest('.venue-card__more-btn')) {
+                return;
+            }
+            
+            const isSelected = card.classList.contains('venue-card--selected');
+            
+            // First, remove selection from all cards
+            venueCards.forEach(c => c.classList.remove('venue-card--selected'));
+            
+            // If it wasn't selected, select it now (toggle on)
+            if (!isSelected) {
+                card.classList.add('venue-card--selected');
+            }
+        });
+    });
 });
