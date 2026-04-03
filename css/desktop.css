@@ -246,13 +246,21 @@
     background-color: #fafaff;
     display: flex;
     flex-direction: column;
-    gap: 32px;
     overflow: hidden;
     border-radius: 6px;
+}
+
+.boda-card__link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
     transition: transform 0.3s ease;
 }
 
-.boda-card:hover {
+.boda-card__link:hover {
     transform: translateY(-8px);
 }
 

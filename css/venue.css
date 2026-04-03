@@ -247,10 +247,16 @@
 }
 
 .venue-feature-card__img-container {
-  height: 167px;
+  height: 360px; /* Increased from 167px to match Wedding style */
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 12px;
   position: relative;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.venue-feature-card:hover .venue-feature-card__img-container {
+  transform: translateY(-8px);
 }
 
 .venue-feature-card__img {
