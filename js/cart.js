@@ -14,6 +14,16 @@ function addToCart(venueData) {
     alert('¡Lugar añadido al carrito con éxito!');
 }
 
+function removeFromCart(category) {
+    const currentCart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+    if (currentCart[category]) {
+        delete currentCart[category];
+        localStorage.setItem('weddingCart', JSON.stringify(currentCart));
+        return true;
+    }
+    return false;
+}
+
 // Function to get current cart data
 function getCartData() {
     return JSON.parse(localStorage.getItem('weddingCart') || '{}');
