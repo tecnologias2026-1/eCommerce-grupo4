@@ -172,7 +172,9 @@
                 } else {
                     actionText.textContent = 'CONTINUAR COMPRA';
                     actionLogo.style.display = 'inline-block';
-                    actionBtn.onclick = () => alert('Procediendo al siguiente paso de la compra...');
+                    actionBtn.onclick = () => {
+                        window.location.href = '/assets/public/userdata.html';
+                    };
                 }
             } else {
                 summaryContainer.innerHTML = `
