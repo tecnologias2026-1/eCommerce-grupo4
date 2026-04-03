@@ -17,12 +17,77 @@
 <body>
     <header class="hero-selection">
         <div class="hero-selection__top">
-            <a href="/assets/public/place.html" class="back-btn">
+            <a href="/assets/public/place.html" class="back-btn" target="_parent">
                 <img src="/assets/images/atras.svg" alt="Atrás" width="54">
             </a>
             <h1 class="hero-selection__title">RESUMEN DE TU BODA</h1>
         </div>
     </header>
+
+    <main class="summary-content" id="summary-main">
+        <div class="summary-marquee" id="dynamic-summary">
+            <!-- Dynamic content will be injected here -->
+            <div class="empty-cart-message" id="empty-cart" style="text-align:center; padding: 40px; font-family: 'Spectral', serif; font-size: 24px; color: var(--muted); display:none;">
+                Aún no has seleccionado un lugar para tu boda.
+            </div>
+        </div>
+    </main>
+
+    <footer class="summary-pago" id="summary-footer" style="display:none;">
+        <div class="summary-cart">
+            <span class="summary-total-label">Total Incluido</span>
+            <span class="summary-total-value" id="final-total">COL$ 0</span>
+        </div>
+        <button class="btn-continue-pay">
+            <img src="http://localhost:3845/assets/c5e830f0c676b1d0943f54b17de0ae27122c2907.png" alt="Logo Pago"
+                class="btn-continue-pay__logo">
+            <span class="btn-continue-pay__text">Continuar con el pago</span>
+        </button>
+    </footer>
+
+    <script src="/js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = getCartData();
+            const summaryContainer = document.getElementById('dynamic-summary');
+            const footer = document.getElementById('summary-footer');
+            const emptyMsg = document.getElementById('empty-cart');
+
+            if (cart.selectedVenue) {
+                const venue = cart.selectedVenue;
+                
+                // Construct the HTML for the selected venue
+                const venueHTML = `
+                    <div class="summary-section">
+                        <h2 class="summary-section__title">LUGAR SELECCIONADO</h2>
+                        <div class="summary-section__items">
+                            <div class="summary-item">
+                                <div class="summary-checkmark"><img src="http://localhost:3845/assets/6113de98605fda6793f6d22f6c46b344fcf8d4c1.svg" alt="Check"></div>
+                                <p class="summary-item__text">${venue.name}</p>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-checkmark"><img src="http://localhost:3845/assets/6113de98605fda6793f6d22f6c46b344fcf8d4c1.svg" alt="Check"></div>
+                                <p class="summary-item__text">${venue.guests}</p>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-checkmark"><img src="http://localhost:3845/assets/6113de98605fda6793f6d22f6c46b344fcf8d4c1.svg" alt="Check"></div>
+                                <p class="summary-item__text">Uso exclusivo del lugar</p>
+                            </div>
+                        </div>
+                        <div class="summary-image-box">
+                            <img src="${venue.image}" alt="${venue.name}">
+                        </div>
+                    </div>
+                `;
+                
+                summaryContainer.innerHTML = venueHTML;
+                footer.style.display = 'flex';
+                document.getElementById('final-total').textContent = venue.price;
+            } else {
+                emptyMsg.style.display = 'block';
+            }
+        });
+    </script>
 </body>
 
 </html>
