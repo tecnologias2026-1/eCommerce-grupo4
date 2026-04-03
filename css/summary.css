@@ -1,0 +1,182 @@
+.summary-content {
+    background: var(--bg);
+    padding: 60px 0;
+}
+
+.summary-marquee {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 80px 48px;
+    padding: 96px 64px;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.summary-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.summary-section__title {
+    margin: 0;
+    font-family: "Spectral SC", serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #000;
+    text-transform: uppercase;
+}
+
+.summary-section__items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.summary-checkmark {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.summary-checkmark img {
+    width: 12px;
+    height: auto;
+}
+
+.summary-item__text {
+    margin: 0;
+    font-family: "Spectral", serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--muted);
+}
+
+.summary-image-box {
+    width: 250px;
+    height: 167px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.summary-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Pago Bar */
+.summary-pago {
+    background: #fafaff;
+    border-top: 1px solid var(--border);
+    padding: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+}
+
+.summary-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+.summary-total-label {
+    font-family: "Spectral", serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--muted);
+}
+
+.summary-total-value {
+    font-family: "Spectral SC", serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #000;
+}
+
+.summary-review-text {
+    flex: 1;
+    font-family: "Spectral", serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--muted);
+    line-height: normal;
+}
+
+.btn-continue-pay {
+    background: #0099de;
+    border: 0;
+    border-radius: 5.456px;
+    padding: 8px 64px;
+    height: 62.1px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-continue-pay:hover {
+    background: #0088c7;
+}
+
+.btn-continue-pay__logo {
+    width: 54px;
+    height: 37px;
+}
+
+.btn-continue-pay__text {
+    font-family: "Spectral", serif;
+    font-weight: 600;
+    font-size: 21.8px;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Mobile */
+@media (max-width: 1024px) {
+    .summary-marquee {
+        padding: 60px 40px;
+    }
+    .summary-pago {
+        padding: 40px;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .summary-marquee {
+        grid-template-columns: 1fr;
+        padding: 40px 20px;
+        gap: 60px;
+    }
+    .summary-pago {
+        flex-direction: column;
+        padding: 40px 20px;
+        text-align: center;
+    }
+    .summary-cart {
+        order: 1;
+    }
+    .summary-review-text {
+        order: 2;
+    }
+    .btn-continue-pay {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+}
