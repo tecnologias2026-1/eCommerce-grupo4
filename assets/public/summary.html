@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen de tu Boda - Wedding Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/summary.css">
+    <style>
+        .summary-marquee {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+            padding: 40px 0;
+            width: 100%;
+        }
+        
+        .empty-cart-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 80px 20px;
+            font-family: 'Spectral', serif;
+            font-size: 24px;
+            color: var(--muted);
+        }
+
+        .summary-section {
+            position: relative;
+        }
+
+        .summary-section__remove {
+            position: absolute;
+            top: -10px;
+            right: 0;
+            background: #fdfdfd;
+            border: 1px solid #ddd;
+            color: #999;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .summary-section__remove:hover {
+            background: #ff4444;
+            color: #fff;
+            border-color: #ff4444;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="hero-selection">
+        <div class="hero-selection__top">
+            <a href="/assets/public/place.html" class="back-btn" target="_parent">
+                <img src="/assets/images/atras.svg" alt="Atrás" width="54">
+            </a>
+            <h1 class="hero-selection__title">RESUMEN DE TU BODA</h1>
+        </div>
+    </header>
+
+    <main class="summary-content" id="summary-main">
+        <div class="summary-marquee" id="dynamic-summary">
+            <!-- Dynamic content will be injected here -->
+            <div class="empty-cart-message" id="empty-cart">
+                Aún no has seleccionado un lugar para tu boda.
+            </div>
+        </div>
+    </main>
+
+    <footer class="summary-pago" id="summary-footer" style="display:none;">
+        <div class="summary-cart">
+            <span class="summary-total-label">Total Incluido</span>
+            <span class="summary-total-value" id="final-total">COL$ 0</span>
+        </div>
+        <button class="btn-continue-pay">
+            <img src="http://localhost:3845/assets/c5e830f0c676b1d0943f54b17de0ae27122c2907.png" alt="Logo Pago"
+                class="btn-continue-pay__logo">
+            <span class="btn-continue-pay__text">Continuar con el pago</span>
+        </button>
+    </footer>
+
+    <script src="/js/cart.js"></script>
+    <script>
+        function renderSummary() {
+            const cart = getCartData();
+            const summaryContainer = document.getElementById('dynamic-summary');
+            const footer = document.getElementById('summary-footer');
+            
+            // Clear current content
+            summaryContainer.innerHTML = '';
+
+            if (cart.selectedVenue) {
+                const venue = cart.selectedVenue;
+                
+                const section = document.createElement('div');
+                section.className = 'summary-section';
+                section.innerHTML = `
+                    <button class="summary-section__remove" title="Eliminar del carrito" onclick="handleRemove('selectedVenue')">
+                       ✕
+                    </button>
+                    <h2 class="summary-section__title">LUGAR SELECCIONADO</h2>
+                    <div class="summary-section__items">
+                        <div class="summary-item">
+                            <div class="summary-checkmark"><img src="http://localhost:3845/assets/6113de98605fda6793f6d22f6c46b344fcf8d4c1.svg" alt="Check"></div>
+                            <p class="summary-item__text">${venue.name}</p>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-checkmark"><img src="http://localhost:3845/assets/6113de98605fda6793f6d22f6c46b344fcf8d4c1.svg" alt="Check"></div>
+                            <p class="summary-item__text">${venue.guests}</p>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-checkmark"><img src="http://localhost:3845/assets/6113de98605fda6793f6d22f6c46b344fcf8d4c1.svg" alt="Check"></div>
+                            <p class="summary-item__text">Uso exclusivo del lugar</p>
+                        </div>
+                    </div>
+                    <div class="summary-image-box">
+                        <img src="${venue.image}" alt="${venue.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                `;
+                
+                summaryContainer.appendChild(section);
+                footer.style.display = 'flex';
+                document.getElementById('final-total').textContent = venue.price;
+            } else {
+                summaryContainer.innerHTML = `
+                    <div class="empty-cart-message">
+                        Aún no has seleccionado un lugar para tu boda.
+                    </div>
+                `;
+                footer.style.display = 'none';
+            }
+        }
+
+        function handleRemove(category) {
+            if (confirm('¿Estás seguro de que deseas eliminar este lugar de tu selección?')) {
+                removeFromCart(category);
+                renderSummary();
+                
+                // Optional: Dispatch event so main window can update icon (if needed)
+                window.parent.postMessage({ type: 'CART_UPDATED' }, '*');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', renderSummary);
+    </script>
+</body>
+
+</html>

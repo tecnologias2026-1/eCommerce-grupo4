@@ -92,6 +92,13 @@
             </div>
         </footer>
 
+        <!-- Cart Button -->
+        <div class="venue-actions">
+            <button class="btn-add-to-cart" onclick="alert('Añadido al carrito con éxito')">
+                <span class="btn-add-to-cart__text">Agregar al carrito</span>
+            </button>
+        </div>
+
         <!-- Navigation Section -->
         <nav class="venue-navigation">
             <a href="venue6.html" class="venue-navigation__link venue-navigation__link--prev">
@@ -104,6 +111,7 @@
     </main>
 
     <script src="/js/venue-component.js" defer></script>
+    <script src="/js/cart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const guestsSelection = localStorage.getItem('selectedGuests');
@@ -122,24 +130,27 @@
             const pricePerGuest = basePriceNum / baseGuestsNum;
             const total = pricePerGuest * selectedGuests;
 
-            const extraGuests = Math.max(0, selectedGuests - baseGuestsNum);
-            const extraCost = extraGuests * pricePerGuest;
-
             const finalGuestsEl = document.getElementById('final-guest-count');
             const baseRentEl = document.getElementById('base-rent');
             const projectedTotalEl = document.getElementById('projected-total');
-            const extraInfoEl = document.getElementById('extra-guests-info');
 
             if (finalGuestsEl) finalGuestsEl.textContent = selectedGuests;
             if (baseRentEl) baseRentEl.textContent = 'COL$ ' + basePriceNum.toLocaleString('es-CO');
-            if (projectedTotalEl) projectedTotalEl.textContent = 'COL$ ' + Math.round(total).toLocaleString('es-CO');
+            
+            const totalFormatted = 'COL$ ' + Math.round(total).toLocaleString('es-CO');
+            if (projectedTotalEl) projectedTotalEl.textContent = totalFormatted;
 
-            if (extraInfoEl) {
-                if (extraGuests > 0) {
-                    extraInfoEl.textContent = `+ ${extraGuests} invitados adicionales (+ COL$ ${Math.round(extraCost).toLocaleString('es-CO')})`;
-                } else {
-                    extraInfoEl.textContent = "Capacidad base";
-                }
+            // Handle Add to Cart
+            const addToCartBtn = document.querySelector('.btn-add-to-cart');
+            if (addToCartBtn) {
+                addToCartBtn.onclick = () => {
+                    addToCart({
+                        name: "Hacienda El Cedro",
+                        guests: `${selectedGuests} invitados`,
+                        price: totalFormatted,
+                        image: "/assets/images/el cedro.png"
+                    });
+                };
             }
         });
     </script>
