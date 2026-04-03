@@ -20,7 +20,7 @@
             padding: 40px 120px;
             width: 100%;
         }
-        
+
         .empty-cart-message {
             grid-column: 1 / -1;
             text-align: center;
@@ -50,7 +50,7 @@
             cursor: pointer;
             font-size: 14px;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         .summary-item {
@@ -66,9 +66,11 @@
                 padding: 30px 20px;
                 grid-template-columns: 1fr;
             }
+
             .hero-selection__title {
                 font-size: 28px;
             }
+
             .summary-image-box {
                 width: 100%;
                 height: 200px;
@@ -114,16 +116,16 @@
             const cart = getCartData();
             const summaryContainer = document.getElementById('dynamic-summary');
             const footer = document.getElementById('summary-footer');
-            
+
             // Clear current content
             summaryContainer.innerHTML = '';
 
             if (cart.selectedVenue) {
                 const venue = cart.selectedVenue;
-                
+
                 const section = document.createElement('div');
                 section.className = 'summary-section';
-                
+
                 const checkIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: #000; margin-top: 4px;">
                     <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>`;
@@ -151,7 +153,7 @@
                         <img src="${venue.image}" alt="${venue.name}" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                 `;
-                
+
                 summaryContainer.appendChild(section);
                 footer.style.display = 'flex';
                 document.getElementById('final-total').textContent = venue.price;
@@ -169,7 +171,7 @@
             if (confirm('¿Estás seguro de que deseas eliminar este lugar de tu selección?')) {
                 removeFromCart(category);
                 renderSummary();
-                
+
                 // Optional: Dispatch event so main window can update icon (if needed)
                 window.parent.postMessage({ type: 'CART_UPDATED' }, '*');
             }
