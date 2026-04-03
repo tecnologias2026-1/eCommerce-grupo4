@@ -1,0 +1,183 @@
+/* Calendar Styles — Premium Design */
+.reservation-calendar {
+    padding: 60px 120px;
+    background-color: #fafaff;
+}
+
+.reservation-calendar__header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.reservation-calendar__title {
+    font-family: "Spectral SC", serif;
+    font-weight: 600;
+    font-size: 32px;
+    color: #000;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.reservation-calendar__subtitle {
+    font-family: "Spectral", serif;
+    font-size: 18px;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.calendar-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.calendar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.calendar-nav__display {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.calendar-nav__month {
+    font-family: "Spectral SC", serif;
+    font-size: 24px;
+    font-weight: 600;
+    min-width: 140px;
+    text-align: right;
+}
+
+.calendar-nav__year-select {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-family: "Spectral SC", serif;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.calendar-nav__year-select:hover {
+    border-color: #54c0cb;
+}
+
+.calendar-nav__btn {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.2s ease;
+}
+
+.calendar-nav__btn:hover {
+    background: #f0f0f0;
+    border-color: #999;
+}
+
+.calendar-grid__daynames {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 12px;
+}
+
+.calendar-grid__daynames span {
+    text-align: center;
+    font-family: "Spectral SC", serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #999;
+}
+
+.calendar-grid__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Spectral", serif;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.calendar-day:not(.empty):not(.booked):hover {
+    background: #f0fdff;
+    border-color: #54c0cb;
+    color: #54c0cb;
+}
+
+.calendar-day.selected {
+    background: #54c0cb;
+    color: #ffffff;
+}
+
+.calendar-day.booked {
+    background: #fff0f0;
+    color: #ff4d4d;
+    cursor: not-allowed;
+    border: 1px solid #ffcccc;
+}
+
+.calendar-day.empty {
+    cursor: default;
+}
+
+.selected-date-info {
+    max-width: 800px;
+    margin: 24px auto 0;
+    padding: 16px 32px;
+    background: #f0fdff;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Spectral", serif;
+    font-weight: 600;
+}
+
+.btn-secondary {
+    background: none;
+    border: 1px solid #54c0cb;
+    color: #54c0cb;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Spectral", serif;
+}
+
+@media (max-width: 1024px) {
+    .reservation-calendar {
+        padding: 60px 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .reservation-calendar {
+        padding: 40px 24px;
+    }
+    .calendar-container {
+        padding: 16px;
+    }
+}

@@ -1,34 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
     const guestInput = document.getElementById('guest-count');
-    const venueGrid = document.getElementById('venue-grid');
     const venueCards = document.querySelectorAll('.venue-card');
+    
+    let activeBookingDate = localStorage.getItem('selectedWeddingDate') || null;
+    let bookedData = {};
 
-    if (guestInput) {
-        guestInput.addEventListener('input', () => {
-            const count = parseInt(guestInput.value) || 0;
-            localStorage.setItem('selectedGuests', count);
-            
-            venueCards.forEach(card => {
-                const venueGuests = parseInt(card.getAttribute('data-guests')) || 0;
-                // Allowance: 50% more guests than the base capacity (1.5x)
-                if (venueGuests * 1.5 >= count) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    }
-
-    // Load initial value from localStorage if exists
-    const storedGuests = localStorage.getItem('selectedGuests');
-    if (storedGuests && guestInput) {
-        guestInput.value = storedGuests;
-        const count = parseInt(storedGuests) || 0;
+    function updateVenueVisibility() {
+        const countValue = parseInt(guestInput.value) || 0;
+        
         venueCards.forEach(card => {
+            const venueName = card.querySelector('.venue-card__title').textContent.trim();
             const venueGuests = parseInt(card.getAttribute('data-guests')) || 0;
-            // Allowance: 50% more guests than the base capacity (1.5x)
-            if (venueGuests * 1.5 >= count) {
+            
+            // 1. Capacity filter (Original)
+            const matchesCapacity = (venueGuests * 1.5 >= countValue);
+            
+            // 2. Availability filter (New)
+            let isAvailable = true;
+            if (activeBookingDate && bookedData[venueName]) {
+                if (bookedData[venueName].includes(activeBookingDate)) {
+                    isAvailable = false;
+                }
+            }
+            
+            if (matchesCapacity && isAvailable) {
                 card.style.display = 'flex';
             } else {
                 card.style.display = 'none';
@@ -36,23 +31,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    if (guestInput) {
+        guestInput.addEventListener('input', () => {
+            localStorage.setItem('selectedGuests', guestInput.value);
+            updateVenueVisibility();
+        });
+    }
+
+    // New: Listen for Date Selection from calendar.js
+    window.addEventListener('weddingDateChanged', (e) => {
+        activeBookingDate = e.detail.date;
+        bookedData = e.detail.venueBookedDates;
+        updateVenueVisibility();
+    });
+
+    // Load initial value from localStorage if exists
+    const storedGuests = localStorage.getItem('selectedGuests');
+    if (storedGuests && guestInput) {
+        guestInput.value = storedGuests;
+    }
+    
+    // Final check for visibility
+    updateVenueVisibility();
+
     // Handle Selection on Card Click (Image or Text Box)
     venueCards.forEach(card => {
         card.addEventListener('click', (e) => {
-            // If the user clicked the "Ver más" button, don't toggle selection
-            if (e.target.closest('.venue-card__more-btn')) {
-                return;
-            }
-
+            // ... (Selection logic remains mostly same)
+            if (e.target.closest('.venue-card__more-btn')) return;
             e.preventDefault();
             e.stopPropagation();
             
             const isSelected = card.classList.contains('venue-card--selected');
-            
-            // First, deselect all cards
             venueCards.forEach(c => c.classList.remove('venue-card--selected'));
-            
-            // If the card was NOT already selected, select it now (only 1 option)
             if (!isSelected) {
                 card.classList.add('venue-card--selected');
             }
