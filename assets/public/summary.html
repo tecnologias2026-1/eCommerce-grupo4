@@ -53,11 +53,26 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .summary-section__remove:hover {
-            background: #ff4444;
-            color: #fff;
-            border-color: #ff4444;
-            transform: scale(1.1);
+        .summary-item {
+            align-items: flex-start;
+        }
+
+        .summary-checkmark {
+            margin-top: 6px;
+        }
+
+        @media (max-width: 768px) {
+            .summary-marquee {
+                padding: 30px 20px;
+                grid-template-columns: 1fr;
+            }
+            .hero-selection__title {
+                font-size: 28px;
+            }
+            .summary-image-box {
+                width: 100%;
+                height: 200px;
+            }
         }
     </style>
 </head>
@@ -108,6 +123,11 @@
                 
                 const section = document.createElement('div');
                 section.className = 'summary-section';
+                
+                const checkIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: #000; margin-top: 4px;">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>`;
+
                 section.innerHTML = `
                     <button class="summary-section__remove" title="Eliminar del carrito" onclick="handleRemove('selectedVenue')">
                        ✕
@@ -115,15 +135,15 @@
                     <h2 class="summary-section__title">LUGAR SELECCIONADO</h2>
                     <div class="summary-section__items">
                         <div class="summary-item">
-                            <div class="summary-checkmark"><img src="http://localhost:3845/assets/6113de98605fda6793f6d22f6c46b344fcf8d4c1.svg" alt="Check"></div>
+                            <div class="summary-checkmark">${checkIcon}</div>
                             <p class="summary-item__text">${venue.name}</p>
                         </div>
                         <div class="summary-item">
-                            <div class="summary-checkmark"><img src="http://localhost:3845/assets/6113de98605fda6793f6d22f6c46b344fcf8d4c1.svg" alt="Check"></div>
+                            <div class="summary-checkmark">${checkIcon}</div>
                             <p class="summary-item__text">${venue.guests}</p>
                         </div>
                         <div class="summary-item">
-                            <div class="summary-checkmark"><img src="http://localhost:3845/assets/6113de98605fda6793f6d22f6c46b344fcf8d4c1.svg" alt="Check"></div>
+                            <div class="summary-checkmark">${checkIcon}</div>
                             <p class="summary-item__text">Uso exclusivo del lugar</p>
                         </div>
                     </div>
