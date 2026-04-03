@@ -40,6 +40,45 @@
     </main>
 
     <script src="/js/venue-component.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const guestsSelection = localStorage.getItem('selectedGuests');
+            const venueHeader = document.querySelector('venue-header');
+
+            const originalPriceStr = venueHeader.getAttribute('price');
+            const originalGuestsStr = venueHeader.getAttribute('guests');
+
+            const basePriceNum = parseInt(originalPriceStr.replace(/[^0-9]/g, "")) || 0;
+            const baseGuestsNum = parseInt(originalGuestsStr.replace(/[^0-9]/g, "")) || 100;
+
+            const selectedGuests = (guestsSelection && parseInt(guestsSelection) > 0)
+                ? parseInt(guestsSelection)
+                : baseGuestsNum;
+
+            const pricePerGuest = basePriceNum / baseGuestsNum;
+            const total = pricePerGuest * selectedGuests;
+
+            const extraGuests = Math.max(0, selectedGuests - baseGuestsNum);
+            const extraCost = extraGuests * pricePerGuest;
+
+            const finalGuestsEl = document.getElementById('final-guest-count');
+            const baseRentEl = document.getElementById('base-rent');
+            const projectedTotalEl = document.getElementById('projected-total');
+            const extraInfoEl = document.getElementById('extra-guests-info');
+
+            if (finalGuestsEl) finalGuestsEl.textContent = selectedGuests;
+            if (baseRentEl) baseRentEl.textContent = 'COL$ ' + basePriceNum.toLocaleString('es-CO');
+            if (projectedTotalEl) projectedTotalEl.textContent = 'COL$ ' + Math.round(total).toLocaleString('es-CO');
+
+            if (extraInfoEl) {
+                if (extraGuests > 0) {
+                    extraInfoEl.textContent = `+ ${extraGuests} invitados adicionales (+ COL$ ${Math.round(extraCost).toLocaleString('es-CO')})`;
+                } else {
+                    extraInfoEl.textContent = "Capacidad base";
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,188 @@
+/* Wedding Detail Pages Styles */
+.wedding-header {
+    background-color: #fafaff;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 80px 120px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.wedding-header__details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wedding-header__title {
+    margin: 0;
+    font-family: "Spectral SC", serif;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.1;
+    color: #000;
+    letter-spacing: -0.96px;
+    text-transform: capitalize;
+}
+
+.wedding-header__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.wedding-header__date,
+.wedding-header__location {
+    margin: 0;
+    font-family: "Spectral", serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.55);
+    line-height: 1.2;
+}
+
+.wedding-header__close {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+    transition: transform 0.2s ease;
+}
+
+.wedding-header__close:hover {
+    transform: scale(1.1);
+}
+
+.wedding-header__close-icon {
+    width: 32px;
+    height: 32px;
+}
+
+@media (max-width: 1024px) {
+    .wedding-header {
+        padding: 60px 40px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .wedding-header {
+        padding: 40px 24px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .wedding-header__title {
+        font-size: 32px;
+    }
+    .wedding-header__date,
+    .wedding-header__location {
+        font-size: 18px;
+    }
+    .wedding-header__close {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* Wedding Banner Section (Figma 483:9728) */
+.wedding-banner {
+    background-color: #fafaff;
+    padding: 80px 120px 50px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+.wedding-banner__image-container {
+    width: 100%;
+    max-width: 1040px;
+    aspect-ratio: 1040 / 480; /* Approximated from typical banner ratio */
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.wedding-banner__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wedding-banner__image--lyj {
+    object-position: center 15%; /* Adjusts to show more of the top of the image */
+}
+
+/* Wedding Features Grid (Figma 483:9729) */
+.wedding-features {
+    background-color: #fafaff;
+    padding: 80px 120px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 64px 48px; /* Slightly larger vertical gap */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.wedding-feature-card {
+    background-color: #fafaff;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.wedding-feature-card:hover {
+    transform: translateY(-8px);
+}
+
+.wedding-feature-card__image-container {
+    width: 100%;
+    height: 360px; /* Increased from 167px for better visibility */
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.wedding-feature-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wedding-feature-card__title {
+    margin: 0;
+    font-family: "Spectral SC", serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #000;
+    text-transform: uppercase;
+    line-height: 1.1;
+}
+
+@media (max-width: 1024px) {
+    .wedding-banner,
+    .wedding-features {
+        padding: 60px 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .wedding-banner,
+    .wedding-features {
+        padding: 40px 24px;
+    }
+    .wedding-features {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .wedding-banner__image-container {
+        aspect-ratio: 16/9;
+    }
+}

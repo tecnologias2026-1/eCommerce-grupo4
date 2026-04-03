@@ -22,20 +22,16 @@
         <venue-video src="/assets/videos/venue3-placeholder.mp4"></venue-video>
 
         <section class="venue-features-grid">
-            <venue-card 
-                img-src="https://www.figma.com/api/mcp/asset/5ce17c14b85c0230ad826175988c2abb9f18c99e" 
+            <venue-card img-src="https://www.figma.com/api/mcp/asset/5ce17c14b85c0230ad826175988c2abb9f18c99e"
                 title="Plaza Central">
             </venue-card>
-            <venue-card 
-                img-src="https://www.figma.com/api/mcp/asset/e36695221e253936f8bde9d164e5896ae70537c9" 
+            <venue-card img-src="https://www.figma.com/api/mcp/asset/e36695221e253936f8bde9d164e5896ae70537c9"
                 title="Zona de Ceremonia">
             </venue-card>
-            <venue-card 
-                img-src="https://www.figma.com/api/mcp/asset/2ecf4a4522e12a1c21f86365daf37687271f8bf8" 
+            <venue-card img-src="https://www.figma.com/api/mcp/asset/2ecf4a4522e12a1c21f86365daf37687271f8bf8"
                 title="Pista de Baile">
             </venue-card>
-            <venue-card 
-                img-src="https://www.figma.com/api/mcp/asset/7358a739dc6f4f68f6b2ac07946088eba7878ae6" 
+            <venue-card img-src="https://www.figma.com/api/mcp/asset/7358a739dc6f4f68f6b2ac07946088eba7878ae6"
                 title="Salón de Eventos">
             </venue-card>
         </section>
@@ -44,6 +40,46 @@
     </main>
 
     <script src="/js/venue-component.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const guestsSelection = localStorage.getItem('selectedGuests');
+            const venueHeader = document.querySelector('venue-header');
+
+            const originalPriceStr = venueHeader.getAttribute('price');
+            const originalGuestsStr = venueHeader.getAttribute('guests');
+
+            const basePriceNum = parseInt(originalPriceStr.replace(/[^0-9]/g, "")) || 0;
+            const baseGuestsNum = parseInt(originalGuestsStr.replace(/[^0-9]/g, "")) || 100;
+
+            const selectedGuests = (guestsSelection && parseInt(guestsSelection) > 0)
+                ? parseInt(guestsSelection)
+                : baseGuestsNum;
+
+            const pricePerGuest = basePriceNum / baseGuestsNum;
+            const total = pricePerGuest * selectedGuests;
+
+            const extraGuests = Math.max(0, selectedGuests - baseGuestsNum);
+            const extraCost = extraGuests * pricePerGuest;
+
+            const finalGuestsEl = document.getElementById('final-guest-count');
+            const baseRentEl = document.getElementById('base-rent');
+            const projectedTotalEl = document.getElementById('projected-total');
+            const extraInfoEl = document.getElementById('extra-guests-info');
+
+            if (finalGuestsEl) finalGuestsEl.textContent = selectedGuests;
+            if (baseRentEl) baseRentEl.textContent = 'COL$ ' + basePriceNum.toLocaleString('es-CO');
+            if (projectedTotalEl) projectedTotalEl.textContent = 'COL$ ' + Math.round(total).toLocaleString('es-CO');
+
+            if (extraInfoEl) {
+                if (extraGuests > 0) {
+                    extraInfoEl.textContent = `+ ${extraGuests} invitados adicionales (+ COL$ ${Math.round(extraCost).toLocaleString('es-CO')})`;
+                } else {
+                    extraInfoEl.textContent = "Capacidad base";
+                }
+            }
+        });
+    </script>
+
 </body>
 
 </html>

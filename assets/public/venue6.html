@@ -21,21 +21,96 @@
     <main class="venue-content">
         <venue-video src="/assets/videos/venue6-placeholder.mp4"></venue-video>
 
+        <!-- Estimated Budget Section — Improved graphic design -->
+        <section class="venue-estimation" id="estimation-section">
+            <h3 class="venue-estimation__title">Precio Estimado para la hacienda</h3>
+            <div class="venue-estimation__details" id="estimation-container">
+                <div class="venue-estimation__card">
+                    <span class="venue-estimation__label">Invitados</span>
+                    <span class="venue-estimation__value" id="final-guest-count">0</span>
+                </div>
+                <div class="venue-estimation__card">
+                    <span class="venue-estimation__label">Alquiler Base (170 invitados)</span>
+                    <span class="venue-estimation__value" id="base-rent">COL$ 4.500.000</span>
+                </div>
+                <div class="venue-estimation__card total">
+                    <span class="venue-estimation__label" id="total-label">Total Proyectado</span>
+                    <span class="venue-estimation__value total" id="projected-total">COL$ 4.500.000</span>
+                    <span class="venue-estimation__extra-info" id="extra-guests-info"></span>
+                </div>
+            </div>
+            <p class="venue-estimation__note">* El valor final puede variar según servicios adicionales seleccionados.
+            </p>
+        </section>
+        <!-- Features Section (Figma 488:1861) -->
+        <section class="venue-features-grid" data-name="Feature cards" data-node-id="488:1861">
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="/assets/images/v6p.png" alt="Plaza Central" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Plaza Central</h5>
+            </div>
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="/assets/images/v6z.png" alt="Zona de Ceremonia" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Zona de Ceremonia</h5>
+            </div>
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="/assets/images/v6pi.png" alt="Pista de Baile" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Pista de Baile</h5>
+            </div>
+            <div class="venue-feature-card">
+                <div class="venue-feature-card__img-container">
+                    <img src="/assets/images/v6s.png" alt="Salón de Eventos" class="venue-feature-card__img">
+                </div>
+                <h5 class="venue-feature-card__title">Salón de Eventos</h5>
+            </div>
+        </section>
+
+        <!-- Details Section (Figma 488:1862) -->
+        <footer class="venue-footer" data-name="Details" data-node-id="488:1862">
+            <div class="venue-footer__container">
+                <div class="venue-footer__section">
+                    <h5 class="venue-footer__title">Detalles del lugar</h5>
+                    <p class="venue-footer__text">La Hacienda Las Marías ofrece un entorno elegante con amplios
+                        espacios, ideal para bodas modernas y celebraciones de gran formato. Su combinación de jardines,
+                        plaza central y salón permite una experiencia completa en un solo lugar.</p>
+                </div>
+                <div class="venue-footer__section">
+                    <h5 class="venue-footer__title">Incluye</h5>
+                    <ul class="venue-footer__list">
+                        <li class="venue-footer__item">Salón principal para recepción</li>
+                        <li class="venue-footer__item">Jardines y plaza exterior</li>
+                        <li class="venue-footer__item">Parqueadero privado</li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Navigation Section -->
+        <nav class="venue-navigation">
+            <a href="venue3.html" class="venue-navigation__link venue-navigation__link--prev">
+                &larr; Hacienda Anterior
+            </a>
+            <a href="venue2.html" class="venue-navigation__link venue-navigation__link--next">
+                Siguiente Hacienda &rarr;
+            </a>
+        </nav>
+
         <section class="venue-features-grid">
-            <venue-card 
-                img-src="https://www.figma.com/api/mcp/asset/5ce17c14b85c0230ad826175988c2abb9f18c99e" 
+            <venue-card img-src="https://www.figma.com/api/mcp/asset/5ce17c14b85c0230ad826175988c2abb9f18c99e"
                 title="Plaza Central">
             </venue-card>
-            <venue-card 
-                img-src="https://www.figma.com/api/mcp/asset/e36695221e253936f8bde9d164e5896ae70537c9" 
+            <venue-card img-src="https://www.figma.com/api/mcp/asset/e36695221e253936f8bde9d164e5896ae70537c9"
                 title="Zona de Ceremonia">
             </venue-card>
-            <venue-card 
-                img-src="https://www.figma.com/api/mcp/asset/2ecf4a4522e12a1c21f86365daf37687271f8bf8" 
+            <venue-card img-src="https://www.figma.com/api/mcp/asset/2ecf4a4522e12a1c21f86365daf37687271f8bf8"
                 title="Pista de Baile">
             </venue-card>
-            <venue-card 
-                img-src="https://www.figma.com/api/mcp/asset/7358a739dc6f4f68f6b2ac07946088eba7878ae6" 
+            <venue-card img-src="https://www.figma.com/api/mcp/asset/7358a739dc6f4f68f6b2ac07946088eba7878ae6"
                 title="Salón de Eventos">
             </venue-card>
         </section>
@@ -44,6 +119,46 @@
     </main>
 
     <script src="/js/venue-component.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const guestsSelection = localStorage.getItem('selectedGuests');
+            const venueHeader = document.querySelector('venue-header');
+
+            const originalPriceStr = venueHeader.getAttribute('price');
+            const originalGuestsStr = venueHeader.getAttribute('guests');
+
+            const basePriceNum = parseInt(originalPriceStr.replace(/[^0-9]/g, "")) || 0;
+            const baseGuestsNum = parseInt(originalGuestsStr.replace(/[^0-9]/g, "")) || 100;
+
+            const selectedGuests = (guestsSelection && parseInt(guestsSelection) > 0)
+                ? parseInt(guestsSelection)
+                : baseGuestsNum;
+
+            const pricePerGuest = basePriceNum / baseGuestsNum;
+            const total = pricePerGuest * selectedGuests;
+
+            const extraGuests = Math.max(0, selectedGuests - baseGuestsNum);
+            const extraCost = extraGuests * pricePerGuest;
+
+            const finalGuestsEl = document.getElementById('final-guest-count');
+            const baseRentEl = document.getElementById('base-rent');
+            const projectedTotalEl = document.getElementById('projected-total');
+            const extraInfoEl = document.getElementById('extra-guests-info');
+
+            if (finalGuestsEl) finalGuestsEl.textContent = selectedGuests;
+            if (baseRentEl) baseRentEl.textContent = 'COL$ ' + basePriceNum.toLocaleString('es-CO');
+            if (projectedTotalEl) projectedTotalEl.textContent = 'COL$ ' + Math.round(total).toLocaleString('es-CO');
+
+            if (extraInfoEl) {
+                if (extraGuests > 0) {
+                    extraInfoEl.textContent = `+ ${extraGuests} invitados adicionales (+ COL$ ${Math.round(extraCost).toLocaleString('es-CO')})`;
+                } else {
+                    extraInfoEl.textContent = "Capacidad base";
+                }
+            }
+        });
+    </script>
+
 </body>
 
 </html>
