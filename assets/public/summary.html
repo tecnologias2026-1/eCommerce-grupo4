@@ -12,71 +12,6 @@
         rel="stylesheet">
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/summary.css">
-    <style>
-        .summary-marquee {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 40px;
-            padding: 40px 120px;
-            width: 100%;
-        }
-
-        .empty-cart-message {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 80px 20px;
-            font-family: 'Spectral', serif;
-            font-size: 24px;
-            color: var(--muted);
-        }
-
-        .summary-section {
-            position: relative;
-        }
-
-        .summary-section__remove {
-            position: absolute;
-            top: -10px;
-            right: 0;
-            background: #fdfdfd;
-            border: 1px solid #ddd;
-            color: #999;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-
-        .summary-item {
-            align-items: flex-start;
-        }
-
-        .summary-checkmark {
-            margin-top: 6px;
-        }
-
-        @media (max-width: 768px) {
-            .summary-marquee {
-                padding: 30px 20px;
-                grid-template-columns: 1fr;
-            }
-
-            .hero-selection__title {
-                font-size: 28px;
-            }
-
-            .summary-image-box {
-                width: 100%;
-                height: 200px;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -190,8 +125,6 @@
             if (confirm('¿Estás seguro de que deseas eliminar este lugar de tu selección?')) {
                 removeFromCart(category);
                 renderSummary();
-
-                // Optional: Dispatch event so main window can update icon (if needed)
                 window.parent.postMessage({ type: 'CART_UPDATED' }, '*');
             }
         }
