@@ -103,10 +103,10 @@
             <span class="summary-total-label">Total Incluido</span>
             <span class="summary-total-value" id="final-total">COL$ 0</span>
         </div>
-        <button class="btn-continue-pay">
+        <button class="btn-continue-pay" id="main-action-btn">
             <img src="http://localhost:3845/assets/c5e830f0c676b1d0943f54b17de0ae27122c2907.png" alt="Logo Pago"
-                class="btn-continue-pay__logo">
-            <span class="btn-continue-pay__text">Continuar con el pago</span>
+                class="btn-continue-pay__logo" id="action-btn-logo">
+            <span class="btn-continue-pay__text" id="action-btn-text">FINALIZAR COMPRA</span>
         </button>
     </footer>
 
@@ -116,9 +116,15 @@
             const cart = getCartData();
             const summaryContainer = document.getElementById('dynamic-summary');
             const footer = document.getElementById('summary-footer');
+            const actionBtn = document.getElementById('main-action-btn');
+            const actionText = document.getElementById('action-btn-text');
+            const actionLogo = document.getElementById('action-btn-logo');
 
             // Clear current content
             summaryContainer.innerHTML = '';
+            
+            // Detect Context (Iframe vs Standalone)
+            const isIframe = window.self !== window.top;
 
             if (cart.selectedVenue) {
                 const venue = cart.selectedVenue;
@@ -157,6 +163,17 @@
                 summaryContainer.appendChild(section);
                 footer.style.display = 'flex';
                 document.getElementById('final-total').textContent = venue.price;
+
+                // Adjust Action Button
+                if (isIframe) {
+                    actionText.textContent = 'FINALIZAR COMPRA';
+                    actionLogo.style.display = 'none'; 
+                    actionBtn.onclick = () => window.open('/assets/public/summary.html', '_blank');
+                } else {
+                    actionText.textContent = 'CONTINUAR COMPRA';
+                    actionLogo.style.display = 'inline-block';
+                    actionBtn.onclick = () => alert('Procediendo al siguiente paso de la compra...');
+                }
             } else {
                 summaryContainer.innerHTML = `
                     <div class="empty-cart-message">
