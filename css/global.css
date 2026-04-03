@@ -280,54 +280,68 @@
     white-space: nowrap;
     }
 
+    @media (max-width: 1024px) {
+        .hero-selection {
+            padding: 48px 40px;
+        }
+        .row-characteristic {
+            padding: 40px;
+            height: auto;
+            flex-direction: column;
+            gap: 40px;
+        }
+        .row-characteristic__image {
+            width: 100%;
+            height: 400px;
+        }
+    }
+
     @media (max-width: 900px) {
-    .hero-selection {
-        padding: 32px 20px;
-        padding-bottom: 48px;
-        gap: 28px;
+        .hero-selection {
+            padding: 32px 20px;
+            padding-bottom: 48px;
+            gap: 28px;
+        }
+        .hero-selection__title {
+            font-size: 36px;
+            white-space: normal;
+        }
+        .row-characteristic {
+            gap: 24px;
+            padding: 24px 20px;
+        }
+        .row-characteristic__text {
+            width: 100%;
+        }
+        .row-characteristic__image {
+            height: 320px;
+        }
     }
 
-    .hero-selection__top {
-        gap: 20px;
-        justify-content: center;
+    @media (max-width: 768px) {
+        .hero-selection {
+            padding: 40px 20px;
+        }
+        .hero-selection__title {
+            font-size: 32px;
+        }
+        .feature-list__subtitle, .feature__text {
+            font-size: 18px;
+        }
+        .row-characteristic__name, .row-characteristic__price {
+            font-size: 20px;
+        }
+        .row-characteristic__description {
+            font-size: 16px;
+        }
+        .row-characteristic__image {
+            height: 260px;
+        }
+        .next-button-bar {
+            padding: 24px 20px;
+            justify-content: center;
+        }
+        .btn-primary {
+            width: 100%;
+        }
     }
-
-    .hero-selection__title {
-        font-size: 36px;
-        letter-spacing: -0.72px;
-        white-space: normal;
-    }
-
-    .feature-list {
-        gap: 24px;
-    }
-
-    .feature-list__subtitle {
-        font-size: 20px;
-    }
-
-    .feature__text {
-        font-size: 20px;
-        white-space: normal;
-    }
-
-    .row-characteristic {
-        flex-direction: column;
-        height: auto;
-        gap: 24px;
-        padding: 24px 20px;
-    }
-
-    .row-characteristic__text {
-        width: 100%;
-    }
-
-    .row-characteristic__image {
-        width: 100%;
-        height: 320px;
-    }
-
-    .next-button-bar {
-    padding: 24px 20px;
-    }
-}

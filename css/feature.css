@@ -52,9 +52,18 @@
     color: rgba(0, 0, 0, 0.55);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
     .feature {
         padding: 60px 40px;
+    }
+}
+
+@media (max-width: 900px) {
+    .feature {
+        padding: 40px;
+    }
+    .feature__title {
+        font-size: 36px;
     }
 }
 

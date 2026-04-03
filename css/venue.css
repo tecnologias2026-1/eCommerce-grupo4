@@ -120,6 +120,12 @@
   align-items: center;
 }
 
+@media (max-width: 768px) {
+  .venue-video-container {
+    padding: 20px;
+  }
+}
+
 .venue-video-wrapper {
   position: relative;
   width: 100%;
@@ -295,8 +301,12 @@
     grid-template-columns: 1fr;
     padding: 40px 20px;
   }
+  .venue-estimation {
+    padding: 40px 20px;
+  }
   .venue-estimation__details {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
   .venue-estimation__card.total {
     grid-column: span 1;
