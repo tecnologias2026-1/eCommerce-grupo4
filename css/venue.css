@@ -110,6 +110,22 @@
   }
 }
 
+/* Venue Video Component */
+.venue-video-container {
+  width: 100%;
+  padding: 40px 64px;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .venue-video-container {
+    padding: 20px;
+  }
+}
+
 /* Modal and Blur Effect */
 body.modal-open {
   overflow: hidden;
