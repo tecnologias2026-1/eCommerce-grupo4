@@ -56,3 +56,25 @@ class VenueVideo extends HTMLElement {
 }
 
 customElements.define("venue-video", VenueVideo);
+
+class VenueCard extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    const imgSrc = this.getAttribute("img-src") || "";
+    const title = this.getAttribute("title") || "";
+
+    this.innerHTML = `
+      <div class="venue-card">
+        <div class="venue-card__image-container">
+          <img class="venue-card__image" src="${imgSrc}" alt="${title}">
+        </div>
+        <h2 class="venue-card__title">${title}</h2>
+      </div>
+    `;
+  }
+}
+
+customElements.define("venue-card", VenueCard);

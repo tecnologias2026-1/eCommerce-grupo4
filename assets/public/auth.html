@@ -1,122 +1,90 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Iniciar sesión</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Spectral+SC:wght@600&family=Spectral:wght@600;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/css/global.css" />
-    <link rel="stylesheet" href="/css/auth.css" />
-  </head>
-  <body class="auth-body">
-    <div class="auth-header">
-      <div class="auth-top-logo" data-name="Logo" data-node-id="356:16696">
-        <img
-          class="auth-top-logo__img"
-          src="https://www.figma.com/api/mcp/asset/e168d633-b3ab-4c2f-9308-7a8318e35e9a"
-          alt="Eventos decoraciones"
-          width="170"
-          height="44"
-          decoding="async"
-        />
-      </div>
-      <header class="auth-top-banner" data-name="image 153" data-node-id="610:10653">
-        <img
-          class="auth-top-banner__img"
-          src="https://www.figma.com/api/mcp/asset/83a5e0fb-4d8b-41ae-afbb-6c14596e2257"
-          alt=""
-          width="1286"
-          height="167"
-          decoding="async"
-        />
-      </header>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar sesión</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Spectral+SC:wght@600&family=Spectral:wght@600;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/auth.css" />
+</head>
+
+<body class="auth-body">
+  <div class="auth-header">
+    <div class="auth-top-logo" data-name="Logo" data-node-id="356:16696">
+      <img class="auth-top-logo__img" src="https://www.figma.com/api/mcp/asset/e168d633-b3ab-4c2f-9308-7a8318e35e9a"
+        alt="Eventos decoraciones" width="170" height="44" decoding="async" />
     </div>
+    <header class="auth-top-banner" data-name="image 153" data-node-id="610:10653">
+      <img class="auth-top-banner__img" src="https://www.figma.com/api/mcp/asset/83a5e0fb-4d8b-41ae-afbb-6c14596e2257"
+        alt="" width="1286" height="167" decoding="async" />
+    </header>
+  </div>
 
-    <main class="auth-page" data-node-id="493:10589">
-      <h1 class="auth-page__title" data-node-id="I493:10127;484:10116">Iniciar sesion</h1>
+  <main class="auth-page" data-node-id="493:10589">
+    <h1 class="auth-page__title" data-node-id="I493:10127;484:10116">Iniciar sesion</h1>
 
-      <form class="auth-form" action="#" method="post" aria-label="Formulario de inicio de sesión">
+    <form class="auth-form" action="#" method="post" aria-label="Formulario de inicio de sesión">
+      <div class="auth-form__group">
+        <label class="auth-form__label" for="identifier" data-node-id="I493:10574;484:10108">Correo/usuario</label>
+        <input class="auth-form__input" id="identifier" name="identifier" type="text" placeholder="Email/User"
+          autocomplete="username" inputmode="email" />
+      </div>
+
+      <div class="auth-form__password-block">
         <div class="auth-form__group">
-          <label class="auth-form__label" for="identifier" data-node-id="I493:10574;484:10108">Correo/usuario</label>
-          <input
-            class="auth-form__input"
-            id="identifier"
-            name="identifier"
-            type="text"
-            placeholder="Email/User"
-            autocomplete="username"
-            inputmode="email"
-          />
-        </div>
-
-        <div class="auth-form__password-block">
-          <div class="auth-form__group">
-            <label class="auth-form__label" for="password" data-node-id="I493:10143;484:10108">Contraseña</label>
-            <div class="auth-form__password-row" data-node-id="493:10168">
-              <input
-                class="auth-form__input"
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Contraseña"
-                autocomplete="current-password"
-              />
-              <button
-                class="auth-form__eye"
-                type="button"
-                id="password-toggle"
-                aria-label="Mostrar contraseña"
-                aria-controls="password"
-                aria-pressed="false"
-                data-node-id="493:10152"
-              >
-                <span class="auth-form__eye-icon auth-form__eye-icon--hidden" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" focusable="false">
-                    <path
-                      d="M12 5c4.418 0 8.18 2.909 9.5 7-1.32 4.091-5.082 7-9.5 7-4.418 0-8.18-2.909-9.5-7C3.82 7.909 7.582 5 12 5Zm0 2C8.785 7 5.794 9.039 4.62 12c1.174 2.961 4.165 5 7.38 5 3.215 0 6.206-2.039 7.38-5C18.206 9.039 15.215 7 12 7Zm0 2.5A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5Z"
-                      fill="currentColor"
-                    />
-                    <path d="M4 4 20 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-                  </svg>
-                </span>
-                <span class="auth-form__eye-icon auth-form__eye-icon--visible" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" focusable="false">
-                    <path
-                      d="M12 5c4.418 0 8.18 2.909 9.5 7-1.32 4.091-5.082 7-9.5 7-4.418 0-8.18-2.909-9.5-7C3.82 7.909 7.582 5 12 5Zm0 2C8.785 7 5.794 9.039 4.62 12c1.174 2.961 4.165 5 7.38 5 3.215 0 6.206-2.039 7.38-5C18.206 9.039 15.215 7 12 7Zm0 2.5A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </span>
-              </button>
-            </div>
+          <label class="auth-form__label" for="password" data-node-id="I493:10143;484:10108">Contraseña</label>
+          <div class="auth-form__password-row" data-node-id="493:10168">
+            <input class="auth-form__input" id="password" name="password" type="password" placeholder="Contraseña"
+              autocomplete="current-password" />
+            <button class="auth-form__eye" type="button" id="password-toggle" aria-label="Mostrar contraseña"
+              aria-controls="password" aria-pressed="false" data-node-id="493:10152">
+              <span class="auth-form__eye-icon auth-form__eye-icon--hidden" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path
+                    d="M12 5c4.418 0 8.18 2.909 9.5 7-1.32 4.091-5.082 7-9.5 7-4.418 0-8.18-2.909-9.5-7C3.82 7.909 7.582 5 12 5Zm0 2C8.785 7 5.794 9.039 4.62 12c1.174 2.961 4.165 5 7.38 5 3.215 0 6.206-2.039 7.38-5C18.206 9.039 15.215 7 12 7Zm0 2.5A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5Z"
+                    fill="currentColor" />
+                  <path d="M4 4 20 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                </svg>
+              </span>
+              <span class="auth-form__eye-icon auth-form__eye-icon--visible" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path
+                    d="M12 5c4.418 0 8.18 2.909 9.5 7-1.32 4.091-5.082 7-9.5 7-4.418 0-8.18-2.909-9.5-7C3.82 7.909 7.582 5 12 5Zm0 2C8.785 7 5.794 9.039 4.62 12c1.174 2.961 4.165 5 7.38 5 3.215 0 6.206-2.039 7.38-5C18.206 9.039 15.215 7 12 7Zm0 2.5A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5Z"
+                    fill="currentColor" />
+                </svg>
+              </span>
+            </button>
           </div>
-          <a href="#" class="auth-form__forgot" id="auth-forgot-password">¿Olvidó su contraseña?</a>
         </div>
+        <a href="#" class="auth-form__forgot" id="auth-forgot-password">¿Olvidó su contraseña?</a>
+      </div>
 
-        <button class="auth-form__submit" type="button" data-node-id="493:10577">
-          <span class="auth-form__submit-text" data-node-id="I493:10577;356:17004">Ingresar</span>
-        </button>
-      </form>
-    </main>
-    <div id="recovery-modal" class="modal-overlay" aria-hidden="true">
-      <div class="modal-content">
-        <h2 class="modal-title">RECUPERAR CONTRASEÑA</h2>
-        <p class="modal-description">Introduce tu dirección de correo electrónico</p>
-        <div class="modal-form-group">
-          <input type="email" class="modal-input" placeholder="Correo electrónico" id="recovery-email" />
-        </div>
-        <div class="modal-actions">
-          <button type="button" class="modal-btn modal-btn--primary" id="recovery-send">Enviar</button>
-          <button type="button" class="modal-btn modal-btn--secondary" id="recovery-back">Volver</button>
-        </div>
+      <button class="auth-form__submit" type="button" data-node-id="493:10577">
+        <span class="auth-form__submit-text" data-node-id="I493:10577;356:17004">Ingresar</span>
+      </button>
+    </form>
+  </main>
+  <div id="recovery-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-content">
+      <h2 class="modal-title">RECUPERAR CONTRASEÑA</h2>
+      <p class="modal-description">Introduce tu dirección de correo electrónico</p>
+      <div class="modal-form-group">
+        <input type="email" class="modal-input" placeholder="Correo electrónico" id="recovery-email" />
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="modal-btn modal-btn--primary" id="recovery-send">Enviar</button>
+        <button type="button" class="modal-btn modal-btn--secondary" id="recovery-back">Volver</button>
       </div>
     </div>
-    <script src="/js/auth-password-toggle.js" defer></script>
-    <script src="/js/auth-modal.js" defer></script>
-  </body>
+  </div>
+  <script src="/js/auth-password-toggle.js" defer></script>
+  <script src="/js/auth-modal.js" defer></script>
+</body>
+
 </html>
