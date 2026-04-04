@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Reserva - Wedding Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/global.css">
+    <style>
+        .confirm-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            text-align: center;
+            padding: 40px 20px;
+            font-family: 'Spectral', serif;
+        }
+
+        .confirm-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(84, 192, 203, 0.3);
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .confirm-title {
+            font-family: 'Spectral SC', serif;
+            font-size: 48px;
+            margin: 0 0 20px;
+            color: #000;
+        }
+
+        .confirm-text {
+            font-size: 24px;
+            color: var(--muted);
+            max-width: 600px;
+            margin-bottom: 48px;
+            line-height: 1.6;
+        }
+
+        .btn-home {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 16px 48px;
+            border-radius: 6px;
+            font-family: 'Spectral SC', serif;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-home:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(84, 192, 203, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .confirm-title {
+                font-size: 32px;
+            }
+
+            .confirm-text {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="hero-selection">
+        <h1 class="hero-selection__title">Resumen de tu Boda</h1>
+    </header>
+
+    <main class="confirm-container">
+        <div class="confirm-icon">
+            <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6L9 17L4 12" stroke="white" stroke-width="3" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </div>
+        <h2 class="confirm-title">¡SOLICITUD RECIBIDA!</h2>
+        <p class="confirm-text">
+            Hemos registrado tus datos con éxito. En breve, un coordinador de <strong>Eventos Decoraciones</strong> se
+            pondrá en contacto contigo vía correopara finalizar los detalles de tu reserva con elementos en la hacienda
+            seleccionada.
+        </p>
+        <a href="/assets/public/place.html" class="btn-home">VOLVER AL INICIO</a>
+    </main>
+
+    <script src="/js/cart.js"></script>
+    <script>
+        // Optional: clear cart after confirmation
+        document.addEventListener('DOMContentLoaded', () => {
+            // localStorage.removeItem('weddingCart'); 
+            // Better to keep it until they pay? User's choice. 
+            // For now just show the page.
+        });
+    </script>
+</body>
+
+</html>

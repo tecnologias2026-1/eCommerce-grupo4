@@ -84,6 +84,15 @@
             if (cart.selectedVenue) {
                 document.getElementById('final-total').textContent = cart.selectedVenue.price;
             }
+
+            // Handle submission
+            const submitBtn = document.querySelector('.btn-submit-booking');
+            if (submitBtn) {
+                submitBtn.onclick = () => {
+                    // Here you could also validate form fields if needed
+                    window.location.href = '/assets/public/confirm.html';
+                };
+            }
         });
     </script>
 </body>
