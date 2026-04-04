@@ -50,6 +50,20 @@
     border-color: #000;
 }
 
+.form-group input[readonly] {
+    background: #fdfdfd;
+    color: #999;
+    cursor: default;
+}
+
+.form-help-text {
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 4px;
+    letter-spacing: 0.1px;
+}
+
 .btn-submit-booking {
     display: block;
     width: 100%;

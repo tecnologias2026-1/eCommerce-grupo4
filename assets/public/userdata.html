@@ -46,7 +46,8 @@
                 </div>
                 <div class="form-group">
                     <label for="wedding-date">Fecha tentativa de la boda</label>
-                    <input type="date" id="wedding-date">
+                    <input type="date" id="wedding-date" readonly>
+                    <p class="form-help-text">Para editar fecha revise nuevamente el inicio por disponibilidad</p>
                 </div>
                 <div class="form-group">
                     <label for="deposit">Abono de la Reserva</label>
@@ -62,6 +63,16 @@
     </main>
 
     <script src="/js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedDate = localStorage.getItem('selectedWeddingDate');
+            const dateInput = document.getElementById('wedding-date');
+            
+            if (storedDate && dateInput) {
+                dateInput.value = storedDate;
+            }
+        });
+    </script>
 </body>
 
 </html>
