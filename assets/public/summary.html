@@ -58,7 +58,7 @@
 
             // Clear current content
             summaryContainer.innerHTML = '';
-            
+
             // Detect Context (Iframe vs Standalone)
             const isIframe = window.self !== window.top;
 
@@ -111,7 +111,7 @@
                         alert('Para confirmar disponibilidad debe seleccionar la fecha aproximada de la boda en el inicio.');
                         return false;
                     };
-                    
+
                     // Add warning text before footer
                     const warning = document.createElement('p');
                     warning.style.cssText = "grid-column: 1/-1; text-align: center; color: #ff4444; font-family: 'Spectral', serif; font-size: 16px; margin-top: 20px;";
@@ -122,7 +122,7 @@
                     actionBtn.style.cursor = 'pointer';
                     if (isIframe) {
                         actionText.textContent = 'FINALIZAR COMPRA';
-                        actionLogo.style.display = 'none'; 
+                        actionLogo.style.display = 'none';
                         actionBtn.onclick = () => window.open('/assets/public/summary.html', '_blank');
                     } else {
                         actionText.textContent = 'CONTINUAR COMPRA';
@@ -138,7 +138,7 @@
 
         function handleRemove(category) {
             showCustomConfirm(
-                '¿ELIMINAR SELECCIÓN?', 
+                '¿ELIMINAR SELECCIÓN?',
                 '¿Estás seguro de que deseas eliminar este lugar de tu selección?',
                 () => {
                     removeFromCart(category);

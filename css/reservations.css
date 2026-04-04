@@ -17,6 +17,12 @@
     align-items: start;
     padding-bottom: 80px;
     border-bottom: 1px solid #efefef;
+    transition: all 0.3s ease;
+}
+
+.res-card:hover {
+    background: #fafaff;
+    transform: translateX(10px);
 }
 
 .res-card:last-child {
@@ -39,19 +45,21 @@
 }
 
 .res-card__venue {
-    font-family: "Inter", sans-serif;
+    font-family: "Spectral SC", serif;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 18px;
     margin: 0;
     color: #333;
+    text-transform: uppercase;
 }
 
 .res-card__date,
 .res-card__status {
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
+    font-family: "Spectral SC", serif;
+    font-size: 16px;
     color: #777;
     margin: 0;
+    text-transform: uppercase;
 }
 
 .res-card__status span {
@@ -60,9 +68,9 @@
 }
 
 .res-card__price {
-    font-family: "Inter", sans-serif;
+    font-family: "Spectral SC", serif;
     font-weight: 700;
-    font-size: 22px;
+    font-size: 20px;
     margin-top: 20px;
     color: #000;
 }
