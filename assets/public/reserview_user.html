@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Reserva - Wedding Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@400;600;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/reservations.css">
+    <link rel="stylesheet" href="/css/reservations-view.css">
+    <link rel="stylesheet" href="/css/reserview-user.css">
+</head>
+
+<body>
+    <header class="hero-selection">
+        <h1 class="hero-selection__title">Resumen de tu Boda</h1>
+    </header>
+
+    <main class="res-view-container">
+        <div class="res-view-header">
+            <a href="reservcode.html" class="back-link">
+                &larr; VOLVER
+            </a>
+            <span class="res-view-id">CÓDIGO DE RESERVA: <span id="res-id" style="color: #000;">000000</span></span>
+        </div>
+
+        <div class="res-view-grid">
+            <h2 class="res-view-main-title" id="res-couple">JUAN Y MARIA</h2>
+
+            <div class="res-info-col">
+                <div class="detail-group">
+                    <span class="detail-label">Lugar de la Boda</span>
+                    <span class="detail-value" id="res-venue">N/A</span>
+                </div>
+                <div class="detail-group">
+                    <span class="detail-label">Fecha del Evento</span>
+                    <span class="detail-value" id="res-date">N/A</span>
+                </div>
+                <div class="detail-group">
+                    <span class="detail-label">Estado</span>
+                    <span class="detail-value" id="res-status" style="color: var(--primary);">Pendiente</span>
+                </div>
+            </div>
+
+            <div class="res-media-col">
+                <div class="res-view-image">
+                    <img id="res-image" src="" alt="Hacienda">
+                </div>
+
+                <div class="payment-summary">
+                    <div class="payment-row">
+                        <span class="payment-label">Monto Total:</span>
+                        <span class="payment-value" id="pay-total">COL$ 0</span>
+                    </div>
+                    <div class="payment-row">
+                        <span class="payment-label">Monto Pagado:</span>
+                        <span class="payment-value" id="pay-deposit" style="color: #27ae60;">COL$ 0</span>
+                    </div>
+                    <div class="payment-row" style="border-top: 1px solid #ddd; padding-top: 12px; margin-top: 12px;">
+                        <span class="payment-label">Pendiente:</span>
+                        <span class="payment-value" id="pay-pending" style="color: #e74c3c;">COL$ 0</span>
+                    </div>
+                </div>
+
+                <div class="user-actions-bar">
+                    <button class="btn-action-user btn-pay-more"
+                        onclick="alert('Redirigiendo a pasarela de pagos...')">Abonar más</button>
+                    <a href="https://wa.me/573000000000" class="btn-action-user btn-chat" target="_blank">Hablar con un
+                        asesor</a>
+                </div>
+            </div>
+
+            <!-- Resto de detalles vacíos como se pidió -->
+            <div class="detail-group" style="padding-top: 40px; border-top: 1px solid #efefef; grid-column: span 2;">
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reservation = JSON.parse(localStorage.getItem('viewingUserReservation'));
+
+            if (!reservation) {
+                window.location.href = 'reservcode.html';
+                return;
+            }
+
+            // Populate Main Details
+            document.getElementById('res-id').textContent = (reservation.id || '000000').replace('#WP-', '');
+            document.getElementById('res-couple').innerHTML = `${reservation.groom.toUpperCase()} Y<br>${reservation.bride.toUpperCase()}`;
+            document.getElementById('res-venue').textContent = reservation.venue;
+            document.getElementById('res-date').textContent = reservation.weddingDate;
+            document.getElementById('res-status').textContent = reservation.status;
+
+            if (reservation.venueImage) {
+                document.getElementById('res-image').src = reservation.venueImage;
+            }
+
+            // Payment Calculations
+            const totalStr = reservation.totalPrice || 'COL$ 0';
+            const depositStr = reservation.deposit || '0';
+
+            document.getElementById('pay-total').textContent = totalStr;
+
+            // Format deposit display
+            const depositNum = parseInt(depositStr.replace(/[^0-9]/g, "")) || 0;
+            const depositFormatted = 'COL$ ' + depositNum.toLocaleString('es-CO');
+            document.getElementById('pay-deposit').textContent = depositFormatted;
+
+            // Calculate pending
+            const totalNum = parseInt(totalStr.replace(/[^0-9]/g, "")) || 0;
+            const pendingNum = totalNum - depositNum;
+            document.getElementById('pay-pending').textContent = 'COL$ ' + pendingNum.toLocaleString('es-CO');
+        });
+    </script>
+</body>
+
+</html>

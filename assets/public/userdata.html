@@ -120,6 +120,7 @@
                         venueImage: cart.selectedVenue ? cart.selectedVenue.image : '',
                         guests: cart.selectedVenue ? cart.selectedVenue.guests : '0 invitados',
                         totalPrice: document.getElementById('final-total').textContent,
+                        deposit: inputs.deposit,
                         status: 'Pendiente',
                         timestamp: new Date().toISOString()
                     };
@@ -128,7 +129,8 @@
                     allReservations.push(newReservation);
                     localStorage.setItem('allReservations', JSON.stringify(allReservations));
 
-                    // Success: Redirect
+                    // Success: Clear Cart and Redirect
+                    clearCart();
                     window.location.href = '/assets/public/confirm.html';
                 };
             }

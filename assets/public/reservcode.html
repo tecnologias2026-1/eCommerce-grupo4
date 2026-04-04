@@ -57,8 +57,16 @@
             verifyBtn.addEventListener('click', () => {
                 const code = codeInput.value.trim();
                 if (code) {
-                    // Logic to follow up the reservation will be added here
-                    // Current: Silently allow click
+                    const allReservations = JSON.parse(localStorage.getItem('allReservations') || '[]');
+                    // Normalize (remove #WP- if any) and find
+                    const found = allReservations.find(r => r.id.replace('#WP-', '') === code.replace('#WP-', ''));
+
+                    if (found) {
+                        localStorage.setItem('viewingUserReservation', JSON.stringify(found));
+                        window.location.href = 'reserview_user.html';
+                    } else {
+                        alert('Reserva no encontrada. Por favor verifica el código ingresado.');
+                    }
                 }
             });
         });
