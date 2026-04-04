@@ -116,7 +116,30 @@
         </div>
       </div>
     </div>
+    <script src="/js/cart.js"></script>
     <script src="/js/auth-password-toggle.js" defer></script>
     <script src="/js/auth-modal.js" defer></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const loginBtn = document.querySelector('.auth-form__submit');
+        const idInput = document.getElementById('identifier');
+        const passInput = document.getElementById('password');
+
+        if (loginBtn) {
+          loginBtn.onclick = () => {
+            const idVal = idInput.value.trim();
+            const passVal = passInput.value.trim();
+
+            if (!idVal || !passVal) {
+              showCustomAlert('CONTROL DE ACCESO', 'No se puede ingresar por no escribir los datos correctos o incompletos.');
+              return;
+            }
+
+            // Success: Redirect to dashboard
+            window.location.href = '/assets/public/reservations.html';
+          };
+        }
+      });
+    </script>
   </body>
 </html>

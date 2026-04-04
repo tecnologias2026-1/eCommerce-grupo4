@@ -55,7 +55,8 @@
                 </div>
                 <div class="form-group full-width">
                     <label for="comments">¿Tienes algún requerimiento especial?</label>
-                    <input type="text" id="comments" placeholder="Ej. Necesitamos acceso para personas con movilidad reducida">
+                    <input type="text" id="comments"
+                        placeholder="Ej. Necesitamos acceso para personas con movilidad reducida">
                 </div>
             </div>
         </div>
@@ -89,7 +90,44 @@
             const submitBtn = document.querySelector('.btn-submit-booking');
             if (submitBtn) {
                 submitBtn.onclick = () => {
-                    // Here you could also validate form fields if needed
+                    const inputs = {
+                        groom: document.getElementById('groom-name').value.trim(),
+                        bride: document.getElementById('bride-name').value.trim(),
+                        email: document.getElementById('email').value.trim(),
+                        phone: document.getElementById('phone').value.trim(),
+                        deposit: document.getElementById('deposit').value.trim(),
+                        comments: document.getElementById('comments').value.trim()
+                    };
+
+                    // Check if any field is empty
+                    const emptyFields = Object.values(inputs).some(val => val === "");
+
+                    if (emptyFields) {
+                        showCustomAlert('DATOS INCOMPLETOS', 'Por favor, completa todos los campos de información para procesar tu reserva.');
+                        return;
+                    }
+
+                    // SUCCESS: Guardar reserva
+                    const cart = getCartData();
+                    const newReservation = {
+                        id: `#WP-${Math.floor(1000 + Math.random() * 9000)}`,
+                        groom: inputs.groom,
+                        bride: inputs.bride,
+                        email: inputs.email,
+                        phone: inputs.phone,
+                        weddingDate: document.getElementById('wedding-date').value,
+                        venue: cart.selectedVenue ? cart.selectedVenue.name : 'N/A',
+                        venueImage: cart.selectedVenue ? cart.selectedVenue.image : '',
+                        totalPrice: document.getElementById('final-total').textContent,
+                        status: 'Pendiente',
+                        timestamp: new Date().toISOString()
+                    };
+
+                    const allReservations = JSON.parse(localStorage.getItem('allReservations') || '[]');
+                    allReservations.push(newReservation);
+                    localStorage.setItem('allReservations', JSON.stringify(allReservations));
+
+                    // Success: Redirect
                     window.location.href = '/assets/public/confirm.html';
                 };
             }

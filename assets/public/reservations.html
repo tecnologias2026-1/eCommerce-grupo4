@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Reservaciones - Eventos Decoraciones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@400;600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/reservations.css">
+</head>
+
+<body>
+    <header class="hero-selection">
+        <a href="/assets/public/auth.html" class="btn-logout">Cerrar Sesión</a>
+        <h1 class="hero-selection__title">Reservaciones</h1>
+    </header>
+
+    <main class="reservations-content">
+        <div class="reservations-list">
+            <!-- Rendered cards here -->
+        </div>
+    </main>
+
+    <script src="/js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const listContainer = document.querySelector('.reservations-list');
+            const allReservations = JSON.parse(localStorage.getItem('allReservations') || '[]');
+
+            // Handle Clear History
+            const clearBtn = document.getElementById('clear-reservations');
+            if (clearBtn) {
+                clearBtn.onclick = () => {
+                    if (confirm('¿Estás seguro de que quieres borrar todo el historial?')) {
+                        localStorage.removeItem('allReservations');
+                        window.location.reload();
+                    }
+                };
+            }
+
+            if (allReservations.length === 0) {
+                listContainer.innerHTML = '<p class="empty-msg">No hay reservaciones registradas aún.</p>';
+                return;
+            }
+
+            allReservations.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            listContainer.innerHTML = '';
+            allReservations.forEach(res => {
+                const card = document.createElement('div');
+                card.className = 'res-card';
+                card.innerHTML = `
+                    <div class="res-card__info">
+                        <h2 class="res-card__title">${res.groom.toUpperCase()} Y<br>${res.bride.toUpperCase()}</h2>
+                        <p class="res-card__venue">${res.venue}</p>
+                        <p class="res-card__date">Fecha: ${res.weddingDate}</p>
+                        <p class="res-card__status">Estado: <span>${res.status}</span></p>
+                        <p class="res-card__price">${res.totalPrice || 'COL$ 0'}</p>
+                    </div>
+                    
+                    <div class="res-card__media-grid">
+                        <div class="media-slot">
+                            <img src="${res.venueImage || 'https://via.placeholder.com/300x200?text=Hacienda'}" alt="Hacienda">
+                            <span>CEREMONIA PREMIUM</span>
+                        </div>
+                        <div class="media-slot empty">
+                            <div class="placeholder-img"></div>
+                            <span>RECEPCION PREMIUM</span>
+                        </div>
+                        <div class="media-slot empty">
+                            <div class="placeholder-img"></div>
+                            <span>COMIDA PREMIUM</span>
+                        </div>
+                        <div class="media-slot empty">
+                            <div class="placeholder-img"></div>
+                            <span>DECORACION FLORAL</span>
+                        </div>
+                    </div>
+                `;
+                listContainer.appendChild(card);
+            });
+        });
+    </script>
+</body>
+
+</html>

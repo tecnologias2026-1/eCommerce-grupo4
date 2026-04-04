@@ -1,0 +1,150 @@
+.reservations-content {
+    padding: 60px 40px;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.reservations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.res-card {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 60px;
+    align-items: start;
+    padding-bottom: 80px;
+    border-bottom: 1px solid #efefef;
+}
+
+.res-card:last-child {
+    border-bottom: none;
+}
+
+.res-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.res-card__title {
+    font-family: "Spectral", serif;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 1.1;
+    margin: 0 0 20px 0;
+    color: #000;
+}
+
+.res-card__venue {
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0;
+    color: #333;
+}
+
+.res-card__date,
+.res-card__status {
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    color: #777;
+    margin: 0;
+}
+
+.res-card__status span {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.res-card__price {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin-top: 20px;
+    color: #000;
+}
+
+.res-card__media-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.media-slot {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.media-slot img,
+.placeholder-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.placeholder-img {
+    background: #f5f5f5;
+    border: 1px dashed #ddd;
+}
+
+.media-slot span {
+    font-family: "Spectral SC", serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    color: #000;
+    letter-spacing: 0.5px;
+}
+
+.empty-msg {
+    text-align: center;
+    font-family: "Spectral", serif;
+    font-size: 24px;
+    color: #999;
+    padding: 100px 0;
+}
+
+.btn-logout {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #666;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-logout:hover {
+    background: #f5f5f5;
+    color: #000;
+}
+
+@media (max-width: 1200px) {
+    .res-card {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .res-card__media-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .res-card__title {
+        font-size: 36px;
+    }
+
+    .res-card__media-grid {
+        grid-template-columns: 1fr;
+    }
+}
