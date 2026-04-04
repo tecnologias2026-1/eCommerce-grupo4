@@ -12,71 +12,6 @@
         rel="stylesheet">
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/summary.css">
-    <style>
-        .summary-marquee {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 40px;
-            padding: 40px 120px;
-            width: 100%;
-        }
-
-        .empty-cart-message {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 80px 20px;
-            font-family: 'Spectral', serif;
-            font-size: 24px;
-            color: var(--muted);
-        }
-
-        .summary-section {
-            position: relative;
-        }
-
-        .summary-section__remove {
-            position: absolute;
-            top: -10px;
-            right: 0;
-            background: #fdfdfd;
-            border: 1px solid #ddd;
-            color: #999;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-
-        .summary-item {
-            align-items: flex-start;
-        }
-
-        .summary-checkmark {
-            margin-top: 6px;
-        }
-
-        @media (max-width: 768px) {
-            .summary-marquee {
-                padding: 30px 20px;
-                grid-template-columns: 1fr;
-            }
-
-            .hero-selection__title {
-                font-size: 28px;
-            }
-
-            .summary-image-box {
-                width: 100%;
-                height: 200px;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -103,6 +38,7 @@
             <span class="summary-total-label">Total Incluido</span>
             <span class="summary-total-value" id="final-total">COL$ 0</span>
         </div>
+        <span class="summary-footer-note">Revisa los detalles de tu evento antes de continuar con el pago.</span>
         <button class="btn-continue-pay" id="main-action-btn">
             <img src="http://localhost:3845/assets/c5e830f0c676b1d0943f54b17de0ae27122c2907.png" alt="Logo Pago"
                 class="btn-continue-pay__logo" id="action-btn-logo">
@@ -164,34 +100,52 @@
                 footer.style.display = 'flex';
                 document.getElementById('final-total').textContent = venue.price;
 
-                // Adjust Action Button
-                if (isIframe) {
-                    actionText.textContent = 'FINALIZAR COMPRA';
-                    actionLogo.style.display = 'none'; 
-                    actionBtn.onclick = () => window.open('/assets/public/summary.html', '_blank');
+                // Validation LOGIC
+                const storedDate = localStorage.getItem('selectedWeddingDate');
+                if (!storedDate && isIframe) {
+                    actionText.textContent = 'SELECCIONA UNA FECHA';
+                    actionBtn.style.opacity = '0.7';
+                    actionBtn.style.cursor = 'not-allowed';
+                    actionBtn.onclick = (e) => {
+                        e.preventDefault();
+                        alert('Para confirmar disponibilidad debe seleccionar la fecha aproximada de la boda en el inicio.');
+                        return false;
+                    };
+                    
+                    // Add warning text before footer
+                    const warning = document.createElement('p');
+                    warning.style.cssText = "grid-column: 1/-1; text-align: center; color: #ff4444; font-family: 'Spectral', serif; font-size: 16px; margin-top: 20px;";
+                    warning.textContent = "Para confirmar disponibilidad debe seleccionar la fecha aproximada de la boda en la página principal";
+                    summaryContainer.appendChild(warning);
                 } else {
-                    actionText.textContent = 'CONTINUAR COMPRA';
-                    actionLogo.style.display = 'inline-block';
-                    actionBtn.onclick = () => alert('Procediendo al siguiente paso de la compra...');
+                    actionBtn.style.opacity = '1';
+                    actionBtn.style.cursor = 'pointer';
+                    if (isIframe) {
+                        actionText.textContent = 'FINALIZAR COMPRA';
+                        actionLogo.style.display = 'none'; 
+                        actionBtn.onclick = () => window.open('/assets/public/summary.html', '_blank');
+                    } else {
+                        actionText.textContent = 'CONTINUAR COMPRA';
+                        actionLogo.style.display = 'inline-block';
+                        actionBtn.onclick = () => { window.location.href = '/assets/public/userdata.html'; };
+                    }
                 }
             } else {
-                summaryContainer.innerHTML = `
-                    <div class="empty-cart-message">
-                        Aún no has seleccionado un lugar para tu boda.
-                    </div>
-                `;
+                summaryContainer.innerHTML = `<div class="empty-cart-message">Aún no has seleccionado un lugar para tu boda.</div>`;
                 footer.style.display = 'none';
             }
         }
 
         function handleRemove(category) {
-            if (confirm('¿Estás seguro de que deseas eliminar este lugar de tu selección?')) {
-                removeFromCart(category);
-                renderSummary();
-
-                // Optional: Dispatch event so main window can update icon (if needed)
-                window.parent.postMessage({ type: 'CART_UPDATED' }, '*');
-            }
+            showCustomConfirm(
+                '¿ELIMINAR SELECCIÓN?', 
+                '¿Estás seguro de que deseas eliminar este lugar de tu selección?',
+                () => {
+                    removeFromCart(category);
+                    renderSummary();
+                    window.parent.postMessage({ type: 'CART_UPDATED' }, '*');
+                }
+            );
         }
 
         document.addEventListener('DOMContentLoaded', renderSummary);

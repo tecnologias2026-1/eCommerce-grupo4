@@ -181,8 +181,23 @@
         </div>
     </section>
 
+    <script src="/js/cart.js"></script>
     <script src="/js/calendar.js"></script>
     <script src="/js/venue-filter.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const moreBtns = document.querySelectorAll('.venue-card__more-btn');
+            moreBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const selectedDate = localStorage.getItem('selectedWeddingDate');
+                    if (!selectedDate) {
+                        e.preventDefault();
+                        showCustomAlert('CONFIRMAR DISPONIBILIDAD', 'Para confirmar disponibilidad debe seleccionar la fecha aproximada de la boda en el calendario.');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
