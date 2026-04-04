@@ -32,6 +32,17 @@
             const listContainer = document.querySelector('.reservations-list');
             const allReservations = JSON.parse(localStorage.getItem('allReservations') || '[]');
 
+            // Handle Clear History
+            const clearBtn = document.getElementById('clear-reservations');
+            if (clearBtn) {
+                clearBtn.onclick = () => {
+                    if (confirm('¿Estás seguro de que quieres borrar todo el historial?')) {
+                        localStorage.removeItem('allReservations');
+                        window.location.reload();
+                    }
+                };
+            }
+
             if (allReservations.length === 0) {
                 listContainer.innerHTML = '<p class="empty-msg">No hay reservaciones registradas aún.</p>';
                 return;
@@ -49,6 +60,7 @@
                         <p class="res-card__venue">${res.venue}</p>
                         <p class="res-card__date">Fecha: ${res.weddingDate}</p>
                         <p class="res-card__status">Estado: <span>${res.status}</span></p>
+                        <p class="res-card__price">${res.totalPrice || 'COL$ 0'}</p>
                     </div>
                     
                     <div class="res-card__media-grid">

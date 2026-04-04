@@ -46,7 +46,8 @@
     color: #333;
 }
 
-.res-card__date, .res-card__status {
+.res-card__date,
+.res-card__status {
     font-family: "Inter", sans-serif;
     font-size: 18px;
     color: #777;
@@ -56,6 +57,14 @@
 .res-card__status span {
     font-weight: 600;
     color: var(--primary);
+}
+
+.res-card__price {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin-top: 20px;
+    color: #000;
 }
 
 .res-card__media-grid {
@@ -71,7 +80,8 @@
     align-items: center;
 }
 
-.media-slot img, .placeholder-img {
+.media-slot img,
+.placeholder-img {
     width: 100%;
     aspect-ratio: 4/3;
     object-fit: cover;
@@ -123,6 +133,7 @@
         grid-template-columns: 1fr;
         gap: 40px;
     }
+
     .res-card__media-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -132,6 +143,7 @@
     .res-card__title {
         font-size: 36px;
     }
+
     .res-card__media-grid {
         grid-template-columns: 1fr;
     }
