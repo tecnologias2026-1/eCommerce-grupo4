@@ -110,7 +110,7 @@
                     // SUCCESS: Guardar reserva
                     const cart = getCartData();
                     const newReservation = {
-                        id: `#WP-${Math.floor(1000 + Math.random() * 9000)}`,
+                        id: `${Math.floor(100000 + Math.random() * 900000)}`,
                         groom: inputs.groom,
                         bride: inputs.bride,
                         email: inputs.email,
@@ -118,6 +118,7 @@
                         weddingDate: document.getElementById('wedding-date').value,
                         venue: cart.selectedVenue ? cart.selectedVenue.name : 'N/A',
                         venueImage: cart.selectedVenue ? cart.selectedVenue.image : '',
+                        guests: cart.selectedVenue ? cart.selectedVenue.guests : '0 invitados',
                         totalPrice: document.getElementById('final-total').textContent,
                         status: 'Pendiente',
                         timestamp: new Date().toISOString()

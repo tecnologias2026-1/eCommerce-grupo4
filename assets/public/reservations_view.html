@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Reservación - Eventos Decoraciones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@400;600;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/reservations.css">
+    <link rel="stylesheet" href="/css/reservations-view.css">
+</head>
+
+<body>
+    <header class="hero-selection">
+        <h1 class="hero-selection__title">Detalle de Reserva</h1>
+    </header>
+
+    <main class="res-view-container">
+        <div class="res-view-header">
+            <a href="reservations.html" class="back-link">
+                &larr; VOLVER A LA LISTA
+            </a>
+            <span class="res-view-id">CÓDIGO DE RESERVA: <span id="res-id" style="color: #000;">123456</span></span>
+        </div>
+
+        <div class="res-view-grid">
+            <h2 class="res-view-main-title" id="res-couple">JUAN Y MARIA</h2>
+
+            <div class="res-info-col">
+                <div class="detail-group">
+                    <span class="detail-label">Lugar de la Boda</span>
+                    <span class="detail-value" id="res-venue">Hacienda Paz del Río</span>
+                </div>
+                <div class="detail-group">
+                    <span class="detail-label">Cantidad de Invitados</span>
+                    <span class="detail-value" id="res-guests">100 invitados</span>
+                </div>
+                <div class="detail-group">
+                    <span class="detail-label">Fecha del Evento</span>
+                    <span class="detail-value" id="res-date">4 de Mayo, 2026</span>
+                </div>
+                <div class="detail-group">
+                    <span class="detail-label">Estado</span>
+                    <span class="detail-value" id="res-status" style="color: var(--primary);">Pendiente</span>
+                </div>
+            </div>
+
+            <div class="res-media-col">
+                <div class="res-view-image">
+                    <img id="res-image" src="/assets/images/paz del rio.png" alt="Hacienda">
+                </div>
+                <div class="detail-group" style="margin-top: 32px;">
+                    <span class="detail-label">Costo Total</span>
+                    <span class="detail-value" id="res-price" style="font-size: 32px; font-weight: 700;">COL$ 3.000.000</span>
+                </div>
+            </div>
+
+            <div class="detail-group full-width" style="grid-column: span 2; border-top: 1px solid #efefef; padding-top: 32px;">
+                <span class="detail-label">Información de Contacto</span>
+                <p class="detail-value" id="res-contact" style="font-size: 16px; color: #555;">Email: juan@example.com | Tel: +57 300 123 4567</p>
+            </div>
+
+            <div class="res-card__media-grid" style="grid-column: span 2; margin-top: 40px; padding-top: 40px; border-top: 1px solid #efefef;">
+                <div class="media-slot">
+                    <img id="res-image-grid" src="/assets/images/paz del rio.png" alt="Ceremonia">
+                    <span>CEREMONIA PREMIUM</span>
+                </div>
+                <div class="media-slot empty">
+                    <div class="placeholder-img"></div>
+                    <span>RECEPCION PREMIUM</span>
+                </div>
+                <div class="media-slot empty">
+                    <div class="placeholder-img"></div>
+                    <span>COMIDA PREMIUM</span>
+                </div>
+                <div class="media-slot empty">
+                    <div class="placeholder-img"></div>
+                    <span>DECORACION FLORAL</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reservation = JSON.parse(localStorage.getItem('viewingReservation'));
+
+            if (!reservation) {
+                window.location.href = 'reservations.html';
+                return;
+            }
+
+            document.getElementById('res-id').textContent = (reservation.id || '000000').replace('#WP-', '');
+            document.getElementById('res-couple').innerHTML = `${reservation.groom.toUpperCase()} Y<br>${reservation.bride.toUpperCase()}`;
+            document.getElementById('res-venue').textContent = reservation.venue;
+            document.getElementById('res-guests').textContent = reservation.guests || '100 invitados aprox';
+            document.getElementById('res-date').textContent = reservation.weddingDate;
+            document.getElementById('res-status').textContent = reservation.status;
+            document.getElementById('res-price').textContent = reservation.totalPrice;
+            document.getElementById('res-contact').textContent = `Email: ${reservation.email} | Tel: ${reservation.phone}`;
+            
+            if (reservation.venueImage) {
+                document.getElementById('res-image').src = reservation.venueImage;
+                document.getElementById('res-image').alt = reservation.venue;
+                document.getElementById('res-image-grid').src = reservation.venueImage;
+            }
+        });
+    </script>
+</body>
+
+</html>

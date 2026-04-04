@@ -51,9 +51,11 @@
             allReservations.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
             listContainer.innerHTML = '';
-            allReservations.forEach(res => {
+            allReservations.forEach((res, index) => {
                 const card = document.createElement('div');
                 card.className = 'res-card';
+                card.style.cursor = 'pointer';
+                card.dataset.index = index;
                 card.innerHTML = `
                     <div class="res-card__info">
                         <h2 class="res-card__title">${res.groom.toUpperCase()} Y<br>${res.bride.toUpperCase()}</h2>
@@ -82,6 +84,12 @@
                         </div>
                     </div>
                 `;
+                
+                card.addEventListener('click', () => {
+                    localStorage.setItem('viewingReservation', JSON.stringify(res));
+                    window.location.href = 'reservations_view.html';
+                });
+
                 listContainer.appendChild(card);
             });
         });

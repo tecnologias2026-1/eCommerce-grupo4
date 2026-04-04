@@ -1,0 +1,100 @@
+.res-view-container {
+    max-width: 1040px;
+    margin: 40px auto;
+    padding: 40px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.res-view-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+}
+
+.back-link {
+    text-decoration: none;
+    color: var(--muted);
+    font-family: "Spectral SC", serif;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: #000;
+}
+
+.res-view-id {
+    font-family: "Spectral SC", serif;
+    font-size: 16px;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.res-view-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+}
+
+.res-view-main-title {
+    font-family: "Spectral", serif;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 1.1;
+    margin: 0 0 40px 0;
+    grid-column: span 2;
+    text-transform: uppercase;
+}
+
+.detail-group {
+    margin-bottom: 32px;
+}
+
+.detail-label {
+    font-family: "Spectral SC", serif;
+    font-size: 14px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.detail-value {
+    font-family: "Spectral SC", serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    text-transform: uppercase;
+}
+
+.res-view-image {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.res-view-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .res-view-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .res-view-main-title {
+        font-size: 32px;
+        grid-column: span 1;
+    }
+}
