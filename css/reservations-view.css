@@ -88,13 +88,141 @@
     display: block;
 }
 
+
+/* Full-width sections that span both grid columns */
+.res-contact-group {
+    grid-column: span 2;
+    border-top: 1px solid #efefef;
+    padding-top: 32px;
+}
+
+.res-contact-value {
+    font-size: 16px;
+    color: #555;
+}
+
+.res-media-full {
+    grid-column: span 2;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid #efefef;
+}
+
+/* ================================================
+   TABLET (max-width: 1024px)
+   ================================================ */
+@media (max-width: 1024px) {
+    .res-view-container {
+        margin: 24px;
+        padding: 32px;
+    }
+
+    .res-view-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+    .res-view-main-title {
+        font-size: 36px;
+        margin-bottom: 28px;
+    }
+
+    .detail-value {
+        font-size: 17px;
+    }
+
+    .res-card__media-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ================================================
+   MOBILE (max-width: 768px)
+   ================================================ */
 @media (max-width: 768px) {
+    .res-view-container {
+        margin: 10px;
+        padding: 16px;
+        border-radius: 8px;
+        box-shadow: none;
+    }
+
+    .res-view-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding-bottom: 14px;
+        margin-bottom: 18px;
+    }
+
+    .back-link {
+        font-size: 13px;
+    }
+
+    .res-view-id {
+        font-size: 12px;
+    }
+
     .res-view-grid {
         grid-template-columns: 1fr;
-        gap: 32px;
+        gap: 0;
     }
+
     .res-view-main-title {
-        font-size: 32px;
+        font-size: 24px;
+        line-height: 1.2;
+        margin-bottom: 16px;
         grid-column: span 1;
+    }
+
+    /* Info col and media col stack naturally */
+    .res-info-col,
+    .res-media-col {
+        width: 100%;
+    }
+
+    .detail-group {
+        margin-bottom: 16px;
+    }
+
+    .detail-label {
+        font-size: 11px;
+        margin-bottom: 4px;
+    }
+
+    .detail-value {
+        font-size: 14px;
+    }
+
+    .res-view-image {
+        border-radius: 6px;
+        margin-top: 20px;
+    }
+
+    /* Full-width spans collapse to 1 column */
+    .res-contact-group {
+        grid-column: span 1;
+        padding-top: 20px;
+        margin-top: 4px;
+    }
+
+    .res-contact-value {
+        font-size: 13px;
+        word-break: break-word;
+    }
+
+    .res-media-full {
+        grid-column: span 1;
+        margin-top: 24px;
+        padding-top: 24px;
+    }
+
+    .res-card__media-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .media-slot span {
+        font-size: 10px;
     }
 }

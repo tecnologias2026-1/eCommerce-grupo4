@@ -108,3 +108,116 @@
 .payment-value--pending {
     color: #e74c3c;
 }
+
+/* ================================================
+   TABLET (max-width: 1024px)
+   ================================================ */
+@media (max-width: 1024px) {
+    .res-view-container {
+        margin: 24px;
+        padding: 32px;
+    }
+
+    .res-view-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+    .res-view-main-title {
+        font-size: 36px;
+    }
+
+    .detail-value {
+        font-size: 16px;
+    }
+}
+
+/* ================================================
+   MOBILE (max-width: 768px)
+   ================================================ */
+@media (max-width: 768px) {
+    .res-view-container {
+        margin: 12px;
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .res-view-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding-bottom: 16px;
+        margin-bottom: 24px;
+    }
+
+    .res-view-id {
+        font-size: 13px;
+    }
+
+    .res-view-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .res-view-main-title {
+        font-size: 28px;
+        margin-bottom: 24px;
+        grid-column: span 1;
+    }
+
+    .detail-group {
+        margin-bottom: 20px;
+    }
+
+    .detail-label {
+        font-size: 12px;
+    }
+
+    .detail-value {
+        font-size: 15px;
+    }
+
+    .res-view-image {
+        display: flex;
+        justify-content: center;
+        margin-top: 8px;
+    }
+
+    .res-view-image img {
+        max-width: 75%;
+        border-radius: 6px;
+    }
+
+    .payment-summary {
+        padding: 16px;
+        margin-top: 20px;
+    }
+
+    .payment-label,
+    .payment-value {
+        font-size: 13px;
+    }
+
+    .user-actions-bar {
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 24px;
+        padding-top: 24px;
+    }
+
+    .btn-action-user {
+        width: 100%;
+        padding: 16px;
+        font-size: 13px;
+    }
+
+    .contact-icons-row {
+        justify-content: flex-start;
+        gap: 12px;
+    }
+
+    .contact-icon-btn {
+        width: 44px;
+        height: 44px;
+    }
+}
