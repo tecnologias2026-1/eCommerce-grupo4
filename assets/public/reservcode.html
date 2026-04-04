@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisa tu Reserva - Wedding Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/confirm.css">
+    <link rel="stylesheet" href="/css/reservcode.css">
+</head>
+
+<body>
+    <header class="hero-selection">
+        <h1 class="hero-selection__title">Resumen de tu Boda</h1>
+    </header>
+
+    <main class="confirm-container">
+        <div class="confirm-icon">
+            <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                    stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </div>
+        <h2 class="confirm-title">REVISA TU RESERVA</h2>
+        <p class="confirm-text">
+            Para rastrear tu reserva ingresa el código enviado a tu correo personal.
+        </p>
+
+        <div class="code-input-container">
+            <input type="text" id="reserve-code" class="code-input" placeholder="Ej. ABC-123" maxlength="10">
+        </div>
+
+        <button id="verify-btn" class="btn-verify">VERIFICAR</button>
+
+        <a href="/assets/public/confirm.html" class="back-link">← Volver</a>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const codeInput = document.getElementById('reserve-code');
+            const verifyBtn = document.getElementById('verify-btn');
+
+            codeInput.addEventListener('input', () => {
+                const value = codeInput.value.trim();
+                if (value.length > 0) {
+                    verifyBtn.classList.add('active');
+                } else {
+                    verifyBtn.classList.remove('active');
+                }
+            });
+
+            verifyBtn.addEventListener('click', () => {
+                const code = codeInput.value.trim();
+                if (code) {
+                    // Logic to follow up the reservation could be added here
+                    alert('Código verificado con éxito: ' + code);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
