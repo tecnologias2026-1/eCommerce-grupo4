@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Reservaciones - Eventos Decoraciones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@400;600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/reservations.css">
+</head>
+
+<body>
+    <header class="hero-selection">
+        <a href="/assets/public/auth.html" class="btn-logout">Cerrar Sesión</a>
+        <h1 class="hero-selection__title">Reservaciones</h1>
+    </header>
+
+    <main class="reservations-content">
+        <div class="reservations-table-container">
+            <table class="reservations-table">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Cliente</th>
+                        <th>Hacienda</th>
+                        <th>Fecha Boda</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#WP-001</td>
+                        <td>Juan & María</td>
+                        <td>Hacienda El Rosal</td>
+                        <td>15 Oct 2026</td>
+                        <td><span class="status-badge status-confirmed">Confirmada</span></td>
+                    </tr>
+                    <tr>
+                        <td>#WP-002</td>
+                        <td>Carlos & Elena</td>
+                        <td>Finca Villa Luz</td>
+                        <td>22 Nov 2026</td>
+                        <td><span class="status-badge status-pending">Pendiente</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="/js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reservationsTableBody = document.querySelector('.reservations-table tbody');
+            const allReservations = JSON.parse(localStorage.getItem('allReservations') || '[]');
+
+            if (allReservations.length === 0) {
+                reservationsTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 40px; color: #999;">Aún no se han registrado reservaciones.</td></tr>';
+                return;
+            }
+
+            // Clear static rows
+            reservationsTableBody.innerHTML = '';
+
+            // Sort by date descending (latest first)
+            allReservations.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            allReservations.forEach(res => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${res.id}</strong></td>
+                    <td>${res.groom} & ${res.bride}</td>
+                    <td>${res.venue}</td>
+                    <td>${res.weddingDate}</td>
+                    <td><span class="status-badge status-${res.status.toLowerCase()}">${res.status}</span></td>
+                `;
+                reservationsTableBody.appendChild(row);
+            });
+        });
+    </script>
+</body>
+
+</html>

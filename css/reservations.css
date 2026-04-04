@@ -1,0 +1,86 @@
+.reservations-content {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: "Inter", sans-serif;
+}
+
+.reservations-table-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.reservations-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.reservations-table th {
+    background: #f8f9fa;
+    padding: 20px;
+    font-family: "Spectral SC", serif;
+    font-size: 14px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.reservations-table td {
+    padding: 20px;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 15px;
+    color: #333;
+}
+
+.reservations-table tr:last-child td {
+    border-bottom: none;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-pending {
+    background: #fff4e5;
+    color: #b7791f;
+}
+
+.status-confirmed {
+    background: #e6fffa;
+    color: #2c7a7b;
+}
+
+.btn-logout {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #666;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-logout:hover {
+    background: #f5f5f5;
+    color: #000;
+}
+
+@media (max-width: 768px) {
+    .reservations-table th,
+    .reservations-table td {
+        padding: 12px;
+        font-size: 13px;
+    }
+}

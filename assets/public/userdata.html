@@ -106,6 +106,24 @@
                         return;
                     }
 
+                    // SUCCESS: Guardar reserva
+                    const cart = getCartData();
+                    const newReservation = {
+                        id: `#WP-${Math.floor(1000 + Math.random() * 9000)}`,
+                        groom: inputs.groom,
+                        bride: inputs.bride,
+                        email: inputs.email,
+                        phone: inputs.phone,
+                        weddingDate: document.getElementById('wedding-date').value,
+                        venue: cart.selectedVenue ? cart.selectedVenue.name : 'N/A',
+                        status: 'Pendiente',
+                        timestamp: new Date().toISOString()
+                    };
+
+                    const allReservations = JSON.parse(localStorage.getItem('allReservations') || '[]');
+                    allReservations.push(newReservation);
+                    localStorage.setItem('allReservations', JSON.stringify(allReservations));
+
                     // Success: Redirect
                     window.location.href = '/assets/public/confirm.html';
                 };
