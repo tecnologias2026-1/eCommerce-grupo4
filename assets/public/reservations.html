@@ -21,64 +21,56 @@
     </header>
 
     <main class="reservations-content">
-        <div class="reservations-table-container">
-            <table class="reservations-table">
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Cliente</th>
-                        <th>Hacienda</th>
-                        <th>Fecha Boda</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>#WP-001</td>
-                        <td>Juan & María</td>
-                        <td>Hacienda El Rosal</td>
-                        <td>15 Oct 2026</td>
-                        <td><span class="status-badge status-confirmed">Confirmada</span></td>
-                    </tr>
-                    <tr>
-                        <td>#WP-002</td>
-                        <td>Carlos & Elena</td>
-                        <td>Finca Villa Luz</td>
-                        <td>22 Nov 2026</td>
-                        <td><span class="status-badge status-pending">Pendiente</span></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="reservations-list">
+            <!-- Rendered cards here -->
         </div>
     </main>
 
     <script src="/js/cart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const reservationsTableBody = document.querySelector('.reservations-table tbody');
+            const listContainer = document.querySelector('.reservations-list');
             const allReservations = JSON.parse(localStorage.getItem('allReservations') || '[]');
 
             if (allReservations.length === 0) {
-                reservationsTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 40px; color: #999;">Aún no se han registrado reservaciones.</td></tr>';
+                listContainer.innerHTML = '<p class="empty-msg">No hay reservaciones registradas aún.</p>';
                 return;
             }
 
-            // Clear static rows
-            reservationsTableBody.innerHTML = '';
-
-            // Sort by date descending (latest first)
             allReservations.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
+            listContainer.innerHTML = '';
             allReservations.forEach(res => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td><strong>${res.id}</strong></td>
-                    <td>${res.groom} & ${res.bride}</td>
-                    <td>${res.venue}</td>
-                    <td>${res.weddingDate}</td>
-                    <td><span class="status-badge status-${res.status.toLowerCase()}">${res.status}</span></td>
+                const card = document.createElement('div');
+                card.className = 'res-card';
+                card.innerHTML = `
+                    <div class="res-card__info">
+                        <h2 class="res-card__title">${res.groom.toUpperCase()} Y<br>${res.bride.toUpperCase()}</h2>
+                        <p class="res-card__venue">${res.venue}</p>
+                        <p class="res-card__date">Fecha: ${res.weddingDate}</p>
+                        <p class="res-card__status">Estado: <span>${res.status}</span></p>
+                    </div>
+                    
+                    <div class="res-card__media-grid">
+                        <div class="media-slot">
+                            <img src="${res.venueImage || 'https://via.placeholder.com/300x200?text=Hacienda'}" alt="Hacienda">
+                            <span>CEREMONIA PREMIUM</span>
+                        </div>
+                        <div class="media-slot empty">
+                            <div class="placeholder-img"></div>
+                            <span>RECEPCION PREMIUM</span>
+                        </div>
+                        <div class="media-slot empty">
+                            <div class="placeholder-img"></div>
+                            <span>COMIDA PREMIUM</span>
+                        </div>
+                        <div class="media-slot empty">
+                            <div class="placeholder-img"></div>
+                            <span>DECORACION FLORAL</span>
+                        </div>
+                    </div>
                 `;
-                reservationsTableBody.appendChild(row);
+                listContainer.appendChild(card);
             });
         });
     </script>

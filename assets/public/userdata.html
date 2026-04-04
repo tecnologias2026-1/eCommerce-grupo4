@@ -116,6 +116,7 @@
                         phone: inputs.phone,
                         weddingDate: document.getElementById('wedding-date').value,
                         venue: cart.selectedVenue ? cart.selectedVenue.name : 'N/A',
+                        venueImage: cart.selectedVenue ? cart.selectedVenue.image : '',
                         status: 'Pendiente',
                         timestamp: new Date().toISOString()
                     };

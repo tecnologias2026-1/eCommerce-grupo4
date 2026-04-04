@@ -1,62 +1,103 @@
 .reservations-content {
-    padding: 60px 20px;
-    max-width: 1200px;
+    padding: 60px 40px;
+    max-width: 1440px;
     margin: 0 auto;
-    font-family: "Inter", sans-serif;
 }
 
-.reservations-table-container {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    border: 1px solid var(--border);
+.reservations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
 }
 
-.reservations-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
+.res-card {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 60px;
+    align-items: start;
+    padding-bottom: 80px;
+    border-bottom: 1px solid #efefef;
 }
 
-.reservations-table th {
-    background: #f8f9fa;
-    padding: 20px;
-    font-family: "Spectral SC", serif;
-    font-size: 14px;
-    color: var(--muted);
-    border-bottom: 1px solid var(--border);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.reservations-table td {
-    padding: 20px;
-    border-bottom: 1px solid #f1f1f1;
-    font-size: 15px;
-    color: #333;
-}
-
-.reservations-table tr:last-child td {
+.res-card:last-child {
     border-bottom: none;
 }
 
-.status-badge {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
+.res-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.res-card__title {
+    font-family: "Spectral", serif;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 1.1;
+    margin: 0 0 20px 0;
+    color: #000;
+}
+
+.res-card__venue {
+    font-family: "Inter", sans-serif;
     font-weight: 600;
-    text-transform: uppercase;
+    font-size: 20px;
+    margin: 0;
+    color: #333;
 }
 
-.status-pending {
-    background: #fff4e5;
-    color: #b7791f;
+.res-card__date, .res-card__status {
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    color: #777;
+    margin: 0;
 }
 
-.status-confirmed {
-    background: #e6fffa;
-    color: #2c7a7b;
+.res-card__status span {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.res-card__media-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.media-slot {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.media-slot img, .placeholder-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.placeholder-img {
+    background: #f5f5f5;
+    border: 1px dashed #ddd;
+}
+
+.media-slot span {
+    font-family: "Spectral SC", serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    color: #000;
+    letter-spacing: 0.5px;
+}
+
+.empty-msg {
+    text-align: center;
+    font-family: "Spectral", serif;
+    font-size: 24px;
+    color: #999;
+    padding: 100px 0;
 }
 
 .btn-logout {
@@ -77,10 +118,21 @@
     color: #000;
 }
 
+@media (max-width: 1200px) {
+    .res-card {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .res-card__media-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
-    .reservations-table th,
-    .reservations-table td {
-        padding: 12px;
-        font-size: 13px;
+    .res-card__title {
+        font-size: 36px;
+    }
+    .res-card__media-grid {
+        grid-template-columns: 1fr;
     }
 }
