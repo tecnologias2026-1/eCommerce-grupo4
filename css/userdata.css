@@ -65,22 +65,25 @@
 }
 
 .btn-submit-booking {
-    display: block;
-    width: 100%;
-    background: #000;
+    background: var(--primary);
     color: #fff;
     border: none;
-    padding: 20px;
+    padding: 16px 64px;
+    border-radius: 6px;
     font-family: 'Spectral SC', serif;
     font-size: 18px;
     cursor: pointer;
-    margin-top: 40px;
     transition: all 0.3s ease;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-submit-booking:hover {
-    background: #333;
+    background: #46b0ba;
     transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(84, 192, 203, 0.2);
 }
 
 @media (max-width: 768px) {

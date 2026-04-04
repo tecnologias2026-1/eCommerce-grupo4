@@ -58,18 +58,31 @@
                     <input type="text" id="comments" placeholder="Ej. Necesitamos acceso para personas con movilidad reducida">
                 </div>
             </div>
-            <button class="btn-submit-booking">ACEPTAR DATOS</button>
         </div>
     </main>
+
+    <footer class="summary-pago">
+        <div class="summary-cart">
+            <span class="summary-total-label">Costo Total</span>
+            <span class="summary-total-value" id="final-total">COL$ 0</span>
+        </div>
+        <span class="summary-footer-note">Procesaremos tu pago por medio de Mercado Pago.</span>
+        <button class="btn-submit-booking">ACEPTAR DATOS</button>
+    </footer>
 
     <script src="/js/cart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const storedDate = localStorage.getItem('selectedWeddingDate');
             const dateInput = document.getElementById('wedding-date');
-            
             if (storedDate && dateInput) {
                 dateInput.value = storedDate;
+            }
+
+            // Populate total
+            const cart = getCartData();
+            if (cart.selectedVenue) {
+                document.getElementById('final-total').textContent = cart.selectedVenue.price;
             }
         });
     </script>
