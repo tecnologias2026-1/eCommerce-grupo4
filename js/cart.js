@@ -1,5 +1,12 @@
 function addToCart(venueData) {
     const currentCart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+    const selectedDate = localStorage.getItem('selectedWeddingDate');
+
+    // FORCE date check
+    if (!selectedDate) {
+        showCustomAlert('CONFIRMAR FECHA', 'Para confirmar disponibilidad debe seleccionar la fecha aproximada de la boda en el inicio.');
+        return;
+    }
     
     // Check if a venue is already selected
     if (currentCart.selectedVenue) {
