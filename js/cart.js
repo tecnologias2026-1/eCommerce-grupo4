@@ -58,6 +58,46 @@ function showCustomAlert(title, message) {
     }, 10);
 }
 
+function showCustomConfirm(title, message, onConfirm) {
+    let backdrop = document.querySelector(".cart-modal-backdrop");
+    if (!backdrop) {
+        backdrop = document.createElement("div");
+        backdrop.className = "cart-modal-backdrop";
+        document.body.appendChild(backdrop);
+    }
+    
+    backdrop.innerHTML = `
+        <div class="notification-modal">
+            <h2 class="notification-modal__title">${title}</h2>
+            <p class="notification-modal__text">${message}</p>
+            <div style="display: flex; gap: 16px; justify-content: center;">
+                <button class="notification-modal__btn notification-modal__btn--danger" id="confirm-btn">ELIMINAR</button>
+                <button class="notification-modal__btn" id="cancel-btn" style="background: #666;">CANCELAR</button>
+            </div>
+        </div>
+    `;
+
+    function closeConfirm(confirmed) {
+        backdrop.classList.remove("active");
+        document.body.classList.remove("modal-open");
+        setTimeout(() => {
+            if (backdrop.parentNode) backdrop.parentNode.removeChild(backdrop);
+            if (confirmed && onConfirm) onConfirm();
+        }, 300);
+    }
+
+    document.getElementById("confirm-btn").addEventListener("click", () => closeConfirm(true));
+    document.getElementById("cancel-btn").addEventListener("click", () => closeConfirm(false));
+    backdrop.addEventListener("click", (e) => {
+        if (e.target === backdrop) closeConfirm(false);
+    });
+
+    setTimeout(() => {
+        backdrop.classList.add("active");
+        document.body.classList.add("modal-open");
+    }, 10);
+}
+
 function removeFromCart(category) {
     const currentCart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
     if (currentCart[category]) {

@@ -136,11 +136,15 @@
         }
 
         function handleRemove(category) {
-            if (confirm('¿Estás seguro de que deseas eliminar este lugar de tu selección?')) {
-                removeFromCart(category);
-                renderSummary();
-                window.parent.postMessage({ type: 'CART_UPDATED' }, '*');
-            }
+            showCustomConfirm(
+                '¿ELIMINAR SELECCIÓN?', 
+                '¿Estás seguro de que deseas eliminar este lugar de tu selección?',
+                () => {
+                    removeFromCart(category);
+                    renderSummary();
+                    window.parent.postMessage({ type: 'CART_UPDATED' }, '*');
+                }
+            );
         }
 
         document.addEventListener('DOMContentLoaded', renderSummary);
