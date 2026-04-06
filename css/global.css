@@ -3044,8 +3044,9 @@ section.feature .feature__subtitle {
     height: 117px;
     position: relative;
     width: 100%;
-    max-width: var(--container-max);
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .logo {
@@ -3673,7 +3674,7 @@ body.modal-open .venue-content {
         justify-content: center;
         padding: var(--space-xl) var(--space-sm);
         width: 100%;
-        max-width: 375px;
+        max-width: none;
     }
 
     .nav {
