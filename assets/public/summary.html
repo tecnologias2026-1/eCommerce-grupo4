@@ -18,8 +18,9 @@
     <div id="header-placeholder"></div>
     <header class="hero-selection">
         <div class="hero-selection__top">
-            <a href="/assets/public/place.html" class="back-btn" target="_parent">
-                <img src="/assets/images/atras.svg" alt="Atrás" width="54">
+            <a href="/assets/public/place.html" class="back-btn" aria-label="Atrás" target="_parent">
+                <img alt="" src="https://www.figma.com/api/mcp/asset/180f61cf-2221-46b8-a1ed-3b2767823085"
+                    style="width: 54.108px; height: 10.912px; display: block" aria-hidden="true">
             </a>
             <h1 class="hero-selection__title">RESUMEN DE TU BODA</h1>
         </div>
@@ -128,7 +129,7 @@
                     } else {
                         actionText.textContent = 'CONTINUAR COMPRA';
                         actionLogo.style.display = 'inline-block';
-                        actionBtn.onclick = () => { window.location.href = '/assets/public/userdata.html'; };
+                        actionBtn.onclick = () => { window.location.href = '/assets/public/payment.html'; };
                     }
                 }
             } else {

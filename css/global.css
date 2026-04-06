@@ -980,6 +980,7 @@ section.feature,
     margin-bottom: var(--space-xl);
     width: 100%;
     max-width: 400px;
+    margin-inline: auto;
 }
 
 .code-input {
