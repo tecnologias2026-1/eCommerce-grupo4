@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos reserva — Pago - Wedding Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/payment.css">
+    <script src="/js/manager.js" defer></script>
+</head>
+
+<body class="payment-page">
+    <div id="header-placeholder"></div>
+    <div class="payment-title-row">
+        <a href="/assets/public/userdata.html" class="back-btn" aria-label="Volver">
+            <img src="https://www.figma.com/api/mcp/asset/e1604c60-9aa8-4ede-aaa1-b0b07f13058c" alt="" width="54"
+                height="11">
+        </a>
+        <h1 class="payment-page-title">Datos reserva</h1>
+    </div>
+
+    <main class="payment-form-wrap">
+        <form class="payment-form" id="payment-form" novalidate>
+            <fieldset class="payment-fieldset">
+                <h2 class="payment-section-label">Novio</h2>
+                <div class="payment-row-pair">
+                    <label class="visually-hidden" for="groom-first">Nombre novio</label>
+                    <input class="payment-input" type="text" id="groom-first" name="groom-first" placeholder="Nombre"
+                        autocomplete="given-name">
+                    <label class="visually-hidden" for="groom-last">Apellido novio</label>
+                    <input class="payment-input" type="text" id="groom-last" name="groom-last" placeholder="Apellido"
+                        autocomplete="family-name">
+                </div>
+            </fieldset>
+
+            <fieldset class="payment-fieldset">
+                <h2 class="payment-section-label">Novia</h2>
+                <div class="payment-row-pair">
+                    <label class="visually-hidden" for="bride-first">Nombre novia</label>
+                    <input class="payment-input" type="text" id="bride-first" name="bride-first" placeholder="Nombre"
+                        autocomplete="given-name">
+                    <label class="visually-hidden" for="bride-last">Apellido novia</label>
+                    <input class="payment-input" type="text" id="bride-last" name="bride-last" placeholder="Apellido"
+                        autocomplete="family-name">
+                </div>
+            </fieldset>
+
+            <fieldset class="payment-fieldset">
+                <h2 class="payment-section-label">Reserva</h2>
+                <div class="payment-row-full">
+                    <label class="visually-hidden" for="phone">Número de celular</label>
+                    <input class="payment-input" type="tel" id="phone" name="phone" placeholder="Número de celular"
+                        autocomplete="tel">
+                </div>
+                <div class="payment-row-full">
+                    <label class="visually-hidden" for="email">Correo electrónico</label>
+                    <input class="payment-input" type="email" id="email" name="email" placeholder="Correo electrónico"
+                        autocomplete="email">
+                </div>
+            </fieldset>
+        </form>
+    </main>
+
+    <section class="payment-checkout" aria-labelledby="payment-total-heading">
+        <h2 id="payment-total-heading" class="visually-hidden">Total y pago</h2>
+        <p class="payment-total-label">Total incluido IVA (19%)</p>
+        <p class="payment-total-value" id="payment-total">COL$ 0</p>
+        <a class="btn-pay-mp" id="btn-pay-mp" href="#" role="button">
+            <span class="btn-pay-mp__logo-wrap">
+                <img src="https://www.figma.com/api/mcp/asset/41f437b8-ae3f-4d7e-9d0c-be0514b06765" alt="">
+            </span>
+            <span>Ir a pagar</span>
+        </a>
+        <p class="payment-checkout-note">Procesaremos tu pago por medio de Mercado Pago.</p>
+    </section>
+
+    <script src="/js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = typeof getCartData === 'function' ? getCartData() : {};
+            const totalEl = document.getElementById('payment-total');
+            if (cart.selectedVenue && totalEl) {
+                totalEl.textContent = cart.selectedVenue.price || 'COL$ 0';
+            }
+
+            const payBtn = document.getElementById('btn-pay-mp');
+            if (payBtn) {
+                payBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Integrar URL de checkout de Mercado Pago aquí
+                    showCustomAlert('Pago', 'La integración con Mercado Pago se conectará en este paso.');
+                });
+            }
+        });
+    </script>
+    <div id="footer-placeholder"></div>
+</body>
+
+</html>
