@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datos reserva — Pago - Wedding Planner</title>
+    <title>Pago</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -14,90 +14,68 @@
     <script src="/js/manager.js" defer></script>
 </head>
 
-<body class="payment-page">
+<body>
     <div id="header-placeholder"></div>
-    <div class="payment-title-row">
-        <a href="/assets/public/userdata.html" class="back-btn" aria-label="Volver">
-            <img src="https://www.figma.com/api/mcp/asset/e1604c60-9aa8-4ede-aaa1-b0b07f13058c" alt="" width="54"
-                height="11">
-        </a>
-        <h1 class="payment-page-title">Datos reserva</h1>
-    </div>
+    <header class="hero-selection">
+        <div class="hero-selection__top">
+            <a href="/assets/public/summary.html" class="back-btn">
+                <img src="/assets/images/atras.svg" alt="Atrás" width="54">
+            </a>
+            <h1 class="hero-selection__title">PAGO</h1>
+        </div>
+    </header>
 
-    <main class="payment-form-wrap">
-        <form class="payment-form" id="payment-form" novalidate>
-            <fieldset class="payment-fieldset">
-                <h2 class="payment-section-label">Novio</h2>
-                <div class="payment-row-pair">
-                    <label class="visually-hidden" for="groom-first">Nombre novio</label>
-                    <input class="payment-input" type="text" id="groom-first" name="groom-first" placeholder="Nombre"
-                        autocomplete="given-name">
-                    <label class="visually-hidden" for="groom-last">Apellido novio</label>
-                    <input class="payment-input" type="text" id="groom-last" name="groom-last" placeholder="Apellido"
-                        autocomplete="family-name">
+    <main class="userdata-content">
+        <div class="userdata-form">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="groom-name">Nombre del Novio</label>
+                    <input type="text" id="groom-name" placeholder="Ej. Juan Pérez">
                 </div>
-            </fieldset>
-
-            <fieldset class="payment-fieldset">
-                <h2 class="payment-section-label">Novia</h2>
-                <div class="payment-row-pair">
-                    <label class="visually-hidden" for="bride-first">Nombre novia</label>
-                    <input class="payment-input" type="text" id="bride-first" name="bride-first" placeholder="Nombre"
-                        autocomplete="given-name">
-                    <label class="visually-hidden" for="bride-last">Apellido novia</label>
-                    <input class="payment-input" type="text" id="bride-last" name="bride-last" placeholder="Apellido"
-                        autocomplete="family-name">
+                <div class="form-group">
+                    <label for="bride-name">Nombre de la Novia</label>
+                    <input type="text" id="bride-name" placeholder="Ej. María García">
                 </div>
-            </fieldset>
-
-            <fieldset class="payment-fieldset">
-                <h2 class="payment-section-label">Reserva</h2>
-                <div class="payment-row-full">
-                    <label class="visually-hidden" for="phone">Número de celular</label>
-                    <input class="payment-input" type="tel" id="phone" name="phone" placeholder="Número de celular"
-                        autocomplete="tel">
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" placeholder="email@ejemplo.com">
                 </div>
-                <div class="payment-row-full">
-                    <label class="visually-hidden" for="email">Correo electrónico</label>
-                    <input class="payment-input" type="email" id="email" name="email" placeholder="Correo electrónico"
-                        autocomplete="email">
+                <div class="form-group">
+                    <label for="phone">Teléfono de Contacto</label>
+                    <input type="tel" id="phone" placeholder="+57 300 000 0000">
                 </div>
-            </fieldset>
-        </form>
+                <div class="form-group">
+                    <label for="wedding-date">Fecha tentativa de la boda</label>
+                    <input type="date" id="wedding-date" readonly>
+                    <p class="form-help-text">Para editar fecha revise nuevamente el inicio por disponibilidad</p>
+                </div>
+                <div class="form-group">
+                    <label for="deposit">Abono de la Reserva</label>
+                    <input type="text" id="deposit" placeholder="Mínimo 50%">
+                </div>
+                <div class="form-group full-width">
+                    <label for="comments">¿Tienes algún requerimiento especial?</label>
+                    <input type="text" id="comments"
+                        placeholder="Ej. Necesitamos acceso para personas con movilidad reducida">
+                </div>
+            </div>
+        </div>
     </main>
 
-    <section class="payment-checkout" aria-labelledby="payment-total-heading">
-        <h2 id="payment-total-heading" class="visually-hidden">Total y pago</h2>
-        <p class="payment-total-label">Total incluido IVA (19%)</p>
-        <p class="payment-total-value" id="payment-total">COL$ 0</p>
+    <footer class="summary-pago">
+        <div class="summary-cart">
+            <span class="summary-total-label">Costo Total</span>
+            <span class="summary-total-value" id="final-total">COL$ 0</span>
+        </div>
+        <span class="summary-footer-note">Procesaremos tu pago por medio de Mercado Pago.</span>
         <a class="btn-pay-mp" id="btn-pay-mp" href="#" role="button">
             <span class="btn-pay-mp__logo-wrap">
-                <img src="https://www.figma.com/api/mcp/asset/41f437b8-ae3f-4d7e-9d0c-be0514b06765" alt="">
+                <img src="https://www.figma.com/api/mcp/asset/41f437b8-ae3f-4d7e-9d0c-be0514b06765" alt="Logo de Mercado Pago">
             </span>
             <span>Ir a pagar</span>
         </a>
-        <p class="payment-checkout-note">Procesaremos tu pago por medio de Mercado Pago.</p>
-    </section>
+    </footer>
 
-    <script src="/js/cart.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const cart = typeof getCartData === 'function' ? getCartData() : {};
-            const totalEl = document.getElementById('payment-total');
-            if (cart.selectedVenue && totalEl) {
-                totalEl.textContent = cart.selectedVenue.price || 'COL$ 0';
-            }
-
-            const payBtn = document.getElementById('btn-pay-mp');
-            if (payBtn) {
-                payBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    // Integrar URL de checkout de Mercado Pago aquí
-                    showCustomAlert('Pago', 'La integración con Mercado Pago se conectará en este paso.');
-                });
-            }
-        });
-    </script>
     <div id="footer-placeholder"></div>
 </body>
 
