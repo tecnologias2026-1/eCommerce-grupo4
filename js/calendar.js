@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedDate = dateStr;
         element.classList.add('selected');
         
-        selectedDateInfo.style.display = 'flex';
+        selectedDateInfo.classList.remove('selected-date-info--hidden');
         displayDate.innerText = dateStr;
         
         localStorage.setItem('selectedWeddingDate', selectedDate);
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clearDateBtn.addEventListener('click', () => {
         selectedDate = null;
         localStorage.removeItem('selectedWeddingDate');
-        selectedDateInfo.style.display = 'none';
+        selectedDateInfo.classList.add('selected-date-info--hidden');
         const currentSelected = document.querySelector('.calendar-day.selected');
         if (currentSelected) currentSelected.classList.remove('selected');
         
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedDate = storedDate;
         // If year/month matches, it will be highlighted in render
         displayDate.innerText = selectedDate;
-        selectedDateInfo.style.display = 'flex';
+        selectedDateInfo.classList.remove('selected-date-info--hidden');
         // Give time for other scripts to load
         setTimeout(() => {
             window.dispatchEvent(new CustomEvent('weddingDateChanged', { detail: { date: selectedDate, venueBookedDates } }));

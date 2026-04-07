@@ -18,22 +18,23 @@
 
 <body>
     <div id="header-placeholder"></div>
+    <main>
     <section class="feature" data-name="Feature" data-node-id="470:290">
         <div class="feature__image-container">
             <img src="/assets/images/imagen novios.png" alt="Pareja de novios" class="feature__image">
         </div>
         <div class="feature__text-content">
-            <h4 class="feature__title">Las mejores haciendas para tu boda</h4>
+            <h1 class="feature__title">Las mejores haciendas para tu boda</h1>
             <p class="feature__subtitle">Encuentra aquí las mejores opciones para tu dia soñado</p>
         </div>
     </section>
 
     <header class="venue-options-selector" data-name="Header venueoption" data-node-id="506:2349">
         <div class="venue-options-selector__details">
-            <h1 class="venue-options-selector__title">numero de invitados</h1>
+            <h2 class="venue-options-selector__title">numero de invitados</h2>
         </div>
         <div class="venue-options-selector__field">
-            <span class="venue-options-selector__label">Invitados:</span>
+            <label for="guest-count" class="venue-options-selector__label">Invitados:</label>
             <input type="number" id="guest-count" class="venue-options-selector__input" min="0" placeholder="0">
         </div>
     </header>
@@ -48,7 +49,7 @@
 
         <div class="calendar-container">
             <div class="calendar-nav">
-                <button id="prev-month" class="calendar-nav__btn">&lt;</button>
+                <button id="prev-month" class="calendar-nav__btn" aria-label="Mes anterior">&lt;</button>
                 <div class="calendar-nav__display">
                     <span id="current-month" class="calendar-nav__month">Abril</span>
                     <select id="calendar-year-selector" class="calendar-nav__year-select">
@@ -57,7 +58,7 @@
                         <option value="2028">2028</option>
                     </select>
                 </div>
-                <button id="next-month" class="calendar-nav__btn">&gt;</button>
+                <button id="next-month" class="calendar-nav__btn" aria-label="Mes siguiente">&gt;</button>
             </div>
             <div class="calendar-grid">
                 <div class="calendar-grid__daynames">
@@ -69,7 +70,7 @@
             </div>
         </div>
 
-        <div id="selected-date-info" class="selected-date-info" style="display: none;">
+        <div id="selected-date-info" class="selected-date-info selected-date-info--hidden">
             <p>Fecha seleccionada: <span id="display-date"></span></p>
             <button id="clear-date" class="btn-secondary">Limpiar fecha</button>
         </div>
@@ -86,10 +87,10 @@
             <!-- Hacienda Paz del Río -->
             <article class="venue-card" data-guests="100">
                 <div class="venue-card__image-wrapper">
-                    <img src="/assets/images/paz del rio.png" alt="Hacienda Paz del Río" class="venue-card__image">
+                    <img src="/assets/images/paz del rio.png" alt="Hacienda Paz del Río" class="venue-card__image" loading="lazy">
                 </div>
                 <div class="venue-card__content">
-                    <h5 class="venue-card__title">HACIENDA PAZ DEL RÍO</h5>
+                    <h4 class="venue-card__title">HACIENDA PAZ DEL RÍO</h4>
                     <p class="venue-card__price">COL$ 3.000.000</p>
                     <p class="venue-card__guests">100 invitados aprox</p>
                     <a href="venue.html" class="btn-primary venue-card__more-btn">
@@ -101,10 +102,10 @@
             <!-- Hacienda San Juan -->
             <article class="venue-card" data-guests="300">
                 <div class="venue-card__image-wrapper">
-                    <img src="/assets/images/san juan.png" alt="Hacienda San Juan" class="venue-card__image">
+                    <img src="/assets/images/san juan.png" alt="Hacienda San Juan" class="venue-card__image" loading="lazy">
                 </div>
                 <div class="venue-card__content">
-                    <h5 class="venue-card__title">HACIENDA SAN JUAN</h5>
+                    <h4 class="venue-card__title">HACIENDA SAN JUAN</h4>
                     <p class="venue-card__price">COL$ 6.500.000</p>
                     <p class="venue-card__guests">300 invitados aprox</p>
                     <a href="venue3.html" class="btn-primary venue-card__more-btn">
@@ -116,10 +117,10 @@
             <!-- Hacienda Las Marías -->
             <article class="venue-card" data-guests="170">
                 <div class="venue-card__image-wrapper">
-                    <img src="/assets/images/las marias.png" alt="Hacienda Las Marías" class="venue-card__image">
+                    <img src="/assets/images/las marias.png" alt="Hacienda Las Marías" class="venue-card__image" loading="lazy">
                 </div>
                 <div class="venue-card__content">
-                    <h5 class="venue-card__title">Hacienda Las Marías</h5>
+                    <h4 class="venue-card__title">Hacienda Las Marías</h4>
                     <p class="venue-card__price">COL$ 4.500.000</p>
                     <p class="venue-card__guests">170 invitados aprox</p>
                     <a href="venue6.html" class="btn-primary venue-card__more-btn">
@@ -131,10 +132,10 @@
             <!-- Hacienda El Cedro -->
             <article class="venue-card" data-guests="200">
                 <div class="venue-card__image-wrapper">
-                    <img src="/assets/images/el cedro.png" alt="Hacienda El Cedro" class="venue-card__image">
+                    <img src="/assets/images/el cedro.png" alt="Hacienda El Cedro" class="venue-card__image" loading="lazy">
                 </div>
                 <div class="venue-card__content">
-                    <h5 class="venue-card__title">Hacienda El Cedro</h5>
+                    <h4 class="venue-card__title">Hacienda El Cedro</h4>
                     <p class="venue-card__price">COL$ 5.000.000</p>
                     <p class="venue-card__guests">200 invitados aprox</p>
                     <a href="venue2.html" class="btn-primary venue-card__more-btn">
@@ -146,10 +147,10 @@
             <!-- Hacienda Arkadia -->
             <article class="venue-card" data-guests="350">
                 <div class="venue-card__image-wrapper">
-                    <img src="/assets/images/arkadia.png" alt="Hacienda Arkadia" class="venue-card__image">
+                    <img src="/assets/images/arkadia.png" alt="Hacienda Arkadia" class="venue-card__image" loading="lazy">
                 </div>
                 <div class="venue-card__content">
-                    <h5 class="venue-card__title">Hacienda Arkadia</h5>
+                    <h4 class="venue-card__title">Hacienda Arkadia</h4>
                     <p class="venue-card__price">COL$ 7.000.000</p>
                     <p class="venue-card__guests">350 invitados aprox</p>
                     <a href="venue4.html" class="btn-primary venue-card__more-btn">
@@ -161,10 +162,10 @@
             <!-- Hacienda Botania -->
             <article class="venue-card" data-guests="100">
                 <div class="venue-card__image-wrapper">
-                    <img src="/assets/images/botania.png" alt="Hacienda Botania" class="venue-card__image">
+                    <img src="/assets/images/botania.png" alt="Hacienda Botania" class="venue-card__image" loading="lazy">
                 </div>
                 <div class="venue-card__content">
-                    <h5 class="venue-card__title">Hacienda Botania</h5>
+                    <h4 class="venue-card__title">Hacienda Botania</h4>
                     <p class="venue-card__price">COL$ 3.000.000</p>
                     <p class="venue-card__guests">100 invitados aprox</p>
                     <a href="venue5.html" class="btn-primary venue-card__more-btn">
@@ -180,6 +181,7 @@
             </a>
         </div>
     </section>
+    </main>
 
     <script src="/js/cart.js"></script>
     <script src="/js/calendar.js"></script>

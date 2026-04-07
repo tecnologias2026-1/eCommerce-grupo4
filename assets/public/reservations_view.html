@@ -21,8 +21,7 @@
     <header class="hero-selection">
         <div class="hero-selection__top">
             <a href="reservations.html" class="back-btn" aria-label="Atrás">
-                <img alt="" src="https://www.figma.com/api/mcp/asset/180f61cf-2221-46b8-a1ed-3b2767823085"
-                    style="width: 54.108px; height: 10.912px; display: block" aria-hidden="true">
+                <img alt="" src="/assets/images/atras.svg" class="back-btn__icon" aria-hidden="true">
             </a>
             <h1 class="hero-selection__title">Detalle de Reserva</h1>
         </div>
@@ -30,7 +29,7 @@
 
     <main class="res-view-container">
         <div class="res-view-header">
-            <span class="res-view-id">CÓDIGO DE RESERVA: <span id="res-id" style="color: #000;">123456</span></span>
+            <span class="res-view-id">CÓDIGO DE RESERVA: <span id="res-id" class="res-view-id__value">123456</span></span>
         </div>
 
         <div class="res-view-grid">
@@ -51,17 +50,17 @@
                 </div>
                 <div class="detail-group">
                     <span class="detail-label">Estado</span>
-                    <span class="detail-value" id="res-status" style="color: var(--primary);">Pendiente</span>
+                    <span class="detail-value detail-value--status" id="res-status">Pendiente</span>
                 </div>
             </div>
 
             <div class="res-media-col">
                 <div class="res-view-image">
-                    <img id="res-image" src="/assets/images/paz del rio.png" alt="Hacienda">
+                    <img id="res-image" src="/assets/images/paz del rio.png" alt="Hacienda" loading="lazy">
                 </div>
-                <div class="detail-group" style="margin-top: 32px;">
+                <div class="detail-group detail-group--offset-top">
                     <span class="detail-label">Costo Total</span>
-                    <span class="detail-value" id="res-price" style="font-size: 32px; font-weight: 700;">COL$ 3.000.000</span>
+                    <span class="detail-value detail-value--price" id="res-price">COL$ 3.000.000</span>
                 </div>
             </div>
 
@@ -72,7 +71,7 @@
 
             <div class="res-card__media-grid res-media-full">
                 <div class="media-slot">
-                    <img id="res-image-grid" src="/assets/images/paz del rio.png" alt="Ceremonia">
+                    <img id="res-image-grid" src="/assets/images/paz del rio.png" alt="Ceremonia" loading="lazy">
                     <span>CEREMONIA PREMIUM</span>
                 </div>
                 <div class="media-slot empty">
@@ -113,6 +112,7 @@
                 document.getElementById('res-image').src = reservation.venueImage;
                 document.getElementById('res-image').alt = reservation.venue;
                 document.getElementById('res-image-grid').src = reservation.venueImage;
+                document.getElementById('res-image-grid').alt = reservation.venue;
             }
         });
     </script>

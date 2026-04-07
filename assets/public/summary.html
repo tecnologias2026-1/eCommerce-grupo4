@@ -21,8 +21,7 @@
     <header class="hero-selection">
         <div class="hero-selection__top">
             <a href="/assets/public/place.html" class="back-btn" aria-label="Atrás" target="_parent">
-                <img alt="" src="https://www.figma.com/api/mcp/asset/180f61cf-2221-46b8-a1ed-3b2767823085"
-                    style="width: 54.108px; height: 10.912px; display: block" aria-hidden="true">
+                <img alt="" src="/assets/images/atras.svg" class="back-btn__icon" aria-hidden="true">
             </a>
             <h1 class="hero-selection__title">RESUMEN DE TU BODA</h1>
         </div>
@@ -37,7 +36,7 @@
         </div>
     </main>
 
-    <footer class="summary-pago" id="summary-footer" style="display:none;">
+    <footer class="summary-pago summary-pago--hidden" id="summary-footer">
         <div class="summary-cart">
             <span class="summary-total-label">Total Incluido</span>
             <span class="summary-total-value" id="final-total">COL$ 0</span>
@@ -72,12 +71,12 @@
                 const section = document.createElement('div');
                 section.className = 'summary-section';
 
-                const checkIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: #000; margin-top: 4px;">
+                const checkIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="summary-checkmark-icon">
                     <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>`;
 
                 section.innerHTML = `
-                    <button class="summary-section__remove" title="Eliminar del carrito" onclick="handleRemove('selectedVenue')">
+                    <button class="summary-section__remove" title="Eliminar del carrito" data-remove-category="selectedVenue">
                        ✕
                     </button>
                     <h2 class="summary-section__title">LUGAR SELECCIONADO</h2>
@@ -96,12 +95,12 @@
                         </div>
                     </div>
                     <div class="summary-image-box">
-                        <img src="${venue.image}" alt="${venue.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="${venue.image}" alt="${venue.name}" class="summary-image-box__img">
                     </div>
                 `;
 
                 summaryContainer.appendChild(section);
-                footer.style.display = 'flex';
+                footer.classList.remove('summary-pago--hidden');
                 document.getElementById('final-total').textContent = venue.price;
 
                 // Validation LOGIC
@@ -118,7 +117,7 @@
 
                     // Add warning text before footer
                     const warning = document.createElement('p');
-                    warning.style.cssText = "grid-column: 1/-1; text-align: center; color: #ff4444; font-family: 'Spectral', serif; font-size: 16px; margin-top: 20px;";
+                    warning.className = 'summary-warning';
                     warning.textContent = "Para confirmar disponibilidad debe seleccionar la fecha aproximada de la boda en la página principal";
                     summaryContainer.appendChild(warning);
                 } else {
@@ -136,7 +135,7 @@
                 }
             } else {
                 summaryContainer.innerHTML = `<div class="empty-cart-message">Aún no has seleccionado un lugar para tu boda.</div>`;
-                footer.style.display = 'none';
+                footer.classList.add('summary-pago--hidden');
             }
         }
 
@@ -153,6 +152,22 @@
         }
 
         document.addEventListener('DOMContentLoaded', renderSummary);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const summaryContainer = document.getElementById('dynamic-summary');
+            if (!summaryContainer) {
+                return;
+            }
+
+            summaryContainer.addEventListener('click', (event) => {
+                const removeBtn = event.target.closest('.summary-section__remove[data-remove-category]');
+                if (!removeBtn) {
+                    return;
+                }
+
+                handleRemove(removeBtn.dataset.removeCategory);
+            });
+        });
     </script>
     <div id="footer-placeholder"></div>
 </body>

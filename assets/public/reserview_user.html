@@ -21,8 +21,7 @@
     <header class="hero-selection">
         <div class="hero-selection__top">
             <a href="reservcode.html" class="back-btn" aria-label="Atrás">
-                <img alt="" src="https://www.figma.com/api/mcp/asset/180f61cf-2221-46b8-a1ed-3b2767823085"
-                    style="width: 54.108px; height: 10.912px; display: block" aria-hidden="true">
+                <img alt="" src="/assets/images/atras.svg" class="back-btn__icon" aria-hidden="true">
             </a>
             <h1 class="hero-selection__title">Resumen de tu Boda</h1>
         </div>
@@ -30,7 +29,7 @@
 
     <main class="res-view-container">
         <div class="res-view-header">
-            <span class="res-view-id">CÓDIGO DE RESERVA: <span id="res-id" style="color: #000;">000000</span></span>
+            <span class="res-view-id">CÓDIGO DE RESERVA: <span id="res-id" class="res-view-id__value">000000</span></span>
         </div>
 
         <div class="res-view-grid">
@@ -47,13 +46,13 @@
                 </div>
                 <div class="detail-group">
                     <span class="detail-label">Estado</span>
-                    <span class="detail-value" id="res-status" style="color: var(--primary);">Pendiente</span>
+                    <span class="detail-value detail-value--status" id="res-status">Pendiente</span>
                 </div>
             </div>
 
             <div class="res-media-col">
                 <div class="res-view-image">
-                    <img id="res-image" src="" alt="Hacienda">
+                    <img id="res-image" src="" alt="Hacienda" loading="lazy">
                 </div>
 
                 <div class="payment-summary">
@@ -63,24 +62,23 @@
                     </div>
                     <div class="payment-row">
                         <span class="payment-label">Monto Pagado:</span>
-                        <span class="payment-value" id="pay-deposit" style="color: #27ae60;">COL$ 0</span>
+                        <span class="payment-value payment-value--paid" id="pay-deposit">COL$ 0</span>
                     </div>
-                    <div class="payment-row" style="border-top: 1px solid #ddd; padding-top: 12px; margin-top: 12px;">
+                    <div class="payment-row payment-row--total">
                         <span class="payment-label">Pendiente:</span>
-                        <span class="payment-value" id="pay-pending" style="color: #e74c3c;">COL$ 0</span>
+                        <span class="payment-value payment-value--pending" id="pay-pending">COL$ 0</span>
                     </div>
                 </div>
 
                 <div class="user-actions-bar">
-                    <button class="btn-action-user btn-pay-more"
-                        onclick="alert('Redirigiendo a pasarela de pagos...')">Abonar más</button>
-                    <a href="https://wa.me/573000000000" class="btn-action-user btn-chat" target="_blank">Hablar con un
+                    <button class="btn-action-user btn-pay-more" id="btn-pay-more">Abonar más</button>
+                    <a href="https://wa.me/573000000000" class="btn-action-user btn-chat" target="_blank" rel="noopener noreferrer">Hablar con un
                         asesor</a>
                 </div>
             </div>
 
             <!-- Resto de detalles vacíos como se pidió -->
-            <div class="detail-group" style="padding-top: 40px; border-top: 1px solid #efefef; grid-column: span 2;">
+            <div class="detail-group detail-group--full-span">
             </div>
         </div>
     </main>
@@ -88,6 +86,13 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const reservation = JSON.parse(localStorage.getItem('viewingUserReservation'));
+            const payMoreBtn = document.getElementById('btn-pay-more');
+
+            if (payMoreBtn) {
+                payMoreBtn.addEventListener('click', () => {
+                    alert('Redirigiendo a pasarela de pagos...');
+                });
+            }
 
             if (!reservation) {
                 window.location.href = 'reservcode.html';

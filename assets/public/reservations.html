@@ -59,6 +59,9 @@
                 card.className = 'res-card';
                 card.style.cursor = 'pointer';
                 card.dataset.index = index;
+                card.setAttribute('role', 'button');
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('aria-label', `Ver detalle de la reserva de ${res.groom} y ${res.bride}`);
                 card.innerHTML = `
                     <div class="res-card__info">
                         <h2 class="res-card__title">${res.groom.toUpperCase()} Y<br>${res.bride.toUpperCase()}</h2>
@@ -70,7 +73,7 @@
                     
                     <div class="res-card__media-grid">
                         <div class="media-slot">
-                            <img src="${res.venueImage || 'https://via.placeholder.com/300x200?text=Hacienda'}" alt="Hacienda">
+                            <img src="${res.venueImage || 'https://via.placeholder.com/300x200?text=Hacienda'}" alt="Hacienda" loading="lazy">
                             <span>CEREMONIA PREMIUM</span>
                         </div>
                         <div class="media-slot empty">
@@ -91,6 +94,14 @@
                 card.addEventListener('click', () => {
                     localStorage.setItem('viewingReservation', JSON.stringify(res));
                     window.location.href = 'reservations_view.html';
+                });
+
+                card.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        localStorage.setItem('viewingReservation', JSON.stringify(res));
+                        window.location.href = 'reservations_view.html';
+                    }
                 });
 
                 listContainer.appendChild(card);
