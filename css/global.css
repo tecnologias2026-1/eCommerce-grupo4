@@ -994,8 +994,10 @@ section.feature,
     padding: 12px 16px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 16px;
-    font-family: var(--font-sans);
+    font-size: 18px;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    color: var(--black);
     transition: border-color var(--transition-fast);
 }
 
@@ -1006,7 +1008,6 @@ section.feature,
 
 .form-group input[readonly] {
     background: #fdfdfd;
-    color: #999;
     cursor: default;
 }
 
@@ -1016,6 +1017,19 @@ section.feature,
     font-style: italic;
     margin-top: 4px;
     letter-spacing: 0.1px;
+}
+
+.field--invalid {
+    border-color: var(--error) !important;
+}
+
+.form-error-text {
+    font-size: 11px;
+    color: var(--error);
+    font-style: italic;
+    margin-top: 4px;
+    letter-spacing: 0.1px;
+    display: none;
 }
 
 .code-input-container {

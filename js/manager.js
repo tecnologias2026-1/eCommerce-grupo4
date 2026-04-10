@@ -162,3 +162,85 @@ window.addEventListener('message', (event) => {
         updateHeaderPrice();
     }
 });
+
+function showCustomAlert(title, message) {
+    let backdrop = document.querySelector(".cart-modal-backdrop");
+    if (!backdrop) {
+        backdrop = document.createElement("div");
+        backdrop.className = "cart-modal-backdrop";
+        document.body.appendChild(backdrop);
+    }
+    
+    // Clear backdrop content for notification
+    backdrop.innerHTML = `
+        <div class="notification-modal">
+            <h2 class="notification-modal__title">${title}</h2>
+            <p class="notification-modal__text">${message}</p>
+            <button class="notification-modal__btn" id="close-alert-btn">ACEPTAR</button>
+        </div>
+    `;
+
+    function closeAlert() {
+        backdrop.classList.remove("active");
+        document.body.classList.remove("modal-open");
+        setTimeout(() => {
+            if (backdrop.parentNode) backdrop.parentNode.removeChild(backdrop);
+        }, 300);
+    }
+
+    const closeBtn = document.getElementById("close-alert-btn");
+    if (closeBtn) closeBtn.addEventListener("click", closeAlert);
+    
+    backdrop.addEventListener("click", (e) => {
+        if (e.target === backdrop) closeAlert();
+    });
+
+    // Short delay to trigger transitions
+    setTimeout(() => {
+        backdrop.classList.add("active");
+        document.body.classList.add("modal-open");
+    }, 10);
+}
+
+function showCustomConfirm(title, message, onConfirm) {
+    let backdrop = document.querySelector(".cart-modal-backdrop");
+    if (!backdrop) {
+        backdrop = document.createElement("div");
+        backdrop.className = "cart-modal-backdrop";
+        document.body.appendChild(backdrop);
+    }
+    
+    backdrop.innerHTML = `
+        <div class="notification-modal">
+            <h2 class="notification-modal__title">${title}</h2>
+            <p class="notification-modal__text">${message}</p>
+            <div style="display: flex; gap: 16px; justify-content: center;">
+                <button class="notification-modal__btn notification-modal__btn--danger" id="confirm-btn">ELIMINAR</button>
+                <button class="notification-modal__btn" id="cancel-btn" style="background: #666;">CANCELAR</button>
+            </div>
+        </div>
+    `;
+
+    function closeConfirm(confirmed) {
+        backdrop.classList.remove("active");
+        document.body.classList.remove("modal-open");
+        setTimeout(() => {
+            if (backdrop.parentNode) backdrop.parentNode.removeChild(backdrop);
+            if (confirmed && onConfirm) onConfirm();
+        }, 300);
+    }
+
+    const confirmBtn = document.getElementById("confirm-btn");
+    const cancelBtn = document.getElementById("cancel-btn");
+    if (confirmBtn) confirmBtn.addEventListener("click", () => closeConfirm(true));
+    if (cancelBtn) cancelBtn.addEventListener("click", () => closeConfirm(false));
+    
+    backdrop.addEventListener("click", (e) => {
+        if (e.target === backdrop) closeConfirm(false);
+    });
+
+    setTimeout(() => {
+        backdrop.classList.add("active");
+        document.body.classList.add("modal-open");
+    }, 10);
+}
