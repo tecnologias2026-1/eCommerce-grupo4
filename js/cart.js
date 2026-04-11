@@ -117,3 +117,5 @@ function getCartData() {
 function clearCart() {
     localStorage.removeItem('weddingCart');
 }
+
+
