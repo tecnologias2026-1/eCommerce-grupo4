@@ -2054,8 +2054,11 @@ section.feature .feature__subtitle {
 }
 
 .venue-card__image-container {
-    flex: 1;
+    width: 100%;
+    height: 350px;
     overflow: hidden;
+    flex-shrink: 0;
+    background: var(--gray-light);
 }
 
 .venue-card__image {
@@ -2400,14 +2403,28 @@ section.feature .feature__subtitle {
 }
 
 /* Desktop extra sections */
-.about-us,
+.about-us {
+    background: var(--gray-light);
+    padding: var(--section-space) var(--page-gutter);
+}
+
+.about-us__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+}
+
 .mission-vision {
     background: var(--gray-light);
     padding: var(--section-space) var(--page-gutter);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-xl);
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: var(--space-xl);
+    text-align: center;
 }
 
 .about-us__title,
@@ -2440,10 +2457,18 @@ section.feature .feature__subtitle {
 }
 
 .about-us__image-container,
-.mission-vision__image-container {
+.mission-vision__image-container,
+.our-history__image-container,
+.our-trajectory__image-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
+}
+
+.mission-vision__image-container {
+    max-width: 1040px;
 }
 
 .about-us__image,
