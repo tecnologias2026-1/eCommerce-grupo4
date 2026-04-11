@@ -31,6 +31,7 @@
             placeholder="Email/User"
             autocomplete="username"
             inputmode="email"
+            required
           />
         </div>
 
@@ -45,6 +46,7 @@
                 type="password"
                 placeholder="Contraseña"
                 autocomplete="current-password"
+                required
               />
               <button
                 class="auth-form__eye"
@@ -78,7 +80,7 @@
           <a href="#" class="auth-form__forgot" id="auth-forgot-password">¿Olvidó su contraseña?</a>
         </div>
 
-        <button class="auth-form__submit" type="button" data-node-id="493:10577">
+        <button class="auth-form__submit" type="submit" data-node-id="493:10577">
           <span class="auth-form__submit-text" data-node-id="I493:10577;356:17004">Ingresar</span>
         </button>
       </form>
@@ -98,6 +100,7 @@
     </div>
     <div id="footer-placeholder"></div>
     <script src="/js/cart.js"></script>
+    <script src="/js/auth-login.js" defer></script>
     <script src="/js/auth-password-toggle.js" defer></script>
     <script src="/js/auth-modal.js" defer></script>
   </body>
