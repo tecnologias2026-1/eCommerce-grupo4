@@ -31,11 +31,35 @@ const STEP_BY_PAGE = {
     "payment.html": "payment",
 };
 
+const PAGE_BY_STEP = {
+    place: "place.html",
+    ceremony: "ceremony.html",
+    reception: "reception.html",
+    food: "food.html",
+    others: "others.html",
+    payment: "payment.html",
+};
+
 function getCurrentPageName() {
     const rawPath = window.location.pathname || "";
     const cleanPath = rawPath.split("?")[0].split("#")[0].toLowerCase();
     const lastSegment = cleanPath.split("/").filter(Boolean).pop();
     return lastSegment || "index.html";
+}
+
+function isPublicPage() {
+    const rawPath = window.location.pathname || "";
+    const cleanPath = rawPath.split("?")[0].split("#")[0].toLowerCase();
+    return cleanPath.includes("/assets/public/");
+}
+
+function getPublicPagePath(pageName) {
+    return isPublicPage() ? pageName : `assets/public/${pageName}`;
+}
+
+function getHomePath(anchor) {
+    const hash = anchor ? `#${anchor}` : "";
+    return isPublicPage() ? `../../index.html${hash}` : `index.html${hash}`;
 }
 
 // Función para cargar componentes
@@ -72,6 +96,11 @@ function updateHeaderState() {
     const navLinks = header.querySelectorAll(".nav a[data-step]");
     const activeStep = STEP_BY_PAGE[pageName];
     const nav = header.querySelector(".nav");
+    const logoLink = header.querySelector(".logo");
+
+    if (logoLink) {
+        logoLink.setAttribute("href", getHomePath());
+    }
 
     header.classList.remove("header--logo-only");
 
@@ -80,6 +109,12 @@ function updateHeaderState() {
     }
 
     navLinks.forEach((link) => {
+        const step = link.dataset.step;
+        const stepPage = step ? PAGE_BY_STEP[step] : null;
+        if (stepPage) {
+            link.setAttribute("href", getPublicPagePath(stepPage));
+        }
+
         link.classList.remove("nav__link--active", "nav__link--blocked");
         link.removeAttribute("aria-disabled");
         link.removeAttribute("tabindex");
@@ -103,13 +138,41 @@ function updateHeaderState() {
     }
 }
 
+function updateFooterState() {
+    const footer = document.querySelector("#footer-placeholder .footer");
+    if (!footer) {
+        return;
+    }
+
+    const links = footer.querySelectorAll("a");
+    links.forEach((link) => {
+        const href = (link.getAttribute("href") || "").toLowerCase();
+
+        if (href.includes("place.html")) {
+            link.setAttribute("href", getPublicPagePath("place.html"));
+            return;
+        }
+
+        if (href.includes("auth.html")) {
+            link.setAttribute("href", getPublicPagePath("auth.html"));
+            return;
+        }
+
+        if (href.includes("index.html#about-us") || href === "#about-us") {
+            link.setAttribute("href", getHomePath("about-us"));
+        }
+    });
+}
+
 // Llamada a las funciones
 document.addEventListener("DOMContentLoaded", () => {
-    cargarComponente("header-placeholder", "header.html").then(() => {
+    cargarComponente("header-placeholder", getPublicPagePath("header.html")).then(() => {
         updateHeaderState();
         updateHeaderPrice();
     });
-    cargarComponente("footer-placeholder", "footer.html");
+    cargarComponente("footer-placeholder", getPublicPagePath("footer.html")).then(() => {
+        updateFooterState();
+    });
 });
 
 function showSummaryPopup() {
@@ -124,7 +187,7 @@ function showSummaryPopup() {
         <div class="summary-popup">
             <button class="summary-popup__close" id="close-summary-btn">&times;</button>
             <div class="summary-popup__content">
-                <iframe src="/assets/public/summary.html" class="summary-popup__iframe"></iframe>
+                <iframe src="${getPublicPagePath("summary.html")}" class="summary-popup__iframe"></iframe>
             </div>
         </div>
     `;

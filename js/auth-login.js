@@ -10,6 +10,6 @@
       return;
     }
 
-    window.location.href = "/assets/public/reservations.html";
+    window.location.href = "reservations.html";
   });
 })();
