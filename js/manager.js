@@ -53,13 +53,30 @@ function isPublicPage() {
     return cleanPath.includes("/assets/public/");
 }
 
+function getProjectRootPath() {
+    const rawPath = window.location.pathname || "/";
+    const cleanPath = rawPath.split("?")[0].split("#")[0];
+    const segments = cleanPath.split("/").filter(Boolean);
+
+    const assetsIndex = segments.findIndex((segment) => segment.toLowerCase() === "assets");
+    if (assetsIndex > -1 && segments[assetsIndex + 1] && segments[assetsIndex + 1].toLowerCase() === "public") {
+        const rootSegments = segments.slice(0, assetsIndex);
+        return rootSegments.length ? `/${rootSegments.join("/")}/` : "/";
+    }
+
+    const lastSegment = segments[segments.length - 1] || "";
+    const isFilePath = lastSegment.includes(".");
+    const rootSegments = isFilePath ? segments.slice(0, -1) : segments;
+    return rootSegments.length ? `/${rootSegments.join("/")}/` : "/";
+}
+
 function getPublicPagePath(pageName) {
-    return isPublicPage() ? pageName : `assets/public/${pageName}`;
+    return `${getProjectRootPath()}assets/public/${pageName}`;
 }
 
 function getHomePath(anchor) {
     const hash = anchor ? `#${anchor}` : "";
-    return isPublicPage() ? `../../index.html${hash}` : `index.html${hash}`;
+    return `${getProjectRootPath()}index.html${hash}`;
 }
 
 // Función para cargar componentes
