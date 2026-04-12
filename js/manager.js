@@ -79,6 +79,33 @@ function getHomePath(anchor) {
     return `${getProjectRootPath()}index.html${hash}`;
 }
 
+function normalizeStylesheetLinks() {
+    const expectedBase = `${getProjectRootPath()}css/`;
+    const stylesheetMap = {
+        "global.css": `${expectedBase}global.css`,
+        "media.css": `${expectedBase}media.css`,
+    };
+
+    const links = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
+
+    links.forEach((link) => {
+        const rawHref = link.getAttribute("href") || "";
+        const matchedFile = Object.keys(stylesheetMap).find((fileName) => rawHref.toLowerCase().includes(fileName));
+        if (!matchedFile) {
+            return;
+        }
+
+        const resolved = new URL(rawHref, window.location.href);
+        const expectedHref = stylesheetMap[matchedFile];
+
+        if (!resolved.pathname.startsWith(expectedBase)) {
+            link.setAttribute("href", expectedHref);
+        }
+    });
+}
+
+normalizeStylesheetLinks();
+
 // Función para cargar componentes
 function cargarComponente(id, url) {
     const target = document.getElementById(id);
