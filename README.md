@@ -78,7 +78,9 @@ DETALLE_RESERVA: Tabla intermedia que vincula reservas con múltiples servicios,
 
 🧩 7. Documentación del Sistema
 Estructura de Carpetas
+
 /css
+
 1. Global CSS
 El archivo de estilos globales contiene toda la configuración base y general de la página web. En esta sección se definen aspectos como la tipografía, colores principales, márgenes, paddings, variables globales (:root), estilos para botones, encabezados, navegación, contenedores y demás componentes principales.
 Su objetivo es mantener una apariencia uniforme en todas las páginas del sitio y facilitar la reutilización de estilos.
@@ -99,7 +101,38 @@ Gracias a esto, la página puede visualizarse correctamente en computadores, tab
 El archivo .gitkeep no corresponde a estilos visuales del proyecto.
 Su función es permitir que Git y GitHub conserven carpetas vacías dentro del repositorio, ya que por defecto Git no guarda directorios sin contenido.
 En este caso, puede encontrarse dentro de la carpeta css únicamente para asegurar que la carpeta exista en el repositorio, aunque no influye en el diseño ni en la funcionalidad de la página.
+
 /js
+
+1. auth-login.js
+Este archivo JavaScript se encarga de gestionar el inicio de sesión del usuario.
+Primero verifica si existe el formulario de autenticación en la página. Luego, al enviar el formulario, evita que la página se recargue automáticamente, valida que todos los campos estén completos y, si la información es correcta, redirige al usuario a la página de reservas (reservations.html).
+
+2. auth.modal.js
+Este archivo JavaScript controla la ventana modal de recuperación de contraseña.
+Se encarga de abrir el modal cuando el usuario selecciona la opción “olvidé mi contraseña”, cerrarlo al presionar el botón de regreso y también permite cerrarlo al hacer clic fuera del contenido de la ventana emergente.
+
+3. auth-password-toggle.js
+Este archivo JavaScript permite mostrar y ocultar la contraseña en el campo de inicio de sesión.
+Al hacer clic en el botón correspondiente, cambia el tipo de entrada entre texto visible y contraseña oculta, además de actualizar el estado visual del botón y su accesibilidad.
+
+4. calendar.js
+Este archivo JavaScript gestiona el calendario de selección de fechas para reservas.
+Permite mostrar los días del mes, cambiar entre meses y años, seleccionar una fecha disponible, marcar fechas ocupadas, limpiar la selección y guardar la fecha elegida en el localStorage. Además, envía eventos para actualizar otras secciones del sistema según la fecha seleccionada.
+
+5. cart.js
+Este archivo JavaScript administra el carrito de la boda.
+Se encarga de agregar y eliminar el lugar seleccionado, validar que exista una fecha elegida antes de reservar, guardar la información en localStorage y mostrar ventanas emergentes de alerta o confirmación para informar al usuario sobre acciones como agregar, eliminar o limpiar el carrito.
+
+6. manager.js
+Es el archivo principal encargado de gestionar el funcionamiento global del sitio web, ya que controla la navegación entre las diferentes páginas del proceso de reserva, identifica la página actual para resaltar el paso correspondiente en el menú, carga dinámicamente componentes reutilizables como el encabezado y el pie de página, corrige las rutas de los archivos CSS y enlaces internos, y administra el carrito de compra almacenado en `localStorage`. Además, se encarga de calcular y actualizar el precio total mostrado en el encabezado, mostrar ventanas emergentes como el resumen de la reserva, alertas y confirmaciones, y mantener sincronizada la información del flujo de la boda en todo el sistema.
+
+7. venue-component.js
+Este archivo JavaScript define componentes web reutilizables para la página de lugares. Crea el componente <venue-header> para mostrar el nombre, precio e información del lugar, y el componente <venue-video> para reproducir un video de fondo. Ambos componentes utilizan HTML, CSS y SVG definidos directamente en el JavaScript para crear una experiencia visual consistente y modular.
+
+8. venue-filter.js
+Este archivo JavaScript implementa la funcionalidad de filtrado y búsqueda en la página de lugares. Permite filtrar los lugares por capacidad, precio y servicios adicionales, y también buscar por nombre. Los resultados se actualizan dinámicamente en la página sin necesidad de recargarla.
+
 /assets
 
 Explicar brevemente qué contiene cada carpeta.
