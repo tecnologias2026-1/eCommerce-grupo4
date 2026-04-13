@@ -127,10 +127,7 @@ Se encarga de agregar y eliminar el lugar seleccionado, validar que exista una f
 6. manager.js
 Es el archivo principal encargado de gestionar el funcionamiento global del sitio web, ya que controla la navegación entre las diferentes páginas del proceso de reserva, identifica la página actual para resaltar el paso correspondiente en el menú, carga dinámicamente componentes reutilizables como el encabezado y el pie de página, corrige las rutas de los archivos CSS y enlaces internos, y administra el carrito de compra almacenado en `localStorage`. Además, se encarga de calcular y actualizar el precio total mostrado en el encabezado, mostrar ventanas emergentes como el resumen de la reserva, alertas y confirmaciones, y mantener sincronizada la información del flujo de la boda en todo el sistema.
 
-7. venue-component.js
-Este archivo JavaScript define componentes web reutilizables para la página de lugares. Crea el componente <venue-header> para mostrar el nombre, precio e información del lugar, y el componente <venue-video> para reproducir un video de fondo. Ambos componentes utilizan HTML, CSS y SVG definidos directamente en el JavaScript para crear una experiencia visual consistente y modular.
-
-8. venue-filter.js
+7. venue-filter.js
 Este archivo JavaScript implementa la funcionalidad de filtrado y búsqueda en la página de lugares. Permite filtrar los lugares por capacidad, precio y servicios adicionales, y también buscar por nombre. Los resultados se actualizan dinámicamente en la página sin necesidad de recargarla.
 
 /assets

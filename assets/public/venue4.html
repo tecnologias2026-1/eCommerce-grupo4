@@ -17,11 +17,21 @@
 
 <body class="venue-body">
     <div id="header-placeholder"></div>
-    <venue-header title="Hacienda Arkadia" price="COL$ 7.000.000" guests="350 invitados">
-    </venue-header>
+    <header class="venue-header" data-base-price="7000000" data-base-guests="350">
+        <div class="venue-header__top">
+            <a href="place.html" class="back-btn" aria-label="Atrás">
+                <img alt="" src="../images/atras.svg" class="back-btn__icon" aria-hidden="true" />
+            </a>
+            <h1 class="venue-title">Hacienda Arkadia</h1>
+        </div>
+        <p class="venue-header__meta">
+            <span class="venue-price">COL$ 7.000.000</span>
+            <span aria-hidden="true">•</span>
+            <span class="venue-guests">350 invitados</span>
+        </p>
+    </header>
 
     <main class="venue-content">
-        <h1 class="visually-hidden">Hacienda Arkadia</h1>
         <!-- Location Section -->
         <section class="venue-location">
             <div class="venue-location__header">
@@ -37,7 +47,14 @@
             </div>
         </section>
 
-        <venue-video src="../videos/venue4-placeholder.mp4"></venue-video>
+        <section class="venue-video-container">
+            <div class="venue-video-wrapper">
+                <video class="venue-video" autoplay loop muted playsinline>
+                    <source src="../videos/venue4-placeholder.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de video.
+                </video>
+            </div>
+        </section>
 
         <!-- Estimated Budget Section — Improved graphic design -->
         <section class="venue-estimation" id="estimation-section">
@@ -127,18 +144,14 @@
         </nav>
     </main>
 
-    <script src="../../js/venue-component.js" defer></script>
     <script src="../../js/cart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const guestsSelection = localStorage.getItem('selectedGuests');
-            const venueHeader = document.querySelector('venue-header');
+            const venueHeader = document.querySelector('.venue-header');
 
-            const originalPriceStr = venueHeader.getAttribute('price');
-            const originalGuestsStr = venueHeader.getAttribute('guests');
-
-            const basePriceNum = parseInt(originalPriceStr.replace(/[^0-9]/g, "")) || 0;
-            const baseGuestsNum = parseInt(originalGuestsStr.replace(/[^0-9]/g, "")) || 100;
+            const basePriceNum = parseInt(venueHeader?.dataset.basePrice || '0', 10) || 0;
+            const baseGuestsNum = parseInt(venueHeader?.dataset.baseGuests || '100', 10) || 100;
 
             const selectedGuests = (guestsSelection && parseInt(guestsSelection) > 0)
                 ? parseInt(guestsSelection)

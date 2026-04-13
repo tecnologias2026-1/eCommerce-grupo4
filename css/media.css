@@ -11,11 +11,11 @@
     }
 
     .hero-selection {
-        padding: var(--space-2xl) var(--space-lg);
+        padding: var(--space-2xl) var(--page-gutter);
     }
 
     .row-characteristic {
-        padding: 40px var(--space-lg);
+        padding: 40px var(--page-gutter);
         height: auto;
         flex-direction: column;
         gap: 40px;
@@ -45,7 +45,7 @@
     }
 
     .venue-header {
-        padding: 60px var(--space-lg) var(--space-md);
+        padding: 60px var(--page-gutter) var(--space-md);
     }
 
     .venue-title {
@@ -53,7 +53,7 @@
     }
 
     .wedding-header {
-        padding: 60px var(--space-lg) var(--space-md);
+        padding: 60px var(--page-gutter) var(--space-md);
     }
 
     .wedding-header__title {
@@ -62,12 +62,12 @@
 
     .wedding-banner,
     .wedding-features {
-        padding: 60px var(--space-lg);
+        padding: 60px var(--page-gutter);
     }
 
     .res-view-container {
         margin: var(--space-lg);
-        padding: var(--space-xl);
+        padding: var(--space-xl) var(--page-gutter);
     }
 
     .confirm-container {
@@ -94,7 +94,7 @@
     }
 
     .venue-gallery {
-        padding: 40px var(--space-md);
+        padding: 40px var(--page-gutter);
         gap: 40px;
     }
 
@@ -107,7 +107,7 @@
     }
 
     .venue-options-selector {
-        padding: 60px var(--space-lg) var(--space-md);
+        padding: 60px var(--page-gutter) var(--space-md);
     }
 
     .venue-options-selector__title {
@@ -115,7 +115,7 @@
     }
 
     .venue-content {
-        padding: 0 var(--space-lg) var(--space-3xl);
+        padding: 0 var(--page-gutter) var(--space-3xl);
     }
 
     .venue-estimation__details {
@@ -141,11 +141,11 @@
     }
 
     .summary-marquee {
-        padding: 60px var(--space-lg);
+        padding: 60px var(--page-gutter);
     }
 
     .summary-pago {
-        padding: 40px var(--space-lg);
+        padding: 40px var(--page-gutter);
         flex-wrap: wrap;
         gap: 40px;
     }
@@ -153,8 +153,8 @@
     .payment-title-row,
     .payment-form-wrap,
     .payment-checkout {
-        padding-left: var(--space-xl);
-        padding-right: var(--space-xl);
+        padding-left: var(--page-gutter);
+        padding-right: var(--page-gutter);
     }
 
     .payment-page-title {
@@ -218,7 +218,7 @@
     }
 
     .next-button-bar {
-        padding: var(--space-lg) var(--space-md);
+        padding: var(--space-lg) var(--page-gutter);
         justify-content: center;
     }
 
@@ -347,8 +347,14 @@
         padding: 40px var(--space-md) var(--space-md);
     }
 
+    .venue-header__meta {
+        margin-top: 16px;
+        flex-wrap: wrap;
+    }
+
     .venue-title {
         font-size: 28px;
+        padding: 0 calc(54.108px + var(--space-sm));
     }
 
     .venue-price,
@@ -367,7 +373,7 @@
     }
 
     .venue-video-container {
-        padding: var(--space-md);
+        padding: 0;
     }
 
     .venue-options-selector {
@@ -385,11 +391,6 @@
         height: 60px;
     }
 
-    .header-controls {
-        gap: var(--space-sm);
-    }
-
-    .venue-cart-btn,
     .venue-close-btn {
         width: 38px;
         height: 38px;

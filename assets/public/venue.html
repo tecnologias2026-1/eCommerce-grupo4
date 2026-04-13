@@ -17,11 +17,21 @@
 
 <body class="venue-body">
     <div id="header-placeholder"></div>
-    <venue-header title="Paz del Río" price="COL$ 3.000.000" guests="100 invitados">
-    </venue-header>
+    <header class="venue-header" data-base-price="3000000" data-base-guests="100">
+        <div class="venue-header__top">
+            <a href="place.html" class="back-btn" aria-label="Atrás">
+                <img alt="" src="../images/atras.svg" class="back-btn__icon" aria-hidden="true" />
+            </a>
+            <h1 class="venue-title">Paz del Río</h1>
+        </div>
+        <p class="venue-header__meta">
+            <span class="venue-price">COL$ 3.000.000</span>
+            <span aria-hidden="true">•</span>
+            <span class="venue-guests">100 invitados</span>
+        </p>
+    </header>
 
     <main class="venue-content">
-        <h1 class="visually-hidden">Hacienda Paz del Río</h1>
         <!-- Location Section -->
         <section class="venue-location">
             <div class="venue-location__header">
@@ -133,18 +143,14 @@
         </nav>
     </main>
 
-    <script src="../../js/venue-component.js" defer></script>
     <script src="../../js/cart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const guestsSelection = localStorage.getItem('selectedGuests');
-            const venueHeader = document.querySelector('venue-header');
+            const venueHeader = document.querySelector('.venue-header');
 
-            const originalPriceStr = venueHeader.getAttribute('price');
-            const originalGuestsStr = venueHeader.getAttribute('guests');
-
-            const basePriceNum = parseInt(originalPriceStr.replace(/[^0-9]/g, "")) || 0;
-            const baseGuestsNum = parseInt(originalGuestsStr.replace(/[^0-9]/g, "")) || 100;
+            const basePriceNum = parseInt(venueHeader?.dataset.basePrice || '0', 10) || 0;
+            const baseGuestsNum = parseInt(venueHeader?.dataset.baseGuests || '100', 10) || 100;
 
             const selectedGuests = (guestsSelection && parseInt(guestsSelection) > 0)
                 ? parseInt(guestsSelection)

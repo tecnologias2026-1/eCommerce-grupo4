@@ -3,6 +3,10 @@
 		"Figma": {
 			"url": "https://mcp.figma.com/mcp",
 			"type": "http"
+		},
+		"my-mcp-server-81e199b4": {
+			"url": "https://mcp.figma.com/mcp",
+			"type": "http"
 		}
 	},
 	"inputs": []

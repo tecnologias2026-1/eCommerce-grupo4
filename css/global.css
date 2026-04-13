@@ -48,6 +48,9 @@
     /* Layout */
     --container-max: 1280px;
     --container-max-wide: 1920px;
+    --content-shell-max: calc(var(--container-max) + (var(--page-gutter) * 2));
+    --content-inline-space: max(var(--page-gutter), calc((100% - var(--container-max)) / 2));
+    --content-reading-max: 680px;
     --radius: 6px;
     --radius-sm: 6px;
     --radius-lg: 12px;
@@ -118,11 +121,11 @@ section.feature,
    ================================================ */
 .hero-selection {
     width: 100%;
-    max-width: var(--container-max-wide);
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
     background: var(--bg);
     border-bottom: 1px solid var(--border);
-    padding: var(--space-3xl) var(--space-3xl) calc(var(--space-4xl) + var(--space-3xl));
+    padding: var(--space-3xl) var(--content-inline-space) calc(var(--space-4xl) + var(--space-3xl));
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -180,25 +183,6 @@ section.feature,
     display: block;
 }
 
-.hero-cart-btn {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--black);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform var(--transition-fast);
-}
-
-.hero-cart-btn:hover {
-    transform: translateY(-50%) scale(1.1);
-}
-
 .feature-list {
     width: 100%;
     display: flex;
@@ -216,6 +200,12 @@ section.feature,
     color: var(--muted);
     width: 627px;
     max-width: 100%;
+}
+
+.feature-list__subtitle--centered {
+    width: 100%;
+    margin-top: 24px;
+    text-align: center;
 }
 
 .features {
@@ -259,8 +249,8 @@ section.feature,
 
 .row-characteristic {
     width: 100%;
-    max-width: var(--container-max-wide);
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
     height: 512px;
     background: var(--bg);
     border-bottom: 1px solid var(--border);
@@ -268,7 +258,7 @@ section.feature,
     gap: var(--space-3xl);
     align-items: flex-start;
     overflow: hidden;
-    padding: 40px var(--space-3xl);
+    padding: 40px var(--content-inline-space);
 }
 
 .row-characteristic__text {
@@ -380,10 +370,10 @@ section.feature,
 
 .next-button-bar {
     width: 100%;
-    max-width: var(--container-max-wide);
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
     background: var(--bg);
-    padding: var(--space-xl) var(--space-3xl);
+    padding: var(--space-xl) var(--content-inline-space);
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -774,9 +764,9 @@ section.feature,
 
 .auth-page {
     width: 100%;
-    max-width: var(--container-max);
+    max-width: var(--content-shell-max);
     margin: 0 auto;
-    padding: 50px clamp(16px, 5vw, 60px) 80px;
+    padding: 50px var(--page-gutter) 80px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -1100,11 +1090,10 @@ section.feature,
 }
 
 .payment-title-row {
-    max-width: var(--container-max);
+    max-width: var(--content-shell-max);
     width: 100%;
     margin: 0 auto;
-    padding: var(--space-3xl);
-    padding-bottom: 0;
+    padding: var(--space-3xl) var(--page-gutter) 0;
     display: flex;
     align-items: center;
     gap: var(--space-2xl);
@@ -1133,11 +1122,10 @@ section.feature,
 }
 
 .payment-form-wrap {
-    max-width: var(--container-max);
+    max-width: var(--content-shell-max);
     width: 100%;
     margin: 0 auto;
-    padding: var(--space-3xl);
-    padding-top: var(--space-2xl);
+    padding: var(--space-2xl) var(--page-gutter) var(--space-3xl);
     box-sizing: border-box;
 }
 
@@ -1354,9 +1342,9 @@ section.feature,
 }
 
 .res-view-container {
-    max-width: 1040px;
+    max-width: var(--content-shell-max);
     margin: 40px auto;
-    padding: 40px;
+    padding: 40px var(--page-gutter);
     background: var(--white);
     border-radius: 12px;
     box-shadow: var(--shadow-lg);
@@ -1503,8 +1491,8 @@ section.feature,
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 80px 48px;
-    padding: 96px 120px;
-    max-width: 1440px;
+    padding: 96px var(--page-gutter);
+    max-width: var(--content-shell-max);
     margin: 0 auto;
     width: 100%;
 }
@@ -1624,7 +1612,7 @@ section.feature,
 .summary-pago {
     background: var(--gray-light);
     border-top: 1px solid var(--border);
-    padding: var(--space-3xl);
+    padding: var(--space-3xl) var(--content-inline-space);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1779,12 +1767,33 @@ section.feature,
 }
 
 .venue-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 80px 120px 20px;
     background: var(--bg);
     width: 100%;
+    padding: 80px var(--content-inline-space) 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.venue-header__top,
+.venue-header__meta {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.venue-header__top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 54px;
+}
+
+.venue-header__meta {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
 }
 
 .venue-details {
@@ -1802,6 +1811,9 @@ section.feature,
     letter-spacing: var(--title-letter-spacing);
     color: var(--black);
     text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    padding: 0 calc(54.108px + var(--space-xl));
 }
 
 .venue-info-row {
@@ -1812,6 +1824,7 @@ section.feature,
 
 .venue-price,
 .venue-guests {
+    margin: 0;
     font-family: var(--font-primary);
     font-weight: 600;
     font-size: 24px;
@@ -1854,7 +1867,9 @@ section.feature,
 
 .venue-video-container {
     width: 100%;
-    padding: 40px 64px;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0;
     background: var(--bg);
     display: flex;
     justify-content: center;
@@ -1926,7 +1941,7 @@ section.feature .feature__subtitle {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: var(--section-space) var(--page-gutter) var(--space-md);
+    padding: var(--section-space) var(--content-inline-space) var(--space-md);
     position: relative;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px -4px 8px rgba(0, 0, 0, 0.1);
     gap: 48px;
@@ -2008,9 +2023,9 @@ section.feature .feature__subtitle {
     display: flex;
     flex-direction: column;
     gap: var(--space-3xl);
-    padding: var(--space-3xl);
+    padding: var(--space-3xl) var(--page-gutter);
     width: 100%;
-    max-width: var(--container-max);
+    max-width: var(--content-shell-max);
     margin: 0 auto;
     box-sizing: border-box;
 }
@@ -2092,7 +2107,7 @@ section.feature .feature__subtitle {
     display: flex;
     flex-direction: column;
     flex: 1;
-    gap: var(--space-sm);
+    gap: calc(var(--space-xs) / 2);
 }
 
 .venue-card__title {
@@ -2100,6 +2115,7 @@ section.feature .feature__subtitle {
     font-family: var(--font-secondary);
     font-weight: 600;
     font-size: 24px;
+    line-height: 1.2;
     color: var(--black);
     text-transform: uppercase;
 }
@@ -2110,6 +2126,7 @@ section.feature .feature__subtitle {
     font-family: var(--font-primary);
     font-weight: 600;
     font-size: 24px;
+    line-height: 1.2;
     color: var(--muted);
 }
 
@@ -2132,7 +2149,7 @@ section.feature .feature__subtitle {
 .venue-gallery__actions {
     display: flex;
     align-items: center;
-    gap: 128px;
+    justify-content: flex-end;
     width: 100%;
 }
 
@@ -2148,44 +2165,31 @@ section.feature .feature__subtitle {
 }
 
 .venue-gallery__next-btn {
-    flex: 1;
+    flex: 0 0 auto;
+    width: 100%;
     max-width: 400px;
 }
 
 /* Venue Detail Pages (venue.html to venue6.html) */
-.header-controls {
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
-}
-
-.venue-cart-btn {
-    width: 46px;
-    height: 46px;
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    background: var(--white);
-    color: var(--black);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-.venue-cart-btn:hover {
-    transform: scale(1.06);
-    box-shadow: var(--shadow-sm);
-}
-
 .venue-content {
     width: 100%;
-    max-width: var(--container-max);
+    max-width: var(--content-shell-max);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: var(--space-xl);
-    padding-bottom: var(--space-3xl);
+    padding: 0 var(--page-gutter) var(--space-3xl);
+}
+
+.venue-location,
+.venue-estimation,
+.venue-features-grid,
+.venue-footer,
+.venue-actions,
+.venue-navigation {
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
 }
 
 .venue-location {
@@ -2230,7 +2234,7 @@ section.feature .feature__subtitle {
 
 .venue-video-wrapper {
     width: 100%;
-    max-width: 1040px;
+    max-width: none;
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--shadow-md);
@@ -2436,6 +2440,13 @@ section.feature .feature__subtitle {
     align-items: center;
 }
 
+.about-us__header,
+.mission-vision__header,
+.our-history__content,
+.our-trajectory__content {
+    width: 100%;
+}
+
 .mission-vision {
     background: var(--gray-light);
     padding: var(--section-space) var(--page-gutter);
@@ -2444,6 +2455,14 @@ section.feature .feature__subtitle {
     align-items: center;
     gap: var(--space-xl);
     text-align: center;
+}
+
+.mission-vision__header {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .about-us__title,
@@ -2461,6 +2480,19 @@ section.feature .feature__subtitle {
     font-size: 20px;
     color: var(--muted);
     line-height: 1.5;
+}
+
+.about-us__description,
+.mission-vision__content,
+.our-history__text,
+.our-trajectory__text,
+.inspiration-quote__container {
+    width: 100%;
+    max-width: var(--content-reading-max);
+}
+
+.mission-vision__content {
+    margin: 0 auto;
 }
 
 .mission-vision__content p {
@@ -2552,7 +2584,6 @@ section.feature .feature__subtitle {
 
 .inspiration-quote__container {
     margin: 0 auto;
-    max-width: 980px;
     text-align: center;
 }
 
@@ -2576,7 +2607,7 @@ section.feature .feature__subtitle {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 80px 120px 20px;
+    padding: 80px var(--content-inline-space) 20px;
     width: 100%;
     box-sizing: border-box;
 }
@@ -2637,7 +2668,7 @@ section.feature .feature__subtitle {
 
 .wedding-banner {
     background-color: var(--gray-light);
-    padding: 80px 120px 50px;
+    padding: 80px var(--content-inline-space) 50px;
     width: 100%;
     box-sizing: border-box;
     display: flex;
@@ -2646,7 +2677,7 @@ section.feature .feature__subtitle {
 
 .wedding-banner__image-container {
     width: 100%;
-    max-width: 1040px;
+    max-width: var(--container-max);
     aspect-ratio: 1040 / 480;
     overflow: hidden;
     border-radius: var(--radius);
@@ -2665,7 +2696,7 @@ section.feature .feature__subtitle {
 
 .wedding-features {
     background-color: var(--gray-light);
-    padding: 80px 120px;
+    padding: 80px var(--content-inline-space);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-3xl) var(--space-2xl);
@@ -2803,7 +2834,7 @@ section.feature .feature__subtitle {
 
 .nuestras-bodas__header {
     text-align: center;
-    max-width: 1040px;
+    max-width: var(--container-max);
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
@@ -2830,7 +2861,7 @@ section.feature .feature__subtitle {
 
 .nuestras-bodas__image-container {
     width: 100%;
-    max-width: 1040px;
+    max-width: var(--container-max);
     height: 480px;
     overflow: hidden;
     border-radius: var(--radius);
@@ -2844,7 +2875,7 @@ section.feature .feature__subtitle {
 
 .nuestras-bodas__details {
     width: 100%;
-    max-width: 1040px;
+    max-width: var(--container-max);
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
@@ -3457,8 +3488,6 @@ section.feature .feature__subtitle {
     justify-content: space-between;
     padding: var(--space-3xl);
     width: 100%;
-    max-width: var(--container-max);
-    margin: 0 auto;
     gap: var(--space-xl);
 }
 
