@@ -7,7 +7,7 @@ function addToCart(venueData) {
         showCustomAlert('CONFIRMAR FECHA', 'Para confirmar disponibilidad debe seleccionar la fecha aproximada de la boda en el inicio.');
         return;
     }
-    
+
     // Check if a venue is already selected
     if (currentCart.selectedVenue) {
         showCustomAlert('SELECCIÓN YA EXISTENTE', 'Ya tienes un lugar seleccionado. Solo puedes agregar un venue a tu boda.');
@@ -17,7 +17,7 @@ function addToCart(venueData) {
     // Save the selected venue
     currentCart.selectedVenue = venueData;
     localStorage.setItem('weddingCart', JSON.stringify(currentCart));
-    
+
     showCustomAlert('¡ENHORABUENA!', 'Lugar añadido al carrito con éxito. Puedes verlo en el resumen de tu boda.');
 }
 
@@ -28,7 +28,7 @@ function showCustomAlert(title, message) {
         backdrop.className = "cart-modal-backdrop";
         document.body.appendChild(backdrop);
     }
-    
+
     // Clear backdrop content for notification
     backdrop.innerHTML = `
         <div class="notification-modal">
@@ -65,7 +65,7 @@ function showCustomConfirm(title, message, onConfirm) {
         backdrop.className = "cart-modal-backdrop";
         document.body.appendChild(backdrop);
     }
-    
+
     backdrop.innerHTML = `
         <div class="notification-modal">
             <h2 class="notification-modal__title">${title}</h2>

@@ -230,11 +230,20 @@ function parsePrice(strip) {
 
 function showSummaryPopup() {
     let backdrop = document.querySelector(".summary-modal-backdrop");
-    if (!backdrop) {
-        backdrop = document.createElement("div");
-        backdrop.className = "summary-modal-backdrop active";
-        document.body.appendChild(backdrop);
+    if (backdrop) {
+        backdrop.classList.add("active");
+        document.body.classList.add("modal-open");
+        // Notify the iframe to update just in case
+        const iframe = backdrop.querySelector('iframe');
+        if (iframe && iframe.contentWindow) {
+            iframe.contentWindow.postMessage({ type: 'CART_UPDATED' }, '*');
+        }
+        return;
     }
+
+    backdrop = document.createElement("div");
+    backdrop.className = "summary-modal-backdrop active";
+    document.body.appendChild(backdrop);
     
     backdrop.innerHTML = `
         <div class="summary-popup">

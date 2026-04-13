@@ -180,6 +180,25 @@ section.feature,
     display: block;
 }
 
+.hero-cart-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-fast);
+}
+
+.hero-cart-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
 .feature-list {
     width: 100%;
     display: flex;

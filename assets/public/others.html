@@ -31,6 +31,11 @@
         <h1 class="hero-selection__title" data-node-id="475:888">
           Otros servicios
         </h1>
+        <button class="hero-cart-btn" onclick="showSummaryPopup()" aria-label="Ver resumen">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5.48C21.05 5.17 21.13 4.84 21.13 4.5C21.13 3.4 20.23 2.5 19.13 2.5H5.21L4.27 0.5H1V2ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18Z" fill="currentColor"/>
+          </svg>
+        </button>
       </div>
 
       <div class="feature-list" data-name="Feature list" data-node-id="475:1097">
@@ -81,48 +86,87 @@
       </div>
     </section>
 
-    <section class="row-characteristic" data-name="Row characteristic" data-node-id="475:1437">
-      <div class="row-characteristic__text" data-name="Text" data-node-id="475:1124">
-        <h2 class="row-characteristic__title" data-node-id="475:1125">Example title characteristic</h2>
-
-        <div class="row-characteristic__feature-row" data-name="Feature 1" data-node-id="475:1126">
-          <p class="row-characteristic__name" data-node-id="475:1127">Name characteristic</p>
-
-          <div class="row-characteristic__price" data-node-id="475:1128">
-            <p class="row-characteristic__price-main" data-node-id="475:1128">COL$ 250.000</p>
-            <p class="row-characteristic__price-sub" data-node-id="475:1128">x/un.</p>
+    <section class="row-characteristic selection-item" data-id="musica" data-name="Música y DJ" data-price="1500000">
+      <div class="row-characteristic__text">
+        <h2 class="row-characteristic__title">Música y DJ</h2>
+        <div class="row-characteristic__feature-row">
+          <p class="row-characteristic__name">Servicio Premium</p>
+          <div class="row-characteristic__price">
+            <p class="row-characteristic__price-main">COL$ 1.500.000</p>
           </div>
-
-          <button class="row-characteristic__checkbox" type="button" aria-label="Seleccionar característica" data-node-id="424:1337">
-            <img
-              alt=""
-              src="../images/checkbox.png"
-              aria-hidden="true"
-            />
-          </button>
+          <div class="selection-status">
+            <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
+          </div>
         </div>
-
-        <p class="row-characteristic__description" data-node-id="475:1131">
-          Aquí vamos a incluir una descripción del producto.
+        <p class="row-characteristic__description">
+          Sonido profesional, iluminación para la pista de baile y DJ experto en bodas.
         </p>
       </div>
-
-      <div class="row-characteristic__image" data-name="Image" data-node-id="475:1183">
-        <div class="row-characteristic__image-frame" aria-hidden="true" data-node-id="I475:1183;356:17030" role="presentation">
-          <img
-            alt=""
-            src="https://www.figma.com/api/mcp/asset/fe777b8e-9387-46fd-9245-7daaa74ca04a"
-            data-node-id="I475:1183;356:17030"
-          />
+      <div class="row-characteristic__image">
+        <div class="row-characteristic__image-frame">
+          <img src="../images/o1.png" alt="Música" />
         </div>
       </div>
     </section>
 
-    <section class="next-button-bar" data-name="boton siguiente" data-node-id="497:10673">
-      <a href="payment.html" class="btn-primary" data-name="Button" data-node-id="356:17005">
-        <span class="btn-primary__text" data-node-id="356:17004">Continuar</span>
+    <section class="next-button-bar">
+      <a href="payment.html" class="btn-primary">
+        <span class="btn-primary__text">Continuar</span>
       </a>
     </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const items = document.querySelectorAll('.selection-item');
+        const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+        const selections = cart.others || {};
+        
+        items.forEach(item => {
+          if (selections[item.dataset.id]) {
+            item.classList.add('is-selected');
+          }
+
+          item.addEventListener('click', () => {
+            const isSelected = item.classList.toggle('is-selected');
+            updateCart(item, isSelected);
+          });
+        });
+
+        function updateCart(item, isSelected) {
+          const currentCart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+          if (!currentCart.others) currentCart.others = {};
+
+          if (isSelected) {
+            const name = item.dataset.name;
+            currentCart.others[item.dataset.id] = {
+              id: item.dataset.id,
+              name: name,
+              price: item.querySelector('.row-characteristic__price-main').textContent
+            };
+            showCustomAlert('¡ENHORABUENA!', `Has agregado "${name}" a tu boda.`);
+            
+            // Abrir el resumen automáticamente
+            setTimeout(() => {
+                showSummaryPopup();
+            }, 500);
+          } else {
+            delete currentCart.others[item.dataset.id];
+          }
+
+          localStorage.setItem('weddingCart', JSON.stringify(currentCart));
+          window.postMessage({ type: 'CART_UPDATED' }, '*');
+
+          // Forzar actualización si el resumen ya está abierto
+          const summaryBackdrop = document.querySelector(".summary-modal-backdrop");
+          if (summaryBackdrop) {
+              const iframe = summaryBackdrop.querySelector('iframe');
+              if (iframe && iframe.contentWindow) {
+                  iframe.contentWindow.postMessage({ type: 'CART_UPDATED' }, '*');
+              }
+          }
+        }
+      });
+    </script>
     </main>
     <div id="footer-placeholder"></div>
   </body>
