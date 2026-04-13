@@ -135,7 +135,74 @@ Este archivo JavaScript implementa la funcionalidad de filtrado y búsqueda en l
 
 /assets
 
-Explicar brevemente qué contiene cada carpeta.
+1. images
+Almacena todos los recursos visuales utilizados en el sitio web, como fotografías, íconos, fondos, logos e imágenes decorativas que se muestran en las diferentes secciones de la página. Su función es centralizar los elementos gráficos para facilitar su organización y reutilización dentro del proyecto.
+
+2. videos
+Contiene los archivos de video que se utilizan en el sitio web, como videos de fondo, demostraciones de lugares, tutoriales o cualquier otro contenido audiovisual. Su función es centralizar los recursos de video para facilitar su organización y reutilización dentro del proyecto.
+
+3. public
+Contiene los archivos públicos del proyecto, como el index.html, el favicon.ico y el robots.txt. Su función es centralizar los archivos públicos para facilitar su organización y reutilización dentro del proyecto.
+
+
+3.1 index.html
+El archivo index.html es la página principal del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.2 auth.html
+El archivo auth.html corresponde a la página de inicio de sesión del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.3 ceremony.html
+El archivo ceremony.html corresponde a la página de ceremonias del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.4 confirm.html
+El archivo confirm.html corresponde a la página de confirmación del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.5 food.html
+El archivo food.html corresponde a la página de comida del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.6 footer.html
+El archivo footer.html corresponde al pie de página del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.7 header.html
+El archivo header.html corresponde al encabezado del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.8 others.html
+El archivo others.html corresponde a la página de otros del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.9 payment.html
+El archivo payment.html corresponde a la página de pago del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.10 place.html
+El archivo place.html corresponde a la página de lugares del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.11 reception.html
+El archivo reception.html corresponde a la página de recepción del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.12 reservations_view.html
+El archivo reservations_view.html corresponde a la página de reservas del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.13 reservations.html
+El archivo reservations.html corresponde a la página de reservas del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.14 reservcode.html
+El archivo reservcode.html corresponde a la página de código de reservas del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.15 reserview_user.html
+El archivo reserview_user.html corresponde a la página de vista de reservas del usuario del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.16 summary.html
+El archivo summary.html corresponde a la página de resumen del sitio web. Contiene el formulario para que el usuario ingrese con correo o nombre de usuario y contraseña, además de incluir funciones como mostrar u ocultar la contraseña, recuperación mediante un modal y acceso a componentes globales como el encabezado y el pie de página. También enlaza los archivos CSS para el diseño visual y los scripts JavaScript que gestionan la autenticación y la interacción de la interfaz.
+
+3.17 venues.html
+Corresponde a la plantilla de las páginas de cada hacienda o venue disponible para la boda. En esta estructura se muestra la información detallada del lugar, como el encabezado con nombre, precio e invitados, ubicación con mapa, video de presentación, estimación dinámica del costo según el número de invitados guardado en `localStorage`, galería de características visuales e información descriptiva del espacio. Además, incluye la opción de agregar el venue al carrito y navegar entre diferentes haciendas. Esta misma plantilla se reutiliza en todos los venues del proyecto, cambiando únicamente la información, imágenes, videos, precios y descripciones específicas de cada lugar.
+
+3.18 wedings.html
+Corresponde a la plantilla de las páginas que muestran bodas ejemplares o de inspiración dentro del proyecto. En esta estructura se presenta la información principal de cada boda, como los nombres de la pareja, la fecha, el lugar donde se realizó, una imagen principal tipo banner y una galería de fotos con diferentes aspectos del evento, como la hacienda, la recepción, la comida y la decoración. Esta misma plantilla se reutiliza para todas las páginas de bodas de ejemplo, cambiando únicamente los nombres, fechas, ubicación e imágenes según cada caso.
+
+4. .gitkeep
+Es un archivo vacío que se usa únicamente para que Git pueda guardar carpetas vacías dentro del repositorio. Como Git no rastrea directorios sin contenido, se agrega este archivo para mantener la estructura de carpetas aunque aún no tengan archivos dentro. No afecta el funcionamiento del proyecto, solo sirve para conservar el orden y la organización de las carpetas en GitHub o Git.
+
+
 
 🚀 8. Instalación y Ejecución
 
