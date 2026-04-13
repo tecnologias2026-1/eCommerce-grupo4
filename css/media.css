@@ -228,23 +228,35 @@
 
     .header {
         flex-direction: column;
-        gap: 11px;
-        height: 178px;
+        gap: 16px;
+        height: auto;
         justify-content: center;
-        padding: var(--space-xl) var(--space-sm);
+        align-items: center;
+        padding: var(--space-lg) var(--space-md);
         width: 100%;
-        max-width: none;
     }
 
     .nav {
-        flex: 1 0 0;
-        gap: 20px;
-        min-height: 0;
-        min-width: 0;
-        padding: 9px;
-        font-size: 11px;
-        width: 345px;
+        width: 95%;
+        max-width: 360px;
+        gap: 15px;
+        padding: 10px 15px;
+        font-size: 12px;
         white-space: nowrap;
+        overflow-x: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 48px;
+    }
+
+    .cart {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin-top: 24px !important;
+        text-align: center !important;
     }
 
     .header:not(.header--logo-only) .cart {
