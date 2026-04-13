@@ -1,130 +1,178 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ceremonia</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Spectral+SC:wght@600&family=Spectral:wght@600;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../../css/global.css">
-    
-    <link rel="stylesheet" href="../../css/media.css">
-    <script src="../../js/manager.js" defer></script>
-  </head>
-  <body>
-    <div id="header-placeholder"></div>
-    <main>
-    <section class="hero-selection" data-name="Hero selection" data-node-id="475:1122">
-      <div class="hero-selection__top" data-name="Container" data-node-id="684:6776">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ceremonia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Spectral+SC:wght@600&family=Spectral:wght@600;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/global.css">
+
+  <link rel="stylesheet" href="../../css/media.css">
+  <script src="../../js/manager.js" defer></script>
+</head>
+
+<body>
+  <div id="header-placeholder"></div>
+  <main>
+    <section class="hero-selection" data-node-id="475:1536">
+      <div class="hero-selection__top">
         <a href="place.html" class="back-btn" aria-label="Atrás">
-          <img
-            alt=""
-            src="../images/atras.svg"
-            class="back-btn__icon"
-            aria-hidden="true"
-          />
+          <img alt="" src="../images/atras.svg" class="back-btn__icon" aria-hidden="true" />
         </a>
-        <h1 class="hero-selection__title" data-node-id="475:888">
-          Ceremonia
-        </h1>
+        <h1 class="hero-selection__title">Diseña tu ceremonia perfecta</h1>
       </div>
+      <p class="feature-list__subtitle" style="text-align: center; width: 100%; margin-top: 24px;">
+        Selecciona las opciones que deseas incluir en tu ceremonia para ver el total reflejado.
+      </p>
+    </section>
 
-      <div class="feature-list" data-name="Feature list" data-node-id="475:1097">
-        <p class="feature-list__subtitle" data-node-id="I475:1097;475:2098">
-          Example title or instruction characteristic
+    <!-- Item 1 -->
+    <section class="row-characteristic selection-item" data-id="montaje" data-name="Montaje de ceremonia" data-price="800000">
+      <div class="row-characteristic__text">
+        <h2 class="row-characteristic__title">Montaje de ceremonia</h2>
+        <div class="row-characteristic__feature-row">
+          <p class="row-characteristic__name">Servicio profesional</p>
+          <div class="row-characteristic__price">
+            <p class="row-characteristic__price-main">COL$ 800.000</p>
+          </div>
+          <div class="selection-status">
+            <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
+          </div>
+        </div>
+        <p class="row-characteristic__description">
+          Estructura completa para altar, mesa de ceremonia y organización profesional del espacio.
         </p>
-
-        <div class="features" data-name="Items" data-node-id="I475:1097;475:2107">
-          <div class="feature" data-name="Feature 1" data-node-id="I475:1097;475:2011">
-            <div class="checkmark" data-node-id="475:1959">
-              <img
-                alt=""
-                src="../images/checkmark.png"
-                aria-hidden="true"
-              />
-            </div>
-            <p class="feature__text" data-node-id="I475:1097;475:2013">
-              Example characteristic
-            </p>
-          </div>
-
-          <div class="feature" data-name="Feature 2" data-node-id="I475:1097;475:2040">
-            <div class="checkmark" data-node-id="475:1959">
-              <img
-                alt=""
-                src="../images/checkmark.png"
-                aria-hidden="true"
-              />
-            </div>
-            <p class="feature__text" data-node-id="I475:1097;475:2042">
-              Example characteristic
-            </p>
-          </div>
-
-          <div class="feature" data-name="Feature 3" data-node-id="I475:1097;475:2069">
-            <div class="checkmark" data-node-id="475:1959">
-              <img
-                alt=""
-                src="../images/checkmark.png"
-                aria-hidden="true"
-              />
-            </div>
-            <p class="feature__text" data-node-id="I475:1097;475:2071">
-              Example characteristic
-            </p>
-          </div>
+      </div>
+      <div class="row-characteristic__image">
+        <div class="row-characteristic__image-frame">
+          <img src="../images/ceremonia campestre w3.png" alt="Montaje" />
         </div>
       </div>
     </section>
 
-    <section class="row-characteristic" data-name="Row characteristic" data-node-id="475:1437">
-      <div class="row-characteristic__text" data-name="Text" data-node-id="475:1124">
-        <h2 class="row-characteristic__title" data-node-id="475:1125">Example title characteristic</h2>
-
-        <div class="row-characteristic__feature-row" data-name="Feature 1" data-node-id="475:1126">
-          <p class="row-characteristic__name" data-node-id="475:1127">Name characteristic</p>
-
-          <div class="row-characteristic__price" data-node-id="475:1128">
-            <p class="row-characteristic__price-main" data-node-id="475:1128">COL$ 250.000</p>
-            <p class="row-characteristic__price-sub" data-node-id="475:1128">x/un.</p>
+    <!-- Item 2 -->
+    <section class="row-characteristic selection-item" data-id="altar" data-name="Arreglo floral para altar" data-price="1200000">
+      <div class="row-characteristic__text">
+        <h2 class="row-characteristic__title">Arreglo floral para altar</h2>
+        <div class="row-characteristic__feature-row">
+          <p class="row-characteristic__name">Arreglo Premium</p>
+          <div class="row-characteristic__price">
+            <p class="row-characteristic__price-main">COL$ 1.200.000</p>
           </div>
-
-          <button class="row-characteristic__checkbox" type="button" aria-label="Seleccionar característica" data-node-id="424:1337">
-            <img
-              alt=""
-              src="../images/checkbox.png"
-              aria-hidden="true"
-            />
-          </button>
+          <div class="selection-status">
+            <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
+          </div>
         </div>
-
-        <p class="row-characteristic__description" data-node-id="475:1131">
-          Aquí vamos a incluir una descripción del producto.
+        <p class="row-characteristic__description">
+          Composición floral majestuosa con flores de temporada, diseñada para resaltar el punto focal de la unión.
         </p>
       </div>
-
-      <div class="row-characteristic__image" data-name="Image" data-node-id="475:1183">
-        <div class="row-characteristic__image-frame" aria-hidden="true" data-node-id="I475:1183;356:17030" role="presentation">
-          <img
-            alt=""
-            src="https://www.figma.com/api/mcp/asset/fe777b8e-9387-46fd-9245-7daaa74ca04a"
-            data-node-id="I475:1183;356:17030"
-          />
+      <div class="row-characteristic__image">
+        <div class="row-characteristic__image-frame">
+          <img src="../images/c2.png" alt="Altar" />
         </div>
       </div>
     </section>
 
-    <section class="next-button-bar" data-name="boton siguiente" data-node-id="497:10673">
-      <a href="reception.html" class="btn-primary" data-name="Button" data-node-id="356:17005">
-        <span class="btn-primary__text" data-node-id="356:17004">Continuar</span>
+    <!-- Item 3 -->
+    <section class="row-characteristic selection-item" data-id="sillas" data-name="Sillas y decoración de asientos" data-price="650000">
+      <div class="row-characteristic__text">
+        <h2 class="row-characteristic__title">Sillas y decoración de asientos</h2>
+        <div class="row-characteristic__feature-row">
+          <p class="row-characteristic__name">Set para 50 personas</p>
+          <div class="row-characteristic__price">
+            <p class="row-characteristic__price-main">COL$ 650.000</p>
+          </div>
+          <div class="selection-status">
+            <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
+          </div>
+        </div>
+        <p class="row-characteristic__description">
+          Sillas tipo tiffany con decoración personalizada en cintas y bouquets laterales.
+        </p>
+      </div>
+      <div class="row-characteristic__image">
+        <div class="row-characteristic__image-frame square-img">
+          <img src="../images/c3.png" alt="Sillas" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Item 4 -->
+    <section class="row-characteristic selection-item" data-id="camino" data-name="Decoración de camino al altar" data-price="450000">
+      <div class="row-characteristic__text">
+        <h2 class="row-characteristic__title">Decoración de camino al altar</h2>
+        <div class="row-characteristic__feature-row">
+          <p class="row-characteristic__name">Camino Clásico</p>
+          <div class="row-characteristic__price">
+            <p class="row-characteristic__price-main">COL$ 450.000</p>
+          </div>
+          <div class="selection-status">
+            <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
+          </div>
+        </div>
+        <p class="row-characteristic__description">
+          Delicada huella de pétalos y pequeños arreglos que enmarcan el recorrido nupcial.
+        </p>
+      </div>
+      <div class="row-characteristic__image">
+        <div class="row-characteristic__image-frame square-img">
+          <img src="../images/c1.png" alt="Camino" />
+        </div>
+      </div>
+    </section>
+
+    <section class="next-button-bar">
+      <a href="reception.html" class="btn-primary">
+        <span class="btn-primary__text">Continuar</span>
       </a>
     </section>
-    </main>
-    <div id="footer-placeholder"></div>
-  </body>
-</html>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const items = document.querySelectorAll('.selection-item');
+        
+        // Cargar estado inicial
+        const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+        const selections = cart.ceremony || {};
+        
+        items.forEach(item => {
+          if (selections[item.dataset.id]) {
+            item.classList.add('is-selected');
+          }
+
+          item.addEventListener('click', () => {
+            const isSelected = item.classList.toggle('is-selected');
+            updateCart(item, isSelected);
+          });
+        });
+
+        function updateCart(item, isSelected) {
+          const currentCart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+          if (!currentCart.ceremony) currentCart.ceremony = {};
+
+          if (isSelected) {
+            currentCart.ceremony[item.dataset.id] = {
+              id: item.dataset.id,
+              name: item.dataset.name,
+              price: item.querySelector('.row-characteristic__price-main').textContent
+            };
+          } else {
+            delete currentCart.ceremony[item.dataset.id];
+          }
+
+          localStorage.setItem('weddingCart', JSON.stringify(currentCart));
+          window.postMessage({ type: 'CART_UPDATED' }, '*');
+        }
+      });
+    </script>
+  </main>
+  <div id="footer-placeholder"></div>
+</body>
+
+</html>

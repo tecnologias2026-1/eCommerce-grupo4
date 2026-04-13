@@ -219,6 +219,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+function formatCurrency(amount) {
+    return 'COL$ ' + amount.toLocaleString('es-CO');
+}
+
+function parsePrice(strip) {
+    if (typeof strip !== 'string') return 0;
+    return parseInt(strip.replace(/[^\d]/g, '')) || 0;
+}
+
 function showSummaryPopup() {
     let backdrop = document.querySelector(".summary-modal-backdrop");
     if (!backdrop) {
@@ -256,11 +265,21 @@ function updateHeaderPrice() {
     const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
     const priceElement = document.querySelector('.cart-amount');
     if (priceElement) {
+        let total = 0;
+        
+        // Sumar venue
         if (cart.selectedVenue) {
-            priceElement.textContent = cart.selectedVenue.price;
-        } else {
-            priceElement.textContent = 'COL$ 0';
+            total += parsePrice(cart.selectedVenue.price);
         }
+        
+        // Sumar opciones de ceremonia
+        if (cart.ceremony) {
+            Object.values(cart.ceremony).forEach(item => {
+                total += parsePrice(item.price);
+            });
+        }
+
+        priceElement.textContent = formatCurrency(total);
     }
 }
 

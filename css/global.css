@@ -3228,8 +3228,8 @@ section.feature .feature__subtitle {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    font-family: var(--font-sans);
-    font-weight: 500;
+    font-family: var(--font-primary);
+    font-weight: 600;
     flex-shrink: 0;
     cursor: pointer;
     transition: transform var(--transition-fast);
@@ -3745,4 +3745,79 @@ body.modal-open .venue-content {
 
 .modal-btn:hover {
     opacity: 0.85;
+}
+
+/* Selection Item Component */
+.selection-item {
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    border: 2px solid transparent;
+    margin: 0 auto var(--space-xl);
+    max-width: var(--container-max);
+    padding: 32px 48px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+}
+
+.selection-item:hover {
+    background-color: #f8f9fa;
+    border-color: var(--primary-light);
+}
+
+.selection-item.is-selected {
+    background-color: #f7feff;
+    border-color: var(--primary);
+    transform: scale(1.02);
+    margin-top: 40px !important;
+    margin-bottom: 40px !important;
+    box-shadow: var(--shadow-md);
+    z-index: 1;
+}
+
+.selection-item .row-characteristic__image {
+    flex: 0 0 500px !important;
+    height: 300px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selection-item .row-characteristic__image-frame {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.selection-status {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    background: var(--white);
+    margin-left: 20px;
+}
+
+.is-selected .selection-status {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.selection-status__icon {
+    width: 16px;
+    height: auto;
+    opacity: 0;
+    filter: brightness(0) invert(1);
+    transition: opacity var(--transition-fast);
+}
+
+.is-selected .selection-status__icon {
+    opacity: 1;
 }

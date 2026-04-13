@@ -26,6 +26,12 @@
         height: 400px;
     }
 
+    .selection-item .row-characteristic__image {
+        width: 100% !important;
+        height: 300px !important;
+        flex: none !important;
+    }
+
     .nuestras-bodas__image-container {
         height: 300px;
     }
@@ -184,7 +190,17 @@
 
     .row-characteristic__name,
     .row-characteristic__price {
-        font-size: 20px;
+        font-size: 18px;
+    }
+
+    .row-characteristic__feature-row {
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+
+    .row-characteristic__price {
+        flex: 1;
+        text-align: right;
     }
 
     .row-characteristic__description {
@@ -193,6 +209,12 @@
 
     .row-characteristic__image {
         height: 260px;
+    }
+
+    .selection-item .row-characteristic__image {
+        height: 220px !important;
+        width: 100% !important;
+        flex: none !important;
     }
 
     .next-button-bar {
