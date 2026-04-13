@@ -79,6 +79,26 @@ DETALLE_RESERVA: Tabla intermedia que vincula reservas con múltiples servicios,
 🧩 7. Documentación del Sistema
 Estructura de Carpetas
 /css
+1. Global CSS
+El archivo de estilos globales contiene toda la configuración base y general de la página web. En esta sección se definen aspectos como la tipografía, colores principales, márgenes, paddings, variables globales (:root), estilos para botones, encabezados, navegación, contenedores y demás componentes principales.
+Su objetivo es mantener una apariencia uniforme en todas las páginas del sitio y facilitar la reutilización de estilos.
+
+2. Media CSS (Responsive Design)
+Este archivo o sección está enfocado en la adaptabilidad de la página según el tamaño de la pantalla.
+Se utilizan media queries para modificar la distribución, tamaños de texto, imágenes, columnas y botones dependiendo del dispositivo.
+
+Se divide principalmente en:
+
+Tablet (max-width: 1024px): ajustes para pantallas medianas.
+Mobile (max-width: 768px): reorganización para celulares.
+Extra small mobile (max-width: 480px): optimización para pantallas pequeñas.
+
+Gracias a esto, la página puede visualizarse correctamente en computadores, tablets y teléfonos móviles.
+
+3. Archivo .gitkeep
+El archivo .gitkeep no corresponde a estilos visuales del proyecto.
+Su función es permitir que Git y GitHub conserven carpetas vacías dentro del repositorio, ya que por defecto Git no guarda directorios sin contenido.
+En este caso, puede encontrarse dentro de la carpeta css únicamente para asegurar que la carpeta exista en el repositorio, aunque no influye en el diseño ni en la funcionalidad de la página.
 /js
 /assets
 
