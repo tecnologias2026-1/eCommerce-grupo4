@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="132" height="32" viewBox="0 0 132 32" role="img" aria-labelledby="title desc">
+  <title id="title">Mercado Pago</title>
+  <desc id="desc">Insignia de texto para botón de pago</desc>
+  <rect x="0.5" y="0.5" width="131" height="31" rx="16" fill="#E8F4FF" stroke="#8AC5FF"/>
+  <text x="66" y="21" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#007EB5">Mercado Pago</text>
+</svg>

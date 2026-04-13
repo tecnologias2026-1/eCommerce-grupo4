@@ -104,6 +104,21 @@ function normalizeStylesheetLinks() {
     });
 }
 
+function normalizeImageSources(scopeElement) {
+    const rootPath = getProjectRootPath();
+    const scope = scopeElement || document;
+    const images = Array.from(scope.querySelectorAll('img[src^="/assets/"]'));
+
+    images.forEach((image) => {
+        const rawSrc = image.getAttribute("src") || "";
+        if (!rawSrc.startsWith("/assets/")) {
+            return;
+        }
+
+        image.setAttribute("src", `${rootPath}${rawSrc.slice(1)}`);
+    });
+}
+
 normalizeStylesheetLinks();
 
 // Función para cargar componentes
@@ -210,11 +225,13 @@ function updateFooterState() {
 
 // Llamada a las funciones
 document.addEventListener("DOMContentLoaded", () => {
-    cargarComponente("header-placeholder", getPublicPagePath("header.html")).then(() => {
+    cargarComponente("header-placeholder", getPublicPagePath("header.html")).then((target) => {
+        normalizeImageSources(target);
         updateHeaderState();
         updateHeaderPrice();
     });
-    cargarComponente("footer-placeholder", getPublicPagePath("footer.html")).then(() => {
+    cargarComponente("footer-placeholder", getPublicPagePath("footer.html")).then((target) => {
+        normalizeImageSources(target);
         updateFooterState();
     });
 });
