@@ -633,6 +633,16 @@ section.feature,
     top: 1%;
 }
 
+#btn-pay-mp .btn-pay-mp__logo-wrap {
+    width: 39px;
+    height: 96px;
+}
+
+#btn-pay-mp .btn-pay-mp__logo-wrap img {
+    left: 0;
+    top: 0;
+}
+
 .btn-continue-pay {
     padding: var(--space-sm) var(--space-3xl);
     height: 62.1px;

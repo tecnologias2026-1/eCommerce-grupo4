@@ -75,7 +75,7 @@
         <span class="summary-footer-note">Procesaremos tu pago por medio de Mercado Pago.</span>
         <a class="btn-pay-mp" id="btn-pay-mp" href="confirm.html" role="button">
             <span class="btn-pay-mp__logo-wrap">
-                <img src="../images/mercado-pago-badge.svg" alt="Mercado Pago">
+                <img src="../images/mercado-pago-badge.png" alt="Mercado Pago">
             </span>
             <span>Ir a pagar</span>
         </a>
@@ -138,7 +138,7 @@
                     if (!isComplete) {
                         e.preventDefault();
                         if (typeof showCustomAlert === 'function') {
-                            showCustomAlert('informacion incometa', 'llena los datos para continuar con el pago');
+                            showCustomAlert('informacion incompleta', 'llena los datos para continuar con el pago');
                         } else {
                             alert('informacion incometa. llena los datos para continuar con el pago');
                         }
