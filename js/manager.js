@@ -309,6 +309,13 @@ function updateHeaderPrice() {
             });
         }
 
+        // Sumar otros servicios
+        if (cart.others) {
+            Object.values(cart.others).forEach(item => {
+                total += parsePrice(item.price);
+            });
+        }
+
         priceElement.textContent = formatCurrency(total);
     }
 }

@@ -1,117 +1,104 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Otros servicios</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Spectral+SC:wght@600&family=Spectral:wght@600;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../../css/global.css">
-    
-    <link rel="stylesheet" href="../../css/media.css">
-    <script src="../../js/manager.js" defer></script>
-  </head>
-  <body>
-    <div id="header-placeholder"></div>
-    <main>
-    <section class="hero-selection" data-name="Hero selection" data-node-id="475:1122">
-      <div class="hero-selection__top" data-name="Container" data-node-id="684:6776">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Otros Servicios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Spectral+SC:wght@600&family=Spectral:wght@600;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/media.css">
+  <script src="../../js/manager.js" defer></script>
+</head>
+
+<body>
+  <div id="header-placeholder"></div>
+  <main>
+    <section class="hero-selection">
+      <div class="hero-selection__top">
         <a href="food.html" class="back-btn" aria-label="Atrás">
-          <img
-            alt=""
-            src="../images/atras.svg"
-            class="back-btn__icon"
-            aria-hidden="true"
-          />
+          <img alt="" src="../images/atras.svg" class="back-btn__icon" aria-hidden="true" />
         </a>
-        <h1 class="hero-selection__title" data-node-id="475:888">
-          Otros servicios
-        </h1>
-        <button class="hero-cart-btn" onclick="showSummaryPopup()" aria-label="Ver resumen">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5.48C21.05 5.17 21.13 4.84 21.13 4.5C21.13 3.4 20.23 2.5 19.13 2.5H5.21L4.27 0.5H1V2ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18Z" fill="currentColor"/>
-          </svg>
-        </button>
+        <h1 class="hero-selection__title">Servicios Adicionales</h1>
       </div>
-
-      <div class="feature-list" data-name="Feature list" data-node-id="475:1097">
-        <p class="feature-list__subtitle" data-node-id="I475:1097;475:2098">
-          Example title or instruction characteristic
-        </p>
-
-        <div class="features" data-name="Items" data-node-id="I475:1097;475:2107">
-          <div class="feature" data-name="Feature 1" data-node-id="I475:1097;475:2011">
-            <div class="checkmark" data-node-id="475:1959">
-              <img
-                alt=""
-                src="../images/checkmark.png"
-                aria-hidden="true"
-              />
-            </div>
-            <p class="feature__text" data-node-id="I475:1097;475:2013">
-              Example characteristic
-            </p>
-          </div>
-
-          <div class="feature" data-name="Feature 2" data-node-id="I475:1097;475:2040">
-            <div class="checkmark" data-node-id="475:1959">
-              <img
-                alt=""
-                src="../images/checkmark.png"
-                aria-hidden="true"
-              />
-            </div>
-            <p class="feature__text" data-node-id="I475:1097;475:2042">
-              Example characteristic
-            </p>
-          </div>
-
-          <div class="feature" data-name="Feature 3" data-node-id="I475:1097;475:2069">
-            <div class="checkmark" data-node-id="475:1959">
-              <img
-                alt=""
-                src="../images/checkmark.png"
-                aria-hidden="true"
-              />
-            </div>
-            <p class="feature__text" data-node-id="I475:1097;475:2071">
-              Example characteristic
-            </p>
-          </div>
-        </div>
-      </div>
+      <p class="feature-list__subtitle" style="text-align: center; width: 100%; margin-top: 24px;">
+        Personaliza cada detalle para que tu boda sea verdaderamente única.
+      </p>
     </section>
 
-    <section class="row-characteristic selection-item" data-id="musica" data-name="Música y DJ" data-price="1500000">
+    <!-- Item 1: Decoración Floral -->
+    <section class="row-characteristic selection-item" data-id="dec-floral" data-name="Decoración Floral" data-price="1800000">
       <div class="row-characteristic__text">
-        <h2 class="row-characteristic__title">Música y DJ</h2>
+        <h2 class="row-characteristic__title">Decoración Floral</h2>
         <div class="row-characteristic__feature-row">
-          <p class="row-characteristic__name">Servicio Premium</p>
+          <p class="row-characteristic__name">Arreglos Exclusivos</p>
           <div class="row-characteristic__price">
-            <p class="row-characteristic__price-main">COL$ 1.500.000</p>
+            <p class="row-characteristic__price-main">COL$ 1.800.000</p>
           </div>
           <div class="selection-status">
             <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
           </div>
         </div>
-        <p class="row-characteristic__description">
-          Sonido profesional, iluminación para la pista de baile y DJ experto en bodas.
-        </p>
+        <p class="row-characteristic__description">Diseños florales espectaculares para centros de mesa, entrada y rincones especiales, creados según tu paleta de colores.</p>
       </div>
       <div class="row-characteristic__image">
         <div class="row-characteristic__image-frame">
-          <img src="../images/o1.png" alt="Música" />
+          <img src="../images/o1.png" alt="Decoración Floral" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Item 2: Detalles Personalizados -->
+    <section class="row-characteristic selection-item" data-id="detalles-pers" data-name="Detalles Personalizados" data-price="950000">
+      <div class="row-characteristic__text">
+        <h2 class="row-characteristic__title">Detalles Personalizados</h2>
+        <div class="row-characteristic__feature-row">
+          <p class="row-characteristic__name">Papelería y Recuerdos</p>
+          <div class="row-characteristic__price">
+            <p class="row-characteristic__price-main">COL$ 950.000</p>
+          </div>
+          <div class="selection-status">
+            <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
+          </div>
+        </div>
+        <p class="row-characteristic__description">Invitaciones, menús impresos, recordatorios para invitados y señalización temática para tu evento.</p>
+      </div>
+      <div class="row-characteristic__image">
+        <div class="row-characteristic__image-frame">
+          <img src="../images/o2.png" alt="Detalles Personalizados" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Item 3: Ambientación -->
+    <section class="row-characteristic selection-item" data-id="ambientacion" data-name="Ambientación" data-price="1200000">
+      <div class="row-characteristic__text">
+        <h2 class="row-characteristic__title">Ambientación</h2>
+        <div class="row-characteristic__feature-row">
+          <p class="row-characteristic__name">Atmósfera Única</p>
+          <div class="row-characteristic__price">
+            <p class="row-characteristic__price-main">COL$ 1.200.000</p>
+          </div>
+          <div class="selection-status">
+            <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
+          </div>
+        </div>
+        <p class="row-characteristic__description">Iluminación decorativa, mobiliario lounge adicional y elementos de escenografía para transformar el espacio.</p>
+      </div>
+      <div class="row-characteristic__image">
+        <div class="row-characteristic__image-frame">
+          <img src="../images/o3.png" alt="Ambientación" />
         </div>
       </div>
     </section>
 
     <section class="next-button-bar">
       <a href="payment.html" class="btn-primary">
-        <span class="btn-primary__text">Continuar</span>
+        <span class="btn-primary__text">Continuar al Pago</span>
       </a>
     </section>
 
@@ -137,38 +124,22 @@
           if (!currentCart.others) currentCart.others = {};
 
           if (isSelected) {
-            const name = item.dataset.name;
             currentCart.others[item.dataset.id] = {
               id: item.dataset.id,
-              name: name,
+              name: item.dataset.name,
               price: item.querySelector('.row-characteristic__price-main').textContent
             };
-            showCustomAlert('¡ENHORABUENA!', `Has agregado "${name}" a tu boda.`);
-            
-            // Abrir el resumen automáticamente
-            setTimeout(() => {
-                showSummaryPopup();
-            }, 500);
           } else {
             delete currentCart.others[item.dataset.id];
           }
 
           localStorage.setItem('weddingCart', JSON.stringify(currentCart));
           window.postMessage({ type: 'CART_UPDATED' }, '*');
-
-          // Forzar actualización si el resumen ya está abierto
-          const summaryBackdrop = document.querySelector(".summary-modal-backdrop");
-          if (summaryBackdrop) {
-              const iframe = summaryBackdrop.querySelector('iframe');
-              if (iframe && iframe.contentWindow) {
-                  iframe.contentWindow.postMessage({ type: 'CART_UPDATED' }, '*');
-              }
-          }
         }
       });
     </script>
-    </main>
-    <div id="footer-placeholder"></div>
-  </body>
-</html>
+  </main>
+  <div id="footer-placeholder"></div>
+</body>
 
+</html>
