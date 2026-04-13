@@ -206,4 +206,70 @@ Es un archivo vacío que se usa únicamente para que Git pueda guardar carpetas 
 
 🚀 8. Instalación y Ejecución
 
-Explicar cómo correr el proyecto.
+Para correr este proyecto de manera local, sigue estos pasos:
+
+### 1. Clonar el repositorio
+Si tienes Git instalado, puedes clonar el proyecto con el siguiente comando:
+```bash
+git clone https://github.com/tu-usuario/eCommerce-grupo4.git
+```
+O simplemente descarga el código como un archivo ZIP y extráelo en tu computadora.
+
+### 2. Ejecutar un Servidor Local
+Este proyecto utiliza `fetch` para cargar componentes dinámicos (como el encabezado y el pie de página). Por seguridad de los navegadores (CORS), **no se puede abrir el archivo `index.html` directamente haciendo doble clic**. Es necesario usar un servidor local.
+
+Tienes varias opciones sencillas:
+
+*   **Opción A: VS Code (Recomendado)**
+    1. Abre la carpeta del proyecto en Visual Studio Code.
+    2. Instala la extensión **"Live Server"**.
+    3. Haz clic derecho sobre `index.html` y selecciona **"Open with Live Server"**.
+
+*   **Opción B: Python**
+    Si tienes Python instalado, abre una terminal en la carpeta del proyecto y ejecuta:
+    ```bash
+    python -m http.server 8000
+    ```
+    Luego abre [http://localhost:8000](http://localhost:8000) en tu navegador.
+
+*   **Opción C: Node.js (npx)**
+    Si tienes Node.js instalado, ejecuta:
+    ```bash
+    npx serve .
+    ```
+    Luego abre el enlace que te proporcione la terminal.
+
+### 3. ¡Listo!
+Una vez que el servidor esté corriendo, podrás navegar por la plataforma, seleccionar haciendas, configurar servicios y ver el presupuesto en tiempo real.
+
+📖 9. Guía de Navegación del Usuario
+
+Sigue estos pasos para planificar tu boda en la plataforma:
+
+1.  **Inicio y Autenticación:** 
+    Al ingresar (vía `index.html` o `auth.html`), podrás iniciar sesión para gestionar tus preferencias (si eres administrador). Si solo quieres explorar como usuario, puedes navegar a las secciones de inspiración.
+
+2.  **Selección de Fecha y Lugar:**
+    *   Dirígete a la sección de **Haciendas** (Lugares).
+    *   Utiliza el **Calendario Interactivo** para verificar la disponibilidad en la fecha que deseas tu evento.
+    *   Filtra y selecciona la hacienda que más te guste. Haz clic en el botón para agregarla a tu plan de boda.
+
+3.  **Configuración del Flujo de la Boda:**
+    Una vez seleccionado el lugar, la plataforma te guiará automáticamente por los siguientes pasos (visibles en la barra de navegación superior):
+    *   **Ceremonia:** Elige el tipo de altar y decoración.
+    *   **Recepción:** Selecciona el mobiliario y estilo de la fiesta.
+    *   **Comida:** Configura el menú y el número de invitados.
+    *   **Otros:** Agrega servicios adicionales (música, fotografía, etc.).
+
+4.  **Presupuesto en Tiempo Real:**
+    En todo momento, verás en la parte superior derecha (en el encabezado) el **Total Acumulado**. Este valor se actualiza instantáneamente cada vez que agregas o quitas un servicio.
+
+5.  **Resumen y Confirmación:**
+    *   Haz clic en el icono del **Carrito/Total** para abrir el resumen detallado de tu selección.
+    *   Verifica que todo esté correcto.
+    *   Procede a la sección de **Pago** para realizar el adelanto y asegurar tu reserva.
+
+6.  **Confirmación:**
+    Tras el pago, el sistema te mostrará una pantalla de confirmación con el resumen final y tu código de reserva.
+
+
