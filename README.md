@@ -199,9 +199,6 @@ Corresponde a la plantilla de las páginas de cada hacienda o venue disponible p
 3.18 wedings.html
 Corresponde a la plantilla de las páginas que muestran bodas ejemplares o de inspiración dentro del proyecto. En esta estructura se presenta la información principal de cada boda, como los nombres de la pareja, la fecha, el lugar donde se realizó, una imagen principal tipo banner y una galería de fotos con diferentes aspectos del evento, como la hacienda, la recepción, la comida y la decoración. Esta misma plantilla se reutiliza para todas las páginas de bodas de ejemplo, cambiando únicamente los nombres, fechas, ubicación e imágenes según cada caso.
 
-4. .gitkeep
-Es un archivo vacío que se usa únicamente para que Git pueda guardar carpetas vacías dentro del repositorio. Como Git no rastrea directorios sin contenido, se agrega este archivo para mantener la estructura de carpetas aunque aún no tengan archivos dentro. No afecta el funcionamiento del proyecto, solo sirve para conservar el orden y la organización de las carpetas en GitHub o Git.
-
 
 
 🚀 8. Instalación y Ejecución
