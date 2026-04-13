@@ -279,6 +279,13 @@ function updateHeaderPrice() {
             });
         }
 
+        // Sumar opciones de recepción
+        if (cart.reception) {
+            Object.values(cart.reception).forEach(item => {
+                total += parsePrice(item.price);
+            });
+        }
+
         priceElement.textContent = formatCurrency(total);
     }
 }
