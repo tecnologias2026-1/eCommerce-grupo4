@@ -3821,3 +3821,58 @@ body.modal-open .venue-content {
 .is-selected .selection-status__icon {
     opacity: 1;
 }
+
+/* Food Options Sub-menu */
+.food-sub-options {
+    margin-top: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--border);
+}
+
+.food-toggle {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-sm);
+}
+
+.food-toggle-btn {
+    padding: 6px 16px;
+    border: 1px solid var(--gray-border);
+    border-radius: 20px;
+    background: transparent;
+    font-family: var(--font-primary);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.food-toggle-btn.active {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+
+.food-quantity-wrap {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    background: #f0f0f0;
+    padding: 8px 16px;
+    border-radius: var(--radius);
+}
+
+.food-quantity-wrap label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.food-quantity-input {
+    width: 60px;
+    padding: 4px;
+    border: 1px solid var(--gray-border);
+    border-radius: 4px;
+    text-align: center;
+}

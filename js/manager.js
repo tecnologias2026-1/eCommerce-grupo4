@@ -286,6 +286,20 @@ function updateHeaderPrice() {
             });
         }
 
+        // Sumar opciones de comida
+        if (cart.food) {
+            const guestCount = parseInt(localStorage.getItem('selectedGuests')) || 0;
+            Object.values(cart.food).forEach(item => {
+                if (item.mode === 'add') {
+                    // Modo adición: precio unitario * cantidad de adiciones
+                    total += parsePrice(item.unitPrice) * (parseInt(item.quantity) || 1);
+                } else {
+                    // Modo completo: precio unitario * número total de invitados
+                    total += parsePrice(item.unitPrice) * guestCount;
+                }
+            });
+        }
+
         priceElement.textContent = formatCurrency(total);
     }
 }

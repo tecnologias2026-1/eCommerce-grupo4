@@ -1,130 +1,288 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alimentos</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Spectral+SC:wght@600&family=Spectral:wght@600;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../../css/global.css">
-    
-    <link rel="stylesheet" href="../../css/media.css">
-    <script src="../../js/manager.js" defer></script>
-  </head>
-  <body>
-    <div id="header-placeholder"></div>
-    <main>
-    <section class="hero-selection" data-name="Hero selection" data-node-id="475:1122">
-      <div class="hero-selection__top" data-name="Container" data-node-id="684:6776">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comida y Banquetes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Spectral+SC:wght@600&family=Spectral:wght@600;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/media.css">
+  <script src="../../js/manager.js" defer></script>
+</head>
+
+<body>
+  <div id="header-placeholder"></div>
+  <main>
+    <section class="hero-selection">
+      <div class="hero-selection__top">
         <a href="reception.html" class="back-btn" aria-label="Atrás">
-          <img
-            alt=""
-            src="../images/atras.svg"
-            class="back-btn__icon"
-            aria-hidden="true"
-          />
+          <img alt="" src="../images/atras.svg" class="back-btn__icon" aria-hidden="true" />
         </a>
-        <h1 class="hero-selection__title" data-node-id="475:888">
-          Alimentos
-        </h1>
+        <h1 class="hero-selection__title">Selecciona tu Menú</h1>
       </div>
+      <p class="feature-list__subtitle" style="text-align: center; width: 100%; margin-top: 24px;">
+        Descubre nuestras experiencias gastronómicas diseñadas para tu gran día.
+      </p>
+    </section>
 
-      <div class="feature-list" data-name="Feature list" data-node-id="475:1097">
-        <p class="feature-list__subtitle" data-node-id="I475:1097;475:2098">
-          Example title or instruction characteristic
-        </p>
-
-        <div class="features" data-name="Items" data-node-id="I475:1097;475:2107">
-          <div class="feature" data-name="Feature 1" data-node-id="I475:1097;475:2011">
-            <div class="checkmark" data-node-id="475:1959">
-              <img
-                alt=""
-                src="../images/checkmark.png"
-                aria-hidden="true"
-              />
-            </div>
-            <p class="feature__text" data-node-id="I475:1097;475:2013">
-              Example characteristic
-            </p>
+    <!-- Menu 1: Servido -->
+    <section class="row-characteristic selection-item food-item" data-id="menu-servido" data-name="Menú Servido" data-price="120000">
+      <div class="row-characteristic__text">
+        <h2 class="row-characteristic__title">Menú Servido</h2>
+        <div class="row-characteristic__feature-row">
+          <p class="row-characteristic__name">Clásico a la mesa</p>
+          <div class="row-characteristic__price">
+            <p class="row-characteristic__price-main">COL$ 120.000</p>
+            <p class="row-characteristic__price-sub">Por persona</p>
           </div>
-
-          <div class="feature" data-name="Feature 2" data-node-id="I475:1097;475:2040">
-            <div class="checkmark" data-node-id="475:1959">
-              <img
-                alt=""
-                src="../images/checkmark.png"
-                aria-hidden="true"
-              />
-            </div>
-            <p class="feature__text" data-node-id="I475:1097;475:2042">
-              Example characteristic
-            </p>
+          <div class="selection-status">
+            <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
           </div>
-
-          <div class="feature" data-name="Feature 3" data-node-id="I475:1097;475:2069">
-            <div class="checkmark" data-node-id="475:1959">
-              <img
-                alt=""
-                src="../images/checkmark.png"
-                aria-hidden="true"
-              />
-            </div>
-            <p class="feature__text" data-node-id="I475:1097;475:2071">
-              Example characteristic
-            </p>
-          </div>
+        </div>
+        <p class="row-characteristic__description">Entrada, plato fuerte y postre servidos directamente a tus invitados con la mejor atención.</p>
+      </div>
+      <div class="row-characteristic__image">
+        <div class="row-characteristic__image-frame">
+          <img src="../images/f1.png" alt="Menú Servido" />
         </div>
       </div>
     </section>
 
-    <section class="row-characteristic" data-name="Row characteristic" data-node-id="475:1437">
-      <div class="row-characteristic__text" data-name="Text" data-node-id="475:1124">
-        <h2 class="row-characteristic__title" data-node-id="475:1125">Example title characteristic</h2>
-
-        <div class="row-characteristic__feature-row" data-name="Feature 1" data-node-id="475:1126">
-          <p class="row-characteristic__name" data-node-id="475:1127">Name characteristic</p>
-
-          <div class="row-characteristic__price" data-node-id="475:1128">
-            <p class="row-characteristic__price-main" data-node-id="475:1128">COL$ 250.000</p>
-            <p class="row-characteristic__price-sub" data-node-id="475:1128">x/un.</p>
+    <!-- Menu 2: Gourmet -->
+    <section class="row-characteristic selection-item food-item" data-id="menu-gourmet" data-name="Menú Gourmet" data-price="180000">
+      <div class="row-characteristic__text">
+        <h2 class="row-characteristic__title">Menú Gourmet</h2>
+        <div class="row-characteristic__feature-row">
+          <p class="row-characteristic__name">Experiencia Premium</p>
+          <div class="row-characteristic__price">
+            <p class="row-characteristic__price-main">COL$ 180.000</p>
+            <p class="row-characteristic__price-sub">Por persona</p>
           </div>
-
-          <button class="row-characteristic__checkbox" type="button" aria-label="Seleccionar característica" data-node-id="424:1337">
-            <img
-              alt=""
-              src="../images/checkbox.png"
-              aria-hidden="true"
-            />
-          </button>
+          <div class="selection-status">
+            <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
+          </div>
         </div>
-
-        <p class="row-characteristic__description" data-node-id="475:1131">
-          Aquí vamos a incluir una descripción del producto.
-        </p>
+        <p class="row-characteristic__description">Platos de autor con ingredientes de alta gama y una presentación artística inolvidable.</p>
       </div>
-
-      <div class="row-characteristic__image" data-name="Image" data-node-id="475:1183">
-        <div class="row-characteristic__image-frame" aria-hidden="true" data-node-id="I475:1183;356:17030" role="presentation">
-          <img
-            alt=""
-            src="https://www.figma.com/api/mcp/asset/fe777b8e-9387-46fd-9245-7daaa74ca04a"
-            data-node-id="I475:1183;356:17030"
-          />
+      <div class="row-characteristic__image">
+        <div class="row-characteristic__image-frame">
+          <img src="../images/f2.png" alt="Menú Gourmet" />
         </div>
       </div>
     </section>
 
-    <section class="next-button-bar" data-name="boton siguiente" data-node-id="497:10673">
-      <a href="others.html" class="btn-primary" data-name="Button" data-node-id="356:17005">
-        <span class="btn-primary__text" data-node-id="356:17004">Continuar</span>
+    <!-- Menu 3: Campestre -->
+    <section class="row-characteristic selection-item food-item" data-id="menu-campestre" data-name="Menú Campestre" data-price="140000">
+      <div class="row-characteristic__text">
+        <h2 class="row-characteristic__title">Menú Campestre</h2>
+        <div class="row-characteristic__feature-row">
+          <p class="row-characteristic__name">Sabor Tradicional</p>
+          <div class="row-characteristic__price">
+            <p class="row-characteristic__price-main">COL$ 140.000</p>
+            <p class="row-characteristic__price-sub">Por persona</p>
+          </div>
+          <div class="selection-status">
+            <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
+          </div>
+        </div>
+        <p class="row-characteristic__description">Asados premium y acompañamientos rústicos servidos en un ambiente relajado y cálido.</p>
+      </div>
+      <div class="row-characteristic__image">
+        <div class="row-characteristic__image-frame">
+          <img src="../images/f3.png" alt="Menú Campestre" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu 4: Vegetariano -->
+    <section class="row-characteristic selection-item food-item" data-id="menu-vegetariano" data-name="Menú Vegetariano" data-price-full="135000" data-price-add="45000">
+      <div class="row-characteristic__text">
+        <h2 class="row-characteristic__title">Menú Vegetariano</h2>
+        <div class="row-characteristic__feature-row">
+          <p class="row-characteristic__name">Opción Saludable</p>
+          <div class="row-characteristic__price">
+            <p class="row-characteristic__price-main">COL$ 135.000</p>
+            <p class="row-characteristic__price-sub">Por plato</p>
+          </div>
+          <div class="selection-status">
+            <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
+          </div>
+        </div>
+        <p class="row-characteristic__description">Increíbles creaciones a base de plantas para deleitar a todos tus invitados.</p>
+        
+        <!-- Sub-opciones -->
+        <div class="food-sub-options" onclick="event.stopPropagation()">
+          <div class="food-toggle">
+            <button class="food-toggle-btn active" data-type="full">Completo</button>
+            <button class="food-toggle-btn" data-type="add">Adiciones</button>
+          </div>
+          <div class="food-quantity-wrap" style="display: none;">
+            <label>Cantidad de adiciones:</label>
+            <input type="number" class="food-quantity-input" value="1" min="1">
+          </div>
+        </div>
+      </div>
+      <div class="row-characteristic__image">
+        <div class="row-characteristic__image-frame">
+          <img src="../images/f4.png" alt="Menú Vegetariano" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu 5: Infantil -->
+    <section class="row-characteristic selection-item food-item" data-id="menu-infantil" data-name="Menú Infantil" data-price-full="65000" data-price-add="25000">
+      <div class="row-characteristic__text">
+        <h2 class="row-characteristic__title">Menú Infantil</h2>
+        <div class="row-characteristic__feature-row">
+          <p class="row-characteristic__name">Para los más pequeños</p>
+          <div class="row-characteristic__price">
+            <p class="row-characteristic__price-main">COL$ 65.000</p>
+            <p class="row-characteristic__price-sub">Por niño</p>
+          </div>
+          <div class="selection-status">
+            <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
+          </div>
+        </div>
+        <p class="row-characteristic__description">Opciones nutritivas y divertidas que a los niños les encantarán.</p>
+        
+        <!-- Sub-opciones -->
+        <div class="food-sub-options" onclick="event.stopPropagation()">
+          <div class="food-toggle">
+            <button class="food-toggle-btn active" data-type="full">Completo</button>
+            <button class="food-toggle-btn" data-type="add">Adiciones</button>
+          </div>
+          <div class="food-quantity-wrap" style="display: none;">
+            <label>Cantidad de adiciones:</label>
+            <input type="number" class="food-quantity-input" value="1" min="1">
+          </div>
+        </div>
+      </div>
+      <div class="row-characteristic__image">
+        <div class="row-characteristic__image-frame">
+          <img src="../images/f5.png" alt="Menú Infantil" />
+        </div>
+      </div>
+    </section>
+
+    <section class="next-button-bar">
+      <a href="others.html" class="btn-primary">
+        <span class="btn-primary__text">Continuar</span>
       </a>
     </section>
-    </main>
-    <div id="footer-placeholder"></div>
-  </body>
-</html>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const foodItems = document.querySelectorAll('.food-item');
+        const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+        const foodCart = cart.food || {};
+
+        foodItems.forEach(item => {
+          const itemId = item.dataset.id;
+          const subOptions = item.querySelector('.food-sub-options');
+          
+          // Restaurar estado
+          if (foodCart[itemId]) {
+            item.classList.add('is-selected');
+            if (subOptions) {
+              const config = foodCart[itemId];
+              const qWrap = subOptions.querySelector('.food-quantity-wrap');
+              const btns = subOptions.querySelectorAll('.food-toggle-btn');
+              
+              if (config.mode === 'add') {
+                btns[0].classList.remove('active');
+                btns[1].classList.add('active');
+                qWrap.style.display = 'flex';
+                qWrap.querySelector('input').value = config.quantity;
+                item.querySelector('.row-characteristic__price-main').textContent = `COL$ ${parseInt(item.dataset.priceAdd).toLocaleString()}`;
+              }
+            }
+          }
+
+          item.addEventListener('click', () => {
+            const isSelected = item.classList.toggle('is-selected');
+            saveAndNotify();
+          });
+
+          if (subOptions) {
+            const btns = subOptions.querySelectorAll('.food-toggle-btn');
+            const qWrap = subOptions.querySelector('.food-quantity-wrap');
+            const qInput = subOptions.querySelector('.food-quantity-input');
+
+            btns.forEach(btn => {
+              btn.addEventListener('click', () => {
+                btns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const mode = btn.dataset.type;
+                if (mode === 'add') {
+                  qWrap.style.display = 'flex';
+                  item.querySelector('.row-characteristic__price-main').textContent = `COL$ ${parseInt(item.dataset.priceAdd).toLocaleString()}`;
+                } else {
+                  qWrap.style.display = 'none';
+                  item.querySelector('.row-characteristic__price-main').textContent = `COL$ ${parseInt(item.dataset.priceFull).toLocaleString()}`;
+                }
+                
+                if (item.classList.contains('is-selected')) {
+                  saveAndNotify();
+                }
+              });
+            });
+
+            qInput.addEventListener('change', () => {
+              if (item.classList.contains('is-selected')) {
+                saveAndNotify();
+              }
+            });
+            qInput.addEventListener('input', () => {
+              if (item.classList.contains('is-selected')) {
+                saveAndNotify();
+              }
+            });
+          }
+        });
+
+        function saveAndNotify() {
+          const currentCart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+          currentCart.food = {};
+
+          document.querySelectorAll('.food-item.is-selected').forEach(item => {
+            const id = item.dataset.id;
+            const subOptions = item.querySelector('.food-sub-options');
+            let mode = 'full';
+            let quantity = 1;
+            let finalPrice = item.dataset.price || item.dataset.priceFull;
+
+            if (subOptions) {
+              const activeBtn = subOptions.querySelector('.food-toggle-btn.active');
+              mode = activeBtn.dataset.type;
+              if (mode === 'add') {
+                quantity = parseInt(subOptions.querySelector('.food-quantity-input').value) || 1;
+                finalPrice = item.dataset.priceAdd;
+              }
+            }
+
+            currentCart.food[id] = {
+              id,
+              name: item.dataset.name,
+              mode,
+              quantity,
+              unitPrice: finalPrice,
+              totalPrice: parseInt(finalPrice) * quantity
+            };
+          });
+
+          localStorage.setItem('weddingCart', JSON.stringify(currentCart));
+          window.postMessage({ type: 'CART_UPDATED' }, '*');
+        }
+      });
+    </script>
+  </main>
+  <div id="footer-placeholder"></div>
+</body>
+
+</html>
