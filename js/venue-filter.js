@@ -33,7 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (guestInput) {
         guestInput.addEventListener('input', () => {
-            localStorage.setItem('selectedGuests', guestInput.value);
+            if (typeof CookieConsent === 'undefined' || CookieConsent.hasConsent()) {
+                localStorage.setItem('selectedGuests', guestInput.value);
+            }
             updateVenueVisibility();
         });
     }

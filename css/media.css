@@ -763,4 +763,25 @@
     .venue-options-selector__input {
         font-size: 20px;
     }
+
+    .cookie-consent-modal {
+        padding: var(--space-2xl) var(--space-xl);
+    }
+
+    .cookie-consent-modal__title {
+        font-size: 24px;
+    }
+
+    .cookie-consent-modal__text {
+        font-size: 16px;
+    }
+
+    .cookie-consent-modal__actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cookie-consent-modal__btn {
+        width: 100%;
+    }
 }

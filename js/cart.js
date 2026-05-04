@@ -16,6 +16,7 @@ function addToCart(venueData) {
 
     // Save the selected venue
     currentCart.selectedVenue = venueData;
+    if (typeof CookieConsent !== 'undefined' && !CookieConsent.hasConsent()) return;
     localStorage.setItem('weddingCart', JSON.stringify(currentCart));
 
     showCustomAlert('¡ENHORABUENA!', 'Lugar añadido al carrito con éxito. Puedes verlo en el resumen de tu boda.');
@@ -102,6 +103,7 @@ function removeFromCart(category) {
     const currentCart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
     if (currentCart[category]) {
         delete currentCart[category];
+        if (typeof CookieConsent !== 'undefined' && !CookieConsent.hasConsent()) return false;
         localStorage.setItem('weddingCart', JSON.stringify(currentCart));
         return true;
     }

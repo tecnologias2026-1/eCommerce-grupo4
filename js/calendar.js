@@ -81,8 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedDateInfo.classList.remove('selected-date-info--hidden');
         displayDate.innerText = dateStr;
         
-        localStorage.setItem('selectedWeddingDate', selectedDate);
-        
+        if (typeof CookieConsent === 'undefined' || CookieConsent.hasConsent()) {
+            localStorage.setItem('selectedWeddingDate', selectedDate);
+        }
+
         // Trigger global filter
         window.dispatchEvent(new CustomEvent('weddingDateChanged', { detail: { date: selectedDate, venueBookedDates } }));
     }
