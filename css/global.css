@@ -1950,11 +1950,13 @@ section.feature .feature__subtitle {
     border: 1px solid #dfdfdf;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    padding: var(--section-space) var(--content-inline-space) var(--space-md);
-    position: relative;
+    align-items: center;
+    padding: var(--space-md) var(--content-inline-space);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px -4px 8px rgba(0, 0, 0, 0.1);
-    gap: 48px;
+    gap: 24px;
 }
 
 .venue-options-selector__details {
@@ -1968,7 +1970,7 @@ section.feature .feature__subtitle {
     margin: 0;
     font-family: var(--font-secondary);
     font-weight: 600;
-    font-size: 48px;
+    font-size: 28px;
     line-height: 1.1;
     color: var(--black);
     letter-spacing: var(--title-letter-spacing);
@@ -1979,8 +1981,8 @@ section.feature .feature__subtitle {
     background: var(--white);
     border: 0.5px solid var(--gray-border);
     border-radius: 7px;
-    padding: 12px 16px;
-    height: 76px;
+    padding: 8px 16px;
+    height: 56px;
     width: 220px;
     min-width: 220px;
     display: flex;
@@ -2000,12 +2002,12 @@ section.feature .feature__subtitle {
     background: transparent;
     font-family: var(--font-primary);
     font-weight: 600;
-    font-size: 24px;
+    font-size: 20px;
     color: var(--black);
     width: 100%;
     outline: none;
     padding: 0;
-    margin-top: 4px;
+    margin-top: 2px;
 }
 
 .venue-options-selector__input::-webkit-inner-spin-button,
@@ -2090,7 +2092,7 @@ section.feature .feature__subtitle {
 .venue-card:hover {
     transform: scale(1.03);
     box-shadow: var(--shadow-lg);
-    z-index: 10;
+    z-index: 1001;
 }
 
 .venue-card--selected {
@@ -2144,16 +2146,6 @@ section.feature .feature__subtitle {
     margin-top: auto;
     text-decoration: none;
     width: 100%;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: opacity var(--transition-normal), transform var(--transition-normal), visibility var(--transition-normal);
-}
-
-.venue-card:hover .venue-card__more-btn {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
 }
 
 .venue-gallery__actions {
@@ -3111,7 +3103,8 @@ section.feature .feature__subtitle {
     text-align: right;
 }
 
-.calendar-nav__year-select {
+.calendar-nav__year-select,
+.calendar-nav__month-select {
     padding: 6px 12px;
     border-radius: var(--radius);
     border: 1px solid #ddd;
@@ -3124,7 +3117,8 @@ section.feature .feature__subtitle {
     transition: border-color var(--transition-fast);
 }
 
-.calendar-nav__year-select:hover {
+.calendar-nav__year-select:hover,
+.calendar-nav__month-select:hover {
     border-color: var(--primary);
 }
 
@@ -3215,19 +3209,63 @@ section.feature .feature__subtitle {
 /* ================================================
    5. UTILITIES - Helper Classes
    ================================================ */
+#header-placeholder {
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    width: 100%;
+}
+
 .header {
     background: var(--white);
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--space-xl) var(--space-3xl);
-    height: 117px;
-    position: relative;
+    padding: var(--space-md) var(--space-3xl);
+    height: auto;
+    min-height: 90px;
     width: 100%;
     max-width: none;
     margin: 0;
     box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.guest-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gray-light);
+    border: 1px solid var(--gray-border);
+    border-radius: 7px;
+    padding: 8px 16px;
+    height: 56px;
+}
+
+.guest-selector label {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--black);
+}
+
+.guest-selector input {
+    border: none;
+    background: transparent;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--black);
+    width: 60px;
+    outline: none;
+    text-align: center;
 }
 
 .logo {
@@ -4032,4 +4070,121 @@ body.modal-open .venue-content {
     background: var(--gray-light);
     color: var(--black);
     transform: translateY(-2px);
+}
+
+/* Venue iframe modal */
+.venue-iframe-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+}
+
+.venue-iframe-modal.show {
+    display: flex;
+}
+
+.venue-iframe-modal__content {
+    background: var(--white);
+    width: 90%;
+    max-width: 1200px;
+    height: 90%;
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.venue-iframe-modal__close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    color: var(--black);
+    cursor: pointer;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.venue-iframe-modal__iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Hide elements when in popup mode */
+body.is-popup #header-placeholder,
+body.is-popup #footer-placeholder,
+body.is-popup .back-btn {
+    display: none !important;
+}
+
+/* Venue Gallery Slider */
+.venue-gallery-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin: var(--space-xl) 0;
+}
+
+.venue-gallery-wrapper .venue-features-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: hidden !important;
+    scroll-behavior: smooth;
+    gap: 0 !important;
+}
+
+.venue-gallery-wrapper .venue-feature-card {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.venue-gallery-wrapper .venue-feature-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.venue-gallery-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    font-size: 24px;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background 0.3s ease;
+}
+
+.venue-gallery-btn:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
+.venue-gallery-btn.prev-btn {
+    left: 10px;
+}
+
+.venue-gallery-btn.next-btn {
+    right: 10px;
 }

@@ -1,44 +1,54 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const guestInput = document.getElementById('guest-count');
     const venueCards = document.querySelectorAll('.venue-card');
     
     let activeBookingDate = localStorage.getItem('selectedWeddingDate') || null;
     let bookedData = {};
 
     function updateVenueVisibility() {
-        const countValue = parseInt(guestInput.value) || 0;
-        
         venueCards.forEach(card => {
-            const venueName = card.querySelector('.venue-card__title').textContent.trim();
-            const venueGuests = parseInt(card.getAttribute('data-guests')) || 0;
-            
-            // 1. Capacity filter (Original)
-            const matchesCapacity = (venueGuests * 1.5 >= countValue);
-            
-            // 2. Availability filter (New)
-            let isAvailable = true;
-            if (activeBookingDate && bookedData[venueName]) {
-                if (bookedData[venueName].includes(activeBookingDate)) {
-                    isAvailable = false;
-                }
-            }
-            
-            if (matchesCapacity && isAvailable) {
-                card.style.display = 'flex';
-            } else {
-                card.style.display = 'none';
-            }
+            // Force all cards to be visible regardless of date or guests
+            card.style.display = 'flex';
         });
+    }
+    function updateCartForCard(card) {
+        const currentCart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+        
+        const titleEl = card.querySelector('.venue-card__title');
+        const priceEl = card.querySelector('.venue-card__price');
+        const imgEl = card.querySelector('img');
+        
+        const baseGuestsNum = parseInt(card.getAttribute('data-guests')) || 100;
+        const basePriceStr = priceEl ? priceEl.textContent.replace(/[^\d]/g, '') : '0';
+        const basePriceNum = parseInt(basePriceStr) || 0;
+        
+        const guestsSelection = localStorage.getItem('selectedGuests');
+        const selectedGuests = (guestsSelection && parseInt(guestsSelection) > 0) ? parseInt(guestsSelection) : baseGuestsNum;
+        
+        const pricePerGuest = basePriceNum / baseGuestsNum;
+        const total = pricePerGuest * selectedGuests;
+        const totalFormatted = 'COL$ ' + Math.round(total).toLocaleString('es-CO');
+        
+        currentCart.selectedVenue = {
+            name: titleEl ? titleEl.textContent.trim() : 'Venue',
+            guests: `${selectedGuests} invitados`,
+            price: totalFormatted,
+            image: imgEl ? imgEl.getAttribute('src') : ''
+        };
+        
+        localStorage.setItem('weddingCart', JSON.stringify(currentCart));
+        if (typeof updateHeaderPrice === 'function') {
+            updateHeaderPrice();
+        }
     }
 
-    if (guestInput) {
-        guestInput.addEventListener('input', () => {
-            if (typeof CookieConsent === 'undefined' || CookieConsent.hasConsent()) {
-                localStorage.setItem('selectedGuests', guestInput.value);
-            }
-            updateVenueVisibility();
-        });
-    }
+    window.addEventListener('guestsChanged', () => {
+        updateVenueVisibility();
+        
+        const selectedCard = document.querySelector('.venue-card--selected');
+        if (selectedCard) {
+            updateCartForCard(selectedCard);
+        }
+    });
 
     // New: Listen for Date Selection from calendar.js
     window.addEventListener('weddingDateChanged', (e) => {
@@ -47,27 +57,41 @@ document.addEventListener('DOMContentLoaded', () => {
         updateVenueVisibility();
     });
 
-    // Load initial value from localStorage if exists
-    const storedGuests = localStorage.getItem('selectedGuests');
-    if (storedGuests && guestInput) {
-        guestInput.value = storedGuests;
-    }
-    
     // Final check for visibility
     updateVenueVisibility();
+    
+    // Restore selection state from cart
+    const initialCart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+    if (initialCart.selectedVenue) {
+        const selectedName = initialCart.selectedVenue.name;
+        venueCards.forEach(card => {
+            const titleEl = card.querySelector('.venue-card__title');
+            if (titleEl && titleEl.textContent.trim() === selectedName) {
+                card.classList.add('venue-card--selected');
+            }
+        });
+    }
 
-    // Handle Selection on Card Click (Image or Text Box)
+    // Handle Selection on Card Click
     venueCards.forEach(card => {
         card.addEventListener('click', (e) => {
-            // ... (Selection logic remains mostly same)
             if (e.target.closest('.venue-card__more-btn')) return;
             e.preventDefault();
             e.stopPropagation();
             
             const isSelected = card.classList.contains('venue-card--selected');
             venueCards.forEach(c => c.classList.remove('venue-card--selected'));
+            
             if (!isSelected) {
                 card.classList.add('venue-card--selected');
+                updateCartForCard(card);
+            } else {
+                const currentCart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+                delete currentCart.selectedVenue;
+                localStorage.setItem('weddingCart', JSON.stringify(currentCart));
+                if (typeof updateHeaderPrice === 'function') {
+                    updateHeaderPrice();
+                }
             }
         });
     });

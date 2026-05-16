@@ -225,16 +225,97 @@ function updateFooterState() {
 
 // Llamada a las funciones
 document.addEventListener("DOMContentLoaded", () => {
+    if (window.location.search.includes('popup=true')) {
+        document.body.classList.add('is-popup');
+    }
+    
+    initVenueGalleries();
+
     cargarComponente("header-placeholder", getPublicPagePath("header.html")).then((target) => {
         normalizeImageSources(target);
         updateHeaderState();
         updateHeaderPrice();
+        initGlobalGuestSelector();
     });
     cargarComponente("footer-placeholder", getPublicPagePath("footer.html")).then((target) => {
         normalizeImageSources(target);
         updateFooterState();
     });
 });
+
+function initGlobalGuestSelector() {
+    const globalGuestInput = document.getElementById('global-guest-count');
+    if (!globalGuestInput) return;
+
+    // Load initial value
+    const storedGuests = localStorage.getItem('selectedGuests');
+    if (storedGuests) {
+        globalGuestInput.value = storedGuests;
+    }
+
+    globalGuestInput.addEventListener('input', () => {
+        if (typeof CookieConsent === 'undefined' || CookieConsent.hasConsent()) {
+            localStorage.setItem('selectedGuests', globalGuestInput.value);
+        }
+        updateHeaderPrice();
+        // Dispatch event for local scripts to react (like venue-filter.js)
+        window.dispatchEvent(new CustomEvent('guestsChanged'));
+    });
+}
+
+function initVenueGalleries() {
+    const grids = document.querySelectorAll('.venue-features-grid');
+    grids.forEach(grid => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'venue-gallery-wrapper';
+        
+        grid.parentNode.insertBefore(wrapper, grid);
+        wrapper.appendChild(grid);
+        
+        const prevBtn = document.createElement('button');
+        prevBtn.innerHTML = '&#10094;';
+        prevBtn.className = 'venue-gallery-btn prev-btn';
+        
+        const nextBtn = document.createElement('button');
+        nextBtn.innerHTML = '&#10095;';
+        nextBtn.className = 'venue-gallery-btn next-btn';
+        
+        wrapper.appendChild(prevBtn);
+        wrapper.appendChild(nextBtn);
+        
+        let currentIndex = 0;
+        const cards = Array.from(grid.children);
+        
+        function updateScroll() {
+            grid.scrollTo({
+                left: currentIndex * grid.clientWidth,
+                behavior: 'smooth'
+            });
+        }
+        
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = cards.length - 1;
+            }
+            updateScroll();
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < cards.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateScroll();
+        });
+        
+        window.addEventListener('resize', () => {
+            grid.scrollTo({ left: currentIndex * grid.clientWidth, behavior: 'instant' });
+        });
+    });
+}
 
 function formatCurrency(amount) {
     return 'COL$ ' + amount.toLocaleString('es-CO');

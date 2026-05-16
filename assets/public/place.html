@@ -30,16 +30,6 @@
         </div>
     </section>
 
-    <header class="venue-options-selector" data-name="Header venueoption" data-node-id="506:2349">
-        <div class="venue-options-selector__details">
-            <h2 class="venue-options-selector__title">numero de invitados</h2>
-        </div>
-        <div class="venue-options-selector__field">
-            <label for="guest-count" class="venue-options-selector__label">Invitados:</label>
-            <input type="number" id="guest-count" class="venue-options-selector__input" min="0" placeholder="0">
-        </div>
-    </header>
-
     <!-- Calendar Section (New Feature) -->
     <section class="reservation-calendar">
         <header class="reservation-calendar__header">
@@ -52,7 +42,20 @@
             <div class="calendar-nav">
                 <button id="prev-month" class="calendar-nav__btn" aria-label="Mes anterior">&lt;</button>
                 <div class="calendar-nav__display">
-                    <span id="current-month" class="calendar-nav__month">Abril</span>
+                    <select id="calendar-month-selector" class="calendar-nav__month-select">
+                        <option value="0">Enero</option>
+                        <option value="1">Febrero</option>
+                        <option value="2">Marzo</option>
+                        <option value="3">Abril</option>
+                        <option value="4">Mayo</option>
+                        <option value="5">Junio</option>
+                        <option value="6">Julio</option>
+                        <option value="7">Agosto</option>
+                        <option value="8">Septiembre</option>
+                        <option value="9">Octubre</option>
+                        <option value="10">Noviembre</option>
+                        <option value="11">Diciembre</option>
+                    </select>
                     <select id="calendar-year-selector" class="calendar-nav__year-select">
                         <option value="2026">2026</option>
                         <option value="2027">2027</option>
@@ -184,20 +187,57 @@
     </section>
     </main>
 
+    <!-- Venue iframe Modal -->
+    <div id="venue-modal" class="venue-iframe-modal">
+        <div class="venue-iframe-modal__content">
+            <button id="venue-modal-close" class="venue-iframe-modal__close">&times;</button>
+            <iframe id="venue-modal-iframe" class="venue-iframe-modal__iframe" src=""></iframe>
+        </div>
+    </div>
+
     <script src="../../js/cart.js"></script>
     <script src="../../js/calendar.js"></script>
     <script src="../../js/venue-filter.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const moreBtns = document.querySelectorAll('.venue-card__more-btn');
+            const modal = document.getElementById('venue-modal');
+            const iframe = document.getElementById('venue-modal-iframe');
+            const closeBtn = document.getElementById('venue-modal-close');
+
             moreBtns.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const selectedDate = localStorage.getItem('selectedWeddingDate');
                     if (!selectedDate) {
                         e.preventDefault();
                         showCustomAlert('CONFIRMAR DISPONIBILIDAD', 'Para confirmar disponibilidad debe seleccionar la fecha aproximada de la boda en el calendario.');
+                        return;
+                    }
+                    
+                    e.preventDefault();
+                    let href = btn.getAttribute('href');
+                    if (href) {
+                        if (href.includes('?')) {
+                            href += '&popup=true';
+                        } else {
+                            href += '?popup=true';
+                        }
+                        iframe.src = href;
+                        modal.classList.add('show');
                     }
                 });
+            });
+
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('show');
+                iframe.src = '';
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                    iframe.src = '';
+                }
             });
         });
     </script>

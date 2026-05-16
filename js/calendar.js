@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const calendarDays = document.getElementById('calendar-days');
     const calendarYearSelector = document.getElementById('calendar-year-selector');
-    const currentMonthText = document.getElementById('current-month');
+    const calendarMonthSelector = document.getElementById('calendar-month-selector');
     const prevMonthBtn = document.getElementById('prev-month');
     const nextMonthBtn = document.getElementById('next-month');
     const selectedDateInfo = document.getElementById('selected-date-info');
@@ -10,6 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     calendarYearSelector.addEventListener('change', () => {
         currentDate.setFullYear(parseInt(calendarYearSelector.value));
+        renderCalendar();
+    });
+
+    calendarMonthSelector.addEventListener('change', () => {
+        currentDate.setMonth(parseInt(calendarMonthSelector.value));
         renderCalendar();
     });
 
@@ -36,9 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstDay = new Date(year, month, 1).getDay();
         const daysInMonth = new Date(year, month + 1, 0).getDate();
         
-        const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-        currentMonthText.innerText = monthNames[month];
-        calendarYearSelector.value = year;
+        if (calendarMonthSelector) {
+            calendarMonthSelector.value = month;
+        }
+        if (calendarYearSelector) {
+            calendarYearSelector.value = year;
+        }
 
         // Add empty cells
         for (let i = 0; i < firstDay; i++) {
