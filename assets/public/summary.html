@@ -111,7 +111,7 @@
                         </div>
                     </div>
                     <div class="summary-image-box">
-                        <img src="../../${venue.image}" alt="${venue.name}" class="summary-image-box__img">
+                        <img src="${venue.image}" alt="${venue.name}" class="summary-image-box__img">
                     </div>
                 `;
                 summaryContainer.appendChild(section);
@@ -129,8 +129,15 @@
                         itemsHtml += `
                             <div class="summary-item">
                                 <div class="summary-checkmark">${checkIcon}</div>
-                                <p class="summary-item__text">${item.name} - ${item.price}</p>
+                                <div class="summary-item__content">
+                                    <p class="summary-item__text">${item.name}</p>
+                                    <p class="summary-item__subtext">${item.price}</p>
+                                </div>
                             </div>
+                            ${item.image ? `
+                            <div class="summary-image-box" style="margin-top: 8px;">
+                                <img src="${item.image}" alt="${item.name}" class="summary-image-box__img">
+                            </div>` : ''}
                         `;
                     });
 
@@ -176,6 +183,10 @@
                                 <p class="summary-item__subtext">${detailLine} - COL$ ${itemTotal.toLocaleString('es-CO')}</p>
                             </div>
                         </div>
+                        ${item.image ? `
+                        <div class="summary-image-box" style="margin-top: 8px;">
+                            <img src="${item.image}" alt="${item.name}" class="summary-image-box__img">
+                        </div>` : ''}
                     `;
                 });
 

@@ -128,7 +128,8 @@
             currentCart.others[item.dataset.id] = {
               id: item.dataset.id,
               name: item.dataset.name,
-              price: item.querySelector('.row-characteristic__price-main').textContent
+              price: item.querySelector('.row-characteristic__price-main').textContent,
+              image: item.querySelector('.row-characteristic__image img').getAttribute('src')
             };
           } else {
             delete currentCart.others[item.dataset.id];

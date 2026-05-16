@@ -273,7 +273,8 @@
               mode,
               quantity,
               unitPrice: finalPrice,
-              totalPrice: parseInt(finalPrice) * quantity
+              totalPrice: parseInt(finalPrice) * quantity,
+              image: item.querySelector('.row-characteristic__image img').getAttribute('src')
             };
           });
 
