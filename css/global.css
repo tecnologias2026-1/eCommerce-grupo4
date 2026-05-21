@@ -2721,6 +2721,7 @@ section.feature .feature__subtitle {
 }
 
 .wedding-feature-card__image-container {
+    position: relative;
     width: 100%;
     height: 360px;
     overflow: hidden;
@@ -2732,6 +2733,87 @@ section.feature .feature__subtitle {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.wedding-feature-card:hover .wedding-feature-card__image {
+    transform: scale(1.08);
+}
+
+/* Semi-transparent dark gradient overlay */
+.wedding-feature-card__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.85) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.wedding-feature-card:hover .wedding-feature-card__overlay {
+    opacity: 1;
+}
+
+/* Info Panel Sliding from Bottom */
+.wedding-feature-card__info-panel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--space-lg);
+    box-sizing: border-box;
+    z-index: 2;
+    transform: translateY(101%);
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.wedding-feature-card:hover .wedding-feature-card__info-panel {
+    transform: translateY(0);
+}
+
+/* Staggered Fade + Slide for contents inside */
+.wedding-feature-card__info-title {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+}
+
+.wedding-feature-card__info-desc {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
+}
+
+.wedding-feature-card:hover .wedding-feature-card__info-title,
+.wedding-feature-card:hover .wedding-feature-card__info-desc {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .wedding-feature-card__title {
@@ -2742,6 +2824,12 @@ section.feature .feature__subtitle {
     color: var(--black);
     text-transform: uppercase;
     line-height: 1.1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.wedding-feature-card:hover .wedding-feature-card__title {
+    opacity: 0;
+    transform: translateY(4px);
 }
 
 /* Desktop Hero */
