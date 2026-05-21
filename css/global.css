@@ -3043,14 +3043,15 @@ section.feature .feature__subtitle {
     flex-direction: column;
     gap: var(--space-xl);
     width: 100%;
-    transition: transform var(--transition-normal);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .boda-card__link:hover {
-    transform: translateY(-8px);
+    transform: translateY(-10px);
 }
 
 .boda-card__image-container {
+    position: relative;
     width: 100%;
     aspect-ratio: 2/3;
     overflow: hidden;
@@ -3058,10 +3059,67 @@ section.feature .feature__subtitle {
     box-shadow: var(--shadow-sm);
 }
 
+/* Elegant glassmorphism dark overlay */
+.boda-card__image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.boda-card__link:hover .boda-card__image-container::before {
+    opacity: 1;
+}
+
+/* Glassmorphism Capsule Badge "VER BODA" */
+.boda-card__image-container::after {
+    content: 'VER BODA';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 2px;
+    padding: 12px 24px;
+    border-radius: 40px;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 2;
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.boda-card__link:hover .boda-card__image-container::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
 .boda-card__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.boda-card__link:hover .boda-card__image {
+    transform: scale(1.06);
 }
 
 .boda-card__content {
@@ -3076,6 +3134,11 @@ section.feature .feature__subtitle {
     font-weight: 600;
     font-size: 24px;
     color: var(--black);
+    transition: color 0.3s ease;
+}
+
+.boda-card__link:hover .boda-card__title {
+    color: var(--primary);
 }
 
 .boda-card__info {
@@ -3086,6 +3149,11 @@ section.feature .feature__subtitle {
     font-size: 20px;
     color: var(--muted);
     line-height: 1.2;
+    transition: color 0.3s ease;
+}
+
+.boda-card__link:hover .boda-card__info {
+    color: var(--black);
 }
 
 /* Text Features */
