@@ -505,3 +505,144 @@ function showCustomConfirm(title, message, onConfirm) {
         document.body.classList.add("modal-open");
     }, 10);
 }
+
+// Premium Smooth Scroll Momentum (Inertial Scrolling)
+(function initPremiumSmoothScroll() {
+    // Only apply on non-touch devices for native feel on mobile/tablet
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    // Dynamically disable native smooth scroll to avoid double-animation fight/stutter
+    document.documentElement.style.scrollBehavior = "auto";
+
+    let targetScrollY = window.scrollY;
+    let currentScrollY = window.scrollY;
+    let isScrolling = false;
+    
+    // Luxury scrolling parameters:
+    // LOWER ease factor = longer, softer, more luxurious momentum glide.
+    // LOWER multiplier = slower, highly elegant scroll speed per wheel click.
+    const ease = 0.035; // Highly noticeable, silky deceleration glide (previous: 0.046)
+    const multiplier = 1.15; // Effortless and responsive scroll distance per tick (previous: 0.88)
+
+    function updateScroll() {
+        const diff = targetScrollY - currentScrollY;
+        if (Math.abs(diff) > 0.3) {
+            currentScrollY += diff * ease;
+            window.scrollTo(0, currentScrollY);
+            requestAnimationFrame(updateScroll);
+        } else {
+            currentScrollY = targetScrollY;
+            window.scrollTo(0, currentScrollY);
+            isScrolling = false;
+        }
+    }
+
+    window.addEventListener("wheel", (e) => {
+        // Do not intercept if scrolling inside an element with overflow (e.g. textareas or sliders)
+        const path = e.composedPath();
+        for (let i = 0; i < path.length; i++) {
+            const el = path[i];
+            if (el === document.body || el === document || el === window) break;
+            if (el.scrollHeight > el.clientHeight) {
+                const overflowY = window.getComputedStyle(el).overflowY;
+                if (overflowY === 'auto' || overflowY === 'scroll') {
+                    return; // Let native scrolling handle it
+                }
+            }
+        }
+
+        e.preventDefault();
+
+        // Calculate target scroll position based on delta
+        targetScrollY += e.deltaY * multiplier;
+
+        // Clamp values to body bounds
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        targetScrollY = Math.max(0, Math.min(targetScrollY, maxScroll));
+
+        if (!isScrolling) {
+            isScrolling = true;
+            currentScrollY = window.scrollY;
+            requestAnimationFrame(updateScroll);
+        }
+    }, { passive: false });
+
+    // Sync targets on user drag scroll or keyboard scroll
+    window.addEventListener("scroll", () => {
+        if (!isScrolling) {
+            targetScrollY = window.scrollY;
+            currentScrollY = window.scrollY;
+        }
+    });
+
+    // Custom smooth scroll animation for internal anchor links (like #about-us)
+    // This provides a beautiful, slow, elegant glide when navigating between sections.
+    document.addEventListener("click", (e) => {
+        const anchor = e.target.closest('a');
+        if (!anchor) return;
+
+        const href = anchor.getAttribute("href");
+        if (!href) return;
+
+        // Check if it's a hash link pointing to an element on the current page
+        let targetId = "";
+        if (href.startsWith("#")) {
+            targetId = href;
+        } else if (href.includes("#")) {
+            try {
+                const url = new URL(href, window.location.href);
+                if (url.pathname === window.location.pathname || url.pathname.replace(/\/$/, '') === window.location.pathname.replace(/\/$/, '')) {
+                    targetId = url.hash;
+                }
+            } catch (err) {
+                // Fail-safe for invalid URLs
+            }
+        }
+
+        if (targetId && targetId !== "#") {
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                
+                // Get absolute vertical position of target
+                const targetY = targetElement.getBoundingClientRect().top + window.scrollY;
+                
+                // Animate to target scroll position with custom timing for premium aesthetic
+                animateScrollTo(targetY, 1200); // 1.2 seconds elegant slow glide
+            }
+        }
+    });
+
+    // Elegant scroll animation with cubic ease-in-out easing
+    function animateScrollTo(destinationY, duration) {
+        const startY = window.scrollY;
+        const difference = destinationY - startY;
+        const startTime = performance.now();
+
+        isScrolling = true;
+
+        function scrollStep(timestamp) {
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            
+            // Cubic Ease-In-Out formula
+            const easeProgress = progress < 0.5 
+                ? 4 * progress * progress * progress 
+                : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+            const nextScrollY = startY + difference * easeProgress;
+            window.scrollTo(0, nextScrollY);
+
+            // Update momentum variables to avoid jarring jumps if wheeling right after click
+            currentScrollY = nextScrollY;
+            targetScrollY = nextScrollY;
+
+            if (progress < 1) {
+                requestAnimationFrame(scrollStep);
+            } else {
+                isScrolling = false;
+            }
+        }
+
+        requestAnimationFrame(scrollStep);
+    }
+})();
