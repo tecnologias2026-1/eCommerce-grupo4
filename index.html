@@ -58,9 +58,10 @@
                 con ellos algunas de sus eleciones para vivir el mejor dia de sus vidas a su completo gusto</p>
         </div>
 
-        <a href="assets/public/weding4.html" class="boda-card__link" style="text-decoration: none; color: inherit; display: block; width: 100%; max-width: var(--container-max); margin: 0 auto;">
+        <div class="boda-card__link" style="text-decoration: none; color: inherit; display: block; width: 100%; max-width: var(--container-max); margin: 0 auto;">
             <div class="nuestras-bodas__image-container">
                 <img src="assets/images/anillos desktop.png" alt="Anillos de boda" class="nuestras-bodas__image">
+                <button class="nuestras-bodas__view-btn" data-wedding="featured">Ver detalles</button>
             </div>
 
             <div class="nuestras-bodas__details">
@@ -70,7 +71,7 @@
                     <p>Hacienda Maria Clarita</p>
                 </div>
             </div>
-        </a>
+        </div>
     </section>
 
     <!-- Bodas Ejemplares Section (Figma 440:8456) -->
@@ -81,9 +82,10 @@
 
         <ul class="bodas-ejemplares__grid" data-name="Cards" data-node-id="440:8456">
             <li class="boda-card" data-name="Card" data-node-id="I440:8456;356:17132">
-                <a href="assets/public/weding1.html" class="boda-card__link">
+                <div class="boda-card__link">
                     <div class="boda-card__image-container">
                         <img src="assets/images/boda1.png" alt="Vanessa y Pedro" class="boda-card__image">
+                        <button class="boda-card__view-btn" data-wedding="assets/public/weding1.html">Ver boda</button>
                     </div>
                     <div class="boda-card__content">
                         <h5 class="boda-card__title">Vanessa y Pedro</h5>
@@ -92,12 +94,13 @@
                             <span>Hacienda San Juan</span>
                         </div>
                     </div>
-                </a>
+                </div>
             </li>
             <li class="boda-card" data-name="Card" data-node-id="I440:8456;356:17138">
-                <a href="assets/public/weding2.html" class="boda-card__link">
+                <div class="boda-card__link">
                     <div class="boda-card__image-container">
                         <img src="assets/images/boda2.png" alt="Tatiana y Felipe" class="boda-card__image">
+                        <button class="boda-card__view-btn" data-wedding="assets/public/weding2.html">Ver boda</button>
                     </div>
                     <div class="boda-card__content">
                         <h5 class="boda-card__title">Tatiana y Felipe</h5>
@@ -106,12 +109,13 @@
                             <span>Hacienda Paz del Río</span>
                         </div>
                     </div>
-                </a>
+                </div>
             </li>
             <li class="boda-card" data-name="Card" data-node-id="I440:8456;356:17145">
-                <a href="assets/public/weding3.html" class="boda-card__link">
+                <div class="boda-card__link">
                     <div class="boda-card__image-container">
                         <img src="assets/images/boda3.png" alt="Laura y Jorge" class="boda-card__image">
+                        <button class="boda-card__view-btn" data-wedding="assets/public/weding3.html">Ver boda</button>
                     </div>
                     <div class="boda-card__content">
                         <h5 class="boda-card__title">Laura y Jorge</h5>
@@ -120,7 +124,7 @@
                             <span>Hacienda Arkadia</span>
                         </div>
                     </div>
-                </a>
+                </div>
             </li>
         </ul>
     </section>
@@ -239,6 +243,159 @@
         </div>
     </section>
     <div id="footer-placeholder"></div>
+
+    <!-- Wedding Detail Modal -->
+    <div class="wedding-modal-overlay" id="wedding-modal">
+        <div class="wedding-modal">
+            <button class="wedding-modal__close" id="wedding-modal-close" aria-label="Cerrar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="wedding-modal__content" id="wedding-modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = document.getElementById('wedding-modal');
+            var closeBtn = document.getElementById('wedding-modal-close');
+            var content = document.getElementById('wedding-modal-content');
+            var viewBtns = document.querySelectorAll('.boda-card__view-btn, .nuestras-bodas__view-btn');
+
+            function buildFeaturedContent() {
+                return (
+                    '<header class="wedding-header">' +
+                        '<div class="wedding-header__details">' +
+                            '<h1 class="wedding-header__title">Juana y Carlos</h1>' +
+                            '<div class="wedding-header__info">' +
+                                '<p class="wedding-header__date">10 de Mayo, 2018</p>' +
+                                '<p class="wedding-header__location">Hacienda Maria Clarita</p>' +
+                            '</div>' +
+                        '</div>' +
+                    '</header>' +
+                    '<section class="wedding-banner">' +
+                        '<div class="wedding-banner__image-container">' +
+                            '<img src="assets/images/imagen novios.png" alt="Juana y Carlos" class="wedding-banner__image">' +
+                        '</div>' +
+                    '</section>' +
+                    '<section class="wedding-features">' +
+                        '<div class="wedding-feature-card">' +
+                            '<div class="wedding-feature-card__image-container">' +
+                                '<img src="assets/images/el cedro.png" alt="Lugar y Hacienda" class="wedding-feature-card__image">' +
+                                '<div class="wedding-feature-card__overlay"></div>' +
+                                '<div class="wedding-feature-card__info-panel">' +
+                                    '<h4 class="wedding-feature-card__info-title">Lugar y Hacienda</h4>' +
+                                    '<p class="wedding-feature-card__info-desc">La Hacienda Maria Clarita nos enamor\u00f3 con sus jardines y su capilla al aire libre.</p>' +
+                                '</div>' +
+                            '</div>' +
+                            '<h5 class="wedding-feature-card__title">Lugar y Hacienda</h5>' +
+                        '</div>' +
+                        '<div class="wedding-feature-card">' +
+                            '<div class="wedding-feature-card__image-container">' +
+                                '<img src="assets/images/c1.png" alt="Experiencia Gastron\u00f3mica" class="wedding-feature-card__image">' +
+                                '<div class="wedding-feature-card__overlay"></div>' +
+                                '<div class="wedding-feature-card__info-panel">' +
+                                    '<h4 class="wedding-feature-card__info-title">Experiencia Gastron\u00f3mica</h4>' +
+                                    '<p class="wedding-feature-card__info-desc">Un banquete con sabores tradicionales que sorprendi\u00f3 a todos nuestros invitados.</p>' +
+                                '</div>' +
+                            '</div>' +
+                            '<h5 class="wedding-feature-card__title">Experiencia Gastron\u00f3mica</h5>' +
+                        '</div>' +
+                        '<div class="wedding-feature-card">' +
+                            '<div class="wedding-feature-card__image-container">' +
+                                '<img src="assets/images/r1.png" alt="Recepci\u00f3n" class="wedding-feature-card__image">' +
+                                '<div class="wedding-feature-card__overlay"></div>' +
+                                '<div class="wedding-feature-card__info-panel">' +
+                                    '<h4 class="wedding-feature-card__info-title">Recepci\u00f3n</h4>' +
+                                    '<p class="wedding-feature-card__info-desc">Una fiesta llena de m\u00fasica, baile y momentos que recordaremos por siempre.</p>' +
+                                '</div>' +
+                            '</div>' +
+                            '<h5 class="wedding-feature-card__title">Recepci\u00f3n</h5>' +
+                        '</div>' +
+                        '<div class="wedding-feature-card">' +
+                            '<div class="wedding-feature-card__image-container">' +
+                                '<img src="assets/images/f1.png" alt="Decoraciones" class="wedding-feature-card__image">' +
+                                '<div class="wedding-feature-card__overlay"></div>' +
+                                '<div class="wedding-feature-card__info-panel">' +
+                                    '<h4 class="wedding-feature-card__info-title">Decoraciones</h4>' +
+                                    '<p class="wedding-feature-card__info-desc">Arreglos florales y detalles que reflejaron nuestra esencia y estilo \u00fanico.</p>' +
+                                '</div>' +
+                            '</div>' +
+                            '<h5 class="wedding-feature-card__title">Decoraciones</h5>' +
+                        '</div>' +
+                    '</section>' +
+                    '<section class="wedding-review" style="background-color:var(--white);padding:60px var(--page-gutter);text-align:center;">' +
+                        '<div style="max-width:850px;margin:0 auto;background:var(--gray-light);padding:45px var(--space-2xl);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--border);">' +
+                            '<div style="color:var(--primary);font-size:26px;margin-bottom:15px;letter-spacing:2px;">\u2605\u2605\u2605\u2605\u2605</div>' +
+                            '<blockquote style="font-family:var(--font-secondary);font-size:30px;line-height:1.35;color:#25393b;font-style:italic;margin:0 0 20px 0;">' +
+                                '"Encontrar esta p\u00e1gina fue un verdadero regalo. Desde el primer momento nos sentimos guiados: elegimos la Hacienda Maria Clarita viendo cada detalle en fotos y videos reales, comparamos opciones sin presi\u00f3n y armamos todo a nuestro ritmo. El d\u00eda de la boda cada cosa estaba exactamente como la hab\u00edamos so\u00f1ado. Nuestros invitados quedaron maravillados y nosotros sentimos que vivimos cada segundo al m\u00e1ximo, sin estr\u00e9s, porque la plataforma ya hab\u00eda resuelto todo. Sin duda, la mejor decisi\u00f3n fue confiar en este equipo."' +
+                            '</blockquote>' +
+                            '<cite style="font-family:var(--font-primary);font-weight:600;font-size:18px;color:var(--black);font-style:normal;display:block;">&mdash; Juana &amp; Carlos</cite>' +
+                            '<span style="font-family:var(--font-primary);font-size:14px;color:var(--muted);display:block;margin-top:5px;">Casados el 10 de Mayo de 2018</span>' +
+                        '</div>' +
+                    '</section>'
+                );
+            }
+
+            function openModal(url) {
+                content.innerHTML = '<div style="text-align:center;padding:80px 20px;font-family:var(--font-secondary);color:var(--muted);font-size:20px;">Cargando...</div>';
+                modal.classList.add('is-active');
+                document.body.style.overflow = 'hidden';
+
+                if (url === 'featured') {
+                    content.innerHTML = buildFeaturedContent();
+                    return;
+                }
+
+                fetch(url)
+                    .then(function (res) {
+                        if (!res.ok) throw new Error();
+                        return res.text();
+                    })
+                    .then(function (html) {
+                        var parser = new DOMParser();
+                        var doc = parser.parseFromString(html, 'text/html');
+                        var body = doc.body;
+                        var h = body.querySelector('#header-placeholder');
+                        var f = body.querySelector('#footer-placeholder');
+                        if (h) h.remove();
+                        if (f) f.remove();
+                        content.innerHTML = body.innerHTML.replace(/src="\.\.\//g, 'src="assets/');
+                    })
+                    .catch(function () {
+                        content.innerHTML = '<div style="text-align:center;padding:80px 20px;font-family:var(--font-secondary);color:var(--error);font-size:20px;">Error al cargar la informaci\u00f3n.</div>';
+                    });
+            }
+
+            function closeModal() {
+                modal.classList.remove('is-active');
+                document.body.style.overflow = '';
+                setTimeout(function () { content.innerHTML = ''; }, 400);
+            }
+
+            for (var i = 0; i < viewBtns.length; i++) {
+                viewBtns[i].addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    openModal(this.getAttribute('data-wedding'));
+                });
+            }
+
+            closeBtn.addEventListener('click', closeModal);
+
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) closeModal();
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>

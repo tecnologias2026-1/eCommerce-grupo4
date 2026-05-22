@@ -2990,12 +2990,73 @@ section.feature .feature__subtitle {
     height: 480px;
     overflow: hidden;
     border-radius: var(--radius);
+    position: relative;
+}
+
+/* Glassmorphism overlay for nuestras-bodas image */
+.nuestras-bodas__image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.boda-card__link:hover .nuestras-bodas__image-container::before {
+    opacity: 1;
 }
 
 .nuestras-bodas__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.boda-card__link:hover .nuestras-bodas__image {
+    transform: scale(1.06);
+}
+
+/* Nuestra Boda button */
+.nuestras-bodas__view-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 2.5px;
+    padding: 14px 28px;
+    border-radius: 40px;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 3;
+    white-space: nowrap;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.boda-card__link:hover .nuestras-bodas__view-btn {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.nuestras-bodas__view-btn:hover {
+    background: rgba(255, 255, 255, 0.28);
 }
 
 .nuestras-bodas__details {
@@ -3115,9 +3176,8 @@ section.feature .feature__subtitle {
     opacity: 1;
 }
 
-/* Glassmorphism Capsule Badge "VER BODA" */
-.boda-card__image-container::after {
-    content: 'VER BODA';
+/* Ver boda button (replaces glassmorphism badge) */
+.boda-card__view-btn {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -3135,15 +3195,19 @@ section.feature .feature__subtitle {
     border-radius: 40px;
     opacity: 0;
     transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 2;
-    pointer-events: none;
+    z-index: 3;
     white-space: nowrap;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
-.boda-card__link:hover .boda-card__image-container::after {
+.boda-card__link:hover .boda-card__view-btn {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
+}
+
+.boda-card__view-btn:hover {
+    background: rgba(255, 255, 255, 0.28);
 }
 
 .boda-card__image {
@@ -4379,3 +4443,148 @@ body.is-popup .back-btn {
 .venue-gallery-btn.next-btn {
     right: 10px;
 }
+
+/* Wedding Detail Modal */
+.wedding-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 2000;
+    padding: 40px 20px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.wedding-modal-overlay.is-active {
+    display: flex;
+}
+
+.wedding-modal {
+    background: var(--gray-light);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    width: 100%;
+    max-width: var(--container-max);
+    position: relative;
+    transform: translateY(30px) scale(0.97);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin: auto;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+
+.wedding-modal-overlay.is-active .wedding-modal {
+    transform: translateY(0) scale(1);
+}
+
+.wedding-modal__close {
+    position: sticky;
+    top: 20px;
+    float: right;
+    margin-right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 0;
+    background: rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: var(--black);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+.wedding-modal__close:hover {
+    background: rgba(0, 0, 0, 0.15);
+    transform: scale(1.1);
+}
+
+.wedding-modal__close svg {
+    width: 22px;
+    height: 22px;
+}
+
+.wedding-modal__content {
+    padding: 0;
+    clear: right;
+}
+
+/* Hide back/close buttons from original wedding pages inside modal */
+.wedding-modal__content .wedding-header__close,
+.wedding-modal__content .wedding-header__back {
+    display: none !important;
+}
+
+/* Reduce header padding inside modal */
+.wedding-modal__content .wedding-header {
+    padding-top: 40px;
+    padding-right: 80px;
+}
+
+/* Responsive modal */
+@media (max-width: 768px) {
+    .wedding-modal-overlay {
+        padding: 0;
+        align-items: stretch;
+    }
+
+    .wedding-modal {
+        max-height: 100vh;
+        border-radius: 0;
+        transform: translateY(20px) scale(0.98);
+        margin: 0;
+    }
+
+    .wedding-modal-overlay.is-active .wedding-modal {
+        transform: translateY(0) scale(1);
+    }
+
+    .wedding-modal__close {
+        top: 12px;
+        margin-right: 12px;
+        width: 38px;
+        height: 38px;
+    }
+
+    .wedding-modal__close svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .wedding-modal__content .wedding-header {
+        padding: 24px var(--page-gutter) 16px;
+        padding-right: 60px;
+    }
+
+    .wedding-modal__content .wedding-header__title {
+        font-size: 28px;
+    }
+
+    .wedding-modal__content .wedding-header__date,
+    .wedding-modal__content .wedding-header__location {
+        font-size: 18px;
+    }
+
+    .wedding-modal__content .wedding-banner {
+        padding: 0 var(--page-gutter) 30px;
+    }
+
+    .wedding-modal__content .wedding-features {
+        padding: 30px var(--page-gutter);
+        gap: var(--space-xl);
+    }
+}
+
