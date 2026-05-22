@@ -195,7 +195,21 @@
 
         modalAddBtn.addEventListener('click', () => {
           if (!currentItem) return;
-          const isSelected = !currentItem.classList.contains('is-selected');
+
+          const currentCart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+          const existingSelections = currentCart.reception || {};
+          const hasExisting = Object.keys(existingSelections).length > 0;
+          const isCurrentlySelected = currentItem.classList.contains('is-selected');
+
+          if (!isCurrentlySelected && hasExisting) {
+            const existingId = Object.keys(existingSelections)[0];
+            const existingName = existingSelections[existingId].name;
+            closeModal();
+            showCustomAlert('SELECCIÓN YA EXISTENTE', 'Ya tienes una recepción seleccionada (' + existingName + '). Solo puedes seleccionar una recepción.');
+            return;
+          }
+
+          const isSelected = !isCurrentlySelected;
           currentItem.classList.toggle('is-selected');
           updateCart(currentItem, isSelected);
           closeModal();
