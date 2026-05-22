@@ -2911,6 +2911,42 @@ section.feature .feature__subtitle {
     color: var(--white);
 }
 
+/* Section Scroll Indicator */
+.section-scroll-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: var(--white);
+    text-decoration: none;
+    margin: var(--space-lg) auto;
+    transition: transform var(--transition-normal), background-color var(--transition-normal);
+}
+
+.section-scroll-indicator:hover {
+    background-color: var(--primary-hover);
+    transform: scale(1.1);
+}
+
+.section-scroll-icon {
+    width: 28px;
+    height: 28px;
+    display: block;
+    animation: scroll-bounce 2.4s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(7px);
+    }
+}
+
 /* Nuestras Bodas */
 .nuestras-bodas {
     background-color: var(--gray-light);
