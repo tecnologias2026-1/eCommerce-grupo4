@@ -127,12 +127,6 @@
           <p class="selection-modal__price" id="modal-price"></p>
           <p class="selection-modal__desc" id="modal-desc"></p>
           <ul class="selection-modal__features" id="modal-features"></ul>
-          <div class="selection-modal__qty">
-            <span class="selection-modal__qty-label">Cantidad:</span>
-            <button class="selection-modal__qty-btn" id="qty-minus">−</button>
-            <input type="number" class="selection-modal__qty-input" id="qty-input" value="1" min="1">
-            <button class="selection-modal__qty-btn" id="qty-plus">+</button>
-          </div>
           <button class="selection-modal__add-btn" id="modal-add-btn">AGREGAR AL CARRITO</button>
         </div>
       </div>
@@ -153,7 +147,6 @@
         const modalPrice = document.getElementById('modal-price');
         const modalDesc = document.getElementById('modal-desc');
         const modalFeatures = document.getElementById('modal-features');
-        const modalQtyInput = document.getElementById('qty-input');
         const modalAddBtn = document.getElementById('modal-add-btn');
 
         let currentItem = null;
@@ -173,7 +166,6 @@
           modalTitle.textContent = item.dataset.name;
           modalPrice.textContent = item.querySelector('.selection-item__price').textContent;
           modalDesc.textContent = item.dataset.description || '';
-          modalQtyInput.value = 1;
 
           try {
             const feats = JSON.parse(item.dataset.features || '[]');
@@ -197,20 +189,6 @@
         document.getElementById('modal-close').addEventListener('click', closeModal);
         modal.addEventListener('click', (e) => {
           if (e.target === modal) closeModal();
-        });
-
-        document.getElementById('qty-minus').addEventListener('click', () => {
-          const val = parseInt(modalQtyInput.value) || 1;
-          if (val > 1) modalQtyInput.value = val - 1;
-        });
-
-        document.getElementById('qty-plus').addEventListener('click', () => {
-          const val = parseInt(modalQtyInput.value) || 1;
-          modalQtyInput.value = val + 1;
-        });
-
-        modalQtyInput.addEventListener('change', () => {
-          if (parseInt(modalQtyInput.value) < 1) modalQtyInput.value = 1;
         });
 
         modalAddBtn.addEventListener('click', () => {
