@@ -55,7 +55,8 @@
                 </div>
                 <div class="form-group" data-reveal data-reveal-delay="600">
                     <label for="deposit">Abono de la Reserva</label>
-                    <input type="text" id="deposit" placeholder="Mínimo 50%">
+                    <input type="text" id="deposit" placeholder="">
+                    <p class="form-error-text" id="deposit-error"></p>
                 </div>
                 <div class="form-group full-width" data-reveal data-reveal-delay="700">
                     <label for="comments">¿Tienes algún requerimiento especial?</label>
@@ -84,10 +85,116 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            updateTotal();
+        });
+
+        function parsePrice(priceStr) {
+            if (typeof priceStr === 'number') return priceStr;
+            return parseInt(String(priceStr).replace(/[^0-9]/g, '')) || 0;
+        }
+
+        function updateTotal() {
+            const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+            let total = 0;
+
+            if (cart.selectedVenue) {
+                total += parsePrice(cart.selectedVenue.price);
+            }
+            if (cart.ceremony) {
+                Object.values(cart.ceremony).forEach(item => { total += parsePrice(item.price); });
+            }
+            if (cart.reception) {
+                Object.values(cart.reception).forEach(item => { total += parsePrice(item.price); });
+            }
+            if (cart.food) {
+                Object.values(cart.food).forEach(item => {
+                    total += parsePrice(item.unitPrice) * (item.quantity || 1);
+                });
+            }
+            if (cart.others) {
+                Object.values(cart.others).forEach(item => {
+                    total += item.totalPrice || parsePrice(item.price);
+                });
+            }
+
+            const totalEl = document.getElementById('final-total');
+            if (totalEl) {
+                totalEl.textContent = 'COL$ ' + total.toLocaleString('es-CO');
+            }
+        }
+
+        window.addEventListener('storage', (event) => {
+            if (event.key === 'weddingCart') updateTotal();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
             const dateInput = document.getElementById('wedding-date');
             const storedDate = localStorage.getItem('selectedWeddingDate');
             if (dateInput && storedDate) {
                 dateInput.value = storedDate;
+            }
+
+            const depositInput = document.getElementById('deposit');
+            const depositError = document.getElementById('deposit-error');
+
+            function updateDepositPlaceholder() {
+                const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+                let total = 0;
+                if (cart.selectedVenue) total += parsePrice(cart.selectedVenue.price);
+                if (cart.ceremony) Object.values(cart.ceremony).forEach(item => { total += parsePrice(item.price); });
+                if (cart.reception) Object.values(cart.reception).forEach(item => { total += parsePrice(item.price); });
+                if (cart.food) Object.values(cart.food).forEach(item => { total += parsePrice(item.unitPrice) * (item.quantity || 1); });
+                if (cart.others) Object.values(cart.others).forEach(item => { total += item.totalPrice || parsePrice(item.price); });
+
+                const minimo = Math.round(total * 0.5);
+                if (depositInput) {
+                    depositInput.placeholder = 'COL$ ' + minimo.toLocaleString('es-CO') + ' (mínimo 50%)';
+                    depositInput.dataset.minimo = minimo;
+                    depositInput.dataset.total = total;
+                }
+            }
+
+            updateDepositPlaceholder();
+            window.addEventListener('storage', updateDepositPlaceholder);
+
+            function validateDeposit() {
+                if (!depositInput || !depositError) return;
+                const val = parseInt(depositInput.value.replace(/[^\d]/g, '')) || 0;
+                const minimo = parseInt(depositInput.dataset.minimo) || 0;
+                const total = parseInt(depositInput.dataset.total) || 0;
+
+                if (depositInput.value.trim() === '') {
+                    depositError.style.display = 'none';
+                    depositInput.classList.remove('field--invalid');
+                    return;
+                }
+
+                if (val < minimo) {
+                    depositError.textContent = 'Debe ser mínimo el 50% (COL$ ' + minimo.toLocaleString('es-CO') + ')';
+                    depositError.style.display = 'block';
+                    depositInput.classList.add('field--invalid');
+                } else if (val > total) {
+                    depositError.textContent = 'La cantidad no puede superar el total (COL$ ' + total.toLocaleString('es-CO') + ')';
+                    depositError.style.display = 'block';
+                    depositInput.classList.add('field--invalid');
+                } else {
+                    depositError.style.display = 'none';
+                    depositInput.classList.remove('field--invalid');
+                }
+            }
+
+            if (depositInput) {
+                depositInput.addEventListener('input', () => {
+                    // Auto-format with thousand separators
+                    const raw = depositInput.value.replace(/[^\d]/g, '');
+                    if (raw) {
+                        const formatted = parseInt(raw).toLocaleString('es-CO');
+                        depositInput.value = formatted;
+                    } else {
+                        depositInput.value = '';
+                    }
+                    validateDeposit();
+                });
             }
 
             const payBtn = document.getElementById('btn-pay-mp');
@@ -141,7 +248,23 @@
                         } else {
                             alert('informacion incometa. llena los datos para continuar con el pago');
                         }
-                    } else if (hasInvalidFormat) {
+                        return;
+                    }
+
+                    // Validate deposit separately
+                    const depositEl = document.getElementById('deposit');
+                    const depositMsg = document.getElementById('deposit-error');
+                    if (depositEl && depositMsg && depositMsg.style.display === 'block') {
+                        e.preventDefault();
+                        if (typeof showCustomAlert === 'function') {
+                            showCustomAlert('abono invalido', depositMsg.textContent);
+                        } else {
+                            alert(depositMsg.textContent);
+                        }
+                        return;
+                    }
+
+                    if (hasInvalidFormat) {
                         e.preventDefault();
                         if (typeof showCustomAlert === 'function') {
                             showCustomAlert('datos invalidos', 'revisa que el correo tenga @ y el telefono sea solo numeros');
