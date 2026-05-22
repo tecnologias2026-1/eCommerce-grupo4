@@ -132,6 +132,7 @@
                                 <div class="summary-item__content">
                                     <p class="summary-item__text">${item.name}</p>
                                     <p class="summary-item__subtext">${item.price}</p>
+                                    ${item.detail ? `<p class="summary-item__detail">${item.detail}</p>` : ''}
                                 </div>
                             </div>
                             ${item.image ? `

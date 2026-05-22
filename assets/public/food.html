@@ -280,15 +280,6 @@
 
           localStorage.setItem('weddingCart', JSON.stringify(currentCart));
           window.postMessage({ type: 'CART_UPDATED' }, '*');
-          
-          if (addedItemName) {
-            showCustomAlert('¡ENHORABUENA!', `Has agregado "${addedItemName}" a tu banquete.`);
-            
-            // Abrir el resumen automáticamente
-            setTimeout(() => {
-                showSummaryPopup();
-            }, 500);
-          }
 
           // Forzar actualización si el resumen ya está abierto
           const summaryBackdrop = document.querySelector(".summary-modal-backdrop");

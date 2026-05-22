@@ -140,12 +140,7 @@
               price: item.querySelector('.row-characteristic__price-main').textContent,
               image: item.querySelector('.row-characteristic__image img').getAttribute('src')
             };
-            showCustomAlert('¡ENHORABUENA!', `Has seleccionado "${name}" para tu recepción.`);
             
-            // Abrir el resumen automáticamente
-            setTimeout(() => {
-                showSummaryPopup();
-            }, 500);
           } else {
             delete currentCart.reception[item.dataset.id];
           }

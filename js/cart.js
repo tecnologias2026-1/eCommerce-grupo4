@@ -18,8 +18,6 @@ function addToCart(venueData) {
     currentCart.selectedVenue = venueData;
     if (typeof CookieConsent !== 'undefined' && !CookieConsent.hasConsent()) return;
     localStorage.setItem('weddingCart', JSON.stringify(currentCart));
-
-    showCustomAlert('¡ENHORABUENA!', 'Lugar añadido al carrito con éxito. Puedes verlo en el resumen de tu boda.');
 }
 
 function showCustomAlert(title, message) {

@@ -173,8 +173,17 @@
 
     .hero-selection {
         padding: 40px var(--space-md);
-        padding-bottom: calc(var(--space-4xl) + var(--space-3xl));
-        gap: var(--space-lg);
+    }
+
+    .ceremony-options {
+        grid-template-columns: 1fr;
+        padding: 24px var(--page-gutter);
+        gap: 16px;
+    }
+
+    .ceremony-options .row-characteristic__image,
+    .ceremony-options .selection-item .row-characteristic__image {
+        height: 180px !important;
     }
 
     .hero-selection__title {
@@ -227,8 +236,9 @@
     }
 
     .header {
+        display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 12px;
         height: auto;
         justify-content: center;
         align-items: center;
@@ -236,27 +246,50 @@
         width: 100%;
     }
 
+    .header-actions {
+        gap: 10px;
+    }
+
     .nav {
         width: 95%;
         max-width: 360px;
-        gap: 15px;
-        padding: 10px 15px;
-        font-size: 12px;
+        gap: 12px;
+        padding: 6px 14px;
+        font-size: 11px;
         white-space: nowrap;
         overflow-x: auto;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 48px;
+        height: 38px;
+    }
+
+    .guest-selector {
+        height: 38px;
+        padding: 4px 10px;
+    }
+
+    .guest-selector label {
+        font-size: 13px;
+    }
+
+    .guest-selector input {
+        font-size: 13px;
+        width: 40px;
     }
 
     .cart {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        width: 100% !important;
-        margin-top: 24px !important;
-        text-align: center !important;
+        height: 38px;
+        padding: 4px 10px;
+    }
+
+    .cart-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .cart-total {
+        font-size: 12px;
     }
 
     .header:not(.header--logo-only) .cart {
@@ -762,6 +795,19 @@
 
     .venue-options-selector__input {
         font-size: 20px;
+    }
+
+    .ceremony-options {
+        padding: 16px var(--page-gutter);
+    }
+
+    .ceremony-options .row-characteristic__image,
+    .ceremony-options .selection-item .row-characteristic__image {
+        height: 160px !important;
+    }
+
+    .ceremony-options .row-characteristic__text {
+        padding: 16px;
     }
 
     .cookie-consent-modal {

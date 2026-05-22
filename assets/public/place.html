@@ -22,7 +22,13 @@
     <main>
     <section class="feature" data-name="Feature" data-node-id="470:290">
         <div class="feature__image-container">
-            <img src="../images/imagen novios.png" alt="Pareja de novios" class="feature__image">
+            <div class="feature__slideshow">
+                <img src="../images/imagen novios.png" alt="Pareja de novios" class="feature__slideshow-slide active">
+                <img src="../images/imagen novios2.png" alt="Pareja de novios" class="feature__slideshow-slide">
+                <img src="../images/imagen novios3.png" alt="Pareja de novios" class="feature__slideshow-slide">
+                <img src="../images/imagen novios4.png" alt="Pareja de novios" class="feature__slideshow-slide">
+                <img src="../images/imagen novios5.jpg" alt="Pareja de novios" class="feature__slideshow-slide">
+            </div>
         </div>
         <div class="feature__text-content">
             <h1 class="feature__title">Las mejores haciendas para tu boda</h1>
@@ -198,6 +204,44 @@
     <script src="../../js/cart.js"></script>
     <script src="../../js/calendar.js"></script>
     <script src="../../js/venue-filter.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.feature__slideshow-slide');
+            if (slides.length < 2) return;
+
+            let currentIndex = 0;
+            let isTransitioning = false;
+
+            function showNext() {
+                if (isTransitioning) return;
+                isTransitioning = true;
+
+                const current = slides[currentIndex];
+                const nextIndex = (currentIndex + 1) % slides.length;
+                const next = slides[nextIndex];
+
+                next.style.transition = 'none';
+                next.classList.remove('active', 'exit');
+                next.classList.add('enter');
+                void next.offsetHeight;
+                next.style.transition = '';
+
+                current.classList.remove('active');
+                current.classList.add('exit');
+                next.classList.remove('enter');
+                next.classList.add('active');
+
+                currentIndex = nextIndex;
+
+                setTimeout(() => {
+                    current.classList.remove('exit');
+                    isTransitioning = false;
+                }, 1200);
+            }
+
+            setInterval(showNext, 2000);
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const moreBtns = document.querySelectorAll('.venue-card__more-btn');
