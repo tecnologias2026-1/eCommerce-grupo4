@@ -14,24 +14,25 @@
 
   <link rel="stylesheet" href="../../css/media.css">
   <script src="../../js/cookie-consent.js" defer></script>
-  <script src="../../js/manager.js" defer></script>
+    <script src="../../js/manager.js" defer></script>
+    <script src="../../js/reveal.js" defer></script>
 </head>
 
 <body>
   <div id="header-placeholder"></div>
   <main>
-    <section class="hero-selection" data-node-id="475:1536">
+    <section class="hero-selection" data-node-id="475:1536" data-reveal>
       <div class="hero-selection__top">
         <a href="place.html" class="back-btn" aria-label="Atrás">
           <img alt="" src="../images/atras.svg" class="back-btn__icon" aria-hidden="true" />
         </a>
-        <h1 class="hero-selection__title">Diseña tu ceremonia perfecta</h1>
+        <h1 class="hero-selection__title" data-reveal>Diseña tu ceremonia perfecta</h1>
       </div>
-      <p class="feature-list__subtitle feature-list__subtitle--centered">
+      <p class="feature-list__subtitle feature-list__subtitle--centered" data-reveal data-reveal-delay="100">
         Selecciona las opciones que deseas incluir en tu ceremonia para ver el total reflejado.
       </p>
 
-      <div class="hero-gallery">
+      <div class="hero-gallery" data-reveal data-reveal-delay="150">
         <div class="feature__slideshow">
           <img src="../images/c0.jpg" alt="Ceremonia" class="feature__slideshow-slide active">
           <img src="../images/c01.webp" alt="Ceremonia" class="feature__slideshow-slide">
@@ -70,7 +71,7 @@
 
       <!-- Item 2 -->
       <section class="row-characteristic selection-item" data-id="altar" data-name="Arreglo floral para altar"
-        data-price="1200000">
+        data-price="1200000" data-reveal="up" data-reveal-delay="200">
         <div class="row-characteristic__image">
           <div class="row-characteristic__image-frame">
             <img src="../images/c2.png" alt="Altar" />
@@ -95,7 +96,7 @@
 
       <!-- Item 3 -->
       <section class="row-characteristic selection-item" data-id="sillas" data-name="Sillas y decoración de asientos"
-        data-price="650000" data-set-capacity="50">
+        data-price="650000" data-set-capacity="50" data-reveal="up" data-reveal-delay="300">
         <div class="row-characteristic__image">
           <div class="row-characteristic__image-frame square-img">
             <img src="../images/c3.png" alt="Sillas" />
@@ -124,10 +125,10 @@
         </div>
       </section>
 
-      <!-- Item 4 -->
-      <section class="row-characteristic selection-item" data-id="camino" data-name="Decoración de camino al altar"
-        data-price="450000">
-        <div class="row-characteristic__image">
+    <!-- Item 4 -->
+    <section class="row-characteristic selection-item" data-id="camino" data-name="Decoración de camino al altar"
+      data-price="450000" data-reveal="up" data-reveal-delay="400">
+      <div class="row-characteristic__image">
           <div class="row-characteristic__image-frame square-img">
             <img src="../images/c1.png" alt="Camino" />
           </div>
@@ -150,7 +151,7 @@
       </section>
     </div>
 
-    <section class="next-button-bar">
+    <section class="next-button-bar" data-reveal data-reveal-delay="300">
       <a href="reception.html" class="btn-primary">
         <span class="btn-primary__text">Continuar</span>
       </a>

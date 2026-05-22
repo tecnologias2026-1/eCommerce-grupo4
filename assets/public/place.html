@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../../css/media.css">
     <script src="../../js/cookie-consent.js" defer></script>
     <script src="../../js/manager.js" defer></script>
+    <script src="../../js/reveal.js" defer></script>
 </head>
 
 <body>
@@ -31,20 +32,20 @@
             </div>
         </div>
         <div class="feature__text-content">
-            <h1 class="feature__title">Las mejores haciendas para tu boda</h1>
-            <p class="feature__subtitle">Encuentra aquí las mejores opciones para tu dia soñado</p>
+            <h1 class="feature__title" data-reveal>Las mejores haciendas para tu boda</h1>
+            <p class="feature__subtitle" data-reveal data-reveal-delay="100">Encuentra aquí las mejores opciones para tu dia soñado</p>
         </div>
     </section>
 
     <!-- Calendar Section (New Feature) -->
-    <section class="reservation-calendar">
+    <section class="reservation-calendar" data-reveal>
         <header class="reservation-calendar__header">
-            <h3 class="reservation-calendar__title">Selecciona una fecha para tu boda</h3>
-            <p class="reservation-calendar__subtitle">Los días en rojo ya están ocupados. Seleccionando una fecha,
+            <h3 class="reservation-calendar__title" data-reveal>Selecciona una fecha para tu boda</h3>
+            <p class="reservation-calendar__subtitle" data-reveal data-reveal-delay="100">Los días en rojo ya están ocupados. Seleccionando una fecha,
                 filtraremos automáticamente las haciendas disponibles.</p>
         </header>
 
-        <div class="calendar-container">
+        <div class="calendar-container" data-reveal data-reveal-delay="150">
             <div class="calendar-nav">
                 <button id="prev-month" class="calendar-nav__btn" aria-label="Mes anterior">&lt;</button>
                 <div class="calendar-nav__display">
@@ -86,16 +87,16 @@
         </div>
     </section>
 
-    <section class="venue-gallery" data-name="Gallery" data-node-id="470:291">
+    <section class="venue-gallery" data-name="Gallery" data-node-id="470:291" data-reveal>
         <header class="venue-gallery__header">
-            <h3 class="venue-gallery__title">Lugares grandiosos que tenemos para ti</h3>
-            <p class="venue-gallery__subtitle">Selecciona un lugar para ver todos los detalles y continuar con tu plan
+            <h3 class="venue-gallery__title" data-reveal>Lugares grandiosos que tenemos para ti</h3>
+            <p class="venue-gallery__subtitle" data-reveal data-reveal-delay="100">Selecciona un lugar para ver todos los detalles y continuar con tu plan
             </p>
         </header>
 
         <div class="venue-gallery__grid" id="venue-grid">
             <!-- Hacienda Paz del Río -->
-            <article class="venue-card" data-guests="100">
+            <article class="venue-card" data-guests="100" data-reveal="up" data-reveal-delay="100">
                 <div class="venue-card__image-container">
                     <img src="../images/paz del rio.png" alt="Hacienda Paz del Río" class="venue-card__image" loading="lazy">
                 </div>
@@ -110,7 +111,7 @@
             </article>
 
             <!-- Hacienda San Juan -->
-            <article class="venue-card" data-guests="300">
+            <article class="venue-card" data-guests="300" data-reveal="up" data-reveal-delay="200">
                 <div class="venue-card__image-container">
                     <img src="../images/san juan.png" alt="Hacienda San Juan" class="venue-card__image" loading="lazy">
                 </div>
@@ -125,7 +126,7 @@
             </article>
 
             <!-- Hacienda Las Marías -->
-            <article class="venue-card" data-guests="170">
+            <article class="venue-card" data-guests="170" data-reveal="up" data-reveal-delay="300">
                 <div class="venue-card__image-container">
                     <img src="../images/las marias.png" alt="Hacienda Las Marías" class="venue-card__image" loading="lazy">
                 </div>
@@ -140,7 +141,7 @@
             </article>
 
             <!-- Hacienda El Cedro -->
-            <article class="venue-card" data-guests="200">
+            <article class="venue-card" data-guests="200" data-reveal="up" data-reveal-delay="400">
                 <div class="venue-card__image-container">
                     <img src="../images/el cedro.png" alt="Hacienda El Cedro" class="venue-card__image" loading="lazy">
                 </div>
@@ -155,7 +156,7 @@
             </article>
 
             <!-- Hacienda Arkadia -->
-            <article class="venue-card" data-guests="350">
+            <article class="venue-card" data-guests="350" data-reveal="up" data-reveal-delay="500">
                 <div class="venue-card__image-container">
                     <img src="../images/arkadia.png" alt="Hacienda Arkadia" class="venue-card__image" loading="lazy">
                 </div>
@@ -170,7 +171,7 @@
             </article>
 
             <!-- Hacienda Botania -->
-            <article class="venue-card" data-guests="100">
+            <article class="venue-card" data-guests="100" data-reveal="up" data-reveal-delay="600">
                 <div class="venue-card__image-container">
                     <img src="../images/botania.png" alt="Hacienda Botania" class="venue-card__image" loading="lazy">
                 </div>
@@ -185,7 +186,7 @@
             </article>
         </div>
 
-        <div class="venue-gallery__actions">
+        <div class="venue-gallery__actions" data-reveal data-reveal-delay="300">
             <a href="ceremony.html" class="btn-primary venue-gallery__next-btn">
                 <span class="btn-primary__text">Continua planeando</span>
             </a>

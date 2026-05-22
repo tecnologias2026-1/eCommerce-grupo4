@@ -13,24 +13,25 @@
   <link rel="stylesheet" href="../../css/global.css">
   <link rel="stylesheet" href="../../css/media.css">
   <script src="../../js/cookie-consent.js" defer></script>
-  <script src="../../js/manager.js" defer></script>
+    <script src="../../js/manager.js" defer></script>
+    <script src="../../js/reveal.js" defer></script>
 </head>
 
 <body>
   <div id="header-placeholder"></div>
   <main>
-    <section class="hero-selection" data-node-id="475:1536">
+    <section class="hero-selection" data-node-id="475:1536" data-reveal>
       <div class="hero-selection__top">
         <a href="ceremony.html" class="back-btn" aria-label="Atrás">
           <img alt="" src="../images/atras.svg" class="back-btn__icon" aria-hidden="true" />
         </a>
-        <h1 class="hero-selection__title">Selecciona tu Recepción</h1>
+        <h1 class="hero-selection__title" data-reveal>Selecciona tu Recepción</h1>
       </div>
-      <p class="feature-list__subtitle feature-list__subtitle--centered">
+      <p class="feature-list__subtitle feature-list__subtitle--centered" data-reveal data-reveal-delay="100">
         Elige el estilo de recepción que mejor se adapte a tu celebración.
       </p>
 
-      <div class="hero-gallery">
+      <div class="hero-gallery" data-reveal data-reveal-delay="150">
         <div class="feature__slideshow">
           <img src="../images/r0.webp" alt="Recepción" class="feature__slideshow-slide active">
           <img src="../images/r01.jpg" alt="Recepción" class="feature__slideshow-slide">
@@ -45,7 +46,7 @@
 
       <!-- Item 1: Clásico -->
       <section class="row-characteristic selection-item" data-id="recep-clasica" data-name="Recepción Clásica"
-        data-price="2500000">
+        data-price="2500000" data-reveal="up" data-reveal-delay="100">
         <div class="row-characteristic__image">
           <div class="row-characteristic__image-frame">
             <img src="../images/r1.png" alt="Recepción Clásica" />
@@ -70,7 +71,7 @@
 
       <!-- Item 2: Elegante -->
       <section class="row-characteristic selection-item" data-id="recep-elegante" data-name="Recepción Elegante"
-        data-price="4000000">
+        data-price="4000000" data-reveal="up" data-reveal-delay="200">
         <div class="row-characteristic__image">
           <div class="row-characteristic__image-frame">
             <img src="../images/r2.png" alt="Recepción Elegante" />
@@ -95,7 +96,7 @@
 
       <!-- Item 3: Campestre -->
       <section class="row-characteristic selection-item" data-id="recep-campestre" data-name="Recepción Campestre"
-        data-price="3200000">
+        data-price="3200000" data-reveal="up" data-reveal-delay="300">
         <div class="row-characteristic__image">
           <div class="row-characteristic__image-frame">
             <img src="../images/r3.png" alt="Recepción Campestre" />
@@ -120,7 +121,7 @@
 
       <!-- Item 4: Playa -->
       <section class="row-characteristic selection-item" data-id="recep-playa" data-name="Recepción de Playa"
-        data-price="5000000">
+        data-price="5000000" data-reveal="up" data-reveal-delay="400">
         <div class="row-characteristic__image">
           <div class="row-characteristic__image-frame">
             <img src="../images/r4.jpg" alt="Recepción de Playa" />
@@ -145,7 +146,7 @@
 
     </div>
 
-    <section class="next-button-bar">
+    <section class="next-button-bar" data-reveal data-reveal-delay="300">
       <a href="food.html" class="btn-primary">
         <span class="btn-primary__text">Continuar</span>
       </a>

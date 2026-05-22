@@ -13,24 +13,25 @@
   <link rel="stylesheet" href="../../css/global.css">
   <link rel="stylesheet" href="../../css/media.css">
   <script src="../../js/cookie-consent.js" defer></script>
-  <script src="../../js/manager.js" defer></script>
+    <script src="../../js/manager.js" defer></script>
+    <script src="../../js/reveal.js" defer></script>
 </head>
 
 <body>
   <div id="header-placeholder"></div>
   <main>
-    <section class="hero-selection">
+    <section class="hero-selection" data-reveal>
       <div class="hero-selection__top">
         <a href="food.html" class="back-btn" aria-label="Atrás">
           <img alt="" src="../images/atras.svg" class="back-btn__icon" aria-hidden="true" />
         </a>
-        <h1 class="hero-selection__title">Servicios Adicionales</h1>
+        <h1 class="hero-selection__title" data-reveal>Servicios Adicionales</h1>
       </div>
-      <p class="feature-list__subtitle" style="text-align: center; width: 100%; margin-top: 24px;">
+      <p class="feature-list__subtitle" style="text-align: center; width: 100%; margin-top: 24px;" data-reveal data-reveal-delay="100">
         Personaliza cada detalle para que tu boda sea verdaderamente única.
       </p>
 
-      <div class="hero-gallery">
+      <div class="hero-gallery" data-reveal data-reveal-delay="150">
         <div class="feature__slideshow">
           <img src="../images/o0.webp" alt="Servicios" class="feature__slideshow-slide active">
           <img src="../images/o01.jpeg" alt="Servicios" class="feature__slideshow-slide">
@@ -45,7 +46,7 @@
 
       <!-- Item 1: Decoración Floral -->
       <section class="row-characteristic selection-item" data-id="dec-floral" data-name="Decoración Floral"
-        data-price="1800000">
+        data-price="1800000" data-reveal="up" data-reveal-delay="100">
         <div class="row-characteristic__image">
           <div class="row-characteristic__image-frame">
             <img src="../images/o1.png" alt="Decoración Floral" />
@@ -69,7 +70,7 @@
 
       <!-- Item 2: Detalles Personalizados -->
       <section class="row-characteristic selection-item" data-id="detalles-pers" data-name="Detalles Personalizados"
-        data-price="950000">
+        data-price="950000" data-reveal="up" data-reveal-delay="200">
         <div class="row-characteristic__image">
           <div class="row-characteristic__image-frame">
             <img src="../images/o2.png" alt="Detalles Personalizados" />
@@ -93,7 +94,7 @@
 
       <!-- Item 3: Ambientación -->
       <section class="row-characteristic selection-item" data-id="ambientacion" data-name="Ambientación"
-        data-price="1200000">
+        data-price="1200000" data-reveal="up" data-reveal-delay="300">
         <div class="row-characteristic__image">
           <div class="row-characteristic__image-frame">
             <img src="../images/o3.png" alt="Ambientación" />
@@ -116,8 +117,8 @@
       </section>
 
       <!-- Item 4: Sonido e Iluminación -->
-      <section class="row-characteristic selection-item" data-id="sonido-ilm" data-name="Sonido e Iluminación"
-        data-price="2200000">
+      <section class="row-characteristic selection-item" data-id="sonido-ilu" data-name="Sonido e Iluminación"
+        data-price="2200000" data-reveal="up" data-reveal-delay="400">
         <div class="row-characteristic__image">
           <div class="row-characteristic__image-frame">
             <img src="../images/o5.jpeg" alt="Sonido e Iluminación" />
@@ -142,7 +143,7 @@
 
     </div>
 
-    <section class="next-button-bar">
+    <section class="next-button-bar" data-reveal data-reveal-delay="300">
       <a href="payment.html" class="btn-primary">
         <span class="btn-primary__text">Continuar al Pago</span>
       </a>

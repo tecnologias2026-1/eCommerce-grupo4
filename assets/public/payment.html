@@ -15,51 +15,52 @@
     <link rel="stylesheet" href="../../css/media.css">
     <script src="../../js/cookie-consent.js" defer></script>
     <script src="../../js/manager.js" defer></script>
+    <script src="../../js/reveal.js" defer></script>
 </head>
 
 <body>
     <div id="header-placeholder"></div>
-    <header class="hero-selection">
+    <header class="hero-selection" data-reveal>
         <div class="hero-selection__top">
             <a href="others.html" class="back-btn" aria-label="Atrás">
                 <img alt="" src="../images/atras.svg" class="back-btn__icon" aria-hidden="true">
             </a>
-            <h1 class="hero-selection__title">PAGO</h1>
+            <h1 class="hero-selection__title" data-reveal>PAGO</h1>
         </div>
     </header>
 
-    <main class="userdata-content">
-        <form class="userdata-form" aria-labelledby="payment-form-legend">
+    <main class="userdata-content" data-reveal>
+        <form class="userdata-form" aria-labelledby="payment-form-legend" data-reveal>
             <fieldset class="form-grid">
                 <legend id="payment-form-legend" class="visually-hidden">Datos de contacto y reserva</legend>
-                <div class="form-group">
+                <div class="form-group" data-reveal data-reveal-delay="100">
                     <label for="groom-name">Nombre del Novio</label>
                     <input type="text" id="groom-name" autocomplete="name" placeholder="Ej. Juan Pérez">
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-reveal data-reveal-delay="200">
                     <label for="bride-name">Nombre de la Novia</label>
                     <input type="text" id="bride-name" autocomplete="name" placeholder="Ej. María García">
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-reveal data-reveal-delay="300">
                     <label for="email">Correo Electrónico</label>
                     <input type="email" id="email" autocomplete="email" placeholder="email@ejemplo.com">
                     <p class="form-error-text" id="email-error">correo no valido</p>
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-reveal data-reveal-delay="400">
                     <label for="phone">Teléfono de Contacto</label>
                     <input type="tel" id="phone" autocomplete="tel" placeholder="+57 300 000 0000">
                     <p class="form-error-text" id="phone-error">caracter invalido</p>
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-reveal data-reveal-delay="500">
                     <label for="wedding-date">Fecha tentativa de la boda</label>
                     <input type="date" id="wedding-date" readonly>
                     <p class="form-help-text">Para editar fecha revise nuevamente el inicio por disponibilidad</p>
                 </div>
-                <div class="form-group">
+                <div class="form-group" data-reveal data-reveal-delay="600">
                     <label for="deposit">Abono de la Reserva</label>
                     <input type="text" id="deposit" placeholder="Mínimo 50%">
                 </div>
-                <div class="form-group full-width">
+                <div class="form-group full-width" data-reveal data-reveal-delay="700">
                     <label for="comments">¿Tienes algún requerimiento especial?</label>
                     <input type="text" id="comments"
                         placeholder="Ej. Necesitamos acceso para personas con movilidad reducida">
@@ -68,7 +69,7 @@
         </form>
     </main>
 
-    <footer class="summary-pago">
+    <footer class="summary-pago" data-reveal>
         <div class="summary-cart">
             <span class="summary-total-label">Costo Total</span>
             <span class="summary-total-value" id="final-total">COL$ 0</span>
