@@ -99,7 +99,6 @@
                 const section = document.createElement('div');
                 section.className = 'summary-section';
                 section.innerHTML = `
-                    <button class="summary-section__remove" title="Eliminar del carrito" data-remove-category="selectedVenue">✕</button>
                     <h2 class="summary-section__title">LUGAR SELECCIONADO</h2>
                     <div class="summary-section__items">
                         <div class="summary-item">
@@ -114,6 +113,7 @@
                     <div class="summary-image-box">
                         <img src="${venue.image}" alt="${venue.name}" class="summary-image-box__img">
                     </div>
+                    <button class="summary-section__remove" data-remove-category="selectedVenue">Eliminar</button>
                 `;
                 summaryContainer.appendChild(section);
             }
@@ -144,9 +144,9 @@
                     });
 
                     section.innerHTML = `
-                        <button class="summary-section__remove" title="Eliminar sección" data-remove-category="${category}">✕</button>
                         <h2 class="summary-section__title">${title}</h2>
                         <div class="summary-section__items">${itemsHtml}</div>
+                        <button class="summary-section__remove" data-remove-category="${category}">Eliminar</button>
                     `;
                     summaryContainer.appendChild(section);
                 }
@@ -193,9 +193,9 @@
                 });
 
                 section.innerHTML = `
-                    <button class="summary-section__remove" title="Eliminar sección" data-remove-category="food">✕</button>
                     <h2 class="summary-section__title">COMIDA</h2>
                     <div class="summary-section__items">${itemsHtml}</div>
+                    <button class="summary-section__remove" data-remove-category="food">Eliminar</button>
                 `;
                 summaryContainer.appendChild(section);
             }

@@ -336,23 +336,9 @@ function parsePrice(strip) {
     return parseInt(strip.replace(/[^\d]/g, '')) || 0;
 }
 
-function showSummaryPopup() {
-    let backdrop = document.querySelector(".summary-modal-backdrop");
-    if (backdrop) {
-        backdrop.classList.add("active");
-        document.body.classList.add("modal-open");
-        // Notify the iframe to update just in case
-        const iframe = backdrop.querySelector('iframe');
-        if (iframe && iframe.contentWindow) {
-            iframe.contentWindow.postMessage({ type: 'CART_UPDATED' }, '*');
-        }
-        return;
-    }
-
-    backdrop = document.createElement("div");
-    backdrop.className = "summary-modal-backdrop active";
-    document.body.appendChild(backdrop);
-    
+document.addEventListener("DOMContentLoaded", function preloadCart() {
+    var backdrop = document.createElement("div");
+    backdrop.className = "summary-modal-backdrop";
     backdrop.innerHTML = `
         <div class="summary-popup">
             <button class="summary-popup__close" id="close-summary-btn">&times;</button>
@@ -361,21 +347,30 @@ function showSummaryPopup() {
             </div>
         </div>
     `;
+    document.body.appendChild(backdrop);
 
     function closeSummary() {
         backdrop.classList.remove("active");
         document.body.classList.remove("modal-open");
-        setTimeout(() => {
-            if (backdrop.parentNode) backdrop.parentNode.removeChild(backdrop);
-        }, 300);
     }
 
-    document.getElementById("close-summary-btn").addEventListener("click", closeSummary);
-    backdrop.addEventListener("click", (e) => {
+    backdrop.querySelector("#close-summary-btn").addEventListener("click", closeSummary);
+    backdrop.addEventListener("click", function(e) {
         if (e.target === backdrop) closeSummary();
     });
+});
 
+function showSummaryPopup() {
+    var backdrop = document.querySelector(".summary-modal-backdrop");
+    if (!backdrop) return;
+
+    backdrop.classList.add("active");
     document.body.classList.add("modal-open");
+
+    var iframe = backdrop.querySelector('iframe');
+    if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.postMessage({ type: 'CART_UPDATED' }, '*');
+    }
 }
 
 function updateHeaderPrice() {
