@@ -175,7 +175,7 @@
           modalTitle.textContent = item.dataset.name;
           modalPrice.textContent = item.querySelector('.selection-item__price').textContent;
           modalDesc.textContent = item.dataset.description || '';
-          modalQtyInput.value = 1;
+          modalQtyInput.value = parseInt(item.dataset.qty) || 1;
 
           try {
             const feats = JSON.parse(item.dataset.features || '[]');
@@ -187,7 +187,26 @@
           modal.classList.add('active');
           document.body.style.overflow = 'hidden';
 
-          modalAddBtn.textContent = item.classList.contains('is-selected') ? 'QUITAR DEL CARRITO' : 'AGREGAR AL CARRITO';
+          updateAddButton();
+        }
+
+        function updateAddButton() {
+          if (!currentItem) return;
+          const isSelected = currentItem.classList.contains('is-selected');
+          const currentQty = parseInt(modalQtyInput.value) || 1;
+          const originalQty = parseInt(currentItem.dataset.qty) || 1;
+
+          modalAddBtn.textContent = 'AGREGAR AL CARRITO';
+
+          if (isSelected && currentQty === originalQty) {
+            modalAddBtn.disabled = true;
+            modalAddBtn.style.opacity = '0.4';
+            modalAddBtn.style.cursor = 'not-allowed';
+          } else {
+            modalAddBtn.disabled = false;
+            modalAddBtn.style.opacity = '';
+            modalAddBtn.style.cursor = '';
+          }
         }
 
         function closeModal() {
@@ -204,45 +223,67 @@
         document.getElementById('qty-minus').addEventListener('click', () => {
           const val = parseInt(modalQtyInput.value) || 1;
           if (val > 1) modalQtyInput.value = val - 1;
+          updateAddButton();
         });
 
         document.getElementById('qty-plus').addEventListener('click', () => {
           const val = parseInt(modalQtyInput.value) || 1;
           modalQtyInput.value = val + 1;
+          updateAddButton();
         });
 
-        modalQtyInput.addEventListener('change', () => {
+        modalQtyInput.addEventListener('input', () => {
           if (parseInt(modalQtyInput.value) < 1) modalQtyInput.value = 1;
+          updateAddButton();
         });
 
         modalAddBtn.addEventListener('click', () => {
           if (!currentItem) return;
-          const isSelected = !currentItem.classList.contains('is-selected');
-          currentItem.classList.toggle('is-selected');
-          updateCart(currentItem, isSelected);
+          if (modalAddBtn.disabled) return;
+
+          currentItem.classList.add('is-selected');
+          currentItem.dataset.qty = modalQtyInput.value;
+          updateCart();
           closeModal();
         });
 
-        function updateCart(item, isSelected) {
+        function parsePrice(priceStr) {
+          if (typeof priceStr === 'number') return priceStr;
+          return parseInt(String(priceStr).replace(/[^0-9]/g, '')) || 0;
+        }
+
+        function updateCart() {
           const currentCart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
           if (!currentCart.others) currentCart.others = {};
 
-          if (isSelected) {
+          document.querySelectorAll('.selection-item.is-selected').forEach(item => {
+            const quantity = parseInt(item.dataset.qty) || 1;
+            const unitPrice = parsePrice(item.querySelector('.selection-item__price').textContent);
+
             currentCart.others[item.dataset.id] = {
               id: item.dataset.id,
               name: item.dataset.name,
-              price: item.querySelector('.selection-item__price').textContent,
+              quantity,
+              unitPrice,
+              totalPrice: unitPrice * quantity,
+              priceLabel: 'COL$ ' + unitPrice.toLocaleString('es-CO'),
               image: item.querySelector('.selection-item__image-container img').getAttribute('src')
             };
-          } else {
-            delete currentCart.others[item.dataset.id];
-          }
+          });
 
           localStorage.setItem('weddingCart', JSON.stringify(currentCart));
           window.postMessage({ type: 'CART_UPDATED' }, '*');
 
-          if (typeof showSummaryPopup === 'function' && isSelected) {
+          if (typeof showSummaryPopup === 'function') {
             showSummaryPopup();
+          }
+
+          const summaryBackdrop = document.querySelector('.summary-modal-backdrop');
+          if (summaryBackdrop) {
+            const iframe = summaryBackdrop.querySelector('iframe');
+            if (iframe && iframe.contentWindow) {
+              iframe.contentWindow.postMessage({ type: 'CART_UPDATED' }, '*');
+            }
           }
         }
 
@@ -250,7 +291,15 @@
           const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
           const others = cart.others || {};
           items.forEach(item => {
-            item.classList.toggle('is-selected', !!others[item.dataset.id]);
+            const config = others[item.dataset.id];
+            const exists = !!config;
+            item.classList.toggle('is-selected', exists);
+
+            if (exists) {
+              item.dataset.qty = config.quantity || 1;
+            } else {
+              item.dataset.qty = 1;
+            }
           });
         }
 

@@ -407,19 +407,14 @@ function updateHeaderPrice() {
     if (cart.food) {
         const items = Object.values(cart.food);
         count += items.length;
-        const guestCount = parseInt(localStorage.getItem('selectedGuests')) || 0;
         items.forEach(item => {
-            if (item.mode === 'add') {
-                total += parsePrice(item.unitPrice) * (item.quantity || 0);
-            } else {
-                total += parsePrice(item.unitPrice) * guestCount;
-            }
+            total += parsePrice(item.unitPrice) * (item.quantity || 1);
         });
     }
     if (cart.others) {
         const items = Object.values(cart.others);
         count += items.length;
-        items.forEach(item => { total += parsePrice(item.price); });
+        items.forEach(item => { total += item.totalPrice || parsePrice(item.price); });
     }
 
     badge.textContent = count;

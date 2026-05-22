@@ -237,7 +237,7 @@
           modalImage.alt = item.dataset.name;
           modalTitle.textContent = item.dataset.name;
           modalDesc.textContent = item.dataset.description || '';
-          modalQtyInput.value = 1;
+          modalQtyInput.value = parseInt(item.dataset.foodQty) || 1;
 
           if (item.dataset.priceFull) {
             foodSubOptions.style.display = 'block';
@@ -257,7 +257,26 @@
           modal.classList.add('active');
           document.body.style.overflow = 'hidden';
 
-          modalAddBtn.textContent = item.classList.contains('is-selected') ? 'QUITAR DEL CARRITO' : 'AGREGAR AL CARRITO';
+          updateAddButton();
+        }
+
+        function updateAddButton() {
+          if (!currentItem) return;
+          const isSelected = currentItem.classList.contains('is-selected');
+          const currentQty = parseInt(modalQtyInput.value) || 1;
+          const originalQty = parseInt(currentItem.dataset.foodQty) || 1;
+
+          modalAddBtn.textContent = 'AGREGAR AL CARRITO';
+
+          if (isSelected && currentQty === originalQty) {
+            modalAddBtn.disabled = true;
+            modalAddBtn.style.opacity = '0.4';
+            modalAddBtn.style.cursor = 'not-allowed';
+          } else {
+            modalAddBtn.disabled = false;
+            modalAddBtn.style.opacity = '';
+            modalAddBtn.style.cursor = '';
+          }
         }
 
         function closeModal() {
@@ -274,15 +293,18 @@
         document.getElementById('qty-minus').addEventListener('click', () => {
           const val = parseInt(modalQtyInput.value) || 1;
           if (val > 1) modalQtyInput.value = val - 1;
+          updateAddButton();
         });
 
         document.getElementById('qty-plus').addEventListener('click', () => {
           const val = parseInt(modalQtyInput.value) || 1;
           modalQtyInput.value = val + 1;
+          updateAddButton();
         });
 
-        modalQtyInput.addEventListener('change', () => {
+        modalQtyInput.addEventListener('input', () => {
           if (parseInt(modalQtyInput.value) < 1) modalQtyInput.value = 1;
+          updateAddButton();
         });
 
         foodToggleBtns.forEach(btn => {
@@ -303,12 +325,13 @@
 
         modalAddBtn.addEventListener('click', () => {
           if (!currentItem) return;
-          const isSelected = !currentItem.classList.contains('is-selected');
-          currentItem.classList.toggle('is-selected');
+          if (modalAddBtn.disabled) return;
+
+          currentItem.classList.add('is-selected');
+          currentItem.dataset.foodQty = modalQtyInput.value;
 
           if (currentItem.dataset.priceFull) {
             currentItem.dataset.foodMode = currentMode;
-            currentItem.dataset.foodQty = modalQtyInput.value;
             const priceSpan = currentItem.querySelector('.selection-item__price span:first-child');
             if (currentMode === 'add') {
               priceSpan.textContent = 'COL$ ' + parseInt(currentItem.dataset.priceAdd).toLocaleString();
@@ -317,27 +340,27 @@
             }
           }
 
-          saveAndNotify(isSelected ? currentItem.dataset.name : null);
+          saveAndNotify();
           closeModal();
         });
 
-        function saveAndNotify(addedItemName) {
+        function saveAndNotify() {
           const currentCart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
           currentCart.food = {};
 
           document.querySelectorAll('.food-item.is-selected').forEach(item => {
             const id = item.dataset.id;
             let mode = 'full';
-            let quantity = 1;
             let finalPrice = item.dataset.price || item.dataset.priceFull;
 
             if (item.dataset.priceFull) {
               mode = item.dataset.foodMode || 'full';
               if (mode === 'add') {
-                quantity = parseInt(item.dataset.foodQty) || 1;
                 finalPrice = item.dataset.priceAdd;
               }
             }
+
+            const quantity = parseInt(item.dataset.foodQty) || 1;
 
             currentCart.food[id] = {
               id,
@@ -353,7 +376,7 @@
           localStorage.setItem('weddingCart', JSON.stringify(currentCart));
           window.postMessage({ type: 'CART_UPDATED' }, '*');
 
-          if (typeof showSummaryPopup === 'function' && addedItemName) {
+          if (typeof showSummaryPopup === 'function') {
             showSummaryPopup();
           }
 
@@ -371,15 +394,20 @@
           const food = cart.food || {};
           foodItems.forEach(item => {
             const id = item.dataset.id;
-            const exists = !!food[id];
+            const config = food[id];
+            const exists = !!config;
             item.classList.toggle('is-selected', exists);
+
+            if (exists) {
+              item.dataset.foodMode = config.mode || 'full';
+              item.dataset.foodQty = config.quantity || 1;
+            } else {
+              item.dataset.foodQty = 1;
+            }
 
             if (item.dataset.priceFull) {
               const priceSpan = item.querySelector('.selection-item__price span:first-child');
               if (exists) {
-                const config = food[id];
-                item.dataset.foodMode = config.mode || 'full';
-                item.dataset.foodQty = config.quantity || 1;
                 if (config.mode === 'add') {
                   priceSpan.textContent = 'COL$ ' + parseInt(item.dataset.priceAdd).toLocaleString();
                 } else {
@@ -387,7 +415,6 @@
                 }
               } else {
                 item.dataset.foodMode = 'full';
-                item.dataset.foodQty = 1;
                 priceSpan.textContent = 'COL$ ' + parseInt(item.dataset.priceFull).toLocaleString();
               }
             }

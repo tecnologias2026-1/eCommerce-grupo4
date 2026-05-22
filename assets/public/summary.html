@@ -126,13 +126,14 @@
                     
                     let itemsHtml = '';
                     Object.values(cart[category]).forEach(item => {
-                        totalBudget += parsePrice(item.price);
+                        const itemTotal = item.totalPrice || parsePrice(item.price);
+                        totalBudget += itemTotal;
                         itemsHtml += `
                             <div class="summary-item">
                                 <div class="summary-checkmark">${checkIcon}</div>
                                 <div class="summary-item__content">
                                     <p class="summary-item__text">${item.name}</p>
-                                    <p class="summary-item__subtext">${item.price}</p>
+                                    <p class="summary-item__subtext">${item.priceLabel || item.price}${item.quantity ? ` - ${item.quantity} unidad(es)` : ''}</p>
                                     ${item.detail ? `<p class="summary-item__detail">${item.detail}</p>` : ''}
                                 </div>
                             </div>
@@ -162,19 +163,10 @@
                 section.className = 'summary-section';
                 
                 let itemsHtml = '';
-                const guestCount = parseInt(localStorage.getItem('selectedGuests')) || 0;
 
                 Object.values(cart.food).forEach(item => {
-                    let itemTotal = 0;
-                    let detailLine = '';
-                    
-                    if (item.mode === 'add') {
-                        itemTotal = parsePrice(item.unitPrice) * item.quantity;
-                        detailLine = `${item.quantity} unidades`;
-                    } else {
-                        itemTotal = parsePrice(item.unitPrice) * guestCount;
-                        detailLine = `${guestCount} platos`;
-                    }
+                    const qty = item.quantity || 1;
+                    const itemTotal = parsePrice(item.unitPrice) * qty;
                     
                     totalBudget += itemTotal;
                     itemsHtml += `
@@ -182,7 +174,7 @@
                             <div class="summary-checkmark">${checkIcon}</div>
                             <div class="summary-item__content">
                                 <p class="summary-item__text">${item.name}</p>
-                                <p class="summary-item__subtext">${detailLine} - COL$ ${itemTotal.toLocaleString('es-CO')}</p>
+                                <p class="summary-item__subtext">${qty} personas - COL$ ${itemTotal.toLocaleString('es-CO')}</p>
                             </div>
                         </div>
                         ${item.image ? `
