@@ -263,6 +263,9 @@ function initGlobalGuestSelector() {
         globalGuestInput.value = storedGuests;
     }
 
+    // Dispatch initial event so venue-filter.js runs right away with stored value
+    window.dispatchEvent(new CustomEvent('guestsChanged'));
+
     globalGuestInput.addEventListener('input', () => {
         if (typeof CookieConsent === 'undefined' || CookieConsent.hasConsent()) {
             localStorage.setItem('selectedGuests', globalGuestInput.value);
