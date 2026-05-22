@@ -30,6 +30,16 @@
       <p class="feature-list__subtitle feature-list__subtitle--centered">
         Selecciona las opciones que deseas incluir en tu ceremonia para ver el total reflejado.
       </p>
+
+      <div class="hero-gallery">
+        <div class="feature__slideshow">
+          <img src="../images/c0.jpg" alt="Ceremonia" class="feature__slideshow-slide active">
+          <img src="../images/c01.webp" alt="Ceremonia" class="feature__slideshow-slide">
+          <img src="../images/c02.jpeg" alt="Ceremonia" class="feature__slideshow-slide">
+          <img src="../images/c03.jpg" alt="Ceremonia" class="feature__slideshow-slide">
+          <img src="../images/c04.jpeg" alt="Ceremonia" class="feature__slideshow-slide">
+        </div>
+      </div>
     </section>
 
     <div class="ceremony-options">
@@ -286,6 +296,44 @@
       }
       document.addEventListener('DOMContentLoaded', updateSillasPricing);
       window.addEventListener('guestsChanged', updateSillasPricing);
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const slides = document.querySelectorAll('.hero-gallery .feature__slideshow-slide');
+        if (slides.length < 2) return;
+
+        let currentIndex = 0;
+        let isTransitioning = false;
+
+        function showNext() {
+          if (isTransitioning) return;
+          isTransitioning = true;
+
+          const current = slides[currentIndex];
+          const nextIndex = (currentIndex + 1) % slides.length;
+          const next = slides[nextIndex];
+
+          next.style.transition = 'none';
+          next.classList.remove('active', 'exit');
+          next.classList.add('enter');
+          void next.offsetHeight;
+          next.style.transition = '';
+
+          current.classList.remove('active');
+          current.classList.add('exit');
+          next.classList.remove('enter');
+          next.classList.add('active');
+
+          currentIndex = nextIndex;
+
+          setTimeout(() => {
+            current.classList.remove('exit');
+            isTransitioning = false;
+          }, 1200);
+        }
+
+        setInterval(showNext, 2000);
+      });
     </script>
   </main>
   <div id="footer-placeholder"></div>

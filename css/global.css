@@ -135,6 +135,16 @@ section.feature,
     justify-content: flex-start;
 }
 
+.hero-gallery {
+    width: 100%;
+    max-width: 800px;
+    height: 380px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    align-self: center;
+}
+
 .hero-selection__top {
     width: 100%;
     display: flex;
@@ -377,7 +387,7 @@ section.feature,
     padding: var(--space-xl) var(--content-inline-space);
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .ceremony-options {
