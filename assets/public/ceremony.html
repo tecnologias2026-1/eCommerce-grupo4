@@ -43,112 +43,102 @@
       </div>
     </section>
 
-    <div class="ceremony-options">
-      <!-- Item 1 -->
-      <section class="row-characteristic selection-item" data-id="montaje" data-name="Montaje de ceremonia"
-        data-price="800000">
-        <div class="row-characteristic__image">
-          <div class="row-characteristic__image-frame">
-            <img src="../images/ceremonia campestre w3.png" alt="Montaje" />
+    <div class="ceremony-options" id="items-container">
+      <!-- Item 1: Montaje -->
+      <section class="selection-item" data-id="montaje" data-name="Montaje de ceremonia" data-price="800000"
+        data-description="Estructura completa para altar, mesa de ceremonia y organización profesional del espacio."
+        data-features='["Montaje profesional de altar y mobiliario","Organización completa del espacio","Incluye mesa de ceremonia y decoración básica"]'>
+        <div class="selection-item__image-container">
+          <img src="../images/ceremonia campestre w3.png" alt="Montaje" />
+          <div class="selection-item__badge">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
+          <span class="selection-item__overlay-text">VER MÁS</span>
         </div>
-        <div class="row-characteristic__text">
-          <h2 class="row-characteristic__title">Montaje de ceremonia</h2>
-          <div class="row-characteristic__feature-row">
-            <p class="row-characteristic__name">Servicio profesional</p>
-            <div class="row-characteristic__price">
-              <p class="row-characteristic__price-main">COL$ 800.000</p>
-            </div>
-            <div class="selection-status">
-              <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
-            </div>
-          </div>
-          <p class="row-characteristic__description">
-            Estructura completa para altar, mesa de ceremonia y organización profesional del espacio.
-          </p>
+        <div class="selection-item__content">
+          <h3 class="selection-item__title">Montaje de ceremonia</h3>
+          <p class="selection-item__name">Servicio profesional</p>
+          <p class="selection-item__price">COL$ 800.000</p>
         </div>
       </section>
 
-      <!-- Item 2 -->
-      <section class="row-characteristic selection-item" data-id="altar" data-name="Arreglo floral para altar"
-        data-price="1200000" data-reveal="up" data-reveal-delay="200">
-        <div class="row-characteristic__image">
-          <div class="row-characteristic__image-frame">
-            <img src="../images/c2.png" alt="Altar" />
+      <!-- Item 2: Altar -->
+      <section class="selection-item" data-id="altar" data-name="Arreglo floral para altar" data-price="1200000"
+        data-reveal="up" data-reveal-delay="200"
+        data-description="Composición floral majestuosa con flores de temporada, diseñada para resaltar el punto focal de la unión."
+        data-features='["Arreglo floral premium","Flores de temporada seleccionadas","Diseño personalizado para altar","Incluye instalación profesional"]'>
+        <div class="selection-item__image-container">
+          <img src="../images/c2.png" alt="Altar" />
+          <div class="selection-item__badge">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
+          <span class="selection-item__overlay-text">VER MÁS</span>
         </div>
-        <div class="row-characteristic__text">
-          <h2 class="row-characteristic__title">Arreglo floral para altar</h2>
-          <div class="row-characteristic__feature-row">
-            <p class="row-characteristic__name">Arreglo Premium</p>
-            <div class="row-characteristic__price">
-              <p class="row-characteristic__price-main">COL$ 1.200.000</p>
-            </div>
-            <div class="selection-status">
-              <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
-            </div>
-          </div>
-          <p class="row-characteristic__description">
-            Composición floral majestuosa con flores de temporada, diseñada para resaltar el punto focal de la unión.
-          </p>
+        <div class="selection-item__content">
+          <h3 class="selection-item__title">Arreglo floral para altar</h3>
+          <p class="selection-item__name">Arreglo Premium</p>
+          <p class="selection-item__price">COL$ 1.200.000</p>
         </div>
       </section>
 
-      <!-- Item 3 -->
-      <section class="row-characteristic selection-item" data-id="sillas" data-name="Sillas y decoración de asientos"
-        data-price="650000" data-set-capacity="50" data-reveal="up" data-reveal-delay="300">
-        <div class="row-characteristic__image">
-          <div class="row-characteristic__image-frame square-img">
-            <img src="../images/c3.png" alt="Sillas" />
+      <!-- Item 3: Sillas -->
+      <section class="selection-item" data-id="sillas" data-name="Sillas y decoración de asientos" data-price="650000"
+        data-set-capacity="50" data-reveal="up" data-reveal-delay="300"
+        data-description="Sillas tipo tiffany con decoración personalizada en cintas y bouquets laterales. El precio se ajusta automáticamente según la cantidad de invitados."
+        data-features='["Sillas tipo tiffany","Decoración personalizada en cintas","Bouquets laterales","Set base para 50 personas","Precio ajustado por invitado"]'>
+        <div class="selection-item__image-container">
+          <img src="../images/c3.png" alt="Sillas" />
+          <div class="selection-item__badge">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
+          <span class="selection-item__overlay-text">VER MÁS</span>
         </div>
-        <div class="row-characteristic__text">
-          <h2 class="row-characteristic__title">Sillas y decoración de asientos</h2>
-          <div class="row-characteristic__feature-row">
-            <p class="row-characteristic__name">Set para 50 personas COL$ 650.000 · <span
-                class="row-characteristic__set-price"> Adicionales COL$ 13.000</span> c/u</p>
-            <div class="row-characteristic__price">
-              <p class="row-characteristic__price-main"><span id="sillas-total">COL$ 650.000</span></p>
-            </div>
-            <div class="selection-status">
-              <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
-            </div>
-          </div>
-          <div class="row-characteristic__sets-info" id="sillas-sets-info">
-            <span id="sillas-sets">1</span> set completo<span id="sillas-sets-plural"></span>
-            <span class="row-characteristic__sets-info-sep" id="sillas-extras-sep" style="display:none"> · </span>
-            <span id="sillas-extras-info" style="display:none"><span id="sillas-extras">0</span> invitado<span id="sillas-extras-plural"></span> adicional<span id="sillas-extras-plural-2"></span>: <span id="sillas-extras-price">COL$ 0</span></span>
-          </div>
-          <p class="row-characteristic__description">
-            Sillas tipo tiffany con decoración personalizada en cintas y bouquets laterales.
-          </p>
+        <div class="selection-item__content">
+          <h3 class="selection-item__title">Sillas y decoración de asientos</h3>
+          <p class="selection-item__name">Set para 50 personas</p>
+          <p class="selection-item__price"><span id="sillas-total">COL$ 650.000</span></p>
         </div>
       </section>
 
-    <!-- Item 4 -->
-    <section class="row-characteristic selection-item" data-id="camino" data-name="Decoración de camino al altar"
-      data-price="450000" data-reveal="up" data-reveal-delay="400">
-      <div class="row-characteristic__image">
-          <div class="row-characteristic__image-frame square-img">
-            <img src="../images/c1.png" alt="Camino" />
+      <!-- Item 4: Camino -->
+      <section class="selection-item" data-id="camino" data-name="Decoración de camino al altar" data-price="450000"
+        data-reveal="up" data-reveal-delay="400"
+        data-description="Delicada huella de pétalos y pequeños arreglos que enmarcan el recorrido nupcial."
+        data-features='["Pétalos naturales","Pequeños arreglos florales","Diseño personalizado del recorrido","Montaje incluido"]'>
+        <div class="selection-item__image-container">
+          <img src="../images/c1.png" alt="Camino" />
+          <div class="selection-item__badge">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
+          <span class="selection-item__overlay-text">VER MÁS</span>
         </div>
-        <div class="row-characteristic__text">
-          <h2 class="row-characteristic__title">Decoración de camino al altar</h2>
-          <div class="row-characteristic__feature-row">
-            <p class="row-characteristic__name">Camino Clásico</p>
-            <div class="row-characteristic__price">
-              <p class="row-characteristic__price-main">COL$ 450.000</p>
-            </div>
-            <div class="selection-status">
-              <img src="../images/checkmark.png" alt="" class="selection-status__icon" />
-            </div>
-          </div>
-          <p class="row-characteristic__description">
-            Delicada huella de pétalos y pequeños arreglos que enmarcan el recorrido nupcial.
-          </p>
+        <div class="selection-item__content">
+          <h3 class="selection-item__title">Decoración de camino al altar</h3>
+          <p class="selection-item__name">Camino Clásico</p>
+          <p class="selection-item__price">COL$ 450.000</p>
         </div>
       </section>
+    </div>
+
+    <!-- Selection Modal -->
+    <div class="selection-modal-backdrop" id="selection-modal">
+      <div class="selection-modal">
+        <button class="selection-modal__close" id="modal-close">&times;</button>
+        <img class="selection-modal__image" id="modal-image" src="" alt="">
+        <div class="selection-modal__body">
+          <h3 class="selection-modal__title" id="modal-title"></h3>
+          <p class="selection-modal__price" id="modal-price"></p>
+          <p class="selection-modal__desc" id="modal-desc"></p>
+          <ul class="selection-modal__features" id="modal-features"></ul>
+          <div class="selection-modal__qty">
+            <span class="selection-modal__qty-label">Cantidad:</span>
+            <button class="selection-modal__qty-btn" id="qty-minus">−</button>
+            <input type="number" class="selection-modal__qty-input" id="qty-input" value="1" min="1">
+            <button class="selection-modal__qty-btn" id="qty-plus">+</button>
+          </div>
+          <button class="selection-modal__add-btn" id="modal-add-btn">AGREGAR AL CARRITO</button>
+        </div>
+      </div>
     </div>
 
     <section class="next-button-bar" data-reveal data-reveal-delay="300">
@@ -160,8 +150,17 @@
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const items = document.querySelectorAll('.selection-item');
+        const modal = document.getElementById('selection-modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalTitle = document.getElementById('modal-title');
+        const modalPrice = document.getElementById('modal-price');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalFeatures = document.getElementById('modal-features');
+        const modalQtyInput = document.getElementById('qty-input');
+        const modalAddBtn = document.getElementById('modal-add-btn');
 
-        // Cargar estado inicial
+        let currentItem = null;
+
         const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
         const selections = cart.ceremony || {};
 
@@ -171,9 +170,63 @@
           }
 
           item.addEventListener('click', () => {
-            const isSelected = item.classList.toggle('is-selected');
-            updateCart(item, isSelected);
+            openModal(item);
           });
+        });
+
+        function openModal(item) {
+          currentItem = item;
+          modalImage.src = item.querySelector('.selection-item__image-container img').getAttribute('src');
+          modalImage.alt = item.dataset.name;
+          modalTitle.textContent = item.dataset.name;
+          modalPrice.textContent = item.querySelector('.selection-item__price').textContent;
+          modalDesc.textContent = item.dataset.description || '';
+          modalQtyInput.value = 1;
+
+          try {
+            const feats = JSON.parse(item.dataset.features || '[]');
+            modalFeatures.innerHTML = feats.map(f => '<li>' + f + '</li>').join('');
+          } catch(e) {
+            modalFeatures.innerHTML = '';
+          }
+
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+
+          modalAddBtn.textContent = item.classList.contains('is-selected') ? 'QUITAR DEL CARRITO' : 'AGREGAR AL CARRITO';
+        }
+
+        function closeModal() {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+          currentItem = null;
+        }
+
+        document.getElementById('modal-close').addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeModal();
+        });
+
+        document.getElementById('qty-minus').addEventListener('click', () => {
+          const val = parseInt(modalQtyInput.value) || 1;
+          if (val > 1) modalQtyInput.value = val - 1;
+        });
+
+        document.getElementById('qty-plus').addEventListener('click', () => {
+          const val = parseInt(modalQtyInput.value) || 1;
+          modalQtyInput.value = val + 1;
+        });
+
+        modalQtyInput.addEventListener('change', () => {
+          if (parseInt(modalQtyInput.value) < 1) modalQtyInput.value = 1;
+        });
+
+        modalAddBtn.addEventListener('click', () => {
+          if (!currentItem) return;
+          const isSelected = !currentItem.classList.contains('is-selected');
+          currentItem.classList.toggle('is-selected');
+          updateCart(currentItem, isSelected);
+          closeModal();
         });
 
         function updateCart(item, isSelected) {
@@ -185,8 +238,8 @@
             const cartItem = {
               id: item.dataset.id,
               name: name,
-              price: item.querySelector('.row-characteristic__price-main').textContent,
-              image: item.querySelector('.row-characteristic__image img').getAttribute('src')
+              price: item.querySelector('.selection-item__price').textContent,
+              image: item.querySelector('.selection-item__image-container img').getAttribute('src')
             };
 
             if (item.dataset.id === 'sillas') {
@@ -222,8 +275,7 @@
             showSummaryPopup();
           }
 
-          // Además, si el popup ya está abierto, forzar actualización
-          const summaryBackdrop = document.querySelector(".summary-modal-backdrop");
+          const summaryBackdrop = document.querySelector('.summary-modal-backdrop');
           if (summaryBackdrop) {
             const iframe = summaryBackdrop.querySelector('iframe');
             if (iframe && iframe.contentWindow) {
@@ -236,17 +288,10 @@
 
     <script>
       function updateSillasPricing() {
-        const setsEl = document.getElementById('sillas-sets');
-        const setsPlural = document.getElementById('sillas-sets-plural');
-        const extrasEl = document.getElementById('sillas-extras');
-        const extrasPlural = document.getElementById('sillas-extras-plural');
-        const extrasPlural2 = document.getElementById('sillas-extras-plural-2');
-        const extrasInfo = document.getElementById('sillas-extras-info');
-        const extrasSep = document.getElementById('sillas-extras-sep');
-        const extrasPriceEl = document.getElementById('sillas-extras-price');
         const totalEl = document.getElementById('sillas-total');
+        if (!totalEl) return;
         const section = document.querySelector('.selection-item[data-id="sillas"]');
-        if (!setsEl || !totalEl || !section) return;
+        if (!section) return;
 
         const guests = parseInt(localStorage.getItem('selectedGuests')) || 0;
         const basePrice = parseInt(section.dataset.price) || 650000;
@@ -261,31 +306,10 @@
           setsPrice = fullSets * basePrice;
           extrasPrice = extraGuests * perPerson;
           total = setsPrice + extrasPrice;
-
-          setsEl.textContent = fullSets;
-          setsPlural.textContent = fullSets !== 1 ? 's' : '';
-          totalEl.textContent = 'COL$ ' + total.toLocaleString('es-CO');
-
-          if (extraGuests > 0) {
-            extrasEl.textContent = extraGuests;
-            extrasPlural.textContent = extraGuests !== 1 ? 's' : '';
-            extrasPlural2.textContent = extraGuests !== 1 ? 's' : '';
-            extrasPriceEl.textContent = 'COL$ ' + extrasPrice.toLocaleString('es-CO');
-            extrasInfo.style.display = 'inline';
-            extrasSep.style.display = 'inline';
-          } else {
-            extrasInfo.style.display = 'none';
-            extrasSep.style.display = 'none';
-          }
-        } else {
-          setsEl.textContent = '1';
-          setsPlural.textContent = '';
-          totalEl.textContent = 'COL$ ' + basePrice.toLocaleString('es-CO');
-          extrasInfo.style.display = 'none';
-          extrasSep.style.display = 'none';
         }
 
-        // Update cart in real-time if sillas is selected
+        totalEl.textContent = 'COL$ ' + total.toLocaleString('es-CO');
+
         const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
         if (cart.ceremony && cart.ceremony.sillas) {
           cart.ceremony.sillas.price = totalEl.textContent;
