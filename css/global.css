@@ -2152,7 +2152,7 @@ section.feature .feature__subtitle {
 .venue-gallery__actions {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     width: 100%;
 }
 
