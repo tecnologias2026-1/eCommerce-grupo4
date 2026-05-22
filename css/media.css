@@ -141,13 +141,19 @@
     }
 
     .summary-marquee {
-        padding: 60px var(--page-gutter);
+        padding: 32px var(--page-gutter);
+        gap: 24px;
     }
 
     .summary-pago {
-        padding: 40px var(--page-gutter);
+        padding: 24px var(--page-gutter);
         flex-wrap: wrap;
-        gap: 40px;
+        gap: 24px;
+    }
+
+    .summary-image-box {
+        max-width: 180px;
+        height: 110px;
     }
 
     .payment-title-row,
@@ -687,14 +693,19 @@
 
     .summary-marquee {
         grid-template-columns: 1fr;
-        padding: 40px var(--space-md);
-        gap: 60px;
+        padding: 24px var(--space-md);
+        gap: 20px;
     }
 
     .summary-pago {
         flex-direction: column;
-        padding: 40px var(--space-md);
+        padding: 24px var(--space-md);
         text-align: center;
+        gap: 16px;
+    }
+
+    .summary-total-value {
+        font-size: 24px;
     }
 
     .btn-continue-pay {
@@ -707,8 +718,12 @@
     }
 
     .summary-image-box {
-        width: 100%;
-        height: 200px;
+        max-width: 100%;
+        height: 160px;
+    }
+
+    .summary-section {
+        padding: 24px 20px;
     }
 
     .payment-row-pair .payment-input {
