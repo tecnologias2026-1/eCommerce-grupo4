@@ -526,6 +526,9 @@ function showCustomConfirm(title, message, onConfirm) {
     // Only apply on non-touch devices for native feel on mobile/tablet
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
+    // Skip smooth scroll inside iframes (carrito summary popup)
+    if (window.self !== window.top) return;
+
     // Dynamically disable native smooth scroll to avoid double-animation fight/stutter
     document.documentElement.style.scrollBehavior = "auto";
 
