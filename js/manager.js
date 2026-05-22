@@ -381,21 +381,64 @@ function showSummaryPopup() {
 function updateHeaderPrice() {
     const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
     const badge = document.getElementById('cart-badge');
+    const totalEl = document.getElementById('cart-total');
     if (!badge) return;
 
     let count = 0;
+    let total = 0;
 
-    if (cart.selectedVenue) count++;
-    if (cart.ceremony) count += Object.keys(cart.ceremony).length;
-    if (cart.reception) count += Object.keys(cart.reception).length;
-    if (cart.food) count += Object.keys(cart.food).length;
-    if (cart.others) count += Object.keys(cart.others).length;
+    function parsePrice(priceStr) {
+        if (typeof priceStr === 'number') return priceStr;
+        return parseInt(String(priceStr).replace(/[^0-9]/g, "")) || 0;
+    }
+
+    if (cart.selectedVenue) {
+        count++;
+        total += parsePrice(cart.selectedVenue.price);
+    }
+    if (cart.ceremony) {
+        const items = Object.values(cart.ceremony);
+        count += items.length;
+        items.forEach(item => { total += parsePrice(item.price); });
+    }
+    if (cart.reception) {
+        const items = Object.values(cart.reception);
+        count += items.length;
+        items.forEach(item => { total += parsePrice(item.price); });
+    }
+    if (cart.food) {
+        const items = Object.values(cart.food);
+        count += items.length;
+        const guestCount = parseInt(localStorage.getItem('selectedGuests')) || 0;
+        items.forEach(item => {
+            if (item.mode === 'add') {
+                total += parsePrice(item.unitPrice) * (item.quantity || 0);
+            } else {
+                total += parsePrice(item.unitPrice) * guestCount;
+            }
+        });
+    }
+    if (cart.others) {
+        const items = Object.values(cart.others);
+        count += items.length;
+        items.forEach(item => { total += parsePrice(item.price); });
+    }
 
     badge.textContent = count;
+    badge.dataset.count = count;
+    if (totalEl) {
+        totalEl.textContent = total > 0 ? 'COL$ ' + total.toLocaleString('es-CO') : 'COL$ 0';
+    }
 }
 
 window.addEventListener('message', (event) => {
     if (event.data.type === 'CART_UPDATED') {
+        updateHeaderPrice();
+    }
+});
+
+window.addEventListener('storage', (event) => {
+    if (event.key === 'weddingCart' || event.key === 'selectedGuests') {
         updateHeaderPrice();
     }
 });
