@@ -227,6 +227,8 @@
           });
         });
 
+        syncFromCart();
+
         function openModal(item) {
           currentItem = item;
           currentMode = 'full';
@@ -366,6 +368,40 @@
             }
           }
         }
+
+        function syncFromCart() {
+          const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+          const food = cart.food || {};
+          foodItems.forEach(item => {
+            const id = item.dataset.id;
+            const exists = !!food[id];
+            item.classList.toggle('is-selected', exists);
+
+            if (item.dataset.priceFull) {
+              const priceSpan = item.querySelector('.selection-item__price span:first-child');
+              if (exists) {
+                const config = food[id];
+                item.dataset.foodMode = config.mode || 'full';
+                item.dataset.foodQty = config.quantity || 1;
+                if (config.mode === 'add') {
+                  priceSpan.textContent = 'COL$ ' + parseInt(item.dataset.priceAdd).toLocaleString();
+                } else {
+                  priceSpan.textContent = 'COL$ ' + parseInt(item.dataset.priceFull).toLocaleString();
+                }
+              } else {
+                item.dataset.foodMode = 'full';
+                item.dataset.foodQty = 1;
+                priceSpan.textContent = 'COL$ ' + parseInt(item.dataset.priceFull).toLocaleString();
+              }
+            }
+          });
+        }
+
+        window.addEventListener('message', (e) => {
+          if (e.data && e.data.type === 'CART_UPDATED') {
+            syncFromCart();
+          }
+        });
       });
     </script>
     <script>

@@ -163,18 +163,13 @@
 
         let currentItem = null;
 
-        const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
-        const selections = cart.others || {};
-
         items.forEach(item => {
-          if (selections[item.dataset.id]) {
-            item.classList.add('is-selected');
-          }
-
           item.addEventListener('click', () => {
             openModal(item);
           });
         });
+
+        syncFromCart();
 
         function openModal(item) {
           currentItem = item;
@@ -253,6 +248,20 @@
             showSummaryPopup();
           }
         }
+
+        function syncFromCart() {
+          const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+          const others = cart.others || {};
+          items.forEach(item => {
+            item.classList.toggle('is-selected', !!others[item.dataset.id]);
+          });
+        }
+
+        window.addEventListener('message', (e) => {
+          if (e.data && e.data.type === 'CART_UPDATED') {
+            syncFromCart();
+          }
+        });
       });
     </script>
     <script>
