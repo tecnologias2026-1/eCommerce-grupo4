@@ -183,6 +183,10 @@
 
           localStorage.setItem('weddingCart', JSON.stringify(currentCart));
           window.postMessage({ type: 'CART_UPDATED' }, '*');
+
+          if (typeof showSummaryPopup === 'function' && isSelected) {
+            showSummaryPopup();
+          }
         }
       });
     </script>

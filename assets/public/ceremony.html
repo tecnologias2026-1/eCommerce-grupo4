@@ -218,6 +218,10 @@
           localStorage.setItem('weddingCart', JSON.stringify(currentCart));
           window.postMessage({ type: 'CART_UPDATED' }, '*');
 
+          if (typeof showSummaryPopup === 'function' && isSelected) {
+            showSummaryPopup();
+          }
+
           // Además, si el popup ya está abierto, forzar actualización
           const summaryBackdrop = document.querySelector(".summary-modal-backdrop");
           if (summaryBackdrop) {

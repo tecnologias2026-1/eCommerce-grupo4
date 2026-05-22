@@ -18,6 +18,15 @@ function addToCart(venueData) {
     currentCart.selectedVenue = venueData;
     if (typeof CookieConsent !== 'undefined' && !CookieConsent.hasConsent()) return;
     localStorage.setItem('weddingCart', JSON.stringify(currentCart));
+
+    // Auto-show cart on successful add
+    if (typeof showSummaryPopup === 'function') {
+        if (window.parent !== window) {
+            window.parent.postMessage({ type: 'SHOW_CART' }, '*');
+        } else {
+            showSummaryPopup();
+        }
+    }
 }
 
 function showCustomAlert(title, message) {

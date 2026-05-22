@@ -430,6 +430,9 @@ window.addEventListener('message', (event) => {
     if (event.data.type === 'CART_UPDATED') {
         updateHeaderPrice();
     }
+    if (event.data.type === 'SHOW_CART') {
+        showSummaryPopup();
+    }
 });
 
 window.addEventListener('storage', (event) => {
