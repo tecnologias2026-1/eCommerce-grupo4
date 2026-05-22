@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="css/global.css">
 
     <link rel="stylesheet" href="css/media.css">
+    <style>
+        #global-guest-container {
+            display: none !important;
+        }
+    </style>
     <script src="js/cookie-consent.js" defer></script>
     <script src="js/manager.js" defer></script>
 </head>
@@ -39,24 +44,33 @@
     </section>
 
     <!-- Nuestras Bodas Section (Figma 440:8455) -->
-    <section class="nuestras-bodas" data-name="Feature" data-node-id="440:8455">
+    <section class="nuestras-bodas" id="nuestras-bodas" data-name="Feature" data-node-id="440:8455">
+        <!-- Floating scroll indicator starting the section -->
+        <a href="#nuestras-bodas" class="section-scroll-indicator" aria-label="Desplazarse hacia abajo">
+            <svg class="section-scroll-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </a>
+
         <div class="nuestras-bodas__header">
             <h2 class="nuestras-bodas__title">Nuestras Bodas</h2>
             <p class="nuestras-bodas__subtitle">Cada pareja tiene sus ideas de boda ideal y aca compartimos contigo y
                 con ellos algunas de sus eleciones para vivir el mejor dia de sus vidas a su completo gusto</p>
         </div>
 
-        <div class="nuestras-bodas__image-container">
-            <img src="assets/images/anillos desktop.png" alt="Anillos de boda" class="nuestras-bodas__image">
-        </div>
-
-        <div class="nuestras-bodas__details">
-            <h4 class="nuestras-bodas__wedding-title">Juana y carlos</h4>
-            <div class="nuestras-bodas__wedding-info">
-                <p>10/05/2018</p>
-                <p>Hacienda Maria Clarita</p>
+        <a href="assets/public/weding4.html" class="boda-card__link" style="text-decoration: none; color: inherit; display: block; width: 100%; max-width: var(--container-max); margin: 0 auto;">
+            <div class="nuestras-bodas__image-container">
+                <img src="assets/images/anillos desktop.png" alt="Anillos de boda" class="nuestras-bodas__image">
             </div>
-        </div>
+
+            <div class="nuestras-bodas__details">
+                <h4 class="nuestras-bodas__wedding-title">Juana y carlos</h4>
+                <div class="nuestras-bodas__wedding-info">
+                    <p>10/05/2018</p>
+                    <p>Hacienda Maria Clarita</p>
+                </div>
+            </div>
+        </a>
     </section>
 
     <!-- Bodas Ejemplares Section (Figma 440:8456) -->
@@ -214,10 +228,15 @@
             <blockquote class="inspiration-quote__text">
                 “Transformamos momentos en recuerdos eternos, cuidando cada detalle con amor y elegancia ”
             </blockquote>
-            <figcaption class="inspiration-quote__caption">
+            <figcaption class="inspiration-quote__caption" style="margin-bottom: var(--space-xl);">
                 Porque tu amor merece ser recordado a detalle
             </figcaption>
         </figure>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="assets/public/place.html" class="hero__button">
+                <span class="hero__button-text">Personalizar</span>
+            </a>
+        </div>
     </section>
     <div id="footer-placeholder"></div>
 </body>

@@ -227,9 +227,19 @@ function updateFooterState() {
 document.addEventListener("DOMContentLoaded", () => {
     if (window.location.search.includes('popup=true')) {
         document.body.classList.add('is-popup');
+        
+        // Intercept close button clicks inside iframe to notify parent window
+        const closeBtn = document.querySelector(".wedding-header__close");
+        if (closeBtn) {
+            closeBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                window.parent.postMessage({ type: 'CLOSE_WEDDING_MODAL' }, '*');
+            });
+        }
     }
     
     initVenueGalleries();
+    initWeddingCardsModal();
 
     cargarComponente("header-placeholder", getPublicPagePath("header.html")).then((target) => {
         normalizeImageSources(target);
@@ -646,3 +656,74 @@ function showCustomConfirm(title, message, onConfirm) {
         requestAnimationFrame(scrollStep);
     }
 })();
+
+function initWeddingCardsModal() {
+    const weddingLinks = document.querySelectorAll(".boda-card__link");
+    weddingLinks.forEach(link => {
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const href = link.getAttribute("href");
+            showWeddingModal(href);
+        });
+    });
+
+    // Listen to messages from the iframe to close the modal
+    window.addEventListener("message", (event) => {
+        if (event.data.type === 'CLOSE_WEDDING_MODAL') {
+            closeWeddingModal();
+        }
+    });
+}
+
+function showWeddingModal(url) {
+    let backdrop = document.querySelector(".wedding-modal-backdrop");
+    if (backdrop) {
+        const iframe = backdrop.querySelector('iframe');
+        if (iframe) {
+            iframe.src = `${url}?popup=true`;
+        }
+        backdrop.classList.add("active");
+        document.body.classList.add("modal-open");
+        return;
+    }
+
+    backdrop = document.createElement("div");
+    backdrop.className = "wedding-modal-backdrop";
+    document.body.appendChild(backdrop);
+
+    backdrop.innerHTML = `
+        <div class="wedding-popup">
+            <button class="wedding-popup__close" id="close-wedding-btn" aria-label="Cerrar">&times;</button>
+            <div class="wedding-popup__content">
+                <iframe src="${url}?popup=true" class="wedding-popup__iframe"></iframe>
+            </div>
+        </div>
+    `;
+
+    // Trigger transition
+    setTimeout(() => {
+        backdrop.classList.add("active");
+        document.body.classList.add("modal-open");
+    }, 10);
+
+    const closeBtn = backdrop.querySelector("#close-wedding-btn");
+    closeBtn.addEventListener("click", closeWeddingModal);
+    backdrop.addEventListener("click", (e) => {
+        if (e.target === backdrop) {
+            closeWeddingModal();
+        }
+    });
+}
+
+function closeWeddingModal() {
+    const backdrop = document.querySelector(".wedding-modal-backdrop");
+    if (backdrop) {
+        backdrop.classList.remove("active");
+        document.body.classList.remove("modal-open");
+        setTimeout(() => {
+            if (backdrop.parentNode) {
+                backdrop.parentNode.removeChild(backdrop);
+            }
+        }, 400);
+    }
+}
