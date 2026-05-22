@@ -1687,7 +1687,7 @@ section.feature,
     border: none;
     color: #ccc;
     cursor: pointer;
-    font-family: var(--font-sans);
+    font-family: var(--font-primary);
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.5px;
@@ -4572,8 +4572,8 @@ body.modal-open .venue-content {
 
 .selection-item__name {
     margin: 0;
-    font-family: var(--font-sans);
-    font-weight: 400;
+    font-family: var(--font-primary);
+    font-weight: 500;
     font-size: 14px;
     color: var(--muted);
 }
@@ -4690,7 +4690,7 @@ body.modal-open .venue-content {
 
 .selection-modal__desc {
     margin: 0;
-    font-family: var(--font-sans);
+    font-family: var(--font-primary);
     font-weight: 400;
     font-size: 15px;
     color: var(--muted);
@@ -4707,7 +4707,7 @@ body.modal-open .venue-content {
 }
 
 .selection-modal__features li {
-    font-family: var(--font-sans);
+    font-family: var(--font-primary);
     font-weight: 400;
     font-size: 14px;
     color: var(--black);
@@ -4735,7 +4735,7 @@ body.modal-open .venue-content {
 }
 
 .selection-modal__qty-label {
-    font-family: var(--font-sans);
+    font-family: var(--font-primary);
     font-weight: 500;
     font-size: 14px;
     color: var(--black);
@@ -4768,7 +4768,7 @@ body.modal-open .venue-content {
     border: 1px solid #ddd;
     border-radius: 8px;
     text-align: center;
-    font-family: var(--font-sans);
+    font-family: var(--font-primary);
     font-size: 15px;
     font-weight: 500;
 }
@@ -4806,7 +4806,7 @@ body.modal-open .venue-content {
     border: 1px solid #ddd;
     border-radius: 20px;
     background: transparent;
-    font-family: var(--font-sans);
+    font-family: var(--font-primary);
     font-size: 14px;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -4819,14 +4819,14 @@ body.modal-open .venue-content {
 }
 
 .selection-modal__qty-hint {
-    font-family: var(--font-sans);
+    font-family: var(--font-primary);
     font-size: 13px;
     color: var(--muted);
     margin: 0;
 }
 
 .selection-item__price-sub {
-    font-family: var(--font-sans);
+    font-family: var(--font-primary);
     font-weight: 400;
     font-size: 13px;
     color: var(--muted);
