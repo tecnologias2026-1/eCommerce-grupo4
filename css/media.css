@@ -791,6 +791,562 @@
         height: 90vh;
         border-radius: 12px;
     }
+
+    /* Buttons smaller on mobile */
+    .btn-primary,
+    .btn-add-to-cart,
+    .btn-continue-pay,
+    .btn-reserve,
+    .btn-home,
+    .btn-action-user {
+        padding: 8px 14px !important;
+        font-size: 11px !important;
+        min-height: 34px;
+        border-radius: 6px !important;
+    }
+
+    .selection-modal__add-btn,
+    .notification-modal__btn {
+        padding: 8px 14px !important;
+        font-size: 11px !important;
+        min-height: 32px;
+        border-radius: 6px !important;
+    }
+
+    .venue-card__overlay-text,
+    .selection-item__overlay-text {
+        font-size: 10px !important;
+        padding: 6px 12px !important;
+        border-radius: 20px !important;
+    }
+
+    .venue-card__content {
+        padding: 10px 12px 8px !important;
+    }
+
+    .venue-card__title {
+        font-size: 14px !important;
+    }
+
+    .venue-card__price,
+    .venue-card__guests {
+        font-size: 12px !important;
+    }
+
+    .selection-item__content {
+        padding: 10px 12px 8px !important;
+    }
+
+    .selection-item__title {
+        font-size: 13px !important;
+    }
+
+    .selection-item__name {
+        font-size: 12px !important;
+    }
+
+    .selection-item__price {
+        font-size: 13px !important;
+    }
+
+    .selection-item__price-sub {
+        font-size: 10px !important;
+    }
+
+    .selection-modal {
+        width: 92%;
+        max-width: 360px;
+        border-radius: 12px !important;
+    }
+
+    .selection-modal__qty-input {
+        width: 40px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .selection-modal__qty-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+
+    .selection-modal__add-btn {
+        margin-top: 12px !important;
+    }
+
+    /* Compact everything for mobile */
+    .hero-selection__title {
+        font-size: 18px !important;
+        padding: 0 !important;
+    }
+
+    .feature-list__subtitle,
+    .feature__text,
+    .venue-gallery__subtitle,
+    .reservation-calendar__subtitle {
+        font-size: 13px !important;
+    }
+
+    .venue-gallery__title,
+    .reservation-calendar__title {
+        font-size: 20px !important;
+    }
+
+    .feature__subtitle {
+        font-size: 14px !important;
+    }
+
+    .hero__title {
+        font-size: 28px !important;
+    }
+
+    h1 { font-size: 22px !important; }
+    h2 { font-size: 18px !important; }
+    h3 { font-size: 16px !important; }
+    h4 { font-size: 14px !important; }
+
+    .venue-card {
+        height: 280px !important;
+    }
+
+    .venue-card__image-container {
+        height: 160px !important;
+    }
+
+    .summary-marquee {
+        padding: 16px !important;
+        gap: 12px !important;
+    }
+
+    .summary-section {
+        padding: 16px !important;
+    }
+
+    .summary-section__title {
+        font-size: 14px !important;
+    }
+
+    .summary-item__text {
+        font-size: 13px !important;
+    }
+
+    .summary-item__subtext {
+        font-size: 11px !important;
+    }
+
+    .summary-total-value {
+        font-size: 18px !important;
+    }
+
+    .summary-total-label {
+        font-size: 13px !important;
+    }
+
+    .summary-pago {
+        padding: 12px 16px !important;
+        gap: 10px !important;
+    }
+
+    .summary-image-box {
+        height: 100px !important;
+    }
+
+    .notification-modal {
+        padding: 20px !important;
+        max-width: 300px !important;
+    }
+
+    .notification-modal__title {
+        font-size: 16px !important;
+    }
+
+    .notification-modal__text {
+        font-size: 13px !important;
+    }
+
+    .cart-modal {
+        width: 98% !important;
+        height: 85vh !important;
+    }
+
+    .venue-modal-content {
+        padding: 12px !important;
+    }
+
+    .venue-iframe-modal__content {
+        width: 98% !important;
+    }
+
+    .selection-modal__image {
+        height: 160px !important;
+    }
+
+    .selection-modal__body {
+        padding: 14px !important;
+    }
+
+    .selection-modal__title {
+        font-size: 16px !important;
+    }
+
+    .selection-modal__price {
+        font-size: 14px !important;
+    }
+
+    .selection-modal__desc {
+        font-size: 12px !important;
+    }
+
+    .selection-modal__features li {
+        font-size: 12px !important;
+    }
+
+    .form-grid {
+        gap: 12px !important;
+    }
+
+    .form-group label {
+        font-size: 12px !important;
+    }
+
+    .form-group input {
+        font-size: 13px !important;
+        padding: 8px 10px !important;
+        min-height: 36px !important;
+    }
+
+    .userdata-form {
+        padding: 0 12px !important;
+    }
+
+    .hero-gallery .feature__slideshow {
+        height: 160px !important;
+    }
+
+    .feature__slideshow-slide {
+        object-fit: cover !important;
+    }
+
+    .next-button-bar {
+        padding: 12px 16px !important;
+    }
+
+    .venue-header {
+        padding: 16px !important;
+    }
+
+    .venue-header__meta {
+        margin-top: 8px !important;
+        gap: 12px !important;
+    }
+
+    .venue-title {
+        font-size: 22px !important;
+    }
+
+    .venue-price,
+    .venue-guests {
+        font-size: 14px !important;
+    }
+
+    .wedding-header {
+        padding: 16px !important;
+    }
+
+    .wedding-header__title {
+        font-size: 22px !important;
+    }
+
+    .wedding-banner,
+    .wedding-features {
+        padding: 24px 16px !important;
+    }
+
+    .wedding-features {
+        gap: 16px !important;
+    }
+
+    .venue-content {
+        gap: 16px !important;
+        padding: 0 12px 16px !important;
+    }
+
+    .venue-location,
+    .venue-estimation,
+    .venue-footer {
+        padding: 12px !important;
+    }
+
+    .venue-location__title,
+    .venue-estimation__title,
+    .venue-footer__title {
+        font-size: 16px !important;
+    }
+
+    .venue-location__address,
+    .venue-footer__text,
+    .venue-footer__item {
+        font-size: 12px !important;
+    }
+
+    .venue-location__map-container iframe {
+        min-height: 180px !important;
+    }
+
+    .venue-features-grid {
+        gap: 12px !important;
+    }
+
+    .calendar-container {
+        padding: 12px !important;
+    }
+
+    .calendar-grid__daynames span,
+    .calendar-grid__days button {
+        font-size: 11px !important;
+        width: 32px !important;
+        height: 32px !important;
+    }
+
+    .reservation-calendar {
+        padding: 16px !important;
+    }
+
+    .res-view-container {
+        margin: 6px !important;
+        padding: 12px !important;
+    }
+
+    .confirm-container {
+        margin: 12px !important;
+        padding: 16px !important;
+    }
+
+    .res-view-main-title {
+        font-size: 18px !important;
+    }
+
+    .detail-label {
+        font-size: 10px !important;
+    }
+
+    .detail-value {
+        font-size: 13px !important;
+    }
+
+    .res-card {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    .res-card__title {
+        font-size: 20px !important;
+    }
+
+    .modal-content {
+        padding: 24px 16px !important;
+    }
+
+    .modal-title {
+        font-size: 20px !important;
+    }
+
+    .modal-description {
+        font-size: 13px !important;
+    }
+
+    .modal-input {
+        font-size: 14px !important;
+        min-height: 40px !important;
+    }
+
+    .payment-page-title {
+        font-size: 20px !important;
+    }
+
+    .payment-row-pair {
+        gap: 8px !important;
+    }
+
+    .payment-checkout-note {
+        font-size: 13px !important;
+    }
+
+    .venue-options-selector {
+        padding: 24px 16px 12px !important;
+        gap: 12px !important;
+    }
+
+    .venue-options-selector__title {
+        font-size: 20px !important;
+    }
+
+    .venue-options-selector__field {
+        height: 44px !important;
+    }
+
+    .venue-options-selector__input {
+        font-size: 14px !important;
+    }
+
+    .venue-navigation {
+        gap: 8px !important;
+    }
+
+    .about-us,
+    .mission-vision,
+    .our-history,
+    .our-trajectory {
+        padding: 24px 16px !important;
+    }
+
+    .about-us__title,
+    .mission-vision__title,
+    .our-history__title,
+    .our-trajectory__title,
+    .inspiration-quote__text {
+        font-size: 20px !important;
+    }
+
+    .about-us__description,
+    .mission-vision__content,
+    .our-history__text,
+    .our-trajectory__text,
+    .inspiration-quote__caption {
+        font-size: 13px !important;
+    }
+
+    .nuestras-bodas__grid {
+        padding: 0 16px !important;
+    }
+
+    .nuestras-bodas__title,
+    .nuestras-bodas__wedding-title {
+        font-size: 20px !important;
+    }
+
+    .nuestras-bodas__subtitle,
+    .nuestras-bodas__wedding-info {
+        font-size: 13px !important;
+    }
+
+    .bodas-ejemplares__title {
+        font-size: 20px !important;
+    }
+
+    .boda-card__title {
+        font-size: 16px !important;
+    }
+
+    .boda-card__description {
+        font-size: 12px !important;
+    }
+
+    .boda-card__price {
+        font-size: 14px !important;
+    }
+
+    .text-features__grid {
+        padding: 0 12px !important;
+        gap: 16px !important;
+    }
+
+    .feature-block__title {
+        font-size: 14px !important;
+    }
+
+    .feature-block__text {
+        font-size: 12px !important;
+    }
+
+    .hero-features__grid {
+        gap: 12px !important;
+    }
+
+    .row-characteristic {
+        padding: 16px !important;
+        gap: 12px !important;
+    }
+
+    .row-characteristic__image {
+        height: 180px !important;
+    }
+
+    .row-characteristic__name,
+    .row-characteristic__price {
+        font-size: 14px !important;
+    }
+
+    .row-characteristic__description {
+        font-size: 12px !important;
+    }
+
+    .selection-item .row-characteristic__image {
+        height: 160px !important;
+    }
+
+    .venue-features-grid .venue-card {
+        height: 260px !important;
+    }
+
+    .payment-title-row,
+    .payment-form-wrap,
+    .payment-checkout {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    .payment-checkout {
+        padding-bottom: 12px !important;
+    }
+
+    .payment-row-pair .payment-input {
+        min-height: 38px !important;
+        font-size: 13px !important;
+    }
+
+    /* Remove excess white space at top on mobile */
+    .hero {
+        min-height: auto !important;
+        max-height: none !important;
+        padding: 80px 16px 24px !important;
+        gap: 16px !important;
+    }
+
+    .hero-selection {
+        padding: 16px 16px 24px !important;
+        gap: 12px !important;
+    }
+
+    .hero-selection__top {
+        min-height: auto !important;
+    }
+
+    .hero-gallery {
+        height: 180px !important;
+    }
+
+    .feature {
+        min-height: auto !important;
+        max-height: none !important;
+    }
+
+    section.feature .feature__image-container {
+        min-height: 180px !important;
+    }
+
+    .feature__text-content {
+        padding: 16px !important;
+    }
+
+    .feature__title {
+        font-size: 20px !important;
+    }
+
+    .hero-features {
+        padding: 16px !important;
+    }
 }
 
 /* Extra small mobile */
