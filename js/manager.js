@@ -370,52 +370,18 @@ function showSummaryPopup() {
 
 function updateHeaderPrice() {
     const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
-    const priceElement = document.querySelector('.cart-amount');
-    if (priceElement) {
-        let total = 0;
-        
-        // Sumar venue
-        if (cart.selectedVenue) {
-            total += parsePrice(cart.selectedVenue.price);
-        }
-        
-        // Sumar opciones de ceremonia
-        if (cart.ceremony) {
-            Object.values(cart.ceremony).forEach(item => {
-                total += parsePrice(item.price);
-            });
-        }
+    const badge = document.getElementById('cart-badge');
+    if (!badge) return;
 
-        // Sumar opciones de recepción
-        if (cart.reception) {
-            Object.values(cart.reception).forEach(item => {
-                total += parsePrice(item.price);
-            });
-        }
+    let count = 0;
 
-        // Sumar opciones de comida
-        if (cart.food) {
-            const guestCount = parseInt(localStorage.getItem('selectedGuests')) || 0;
-            Object.values(cart.food).forEach(item => {
-                if (item.mode === 'add') {
-                    // Modo adición: precio unitario * cantidad de adiciones
-                    total += parsePrice(item.unitPrice) * (parseInt(item.quantity) || 1);
-                } else {
-                    // Modo completo: precio unitario * número total de invitados
-                    total += parsePrice(item.unitPrice) * guestCount;
-                }
-            });
-        }
+    if (cart.selectedVenue) count++;
+    if (cart.ceremony) count += Object.keys(cart.ceremony).length;
+    if (cart.reception) count += Object.keys(cart.reception).length;
+    if (cart.food) count += Object.keys(cart.food).length;
+    if (cart.others) count += Object.keys(cart.others).length;
 
-        // Sumar otros servicios
-        if (cart.others) {
-            Object.values(cart.others).forEach(item => {
-                total += parsePrice(item.price);
-            });
-        }
-
-        priceElement.textContent = formatCurrency(total);
-    }
+    badge.textContent = count;
 }
 
 window.addEventListener('message', (event) => {
