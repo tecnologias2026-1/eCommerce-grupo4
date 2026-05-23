@@ -182,14 +182,14 @@
     }
 
     .ceremony-options {
-        grid-template-columns: 1fr;
-        padding: 24px var(--page-gutter);
-        gap: 16px;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 16px var(--page-gutter);
+        gap: 12px;
     }
 
     .ceremony-options .row-characteristic__image,
     .ceremony-options .selection-item .row-characteristic__image {
-        height: 180px !important;
+        height: 130px !important;
     }
 
     .hero-selection__title {
@@ -223,11 +223,11 @@
     }
 
     .row-characteristic__image {
-        height: 260px;
+        height: 180px;
     }
 
     .selection-item .row-characteristic__image {
-        height: 220px !important;
+        height: 160px !important;
         width: 100% !important;
         flex: none !important;
     }
@@ -366,7 +366,8 @@
     }
 
     .bodas-ejemplares__grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
     }
 
     .bodas-ejemplares__title {
@@ -374,12 +375,12 @@
     }
 
     .boda-card {
-        gap: var(--space-lg);
+        gap: var(--space-md);
     }
 
     .text-features__grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
 
     .venue-header {
@@ -495,7 +496,7 @@
     }
 
     .venue-gallery__grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .venue-gallery__title {
@@ -562,8 +563,8 @@
     }
 
     .wedding-features {
-        grid-template-columns: 1fr;
-        gap: var(--space-xl);
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
     }
 
     .wedding-banner__image-container {
@@ -692,9 +693,9 @@
     }
 
     .summary-marquee {
-        grid-template-columns: 1fr;
-        padding: 24px var(--space-md);
-        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 16px var(--space-md);
+        gap: 12px;
     }
 
     .summary-pago {
@@ -821,36 +822,36 @@
     }
 
     .venue-card__content {
-        padding: 10px 12px 8px !important;
+        padding: 6px 8px 6px !important;
     }
 
     .venue-card__title {
-        font-size: 14px !important;
+        font-size: 12px !important;
     }
 
     .venue-card__price,
     .venue-card__guests {
-        font-size: 12px !important;
+        font-size: 10px !important;
     }
 
     .selection-item__content {
-        padding: 10px 12px 8px !important;
+        padding: 6px 8px 6px !important;
     }
 
     .selection-item__title {
-        font-size: 13px !important;
-    }
-
-    .selection-item__name {
         font-size: 12px !important;
     }
 
+    .selection-item__name {
+        font-size: 11px !important;
+    }
+
     .selection-item__price {
-        font-size: 13px !important;
+        font-size: 12px !important;
     }
 
     .selection-item__price-sub {
-        font-size: 10px !important;
+        font-size: 9px !important;
     }
 
     .selection-modal {
@@ -907,11 +908,11 @@
     h4 { font-size: 14px !important; }
 
     .venue-card {
-        height: 280px !important;
+        height: 220px !important;
     }
 
     .venue-card__image-container {
-        height: 160px !important;
+        height: 120px !important;
     }
 
     .summary-marquee {
@@ -1265,29 +1266,29 @@
     }
 
     .row-characteristic {
-        padding: 16px !important;
-        gap: 12px !important;
+        padding: 12px !important;
+        gap: 8px !important;
     }
 
     .row-characteristic__image {
-        height: 180px !important;
+        height: 140px !important;
     }
 
     .row-characteristic__name,
     .row-characteristic__price {
-        font-size: 14px !important;
+        font-size: 13px !important;
     }
 
     .row-characteristic__description {
-        font-size: 12px !important;
+        font-size: 11px !important;
     }
 
     .selection-item .row-characteristic__image {
-        height: 160px !important;
+        height: 130px !important;
     }
 
     .venue-features-grid .venue-card {
-        height: 260px !important;
+        height: 200px !important;
     }
 
     .payment-title-row,
@@ -1374,7 +1375,7 @@
 
     .ceremony-options .row-characteristic__image,
     .ceremony-options .selection-item .row-characteristic__image {
-        height: 160px !important;
+        height: 120px !important;
     }
 
     .ceremony-options .row-characteristic__text {
