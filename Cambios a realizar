@@ -9,3 +9,253 @@ Cosas para mejorar:
 - Los videos siempre deben tener opciones para pausarlo y ver cuanto dura el clip   (ya)
 - Las imagenes deben poder verse como estilo galeria    (ya)
 - Accesibilidad: Contraste de color insuficiente, deben estar nombrados todos los componentes
+
+
+Plan: Backend API + Base de Datos para Eventos & Decoraciones
+Contexto
+El frontend está 100% estático: todos los datos (haciendas, precios, servicios, opciones de ceremonia, recepción, comida, bodas de ejemplo) están hardcodeados en HTML como data-* attributes. Las reservas y el carrito se guardan en localStorage del navegador — datos que desaparecen si el usuario limpia la caché.
+
+El README del proyecto ya contempla un diagrama de BD (USUARIO, HACIENDA, SERVICIO, RESERVA, DETALLE_RESERVA). Este plan toma ese diseño como base, lo amplía con los datos reales encontrados y define la API RESTful que conectará el frontend existente con la BD.
+
+Stack elegido: Node.js + Express · PostgreSQL · Deploy en Railway/Render
+
+1. Arquitectura General
+Browser (HTML/JS estático)
+        │  fetch() JSON
+        ▼
+[Express API — Node.js]
+        │  pg / sequelize
+        ▼
+[PostgreSQL Database]
+El frontend ya hace fetch() (ver manager.js — cargarComponente). El cambio es que en lugar de cargar HTML estático, los JS existentes harán fetch('/api/venues'), fetch('/api/services/ceremony'), etc. y pintarán los datos dinámicamente.
+
+No hay cambio de dominio: el backend puede servirse desde la misma plataforma que el frontend o como subdominio api.eventos-decoraciones.com.
+
+2. Esquema de Base de Datos
+Tablas principales
+users
+Campo	Tipo	Notas
+id	SERIAL PK	
+name	VARCHAR(120)	
+email	VARCHAR(255) UNIQUE	
+password_hash	TEXT	bcrypt
+role	ENUM('admin','client')	
+created_at	TIMESTAMPTZ	
+venues (Haciendas)
+Campo	Tipo	Notas
+id	SERIAL PK	
+slug	VARCHAR(60) UNIQUE	ej: "paz-del-rio"
+name	VARCHAR(120)	
+description	TEXT	
+base_price	INTEGER	en COP, sin formato
+base_guests	INTEGER	
+location_label	VARCHAR(200)	texto visible
+address	VARCHAR(255)	
+map_lat	DOUBLE PRECISION	
+map_lng	DOUBLE PRECISION	
+video_url	TEXT	
+featured_image	TEXT	ruta relativa o URL
+is_recommended	BOOLEAN	
+is_active	BOOLEAN	
+created_at	TIMESTAMPTZ	
+venue_features (Características/galería de cada hacienda)
+Campo	Tipo	Notas
+id	SERIAL PK	
+venue_id	FK → venues	
+title	VARCHAR(100)	
+image_url	TEXT	
+display_order	INTEGER	
+venue_includes (Qué incluye cada hacienda)
+Campo	Tipo	Notas
+id	SERIAL PK	
+venue_id	FK → venues	
+description	TEXT	
+display_order	INTEGER	
+services (Tabla unificada: ceremony, reception, food, others)
+Campo	Tipo	Notas
+id	SERIAL PK	
+slug	VARCHAR(80) UNIQUE	ej: "montaje"
+category	ENUM('ceremony','reception','food','others')	
+name	VARCHAR(150)	
+price	INTEGER	precio base en COP
+price_unit	ENUM('fixed','per_person','per_set')	para sillas: per_set
+base_capacity	INTEGER	solo para per_set (ej: 50 sillas)
+description	TEXT	
+image_url	TEXT	
+is_active	BOOLEAN	
+display_order	INTEGER	
+service_features (Bullets de cada servicio)
+Campo	Tipo	Notas
+id	SERIAL PK	
+service_id	FK → services	
+feature_text	VARCHAR(200)	
+display_order	INTEGER	
+weddings (Bodas ejemplo — portafolio)
+Campo	Tipo	Notas
+id	SERIAL PK	
+bride_name	VARCHAR(80)	
+groom_name	VARCHAR(80)	
+wedding_date	DATE	
+venue_id	FK → venues	
+banner_image	TEXT	
+review_text	TEXT	
+is_featured	BOOLEAN	boda "principal" del home
+display_order	INTEGER	
+wedding_features (Fotos y secciones dentro de cada boda)
+Campo	Tipo	Notas
+id	SERIAL PK	
+wedding_id	FK → weddings	
+title	VARCHAR(100)	ej: "Lugar y Hacienda"
+description	TEXT	
+image_url	TEXT	
+display_order	INTEGER	
+reservations
+Campo	Tipo	Notas
+id	SERIAL PK	
+code	VARCHAR(20) UNIQUE	generado: #WP-XXXXXX
+user_id	FK → users NULL	NULL si no registrado
+groom_name	VARCHAR(100)	
+bride_name	VARCHAR(100)	
+email	VARCHAR(255)	
+phone	VARCHAR(30)	
+venue_id	FK → venues	
+wedding_date	DATE	
+guest_count	INTEGER	
+special_requirements	TEXT	
+deposit_amount	INTEGER	COP
+total_price	INTEGER	COP
+status	ENUM('pending','confirmed','cancelled')	
+created_at	TIMESTAMPTZ	
+updated_at	TIMESTAMPTZ	
+reservation_items (Items del carrito al momento de la reserva)
+Campo	Tipo	Notas
+id	SERIAL PK	
+reservation_id	FK → reservations	
+service_id	FK → services NULL	NULL si es la hacienda
+item_type	ENUM('venue','ceremony','reception','food','others')	
+item_name	VARCHAR(150)	snapshot del nombre
+quantity	INTEGER	
+unit_price	INTEGER	precio al momento
+total_price	INTEGER	
+calendar_blocks (Fechas bloqueadas por hacienda)
+Campo	Tipo	Notas
+id	SERIAL PK	
+venue_id	FK → venues	
+blocked_date	DATE	
+reason	VARCHAR(200)	"Reserva #WP-XXXX" o "Mantenimiento"
+3. Endpoints de la API
+Base path: /api/v1
+
+Venues (Haciendas)
+Método	Endpoint	Descripción
+GET	/venues	Lista todas las haciendas activas. Soporta ?guests=150 para filtrar por capacidad
+GET	/venues/:slug	Detalle completo de una hacienda (incluye features, includes, fechas bloqueadas)
+GET	/venues/:slug/availability	Fechas bloqueadas para el calendario
+Services (Servicios)
+Método	Endpoint	Descripción
+GET	/services	Todos los servicios activos, agrupados por categoría
+GET	/services/ceremony	Solo servicios de categoría ceremony
+GET	/services/reception	Solo servicios de categoría reception
+GET	/services/food	Solo servicios de categoría food
+GET	/services/others	Solo servicios de categoría others
+Weddings (Portafolio)
+Método	Endpoint	Descripción
+GET	/weddings	Lista de bodas ejemplo para el home
+GET	/weddings/:id	Detalle de una boda con sus features
+Reservations
+Método	Endpoint	Descripción
+POST	/reservations	Crear nueva reserva (body: datos del formulario + cart)
+GET	/reservations/:code	Consultar estado de una reserva por código
+GET	/reservations?email=X	Reservas por email (para vista de cliente)
+PATCH	/reservations/:code/status	Solo admin: cambiar estado
+Auth
+Método	Endpoint	Descripción
+POST	/auth/login	Login con email + password, devuelve JWT
+POST	/auth/register	Registro de nuevo usuario
+GET	/auth/me	Usuario autenticado (requiere JWT)
+Admin (requieren JWT con role='admin')
+Método	Endpoint	Descripción
+POST/PUT/DELETE	/admin/venues	CRUD de haciendas
+POST/PUT/DELETE	/admin/services	CRUD de servicios
+GET	/admin/reservations	Ver todas las reservas
+4. Migración de datos hardcodeados (seed)
+Los datos actualmente en HTML se migran como archivo seed.js que inserta todos los registros iniciales:
+
+Haciendas (6): Paz del Río, El Cedro, San Juan, Las Marías, Arkadia, Botania — con todos sus campos, features e includes.
+
+Servicios (18 en total):
+
+4 de ceremonia (montaje, altar, sillas, camino)
+4 de recepción (clásica, elegante, campestre, playa)
+6 de comida (servido, gourmet, campestre, pasabocas, vegetariano, infantil)
+4 de otros (floral, detalles, ambientación, sonido)
+Bodas ejemplo (3-4): Juana & Carlos, Vanessa & Pedro, Tatiana & Felipe, Laura & Jorge.
+
+5. Cambios en el frontend existente
+Archivos que cambian
+Archivo	Cambio
+assets/public/place.html	Eliminar cards hardcodeadas. El JS las genera leyendo GET /api/v1/venues
+assets/public/venue.html - venue6.html	Convertir en una sola plantilla venue.html con ?slug=paz-del-rio. El JS llena los datos desde GET /api/v1/venues/:slug
+assets/public/ceremony.html	Las selection-item se generan desde GET /api/v1/services/ceremony
+assets/public/reception.html	Ídem para recepción
+assets/public/food.html	Ídem para comida
+assets/public/others.html	Ídem para otros
+assets/public/payment.html	POST /api/v1/reservations en lugar de guardar en localStorage
+assets/public/reservations.html	GET /api/v1/reservations?email=X en lugar de leer localStorage
+index.html	Slideshow de bodas ejemplo: GET /api/v1/weddings
+js/manager.js	Añadir función utilitaria apiFetch(path) que resuelve la base URL y hace fetch
+Archivos que no cambian en la primera iteración
+css/global.css, css/media.css — sin tocar
+js/cart.js, js/calendar.js — la lógica de carrito y calendario sigue en el cliente, solo cambia de dónde vienen los datos
+js/venue-filter.js — puede seguir filtrando datos del DOM una vez que place.html los haya renderizado
+Patrón de integración
+El frontend seguirá siendo SPA-lite / multi-page estático. No habrá framework JS: se mantiene el patrón actual de "fetch → construir HTML string → .innerHTML =" que ya está en manager.js.
+
+La única variación es que en lugar de leer data-* del HTML precargado, se leerá del JSON de la API.
+
+6. Estructura de carpetas del backend
+backend/
+  src/
+    db/
+      index.js          # pool de conexión pg
+      schema.sql        # CREATE TABLE statements
+      seed.js           # datos iniciales
+    routes/
+      venues.js
+      services.js
+      weddings.js
+      reservations.js
+      auth.js
+      admin.js
+    middleware/
+      auth.js           # validar JWT
+      errorHandler.js
+    app.js              # express app, CORS, rutas
+    server.js           # listen
+  .env.example
+  package.json
+7. Detalles de variables de entorno necesarias
+DATABASE_URL=postgresql://...
+JWT_SECRET=...
+PORT=3000
+CORS_ORIGIN=https://tu-frontend.com
+En Railway/Render, DATABASE_URL se configura automáticamente al añadir el add-on PostgreSQL.
+
+8. Orden de implementación sugerido
+Scaffolding: crear carpeta backend/, package.json, instalar dependencias (express, pg, bcrypt, jsonwebtoken, cors, dotenv).
+DB schema: crear schema.sql y ejecutarlo en la instancia de PostgreSQL.
+Seed: escribir seed.js con todos los datos que hoy están en HTML.
+Endpoints de lectura primero (GET /venues, GET /services/*, GET /weddings) — no requieren auth.
+Adaptar frontend para consumir esos 3 endpoints (place.html, ceremony/reception/food/others.html, index.html).
+POST /reservations + adaptar payment.html — reemplaza el localStorage final.
+Auth (login/register) + vista de reservas.
+Admin endpoints si el tiempo lo permite.
+9. Verificación (end-to-end)
+GET /api/v1/venues devuelve array con las 6 haciendas en JSON.
+Abrir place.html — las cards aparecen renderizadas dinámicamente desde la API.
+Filtrar por invitados — solo aparecen haciendas con capacidad ≥ n.
+Abrir ceremony.html — los 4 servicios aparecen con sus precios desde la BD.
+Completar el flujo completo (place → ceremony → reception → food → others → payment).
+POST /api/v1/reservations devuelve código #WP-XXXXXX.
+GET /api/v1/reservations/:code devuelve la reserva creada.
+En PostgreSQL: SELECT * FROM reservations; muestra el registro.

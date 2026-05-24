@@ -140,7 +140,7 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const items = document.querySelectorAll('.selection-item');
+        const container = document.getElementById('items-container');
         const modal = document.getElementById('selection-modal');
         const modalImage = document.getElementById('modal-image');
         const modalTitle = document.getElementById('modal-title');
@@ -151,10 +151,10 @@
 
         let currentItem = null;
 
-        items.forEach(item => {
-          item.addEventListener('click', () => {
-            openModal(item);
-          });
+        // Event delegation: works for both hardcoded and API-rendered items
+        container.addEventListener('click', (e) => {
+          const item = e.target.closest('.selection-item');
+          if (item) openModal(item);
         });
 
         syncFromCart();
@@ -271,7 +271,7 @@
         function syncFromCart() {
           const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
           const ceremony = cart.ceremony || {};
-          items.forEach(item => {
+          document.querySelectorAll('.selection-item').forEach(item => {
             item.classList.toggle('is-selected', !!ceremony[item.dataset.id]);
           });
         }
@@ -365,6 +365,59 @@
     </script>
   </main>
   <div id="footer-placeholder"></div>
+
+  <script>
+    (function () {
+      var SVG_CHECK = '<div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>';
+
+      function buildServiceItem(s) {
+        var price = s.price_unit === 'per_set'
+            ? s.price
+            : s.price;
+        var priceLabel = 'COL$ ' + Number(price).toLocaleString('es-CO');
+        var extraAttrs = s.price_unit === 'per_set' && s.base_capacity
+            ? ' data-set-capacity="' + s.base_capacity + '"' : '';
+        var featuresJson = JSON.stringify(s.features || []).replace(/'/g, '&#39;');
+
+        return (
+          '<section class="selection-item" data-id="' + s.slug + '" data-name="' + s.name + '" data-price="' + price + '"' +
+          ' data-description="' + (s.description || '').replace(/"/g, '&quot;') + '"' +
+          ' data-features=\'' + featuresJson + '\'' + extraAttrs + '>' +
+          '<div class="selection-item__image-container">' +
+          '<img src="../images/' + s.image_url + '" alt="' + s.name + '" loading="lazy" />' +
+          SVG_CHECK +
+          '<span class="selection-item__overlay-text">VER MÁS</span>' +
+          '</div>' +
+          '<div class="selection-item__content">' +
+          '<h3 class="selection-item__title">' + s.name + '</h3>' +
+          '<p class="selection-item__name">Servicio profesional</p>' +
+          '<p class="selection-item__price">' + priceLabel + '</p>' +
+          (s.slug === 'sillas' ? '<p id="sillas-total" class="selection-item__price-detail">' + priceLabel + '</p>' : '') +
+          '</div>' +
+          '</section>'
+        );
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        if (typeof apiFetch !== 'function') return;
+        apiFetch('/services/ceremony')
+          .then(function (services) {
+            if (!Array.isArray(services) || services.length === 0) return;
+            var container = document.getElementById('items-container');
+            if (!container) return;
+            container.innerHTML = services.map(buildServiceItem).join('');
+            // Re-sync cart state for the new items
+            var cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+            var ceremony = cart.ceremony || {};
+            container.querySelectorAll('.selection-item').forEach(function (item) {
+              item.classList.toggle('is-selected', !!ceremony[item.dataset.id]);
+            });
+            if (typeof updateSillasPricing === 'function') updateSillasPricing();
+          })
+          .catch(function () { /* API no disponible — fallback estático activo */ });
+      });
+    })();
+  </script>
 </body>
 
 </html>

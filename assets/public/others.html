@@ -148,7 +148,7 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const items = document.querySelectorAll('.selection-item');
+        const othersContainer = document.getElementById('items-container');
         const modal = document.getElementById('selection-modal');
         const modalImage = document.getElementById('modal-image');
         const modalTitle = document.getElementById('modal-title');
@@ -160,10 +160,9 @@
 
         let currentItem = null;
 
-        items.forEach(item => {
-          item.addEventListener('click', () => {
-            openModal(item);
-          });
+        othersContainer.addEventListener('click', (e) => {
+          const item = e.target.closest('.selection-item');
+          if (item) openModal(item);
         });
 
         syncFromCart();
@@ -290,7 +289,7 @@
         function syncFromCart() {
           const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
           const others = cart.others || {};
-          items.forEach(item => {
+          document.querySelectorAll('.selection-item').forEach(item => {
             const config = others[item.dataset.id];
             const exists = !!config;
             item.classList.toggle('is-selected', exists);
@@ -350,6 +349,49 @@
     </script>
   </main>
   <div id="footer-placeholder"></div>
+
+  <script>
+    (function () {
+      var SVG_CHECK = '<div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>';
+
+      function buildOtherItem(s) {
+        var priceLabel = 'COL$ ' + Number(s.price).toLocaleString('es-CO');
+        var featuresJson = JSON.stringify(s.features || []).replace(/'/g, '&#39;');
+        return (
+          '<section class="selection-item" data-id="' + s.slug + '" data-name="' + s.name + '" data-price="' + s.price + '"' +
+          ' data-description="' + (s.description || '').replace(/"/g, '&quot;') + '"' +
+          ' data-features=\'' + featuresJson + '\'>' +
+          '<div class="selection-item__image-container">' +
+          '<img src="../images/' + s.image_url + '" alt="' + s.name + '" loading="lazy" />' +
+          SVG_CHECK +
+          '<span class="selection-item__overlay-text">VER MÁS</span>' +
+          '</div>' +
+          '<div class="selection-item__content">' +
+          '<h3 class="selection-item__title">' + s.name + '</h3>' +
+          '<p class="selection-item__name">Servicio adicional</p>' +
+          '<p class="selection-item__price">' + priceLabel + '</p>' +
+          '</div></section>'
+        );
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        if (typeof apiFetch !== 'function') return;
+        apiFetch('/services/others')
+          .then(function (services) {
+            if (!Array.isArray(services) || services.length === 0) return;
+            var container = document.getElementById('items-container');
+            if (!container) return;
+            container.innerHTML = services.map(buildOtherItem).join('');
+            var cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+            var others = cart.others || {};
+            container.querySelectorAll('.selection-item').forEach(function (item) {
+              item.classList.toggle('is-selected', !!others[item.dataset.id]);
+            });
+          })
+          .catch(function () { /* API no disponible — fallback estático activo */ });
+      });
+    })();
+  </script>
 </body>
 
 </html>

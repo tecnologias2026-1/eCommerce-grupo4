@@ -28,10 +28,23 @@
     <div id="header-placeholder"></div>
     <!-- Hero Section (Figma 440:8454) -->
     <section class="hero" data-name="Hero" data-node-id="440:8454">
-        <video autoplay loop muted playsinline class="hero__video">
+        <video id="hero-video" loop muted playsinline preload="metadata"
+            poster="assets/public/fondo desktop.png" class="hero__video">
             <source src="assets/videos/venue-placeholder.mp4" type="video/mp4">
             Tu navegador no soporta videos.
         </video>
+        <script>
+            (function () {
+                var v = document.getElementById('hero-video');
+                if (!v) return;
+                var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                if (!reduced) {
+                    var tryPlay = function () { v.play().catch(function () { }); };
+                    if (v.readyState >= 2) tryPlay();
+                    else v.addEventListener('loadeddata', tryPlay, { once: true });
+                }
+            })();
+        </script>
 
         <div class="hero__text-content">
             <h1 class="hero__title">La boda de tus sueños a tu medida y estilo</h1>
@@ -66,7 +79,7 @@
                 <div class="slideshow-container"
                     data-slideshow='["assets/images/anillos desktop.png","assets/images/juana y carlos.png","assets/images/juana y carlos2.png"]'
                     data-speed="2000">
-                    <img src="assets/images/anillos desktop.png" alt="Anillos de boda" class="nuestras-bodas__image">
+                    <img src="assets/images/anillos desktop.png" alt="Anillos de boda" class="nuestras-bodas__image" decoding="async">
                 </div>
                 <button class="nuestras-bodas__view-btn" data-wedding="featured">Ver detalles</button>
             </div>
@@ -91,7 +104,7 @@
             <li class="boda-card" data-name="Card" data-node-id="I440:8456;356:17132">
                 <div class="boda-card__link">
                     <div class="boda-card__image-container">
-                        <img src="assets/images/boda1.png" alt="Vanessa y Pedro" class="boda-card__image">
+                        <img src="assets/images/boda1.jpg" alt="Vanessa y Pedro" class="boda-card__image" loading="lazy" decoding="async">
                         <button class="boda-card__view-btn" data-wedding="assets/public/weding1.html">Ver boda</button>
                     </div>
                     <div class="boda-card__content">
@@ -106,7 +119,7 @@
             <li class="boda-card" data-name="Card" data-node-id="I440:8456;356:17138">
                 <div class="boda-card__link">
                     <div class="boda-card__image-container">
-                        <img src="assets/images/boda2.png" alt="Tatiana y Felipe" class="boda-card__image">
+                        <img src="assets/images/boda2.png" alt="Tatiana y Felipe" class="boda-card__image" loading="lazy" decoding="async">
                         <button class="boda-card__view-btn" data-wedding="assets/public/weding2.html">Ver boda</button>
                     </div>
                     <div class="boda-card__content">
@@ -121,7 +134,7 @@
             <li class="boda-card" data-name="Card" data-node-id="I440:8456;356:17145">
                 <div class="boda-card__link">
                     <div class="boda-card__image-container">
-                        <img src="assets/images/boda3.png" alt="Laura y Jorge" class="boda-card__image">
+                        <img src="assets/images/boda3.jpg" alt="Laura y Jorge" class="boda-card__image" loading="lazy" decoding="async">
                         <button class="boda-card__view-btn" data-wedding="assets/public/weding3.html">Ver boda</button>
                     </div>
                     <div class="boda-card__content">
@@ -150,7 +163,7 @@
                 <div class="slideshow-container"
                     data-slideshow='["assets/images/quienes somos.png","assets/images/quienes somos2.png","assets/images/quienes somos3.png"]'>
                     <img src="assets/images/quienes somos.png" alt="Sobre nosotros - Quienes somos"
-                        class="about-us__image">
+                        class="about-us__image" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
@@ -173,7 +186,7 @@
                 <div class="slideshow-container"
                     data-slideshow='["assets/images/nuestra historia.png","assets/images/nuestra historia2.png","assets/images/nuestra historia3.png"]'>
                     <img src="assets/images/nuestra historia.png" alt="Nuestra Historia - Comienzos"
-                        class="our-history__image">
+                        class="our-history__image" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
@@ -193,7 +206,7 @@
                 <div class="slideshow-container"
                     data-slideshow='["assets/images/nuestra trayectoria.png","assets/images/nuestra trayectoria2.png","assets/images/nuestra trayectoria3.png"]'>
                     <img src="assets/images/nuestra trayectoria.png" alt="Nuestra Trayectoria"
-                        class="our-trajectory__image">
+                        class="our-trajectory__image" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
@@ -224,7 +237,7 @@
             <div class="slideshow-container"
                 data-slideshow='["assets/images/mision y valores.png","assets/images/mision y valores 2.png","assets/images/mision y valores 3.png"]'>
                 <img src="assets/images/mision y valores.png" alt="Nuestra Misión y Valores"
-                    class="mission-vision__image">
+                    class="mission-vision__image" loading="lazy" decoding="async">
             </div>
         </div>
     </section>
@@ -416,43 +429,137 @@
                 }
             });
 
-            // Slideshow auto-cycle
+            // Slideshow auto-cycle — lazy load secondary images, only animate when in viewport,
+            // and stagger start time so all slideshows don't repaint together.
             var slideshows = document.querySelectorAll('.slideshow-container');
+            var supportsObserver = 'IntersectionObserver' in window;
             for (var s = 0; s < slideshows.length; s++) {
-                (function (container) {
+                (function (container, indexOffset) {
                     var imagesAttr = container.getAttribute('data-slideshow');
                     if (!imagesAttr) return;
                     var sources;
                     try { sources = JSON.parse(imagesAttr); } catch (e) { return; }
                     if (sources.length < 2) return;
 
-                    var imgs = container.querySelectorAll('img');
-                    var currentIndex = 0;
+                    var firstImg = container.querySelector('img');
+                    if (!firstImg) return;
 
-                    // add extra images beyond the first
                     for (var i = 1; i < sources.length; i++) {
                         var img = document.createElement('img');
                         img.src = sources[i];
-                        img.alt = imgs[0].alt || '';
-                        img.className = imgs[0].className;
+                        img.alt = firstImg.alt || '';
+                        img.className = firstImg.className;
+                        img.loading = 'lazy';
+                        img.decoding = 'async';
                         container.appendChild(img);
                     }
-                    // refresh node list
-                    imgs = container.querySelectorAll('img');
-                    // first is already visible (position relative, opacity 1)
+
+                    var imgs = container.querySelectorAll('img');
                     imgs[0].classList.add('active');
 
                     var speed = parseInt(container.getAttribute('data-speed'), 10) || 4500;
-                    setInterval(function () {
+                    var currentIndex = 0;
+                    var timerId = null;
+
+                    function tick() {
                         var nextIndex = (currentIndex + 1) % sources.length;
                         imgs[currentIndex].classList.remove('active');
-                        imgs[currentIndex].style.opacity = '0';
                         imgs[nextIndex].classList.add('active');
-                        imgs[nextIndex].style.opacity = '1';
                         currentIndex = nextIndex;
-                    }, speed);
-                })(slideshows[s]);
+                    }
+
+                    function start() {
+                        if (timerId) return;
+                        // stagger initial fire so multiple slideshows don't sync
+                        var initialDelay = speed + (indexOffset * 800);
+                        timerId = setTimeout(function loop() {
+                            tick();
+                            timerId = setTimeout(loop, speed);
+                        }, initialDelay);
+                    }
+
+                    function stop() {
+                        if (timerId) {
+                            clearTimeout(timerId);
+                            timerId = null;
+                        }
+                    }
+
+                    if (supportsObserver) {
+                        var io = new IntersectionObserver(function (entries) {
+                            entries.forEach(function (entry) {
+                                if (entry.isIntersecting) start();
+                                else stop();
+                            });
+                        }, { threshold: 0.15 });
+                        io.observe(container);
+                    } else {
+                        start();
+                    }
+                })(slideshows[s], s);
             }
+        });
+    </script>
+
+    <script>
+        // Populate weddings from API when available; fallback to hardcoded HTML
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof apiFetch !== 'function') return;
+
+            apiFetch('/weddings')
+                .then(function (weddings) {
+                    if (!Array.isArray(weddings) || weddings.length === 0) return;
+
+                    // Update featured wedding ("Nuestras Bodas")
+                    var featured = weddings.find(function (w) { return w.is_featured; }) || weddings[0];
+                    if (featured) {
+                        var titleEl = document.querySelector('.nuestras-bodas__wedding-title');
+                        var infoEls = document.querySelectorAll('.nuestras-bodas__wedding-info p');
+                        if (titleEl) titleEl.textContent = featured.groom_name + ' y ' + featured.bride_name;
+                        if (infoEls[0]) infoEls[0].textContent = featured.wedding_date
+                            ? new Date(featured.wedding_date).toLocaleDateString('es-CO') : '';
+                        if (infoEls[1]) infoEls[1].textContent = featured.venue_name || '';
+                    }
+
+                    // Update "Bodas Ejemplares" grid with non-featured weddings
+                    var others = weddings.filter(function (w) { return !w.is_featured; });
+                    if (others.length === 0) return;
+                    var grid = document.querySelector('.bodas-ejemplares__grid');
+                    if (!grid) return;
+
+                    grid.innerHTML = others.map(function (w) {
+                        var dateStr = w.wedding_date
+                            ? new Date(w.wedding_date).toLocaleDateString('es-CO') : '';
+                        var imgSrc = w.banner_image
+                            ? 'assets/images/' + w.banner_image
+                            : 'assets/images/boda1.jpg';
+                        var pageUrl = w.page_url || 'assets/public/weding1.html';
+                        return (
+                            '<li class="boda-card">' +
+                            '<div class="boda-card__link">' +
+                            '<div class="boda-card__image-container">' +
+                            '<img src="' + imgSrc + '" alt="' + w.groom_name + ' y ' + w.bride_name + '" class="boda-card__image" loading="lazy" decoding="async">' +
+                            '<button class="boda-card__view-btn" data-wedding="' + pageUrl + '">Ver boda</button>' +
+                            '</div>' +
+                            '<div class="boda-card__content">' +
+                            '<h5 class="boda-card__title">' + w.groom_name + ' y ' + w.bride_name + '</h5>' +
+                            '<div class="boda-card__info">' +
+                            '<span>' + dateStr + '</span>' +
+                            '<span>' + (w.venue_name || '') + '</span>' +
+                            '</div></div></div></li>'
+                        );
+                    }).join('');
+
+                    // Re-bind view buttons after DOM update
+                    grid.querySelectorAll('.boda-card__view-btn').forEach(function (btn) {
+                        btn.addEventListener('click', function (e) {
+                            e.stopPropagation();
+                            var url = btn.getAttribute('data-wedding');
+                            if (typeof openModal === 'function') openModal(url);
+                        });
+                    });
+                })
+                .catch(function () { /* API no disponible — fallback estático activo */ });
         });
     </script>
 

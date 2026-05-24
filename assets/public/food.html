@@ -85,7 +85,7 @@
         data-description="Asados premium y acompañamientos rústicos servidos en un ambiente relajado y cálido."
         data-features='["Asados premium","Acompañamientos rústicos","Opción de parrilla abierta","Postres tradicionales"]'>
         <div class="selection-item__image-container">
-          <img src="../images/f3.png" alt="Menú Campestre" />
+          <img src="../images/f3.jpg" alt="Menú Campestre" />
           <div class="selection-item__badge">
             <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
@@ -193,7 +193,7 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const foodItems = document.querySelectorAll('.food-item');
+        const foodContainer = document.getElementById('items-container');
         const modal = document.getElementById('selection-modal');
         const modalImage = document.getElementById('modal-image');
         const modalTitle = document.getElementById('modal-title');
@@ -209,19 +209,10 @@
         let currentItem = null;
         let currentMode = 'full';
 
-        const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
-        const foodCart = cart.food || {};
-
-        foodItems.forEach(item => {
-          const itemId = item.dataset.id;
-
-          if (foodCart[itemId]) {
-            item.classList.add('is-selected');
-          }
-
-          item.addEventListener('click', () => {
-            openModal(item);
-          });
+        // Event delegation: works for both hardcoded and API-rendered items
+        foodContainer.addEventListener('click', (e) => {
+          const item = e.target.closest('.food-item');
+          if (item) openModal(item);
         });
 
         syncFromCart();
@@ -392,7 +383,7 @@
         function syncFromCart() {
           const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
           const food = cart.food || {};
-          foodItems.forEach(item => {
+          document.querySelectorAll('.food-item').forEach(item => {
             const id = item.dataset.id;
             const config = food[id];
             const exists = !!config;
@@ -468,6 +459,49 @@
     </script>
   </main>
   <div id="footer-placeholder"></div>
+
+  <script>
+    (function () {
+      var SVG_CHECK = '<div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>';
+
+      function buildFoodItem(s) {
+        var priceLabel = 'COL$ ' + Number(s.price).toLocaleString('es-CO') + ' / persona';
+        var featuresJson = JSON.stringify(s.features || []).replace(/'/g, '&#39;');
+        return (
+          '<section class="selection-item food-item" data-id="' + s.slug + '" data-name="' + s.name + '" data-price="' + s.price + '"' +
+          ' data-description="' + (s.description || '').replace(/"/g, '&quot;') + '"' +
+          ' data-features=\'' + featuresJson + '\'>' +
+          '<div class="selection-item__image-container">' +
+          '<img src="../images/' + s.image_url + '" alt="' + s.name + '" loading="lazy" />' +
+          SVG_CHECK +
+          '<span class="selection-item__overlay-text">VER MÁS</span>' +
+          '</div>' +
+          '<div class="selection-item__content">' +
+          '<h3 class="selection-item__title">' + s.name + '</h3>' +
+          '<p class="selection-item__name">Menú por persona</p>' +
+          '<p class="selection-item__price"><span>' + priceLabel + '</span></p>' +
+          '</div></section>'
+        );
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        if (typeof apiFetch !== 'function') return;
+        apiFetch('/services/food')
+          .then(function (services) {
+            if (!Array.isArray(services) || services.length === 0) return;
+            var container = document.getElementById('items-container');
+            if (!container) return;
+            container.innerHTML = services.map(buildFoodItem).join('');
+            var cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+            var food = cart.food || {};
+            container.querySelectorAll('.food-item').forEach(function (item) {
+              item.classList.toggle('is-selected', !!food[item.dataset.id]);
+            });
+          })
+          .catch(function () { /* API no disponible — fallback estático activo */ });
+      });
+    })();
+  </script>
 </body>
 
 </html>

@@ -5420,3 +5420,20 @@ body.is-popup .back-btn {
     }
 }
 
+/* Reserve space for async-loaded header/footer to prevent layout shift */
+#header-placeholder {
+    min-height: 90px;
+    display: block;
+}
+
+#footer-placeholder {
+    min-height: 140px;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    #footer-placeholder {
+        min-height: 280px;
+    }
+}
+

@@ -257,6 +257,61 @@
         });
     </script>
     <div id="footer-placeholder"></div>
+
+    <script>
+        // Slug → página de detalle local (mientras no exista plantilla dinámica)
+        var VENUE_PAGE_MAP = {
+            'paz-del-rio': 'venue.html',
+            'el-cedro':    'venue2.html',
+            'san-juan':    'venue3.html',
+            'arkadia':     'venue4.html',
+            'botania':     'venue5.html',
+            'las-marias':  'venue6.html'
+        };
+
+        function buildVenueCard(v, delay) {
+            var href = VENUE_PAGE_MAP[v.slug] || 'venue.html';
+            var price = typeof formatCurrency === 'function'
+                ? formatCurrency(v.base_price)
+                : 'COL$ ' + Number(v.base_price).toLocaleString('es-CO');
+            var badge = v.is_recommended
+                ? '<span class="venue-card__recommended-badge">Recomendada</span>' : '';
+            return (
+                '<article class="venue-card" data-guests="' + v.base_guests + '" data-href="' + href + '"' +
+                ' data-reveal="up" data-reveal-delay="' + delay + '">' +
+                '<div class="venue-card__image-container">' +
+                '<img src="../images/' + v.featured_image + '" alt="' + v.name + '" class="venue-card__image" loading="lazy">' +
+                '<span class="venue-card__overlay-text">Ver más</span>' +
+                badge +
+                '</div>' +
+                '<div class="venue-card__content">' +
+                '<h4 class="venue-card__title">' + v.name.toUpperCase() + '</h4>' +
+                '<p class="venue-card__price">' + price + '</p>' +
+                '<p class="venue-card__guests">' + v.base_guests + ' invitados aprox</p>' +
+                '</div>' +
+                '</article>'
+            );
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof apiFetch !== 'function') return;
+            apiFetch('/venues')
+                .then(function (venues) {
+                    if (!Array.isArray(venues) || venues.length === 0) return;
+                    var grid = document.getElementById('venue-grid');
+                    if (!grid) return;
+                    var html = venues.map(function (v, i) {
+                        return buildVenueCard(v, (i + 1) * 100);
+                    }).join('');
+                    grid.innerHTML = html;
+                    // Re-apply venue filter and reveal for new elements
+                    if (typeof window.dispatchEvent === 'function') {
+                        window.dispatchEvent(new CustomEvent('guestsChanged'));
+                    }
+                })
+                .catch(function () { /* API no disponible — fallback estático activo */ });
+        });
+    </script>
 </body>
 
 </html>

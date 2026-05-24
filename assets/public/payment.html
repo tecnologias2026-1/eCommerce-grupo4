@@ -271,7 +271,92 @@
                         } else {
                             alert('formato incorrecto. Revisa el correo y el teléfono');
                         }
+                        return;
                     }
+
+                    // All validations passed — save reservation and navigate
+                    e.preventDefault();
+                    (function submitReservation() {
+                        var groomVal   = (document.getElementById('groom-name') || {}).value || '';
+                        var brideVal   = (document.getElementById('bride-name') || {}).value || '';
+                        var emailVal   = (document.getElementById('email') || {}).value || '';
+                        var phoneVal   = (document.getElementById('phone') || {}).value || '';
+                        var dateVal    = (document.getElementById('wedding-date') || {}).value || '';
+                        var depositRaw = ((document.getElementById('deposit') || {}).value || '').replace(/[^\d]/g, '');
+                        var depositAmt = parseInt(depositRaw) || 0;
+                        var commentsVal = (document.getElementById('comments') || {}).value || '';
+
+                        var cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
+                        var venue = cart.selectedVenue || {};
+                        var totalStr = document.getElementById('total-display')
+                            ? document.getElementById('total-display').textContent
+                            : 'COL$ 0';
+
+                        function makeCode() {
+                            return '#WP-' + Math.floor(100000 + Math.random() * 900000);
+                        }
+
+                        var reservation = {
+                            id: makeCode(),
+                            groom: groomVal,
+                            bride: brideVal,
+                            email: emailVal,
+                            phone: phoneVal,
+                            venue: venue.name || '',
+                            venueImage: venue.image || '',
+                            guests: venue.guests || localStorage.getItem('selectedGuests') || '0',
+                            weddingDate: dateVal,
+                            status: 'Pendiente',
+                            totalPrice: totalStr,
+                            depositAmount: depositAmt,
+                            cart: cart,
+                            comments: commentsVal,
+                            timestamp: Date.now()
+                        };
+
+                        // Save to localStorage as fallback
+                        var allReservations = JSON.parse(localStorage.getItem('allReservations') || '[]');
+                        allReservations.push(reservation);
+                        localStorage.setItem('allReservations', JSON.stringify(allReservations));
+
+                        function doNavigate() {
+                            localStorage.removeItem('weddingCart');
+                            window.location.href = payBtn.getAttribute('href') || 'confirm.html';
+                        }
+
+                        // Try POST to API
+                        if (typeof apiFetch === 'function' && typeof API_BASE !== 'undefined') {
+                            fetch(API_BASE + '/reservations', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    groom_name: groomVal,
+                                    bride_name: brideVal,
+                                    email: emailVal,
+                                    phone: phoneVal,
+                                    wedding_date: dateVal,
+                                    guest_count: parseInt(reservation.guests) || 0,
+                                    special_requirements: commentsVal,
+                                    deposit_amount: depositAmt,
+                                    cart: cart
+                                })
+                            })
+                            .then(function (res) { return res.ok ? res.json() : null; })
+                            .then(function (data) {
+                                if (data && data.code) {
+                                    // Update the code with the one from the API
+                                    var all2 = JSON.parse(localStorage.getItem('allReservations') || '[]');
+                                    var last = all2[all2.length - 1];
+                                    if (last) { last.id = data.code; }
+                                    localStorage.setItem('allReservations', JSON.stringify(all2));
+                                }
+                                doNavigate();
+                            })
+                            .catch(function () { doNavigate(); });
+                        } else {
+                            doNavigate();
+                        }
+                    })();
                 });
             }
         });
