@@ -11,15 +11,78 @@
         href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@400;600;800&family=Inter:wght@400;500;600&family=Syne:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../../css/global.css">
-    
     <link rel="stylesheet" href="../../css/media.css">
     <script src="../../js/cookie-consent.js" defer></script>
     <script src="../../js/manager.js" defer></script>
     <script src="../../js/reveal.js" defer></script>
+    <style>
+        /* ── Compact header matching planner ── */
+        #header-placeholder { min-height: 48px; }
+        .header { min-height: 48px; padding: 6px 24px; }
+
+        /* ── Logo → back arrow ── */
+        .logo {
+            display: inline-flex !important; align-items: center; justify-content: center;
+            width: 32px; height: 32px; border: 1.5px solid #ddd; border-radius: 50%;
+            text-decoration: none; transition: border-color 0.2s; flex-shrink: 0;
+        }
+        .logo:hover { border-color: #888; }
+        .logo img { display: none; }
+        .logo::before {
+            content: '';
+            display: block; width: 8px; height: 8px;
+            border-left: 2px solid #666; border-bottom: 2px solid #666;
+            transform: rotate(45deg) translateX(2px);
+        }
+
+        /* ── Show only logout, hide other header buttons ── */
+        [data-header-btn="reserva"],
+        [data-header-btn="login"] { display: none !important; }
+        [data-header-btn="logout"] {
+            display: inline-flex !important;
+            width: 36px; height: 36px; padding: 0; border-radius: 50%; justify-content: center;
+        }
+        [data-header-btn="logout"] .header-btn__icon { display: block; }
+        [data-header-btn="logout"] .header-btn__text { display: none; }
+
+        /* ── Page section heading ── */
+        .hero-selection {
+            padding: 44px 68px 36px;
+            background: #fff;
+            border-bottom: 1px solid #ebebeb;
+            flex-direction: row;
+            align-items: center;
+            gap: 0;
+        }
+        .hero-selection__title {
+            font-size: 30px;
+            letter-spacing: 2px;
+            text-align: left;
+            padding: 0;
+            white-space: normal;
+            width: auto;
+        }
+    </style>
 </head>
 
 <body>
     <div id="header-placeholder"></div>
+    <script>
+        (function () {
+            var headerEl = document.getElementById('header-placeholder');
+            if (!headerEl) return;
+            var observer = new MutationObserver(function (_, obs) {
+                var btn = headerEl.querySelector('[data-header-btn="logout"]');
+                if (!btn) return;
+                obs.disconnect();
+                btn.addEventListener('click', function () {
+                    localStorage.removeItem('authToken');
+                    localStorage.removeItem('authUser');
+                });
+            });
+            observer.observe(headerEl, { childList: true, subtree: true });
+        })();
+    </script>
     <header class="hero-selection">
         <div class="hero-selection__top">
             <h1 class="hero-selection__title">Detalle de Reserva</h1>
@@ -151,7 +214,6 @@
             }
         });
     </script>
-    <div id="footer-placeholder"></div>
 </body>
 
 </html>
