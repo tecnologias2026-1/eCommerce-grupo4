@@ -53,7 +53,10 @@
                 if (!v) return;
                 var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
                 if (!reduced) {
-                    var tryPlay = function () { v.play().catch(function () { }); };
+                    var tryPlay = function () {
+                        v.currentTime = 5;
+                        v.play().catch(function () { });
+                    };
                     if (v.readyState >= 2) tryPlay();
                     else v.addEventListener('loadeddata', tryPlay, { once: true });
                 }

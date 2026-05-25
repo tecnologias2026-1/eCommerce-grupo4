@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     var venueImgMap = {
-        'paz-del-rio': '../images/paz del rio.png',
-        'el-cedro':    '../images/el cedro.png',
-        'san-juan':    '../images/san juan.png',
-        'las-marias':  '../images/las marias.png',
+        'paz-del-rio': '../images/paz%20del%20rio.png',
+        'el-cedro':    '../images/el%20cedro.png',
+        'san-juan':    '../images/san%20juan.png',
+        'las-marias':  '../images/las%20marias.png',
         'arkadia':     '../images/arkadia.png',
         'botania':     '../images/botania.png'
     };
