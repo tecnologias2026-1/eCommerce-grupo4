@@ -19,13 +19,10 @@
             display: none !important;
         }
 
-        /* Fix header buttons: show text, proper size */
-        .header-btn__text {
-            display: inline !important;
-        }
-        .header-btn__icon {
-            display: none !important;
-        }
+        /* Fix header buttons: show text + icon for login */
+        .header-btn__text { display: inline !important; }
+        .header-btn__icon { display: none !important; }
+        .header-btn--fill .header-btn__icon { display: block !important; }
         .header-btn {
             padding: 10px 24px !important;
             font-size: 15px !important;
@@ -34,9 +31,7 @@
             background: #000 !important;
             color: #fff !important;
         }
-        .header-btn--outline {
-            color: #000 !important;
-        }
+        .header-btn--outline { color: #000 !important; }
     </style>
     <script src="js/cookie-consent.js" defer></script>
     <script src="js/manager.js" defer></script>
@@ -168,29 +163,6 @@
         </ul>
     </section>
 
-    <!-- Nuestra Historia Section (Figma 864:5604) -->
-    <section class="our-history" data-name="Row characteristic" data-node-id="864:5604">
-        <div class="our-history__container">
-            <div class="our-history__content">
-                <h4 class="our-history__title">Nuestra Historia</h4>
-                <p class="our-history__text">Nuestra historia comenzó con la idea de simplificar uno de los momentos más
-                    especiales en la vida de una pareja: la planificación de su boda. Al reconocer lo abrumador que
-                    puede ser organizar cada detalle, decidimos crear una plataforma que reuniera en un solo lugar
-                    inspiración, herramientas prácticas y orientación confiable. Desde nuestros inicios, hemos trabajado
-                    con pasión para acompañar a cada pareja en su proceso, creciendo junto a sus sueños y adaptándonos a
-                    sus necesidades, con el objetivo de convertir cada boda en una experiencia única, memorable y llena
-                    de significado.</p>
-            </div>
-            <div class="our-history__image-container">
-                <div class="slideshow-container"
-                    data-slideshow='["assets/images/nuestra historia.png","assets/images/nuestra historia2.png","assets/images/nuestra historia3.png"]'>
-                    <img src="assets/images/nuestra historia.png" alt="Nuestra Historia - Comienzos"
-                        class="our-history__image" loading="lazy" decoding="async">
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Nuestra Trayectoria Section (Figma 626:4868) -->
     <section class="our-trajectory" data-name="Row characteristic" data-node-id="626:4868">
         <div class="our-trajectory__container">
@@ -239,11 +211,6 @@
                 Porque tu amor merece ser recordado a detalle
             </figcaption>
         </figure>
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="assets/public/planner.html" class="hero__button">
-                <span class="hero__button-text">Personalizar</span>
-            </a>
-        </div>
     </section>
     <div id="footer-placeholder"></div>
 

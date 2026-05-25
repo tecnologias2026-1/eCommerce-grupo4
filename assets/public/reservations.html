@@ -15,6 +15,36 @@
     <script src="../../js/cookie-consent.js" defer></script>
     <script src="../../js/manager.js" defer></script>
     <script src="../../js/reveal.js" defer></script>
+    <style>
+        /* ── Compact header matching planner ── */
+        #header-placeholder { min-height: 48px; }
+        .header { min-height: 48px; padding: 6px 24px; }
+
+        /* ── Logo → back arrow ── */
+        .logo {
+            display: inline-flex !important; align-items: center; justify-content: center;
+            width: 32px; height: 32px; border: 1.5px solid #ddd; border-radius: 50%;
+            text-decoration: none; transition: border-color 0.2s; flex-shrink: 0;
+        }
+        .logo:hover { border-color: #888; }
+        .logo img { display: none; }
+        .logo::before {
+            content: '';
+            display: block; width: 8px; height: 8px;
+            border-left: 2px solid #666; border-bottom: 2px solid #666;
+            transform: rotate(45deg) translateX(2px);
+        }
+
+        /* ── Show only logout, hide other header buttons ── */
+        [data-header-btn="reserva"],
+        [data-header-btn="login"] { display: none !important; }
+        [data-header-btn="logout"] {
+            display: inline-flex !important;
+            width: 36px; height: 36px; padding: 0; border-radius: 50%; justify-content: center;
+        }
+        [data-header-btn="logout"] .header-btn__icon { display: block; }
+        [data-header-btn="logout"] .header-btn__text { display: none; }
+    </style>
 </head>
 
 <body>
@@ -37,6 +67,22 @@
     </main>
 
     <script>
+        // Wire up header logout button once it loads
+        (function () {
+            var headerEl = document.getElementById('header-placeholder');
+            if (!headerEl) return;
+            var observer = new MutationObserver(function (_, obs) {
+                var btn = headerEl.querySelector('[data-header-btn="logout"]');
+                if (!btn) return;
+                obs.disconnect();
+                btn.addEventListener('click', function () {
+                    localStorage.removeItem('authToken');
+                    localStorage.removeItem('authUser');
+                });
+            });
+            observer.observe(headerEl, { childList: true, subtree: true });
+        })();
+
         document.addEventListener('DOMContentLoaded', function () {
             var listContainer = document.getElementById('reservations-list');
             var allReservations = [];

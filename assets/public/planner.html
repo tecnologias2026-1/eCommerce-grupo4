@@ -12,9 +12,21 @@
   <script src="../../js/cookie-consent.js" defer></script>
   <script src="../../js/manager.js" defer></script>
   <style>
-    /* ── No footer, no header logo ── */
+    /* ── No footer; header logo → back arrow ── */
     #footer-placeholder { display: none; min-height: 0; }
-    .logo { display: none; }
+    .logo {
+      display: inline-flex !important; align-items: center; justify-content: center;
+      width: 32px; height: 32px; border: 1.5px solid #ddd; border-radius: 50%;
+      text-decoration: none; transition: border-color 0.2s; flex-shrink: 0;
+    }
+    .logo:hover { border-color: #888; }
+    .logo img { display: none; }
+    .logo::before {
+      content: '';
+      display: block; width: 8px; height: 8px;
+      border-left: 2px solid #666; border-bottom: 2px solid #666;
+      transform: rotate(45deg) translateX(2px); flex-shrink: 0;
+    }
 
     /* ── Nav section label ── */
     .planner-nav__section-label {
@@ -27,18 +39,15 @@
     #planner-nav a:first-of-type::before { top: 50%; }
 
     /* ── Nav logo at bottom ── */
-    .planner-nav__logo-wrap {
-      margin-top: auto; padding-top: 28px;
-    }
+    .planner-nav__logo-wrap { margin-top: auto; padding-top: 28px; text-align: center; }
     .planner-nav__logo-wrap img {
-      width: 78px; height: auto; object-fit: contain; opacity: 0.55;
-      display: block;
+      width: 110px; height: auto; object-fit: contain; opacity: 0.65;
+      display: inline-block;
     }
 
     /* ── Compact header ── */
     #header-placeholder { min-height: 48px; }
     .header { min-height: 48px; padding: 6px 24px; }
-    .logo { height: 26px; width: 90px; }
 
     /* ── Icon-only action buttons ── */
     .header-btn__icon { display: block; }
@@ -799,11 +808,6 @@
           <p class="planner-section__sub">¿Hay algo especial que debamos saber? Acceso diferencial, preferencias florales, restricciones alimentarias u otros detalles.</p>
         </div>
         <textarea class="planner-notes-textarea" id="planner-notes-input" placeholder="Ej. Necesitamos acceso para personas con movilidad reducida, preferimos flores blancas y verdes..."></textarea>
-        <div class="planner-continuar-bar">
-          <button class="btn-primary" onclick="goToContinuar(event)">
-            <span class="btn-primary__text">Continuar</span>
-          </button>
-        </div>
       </section>
 
     </main>

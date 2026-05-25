@@ -3922,6 +3922,8 @@ section.feature .feature__subtitle {
     background: var(--primary);
 }
 
+[data-header-btn="logout"] { display: none; }
+
 .guest-selector {
     display: flex;
     align-items: center;
