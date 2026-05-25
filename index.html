@@ -347,6 +347,9 @@
                 });
             }
 
+            window.openModal = openModal;
+            window.closeModal = closeModal;
+
             closeBtn.addEventListener('click', closeModal);
 
             modal.addEventListener('click', function (e) {
@@ -457,12 +460,13 @@
                     var grid = document.querySelector('.bodas-ejemplares__grid');
                     if (!grid) return;
 
-                    grid.innerHTML = others.map(function (w) {
+                    var fallbackImages = ['assets/images/boda1.jpg', 'assets/images/boda2.png', 'assets/images/boda3.jpg'];
+                    grid.innerHTML = others.map(function (w, idx) {
                         var dateStr = w.wedding_date
                             ? new Date(w.wedding_date).toLocaleDateString('es-CO') : '';
                         var imgSrc = w.banner_image
                             ? 'assets/images/' + w.banner_image
-                            : 'assets/images/boda1.jpg';
+                            : (fallbackImages[idx] || 'assets/images/boda1.jpg');
                         var pageUrl = w.page_url || 'assets/public/weding1.html';
                         return (
                             '<li class="boda-card">' +

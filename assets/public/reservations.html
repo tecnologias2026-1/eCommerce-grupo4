@@ -205,6 +205,15 @@
                 return isNaN(n) ? 'COL$ 0' : 'COL$ ' + n.toLocaleString('es-CO');
             }
 
+            var venueImgMap = {
+                'paz-del-rio': '../images/paz del rio.png',
+                'el-cedro':    '../images/el cedro.png',
+                'san-juan':    '../images/san juan.png',
+                'las-marias':  '../images/las marias.png',
+                'arkadia':     '../images/arkadia.png',
+                'botania':     '../images/botania.png'
+            };
+
             function renderCards() {
                 var filtered = allReservations.filter(function (r) {
                     if (activeFilter === 'all') return true;
@@ -229,6 +238,8 @@
                     var price  = formatPrice(res.total_price);
                     var canConclude = status === 'pending' || status === 'confirmed';
 
+                    var venueImg = venueImgMap[res.venue_slug] || res.venue_image || '';
+
                     var card = document.createElement('div');
                     card.className = 'res-card';
                     card.dataset.code = code;
@@ -245,19 +256,19 @@
 
                         <div class="res-card__media-grid">
                             <div class="media-slot">
-                                <img src="${res.venue_image || 'https://via.placeholder.com/300x200?text=Hacienda'}" alt="${venue}" loading="lazy">
+                                <img src="${venueImg}" alt="${venue}" loading="lazy">
                                 <span>HACIENDA</span>
                             </div>
-                            <div class="media-slot empty">
-                                <div class="placeholder-img"></div>
+                            <div class="media-slot">
+                                <img src="../images/c1.png" alt="Ceremonia" loading="lazy">
                                 <span>CEREMONIA</span>
                             </div>
-                            <div class="media-slot empty">
-                                <div class="placeholder-img"></div>
+                            <div class="media-slot">
+                                <img src="../images/r1.png" alt="Recepción" loading="lazy">
                                 <span>RECEPCIÓN</span>
                             </div>
-                            <div class="media-slot empty">
-                                <div class="placeholder-img"></div>
+                            <div class="media-slot">
+                                <img src="../images/f1.png" alt="Decoración" loading="lazy">
                                 <span>DECORACIÓN</span>
                             </div>
                         </div>

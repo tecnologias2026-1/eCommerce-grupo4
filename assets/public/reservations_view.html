@@ -70,19 +70,19 @@
 
             <div class="res-card__media-grid res-media-full">
                 <div class="media-slot">
-                    <img id="res-image-grid" src="../images/paz del rio.png" alt="Ceremonia" loading="lazy">
+                    <img id="res-image-grid" src="" alt="Hacienda" loading="lazy">
+                    <span>HACIENDA</span>
+                </div>
+                <div class="media-slot">
+                    <img src="../images/c1.png" alt="Ceremonia" loading="lazy">
                     <span>CEREMONIA PREMIUM</span>
                 </div>
-                <div class="media-slot empty">
-                    <div class="placeholder-img"></div>
+                <div class="media-slot">
+                    <img src="../images/r1.png" alt="Recepción" loading="lazy">
                     <span>RECEPCION PREMIUM</span>
                 </div>
-                <div class="media-slot empty">
-                    <div class="placeholder-img"></div>
-                    <span>COMIDA PREMIUM</span>
-                </div>
-                <div class="media-slot empty">
-                    <div class="placeholder-img"></div>
+                <div class="media-slot">
+                    <img src="../images/f1.png" alt="Decoración" loading="lazy">
                     <span>DECORACION FLORAL</span>
                 </div>
             </div>
@@ -98,6 +98,15 @@
                 return;
             }
 
+            var venueImgMap = {
+                'paz-del-rio': '../images/paz del rio.png',
+                'el-cedro':    '../images/el cedro.png',
+                'san-juan':    '../images/san juan.png',
+                'las-marias':  '../images/las marias.png',
+                'arkadia':     '../images/arkadia.png',
+                'botania':     '../images/botania.png'
+            };
+
             function populate(r) {
                 var id     = (r.code || r.id || '000000').replace(/^#/, '');
                 var groom  = r.groom_name  || r.groom  || '';
@@ -108,7 +117,8 @@
                 var status = r.status      || 'Pendiente';
                 var email  = r.email       || '';
                 var phone  = r.phone       || '';
-                var image  = r.venue_image || r.venueImage || '';
+                var image  = (r.venue_slug && venueImgMap[r.venue_slug])
+                    || r.venue_image || r.venueImage || '../images/paz del rio.png';
                 var total  = r.total_price != null
                     ? 'COL$ ' + Number(r.total_price).toLocaleString('es-CO')
                     : (r.totalPrice || 'COL$ 0');
