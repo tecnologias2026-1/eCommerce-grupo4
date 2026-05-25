@@ -596,8 +596,9 @@
       var cartTop = document.querySelector('.planner-cart__top');
       if (cartTop) {
         cartTop.addEventListener('click', function () {
+          if (window.innerWidth > 768) return;
           var drawer = document.getElementById('planner-cart-drawer');
-          if (!drawer || window.getComputedStyle(drawer).display === 'none') return;
+          if (!drawer) return;
           drawer.classList.contains('is-open') ? closeDrawer() : openDrawer();
         });
       }

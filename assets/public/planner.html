@@ -214,12 +214,25 @@
       -webkit-backdrop-filter: blur(3px);
     }
 
-    /* Show drawer only on mobile (when cart becomes a bottom bar) */
+    /* ── Expand chevron on mobile cart bar ── */
     @media (max-width: 768px) {
       .planner-cart__drawer { display: flex; }
       .planner-cart__drawer-backdrop.is-active { display: block; }
       .planner-cart__top:hover { background: rgba(0,0,0,0.03); }
+
+      .planner-cart__expand-icon {
+        display: flex;
+        align-items: center;
+        margin-left: 8px;
+        color: #aaa;
+        flex-shrink: 0;
+        transition: transform 0.3s;
+      }
+      .planner-cart__top.is-open .planner-cart__expand-icon {
+        transform: rotate(180deg);
+      }
     }
+    .planner-cart__expand-icon { display: none; }
   </style>
 </head>
 <body>
@@ -887,6 +900,9 @@
           <span class="planner-cart__total-lbl">Total estimado</span>
           <span class="planner-cart__total-val" id="planner-total">COL$ 0</span>
         </div>
+        <svg class="planner-cart__expand-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="18 15 12 9 6 15"/>
+        </svg>
       </div>
 
       <div class="planner-cart__items" id="planner-cart-items">

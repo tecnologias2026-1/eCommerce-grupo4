@@ -1420,10 +1420,11 @@
         position: sticky;
         top: 48px;
         height: auto !important;
-        padding: 0 8px !important;
+        padding: 0 !important;
         flex-direction: row !important;
         overflow-x: auto !important;
         overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch;
         border-right: none !important;
         border-bottom: 1px solid #ebebeb;
         z-index: 100;
@@ -1434,9 +1435,9 @@
     .planner-nav::-webkit-scrollbar { display: none; }
 
     .planner-nav__item {
-        flex-direction: row;
-        padding: 12px 10px !important;
         flex-shrink: 0;
+        flex-direction: row;
+        padding: 12px 14px !important;
         gap: 6px;
     }
     .planner-nav__item::before { display: none !important; }
