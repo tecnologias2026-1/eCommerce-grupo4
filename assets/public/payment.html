@@ -344,7 +344,7 @@
                             .then(function (res) { return res.ok ? res.json() : null; })
                             .then(function (data) {
                                 if (data && data.code) {
-                                    // Update the code with the one from the API
+                                    localStorage.setItem('reservationCode', data.code);
                                     var all2 = JSON.parse(localStorage.getItem('allReservations') || '[]');
                                     var last = all2[all2.length - 1];
                                     if (last) { last.id = data.code; }

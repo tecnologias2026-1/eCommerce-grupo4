@@ -36,6 +36,16 @@
             pondrá en contacto contigo vía correo para finalizar los detalles de tu reserva con elementos en la hacienda
             seleccionada.
         </p>
+        <div id="res-summary" style="display:none;margin:24px 0;padding:20px 24px;background:var(--gray-light,#f8f6f3);border-radius:8px;text-align:left;">
+            <p style="font-family:var(--font-secondary,serif);font-size:12px;color:var(--muted,#888);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;">Código de reserva</p>
+            <p id="sum-code" style="font-family:var(--font-primary,sans-serif);font-size:20px;font-weight:700;margin-bottom:16px;color:var(--black,#1a1a1a);"></p>
+            <div style="display:grid;gap:8px;font-family:var(--font-primary,sans-serif);font-size:15px;">
+                <div><span style="color:var(--muted,#888);">Pareja: </span><strong id="sum-couple"></strong></div>
+                <div><span style="color:var(--muted,#888);">Hacienda: </span><span id="sum-venue"></span></div>
+                <div><span style="color:var(--muted,#888);">Fecha: </span><span id="sum-date"></span></div>
+                <div><span style="color:var(--muted,#888);">Total: </span><strong id="sum-total"></strong></div>
+            </div>
+        </div>
         <div class="confirm-actions">
             <a href="reservcode.html" class="btn-reserve">REVISAR RESERVA</a>
             <a href="../../index.html" class="btn-home">VOLVER AL INICIO</a>
@@ -44,9 +54,51 @@
 
     <script src="../../js/cart.js"></script>
     <script>
-        // Optional: clear cart after confirmation
-        document.addEventListener('DOMContentLoaded', () => {
-             // For now we keep the cart until final step
+        document.addEventListener('DOMContentLoaded', function () {
+            var code = localStorage.getItem('reservationCode');
+            var summaryEl = document.getElementById('res-summary');
+
+            function showSummary(code, couple, venue, date, total) {
+                if (!summaryEl) return;
+                document.getElementById('sum-code').textContent = code || '';
+                document.getElementById('sum-couple').textContent = couple || '';
+                document.getElementById('sum-venue').textContent = venue || '';
+                document.getElementById('sum-date').textContent = date || '';
+                document.getElementById('sum-total').textContent = total || '';
+                summaryEl.style.display = 'block';
+            }
+
+            function showFromLocal() {
+                var all = JSON.parse(localStorage.getItem('allReservations') || '[]');
+                if (!all.length) return;
+                var r = all[all.length - 1];
+                showSummary(
+                    (r.id || '').replace(/^#/, ''),
+                    (r.groom || '') + ' y ' + (r.bride || ''),
+                    r.venue || '',
+                    r.weddingDate || '',
+                    r.totalPrice || ''
+                );
+            }
+
+            if (code && typeof apiFetch === 'function') {
+                apiFetch('/reservations/' + code.replace(/^#/, ''))
+                    .then(function (data) {
+                        var total = data.total_price
+                            ? ('COL$ ' + Number(data.total_price).toLocaleString('es-CO'))
+                            : (data.totalPrice || '');
+                        showSummary(
+                            data.code || data.id || code,
+                            (data.groom_name || data.groom || '') + ' y ' + (data.bride_name || data.bride || ''),
+                            data.venue_name || data.venue || '',
+                            data.wedding_date || data.weddingDate || '',
+                            total
+                        );
+                    })
+                    .catch(showFromLocal);
+            } else {
+                showFromLocal();
+            }
         });
     </script>
     <div id="footer-placeholder"></div>
