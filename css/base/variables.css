@@ -1,0 +1,63 @@
+/* ================================================
+   1. SETTINGS - CSS Custom Properties
+   ================================================ */
+:root {
+    /* Colors */
+    --bg: #fafaff;
+    --muted: rgba(0, 0, 0, 0.55);
+    --border: rgba(0, 0, 0, 0.1);
+    --primary: #3daab5;
+    --primary-hover: #46b0ba;
+    --primary-light: rgba(84, 192, 203, 0.18);
+    --black: #000;
+    --white: #fff;
+    --gray-light: #fafaff;
+    --gray-muted: #666;
+    --gray-border: #cecece;
+    --gray-placeholder: #979797;
+    --success: #27ae60;
+    --error: #e74c3c;
+    --mp-blue: #0099de;
+    --mp-blue-hover: #0088c7;
+
+    /* Typography */
+    --font-primary: "Syne", sans-serif;
+    --font-secondary: "Spectral SC", serif;
+    --font-sans: "Inter", sans-serif;
+    --title-letter-spacing: -0.96px;
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+    --space-4xl: 80px;
+    --space-5xl: 120px;
+    --page-gutter: clamp(20px, 7vw, 120px);
+    --section-space: clamp(40px, 6vw, 80px);
+    --section-space-lg: clamp(56px, 8vw, 120px);
+    --hero-max-height: calc(100vh - var(--space-xl));
+
+    /* Layout */
+    --container-max: 1280px;
+    --container-max-wide: 1920px;
+    --content-shell-max: calc(var(--container-max) + (var(--page-gutter) * 2));
+    --content-inline-space: max(var(--page-gutter), calc((100% - var(--container-max)) / 2));
+    --content-reading-max: 680px;
+    --radius: 6px;
+    --radius-sm: 6px;
+    --radius-lg: 12px;
+    --radius-xl: 20px;
+    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 40px 100px rgba(0, 0, 0, 0.3);
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}

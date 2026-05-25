@@ -49,59 +49,7 @@
 
     </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const codeInput = document.getElementById('reserve-code');
-            const verifyBtn = document.getElementById('verify-btn');
-            const reserveCodeForm = document.getElementById('reserve-code-form');
-
-            codeInput.addEventListener('input', () => {
-                const value = codeInput.value.trim();
-                if (value.length > 0) {
-                    verifyBtn.classList.add('active');
-                } else {
-                    verifyBtn.classList.remove('active');
-                }
-            });
-
-            reserveCodeForm.addEventListener('submit', function (event) {
-                event.preventDefault();
-                var raw = codeInput.value.trim();
-                if (!raw) return;
-
-                // Normalize to WP-XXXXXX (strip leading # and prepend WP- if missing)
-                var normalized = raw.replace(/^#/, '');
-                if (!/^WP-/i.test(normalized)) normalized = 'WP-' + normalized;
-
-                function goToView(data) {
-                    localStorage.setItem('viewingUserReservation', JSON.stringify(data));
-                    window.location.href = 'reserview_user.html';
-                }
-
-                function fallbackLocal() {
-                    var all = JSON.parse(localStorage.getItem('allReservations') || '[]');
-                    var found = all.find(function (r) {
-                        return (r.id || '').replace(/^#/, '').toUpperCase() === normalized.toUpperCase();
-                    });
-                    if (found) { goToView(found); }
-                    else { alert('Reserva no encontrada. Por favor verifica el código ingresado.'); }
-                }
-
-                if (typeof apiFetch === 'function') {
-                    verifyBtn.disabled = true;
-                    apiFetch('/reservations/' + normalized)
-                        .then(function (data) {
-                            if (data && (data.code || data.id)) { goToView(data); }
-                            else { fallbackLocal(); }
-                        })
-                        .catch(fallbackLocal)
-                        .finally(function () { verifyBtn.disabled = false; });
-                } else {
-                    fallbackLocal();
-                }
-            });
-        });
-    </script>
+    <script src="../../js/pages/reservcode.js"></script>
     <div id="footer-placeholder"></div>
 </body>
 

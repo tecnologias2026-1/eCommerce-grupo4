@@ -1,0 +1,394 @@
+/* ================================================
+   3. LAYOUT - Page Structure
+   ================================================ */
+.hero-selection {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-3xl) var(--content-inline-space) var(--space-3xl);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.hero-gallery {
+    width: 100%;
+    max-width: 800px;
+    height: 380px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    align-self: center;
+}
+
+.hero-selection__top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 54px;
+}
+
+.hero-selection__title {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.1;
+    letter-spacing: var(--title-letter-spacing);
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    padding: 0 calc(54.108px + var(--space-xl));
+    white-space: nowrap;
+}
+
+.back-btn {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform var(--transition-fast);
+}
+
+.back-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.back-btn__icon {
+    width: 54.108px;
+    height: 10.912px;
+    display: block;
+}
+
+.feature-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+    align-items: flex-start;
+}
+
+.feature-list__subtitle {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: normal;
+    color: var(--muted);
+    width: 627px;
+    max-width: 100%;
+}
+
+.feature-list__subtitle--centered {
+    width: 100%;
+    margin-top: 24px;
+    text-align: center;
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: flex-start;
+}
+
+.feature {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+}
+
+.checkmark {
+    width: 24px;
+    height: 24px;
+    border-radius: 24px;
+    overflow: clip;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.checkmark img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.feature__text {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: normal;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.row-characteristic {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    height: 512px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: var(--space-3xl);
+    align-items: flex-start;
+    overflow: hidden;
+    padding: 40px var(--content-inline-space);
+}
+
+.row-characteristic__text {
+    width: 544px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    align-items: flex-start;
+}
+
+.row-characteristic__title {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: normal;
+    color: var(--black);
+}
+
+.row-characteristic__feature-row {
+    width: 100%;
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+}
+
+.row-characteristic__name {
+    flex: 1 0 0;
+    margin: 0;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: normal;
+    color: var(--black);
+    white-space: nowrap;
+}
+
+.row-characteristic__price {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: normal;
+    color: var(--black);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.row-characteristic__price-main,
+.row-characteristic__price-sub {
+    margin: 0;
+}
+
+.row-characteristic__description {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: normal;
+    color: var(--muted);
+}
+
+.row-characteristic__checkbox {
+    width: 18px;
+    height: 18px;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: clip;
+}
+
+.row-characteristic__checkbox img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.row-characteristic__image {
+    flex: 1 0 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.row-characteristic__image-frame {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.row-characteristic__image-frame img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.next-button-bar {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    background: var(--bg);
+    padding: var(--space-xl) var(--content-inline-space);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ceremony-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding: 40px var(--content-inline-space);
+    background: var(--bg);
+}
+
+.ceremony-options .row-characteristic {
+    position: relative;
+    height: auto;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--white);
+    cursor: pointer;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.ceremony-options .row-characteristic:hover {
+    border-color: var(--primary-light);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.ceremony-options .row-characteristic__image {
+    width: 100%;
+    height: 220px;
+    flex: none;
+}
+
+.ceremony-options .selection-item .row-characteristic__image {
+    flex: none !important;
+    width: 100% !important;
+    height: 220px !important;
+}
+
+.ceremony-options .row-characteristic__image-frame {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+.ceremony-options .row-characteristic__text {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px 20px 20px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.ceremony-options .row-characteristic__title {
+    font-size: 18px;
+    line-height: 1.3;
+}
+
+.ceremony-options .row-characteristic__feature-row {
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.ceremony-options .row-characteristic__name {
+    font-size: 16px;
+    flex: none;
+    width: 100%;
+}
+
+.ceremony-options .row-characteristic__price {
+    font-size: 16px;
+    text-align: left;
+}
+
+.ceremony-options .row-characteristic__description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--gray-muted);
+}
+
+.ceremony-options .row-characteristic__sets-info {
+    margin: 2px 0 0;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--black);
+}
+
+.ceremony-options .row-characteristic__sets-info span {
+    font-weight: 700;
+}
+
+.ceremony-options .row-characteristic__set-price {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.ceremony-options .row-characteristic__sets-info-sep {
+    color: var(--border);
+}
+
+.ceremony-options .selection-status {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    margin: 0;
+    background: var(--white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.ceremony-options .selection-item.is-selected {
+    box-shadow: 0 0 0 2px var(--primary), 0 8px 24px rgba(84, 192, 203, 0.15);
+}
+
+.ceremony-options .selection-item.is-selected:hover {
+    box-shadow: 0 0 0 2px var(--primary), 0 12px 32px rgba(84, 192, 203, 0.2);
+}
+

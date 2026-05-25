@@ -1,0 +1,171 @@
+/* ================================================
+   4. COMPONENTS - Reusable UI Elements
+   ================================================ */
+
+/* Buttons */
+.btn-primary {
+    border: 0;
+    border-radius: var(--radius);
+    background: var(--primary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md) calc(var(--space-3xl) + var(--space-lg));
+    transition: all var(--transition-normal);
+    text-decoration: none;
+}
+
+.btn-add-to-cart,
+.btn-reserve,
+.btn-submit-booking,
+.auth-form__submit,
+.modal-btn--primary,
+.btn-verify,
+.btn-pay-mp,
+.btn-continue-pay,
+.btn-pay-more {
+    border: 0;
+    border-radius: 10px;
+    background: var(--primary);
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-add-to-cart:hover,
+.btn-reserve:hover,
+.btn-submit-booking:hover,
+.auth-form__submit:hover,
+.modal-btn--primary:hover,
+.btn-verify.active:hover,
+.btn-pay-mp:hover,
+.btn-continue-pay:hover,
+.btn-pay-more:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(84, 192, 203, 0.3);
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary__text {
+    font-family: var(--font-primary);
+    font-weight: 800;
+    font-size: 24px;
+    line-height: normal;
+    color: var(--white);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.btn-secondary {
+    background: none;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: var(--font-primary);
+    transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+    background: var(--bg);
+    color: var(--primary-hover);
+}
+
+.btn-home,
+.btn-logout,
+.calendar-nav__btn,
+.modal-btn--secondary,
+.btn-chat {
+    background: none;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    border-radius: var(--radius);
+    transition: all var(--transition-fast);
+}
+
+.btn-home:hover,
+.btn-logout:hover,
+.calendar-nav__btn:hover,
+.modal-btn--secondary:hover,
+.btn-chat:hover {
+    background: var(--bg);
+    color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+.btn-submit-booking {
+    padding: var(--space-md) calc(var(--space-3xl) + var(--space-lg));
+    font-family: var(--font-secondary);
+    font-size: 18px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-submit-booking:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.btn-reserve {
+    padding: var(--space-md) calc(var(--space-2xl) + var(--space-lg));
+    font-family: var(--font-secondary);
+    font-size: 18px;
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    min-width: 250px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-reserve:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-home {
+    padding: var(--space-md) calc(var(--space-2xl) + var(--space-lg));
+    font-family: var(--font-secondary);
+    font-size: 18px;
+    text-decoration: none;
+    min-width: 250px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-home:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.btn-verify {
+    padding: var(--space-lg) calc(var(--space-3xl) + var(--space-lg));
+    font-family: var(--font-secondary);
+    font-size: 18px;
+    text-decoration: none;
+    min-width: 250px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.btn-verify.active {
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-verify.active:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+

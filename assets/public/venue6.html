@@ -19,7 +19,7 @@
 
 <body class="venue-body">
     <div id="header-placeholder"></div>
-    <header class="venue-header" data-base-price="4500000" data-base-guests="170">
+    <header class="venue-header" data-base-price="4500000" data-base-guests="170" data-name="Hacienda Las Marías" data-slug="las-marias" data-image="/assets/images/las marias.png">
         <div class="venue-header__top">
             <a href="planner.html" class="back-btn" aria-label="Atrás">
                 <img alt="" src="../images/atras.svg" class="back-btn__icon" aria-hidden="true" />
@@ -146,46 +146,7 @@
     </main>
 
     <script src="../../js/cart.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const guestsSelection = localStorage.getItem('selectedGuests');
-            const venueHeader = document.querySelector('.venue-header');
-
-            const basePriceNum = parseInt(venueHeader?.dataset.basePrice || '0', 10) || 0;
-            const baseGuestsNum = parseInt(venueHeader?.dataset.baseGuests || '100', 10) || 100;
-
-            const selectedGuests = (guestsSelection && parseInt(guestsSelection) > 0)
-                ? parseInt(guestsSelection)
-                : baseGuestsNum;
-
-            const pricePerGuest = basePriceNum / baseGuestsNum;
-            const total = pricePerGuest * selectedGuests;
-
-            const finalGuestsEl = document.getElementById('final-guest-count');
-            const baseRentEl = document.getElementById('base-rent');
-            const projectedTotalEl = document.getElementById('projected-total');
-
-            if (finalGuestsEl) finalGuestsEl.textContent = selectedGuests;
-            if (baseRentEl) baseRentEl.textContent = 'COL$ ' + basePriceNum.toLocaleString('es-CO');
-            
-            const totalFormatted = 'COL$ ' + Math.round(total).toLocaleString('es-CO');
-            if (projectedTotalEl) projectedTotalEl.textContent = totalFormatted;
-
-            // Handle Add to Cart
-            const addToCartBtn = document.querySelector('.btn-add-to-cart');
-            if (addToCartBtn) {
-                addToCartBtn.onclick = () => {
-                    addToCart({
-                        name: "Hacienda Las Marías",
-                        slug: "las-marias",
-                        guests: `${selectedGuests} invitados`,
-                        price: totalFormatted,
-                        image: "/assets/images/las marias.png"
-                    });
-                };
-            }
-        });
-    </script>
+    <script src="../../js/pages/venue.js"></script>
     <div id="footer-placeholder"></div>
 </body>
 

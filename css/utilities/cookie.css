@@ -1,0 +1,360 @@
+/* ================================================
+   COOKIE CONSENT MODAL
+   ================================================ */
+.cookie-consent-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.cookie-consent--visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cookie-consent-modal {
+    background: var(--white);
+    padding: 60px;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.cookie-consent--visible .cookie-consent-modal {
+    transform: translateY(0);
+}
+
+.cookie-consent-modal__title {
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 32px;
+    margin: 0 0 var(--space-lg);
+    color: var(--black);
+    text-transform: uppercase;
+    letter-spacing: var(--title-letter-spacing);
+}
+
+.cookie-consent-modal__text {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0 0 var(--space-xl);
+}
+
+.cookie-consent-modal__actions {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cookie-consent-modal__btn {
+    border: none;
+    padding: 12px var(--space-2xl);
+    border-radius: 30px;
+    font-family: var(--font-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cookie-consent-modal__btn--accept {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.cookie-consent-modal__btn--accept:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.cookie-consent-modal__btn--decline {
+    background: transparent;
+    color: var(--gray-muted);
+    border: 1px solid var(--gray-border);
+}
+
+.cookie-consent-modal__btn--decline:hover {
+    background: var(--gray-light);
+    color: var(--black);
+    transform: translateY(-2px);
+}
+
+/* Venue iframe modal */
+.venue-iframe-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+}
+
+.venue-iframe-modal.show {
+    display: flex;
+}
+
+.venue-iframe-modal__content {
+    background: var(--white);
+    width: 90%;
+    max-width: 1200px;
+    height: 90%;
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.venue-iframe-modal__close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    color: var(--black);
+    cursor: pointer;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.venue-iframe-modal__iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Hide elements when in popup mode */
+body.is-popup #header-placeholder,
+body.is-popup #footer-placeholder,
+body.is-popup .back-btn {
+    display: none !important;
+}
+
+/* Venue Gallery Slider */
+.venue-gallery-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin: var(--space-xl) 0;
+}
+
+.venue-gallery-wrapper .venue-features-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: hidden !important;
+    scroll-behavior: smooth;
+    gap: 0 !important;
+}
+
+.venue-gallery-wrapper .venue-feature-card {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.venue-gallery-wrapper .venue-feature-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.venue-gallery-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    font-size: 24px;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+.venue-gallery-btn:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
+.venue-gallery-btn.prev-btn {
+    left: 10px;
+}
+
+.venue-gallery-btn.next-btn {
+    right: 10px;
+}
+
+/* Wedding Detail Modal */
+.wedding-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 2000;
+    padding: 40px 20px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.wedding-modal-overlay.is-active {
+    display: flex;
+}
+
+.wedding-modal {
+    background: var(--gray-light);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    width: 100%;
+    max-width: var(--container-max);
+    position: relative;
+    transform: translateY(30px) scale(0.97);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin: auto;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+
+.wedding-modal-overlay.is-active .wedding-modal {
+    transform: translateY(0) scale(1);
+}
+
+.wedding-modal__close {
+    position: sticky;
+    top: 20px;
+    float: right;
+    margin-right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 0;
+    background: rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: var(--black);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+.wedding-modal__close:hover {
+    background: rgba(0, 0, 0, 0.15);
+    transform: scale(1.1);
+}
+
+.wedding-modal__close svg {
+    width: 22px;
+    height: 22px;
+}
+
+.wedding-modal__content {
+    padding: 0;
+    clear: right;
+}
+
+/* Hide back/close buttons from original wedding pages inside modal */
+.wedding-modal__content .wedding-header__close,
+.wedding-modal__content .wedding-header__back {
+    display: none !important;
+}
+
+/* Reduce header padding inside modal */
+.wedding-modal__content .wedding-header {
+    padding-top: 40px;
+    padding-right: 80px;
+}
+
+/* Responsive modal */
+@media (max-width: 768px) {
+    .wedding-modal-overlay {
+        padding: 0;
+        align-items: stretch;
+    }
+
+    .wedding-modal {
+        max-height: 100vh;
+        border-radius: 0;
+        transform: translateY(20px) scale(0.98);
+        margin: 0;
+    }
+
+    .wedding-modal-overlay.is-active .wedding-modal {
+        transform: translateY(0) scale(1);
+    }
+
+    .wedding-modal__close {
+        top: 12px;
+        margin-right: 12px;
+        width: 38px;
+        height: 38px;
+    }
+
+    .wedding-modal__close svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .wedding-modal__content .wedding-header {
+        padding: 24px var(--page-gutter) 16px;
+        padding-right: 60px;
+    }
+
+    .wedding-modal__content .wedding-header__title {
+        font-size: 28px;
+    }
+
+    .wedding-modal__content .wedding-header__date,
+    .wedding-modal__content .wedding-header__location {
+        font-size: 18px;
+    }
+
+    .wedding-modal__content .wedding-banner {
+        padding: 0 var(--page-gutter) 30px;
+    }
+
+    .wedding-modal__content .wedding-features {
+        padding: 30px var(--page-gutter);
+        gap: var(--space-xl);
+    }
+}
+

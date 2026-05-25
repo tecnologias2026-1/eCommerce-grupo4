@@ -1,0 +1,895 @@
+/* Wedding Components */
+.wedding-header {
+    background-color: var(--gray-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 80px var(--content-inline-space) 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.wedding-header__details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.wedding-header__title {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.1;
+    color: var(--black);
+    letter-spacing: var(--title-letter-spacing);
+    text-transform: capitalize;
+}
+
+.wedding-header__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.wedding-header__date,
+.wedding-header__location {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--muted);
+    line-height: 1.2;
+}
+
+.wedding-header__close {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--black);
+    transition: transform var(--transition-fast);
+}
+
+.wedding-header__close:hover {
+    transform: scale(1.1);
+}
+
+.wedding-header__close-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.wedding-banner {
+    background-color: var(--gray-light);
+    padding: 80px var(--content-inline-space) 50px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+.wedding-banner__image-container {
+    width: 100%;
+    max-width: var(--container-max);
+    aspect-ratio: 1040 / 480;
+    overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.wedding-banner__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wedding-banner__image--lyj {
+    object-position: center 15%;
+}
+
+.wedding-features {
+    background-color: var(--gray-light);
+    padding: 80px var(--content-inline-space);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3xl) var(--space-2xl);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.wedding-feature-card {
+    background-color: var(--gray-light);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    overflow: hidden;
+    border-radius: var(--radius);
+    transition: transform var(--transition-normal);
+}
+
+.wedding-feature-card:hover {
+    transform: translateY(-8px);
+}
+
+.wedding-feature-card__image-container {
+    position: relative;
+    width: 100%;
+    height: 360px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.wedding-feature-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.wedding-feature-card:hover .wedding-feature-card__image {
+    transform: scale(1.08);
+}
+
+/* Semi-transparent dark gradient overlay */
+.wedding-feature-card__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.4) 50%,
+            rgba(0, 0, 0, 0) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.wedding-feature-card:hover .wedding-feature-card__overlay {
+    opacity: 1;
+}
+
+/* Info Panel Sliding from Bottom */
+.wedding-feature-card__info-panel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--space-lg);
+    box-sizing: border-box;
+    z-index: 2;
+    transform: translateY(101%);
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.wedding-feature-card:hover .wedding-feature-card__info-panel {
+    transform: translateY(0);
+}
+
+/* Staggered Fade + Slide for contents inside */
+.wedding-feature-card__info-title {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+}
+
+.wedding-feature-card__info-desc {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
+}
+
+.wedding-feature-card:hover .wedding-feature-card__info-title,
+.wedding-feature-card:hover .wedding-feature-card__info-desc {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.wedding-feature-card__title {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--black);
+    text-transform: uppercase;
+    line-height: 1.1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.wedding-feature-card:hover .wedding-feature-card__title {
+    opacity: 0;
+    transform: translateY(4px);
+}
+
+/* Slideshow cross-fade */
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.slideshow-container > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    will-change: opacity;
+}
+
+.slideshow-container > img:first-child {
+    opacity: 1;
+}
+
+.slideshow-container > img.active {
+    opacity: 1;
+}
+
+/* Desktop Hero */
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: clamp(400px, 72vh, 680px);
+    max-height: var(--hero-max-height);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 80px 110px;
+    box-sizing: border-box;
+    overflow: hidden;
+    gap: 16px;
+    border-bottom: 6px solid #effdff;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0) 100%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+    z-index: -1;
+}
+
+.hero__text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 320px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero__title {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.5;
+    color: var(--white);
+    letter-spacing: 0;
+}
+
+.hero__button {
+    background-color: #54c0cb;
+    border: none;
+    border-radius: var(--radius);
+    padding: 16px 24px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    width: 320px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+.hero__button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.hero__button-text {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--white);
+    letter-spacing: -0.2px;
+}
+
+/* Section Scroll Indicator */
+.section-scroll-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: var(--white);
+    text-decoration: none;
+    margin: var(--space-lg) auto;
+    transition: transform var(--transition-normal), background-color var(--transition-normal);
+}
+
+.section-scroll-indicator:hover {
+    background-color: var(--primary-hover);
+    transform: scale(1.1);
+}
+
+.section-scroll-icon {
+    width: 28px;
+    height: 28px;
+    display: block;
+    animation: scroll-bounce 2.4s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(7px);
+    }
+}
+
+/* Nuestras Bodas */
+.nuestras-bodas {
+    background-color: var(--gray-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--section-space) var(--page-gutter) clamp(40px, 5vw, 56px);
+    gap: var(--space-2xl);
+}
+
+.nuestras-bodas__header {
+    text-align: center;
+    max-width: var(--container-max);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.nuestras-bodas__title {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.1;
+    color: var(--black);
+    letter-spacing: var(--title-letter-spacing);
+}
+
+.nuestras-bodas__subtitle {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--muted);
+    line-height: 1.2;
+}
+
+.nuestras-bodas__image-container {
+    width: 100%;
+    max-width: var(--container-max);
+    height: 480px;
+    overflow: hidden;
+    border-radius: var(--radius);
+    position: relative;
+}
+
+/* Glassmorphism overlay for nuestras-bodas image */
+.nuestras-bodas__image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.boda-card__link:hover .nuestras-bodas__image-container::before {
+    opacity: 1;
+}
+
+.nuestras-bodas__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.boda-card__link:hover .nuestras-bodas__image {
+    transform: scale(1.06);
+}
+
+/* Nuestra Boda button */
+.nuestras-bodas__view-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 2.5px;
+    padding: 14px 28px;
+    border-radius: 40px;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 3;
+    white-space: nowrap;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.boda-card__link:hover .nuestras-bodas__view-btn {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.nuestras-bodas__view-btn:hover {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.nuestras-bodas__details {
+    width: 100%;
+    max-width: var(--container-max);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: left;
+}
+
+.nuestras-bodas__wedding-title {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.1;
+    color: var(--black);
+    letter-spacing: var(--title-letter-spacing);
+}
+
+.nuestras-bodas__wedding-info {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--muted);
+    line-height: 1.2;
+}
+
+/* Bodas Ejemplares */
+.bodas-ejemplares {
+    background-color: var(--gray-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--section-space) var(--page-gutter) var(--section-space-lg);
+    gap: var(--space-2xl);
+}
+
+.bodas-ejemplares__header {
+    text-align: center;
+    width: 100%;
+}
+
+.bodas-ejemplares__title {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 1.1;
+    color: var(--black);
+    letter-spacing: var(--title-letter-spacing);
+    text-transform: uppercase;
+}
+
+.bodas-ejemplares__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: var(--container-max);
+}
+
+.boda-card {
+    background-color: var(--gray-light);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: var(--radius);
+}
+
+.boda-card__link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    width: 100%;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.boda-card__link:hover {
+    transform: translateY(-10px);
+}
+
+.boda-card__image-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2/3;
+    overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Elegant glassmorphism dark overlay */
+.boda-card__image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.boda-card__link:hover .boda-card__image-container::before {
+    opacity: 1;
+}
+
+/* Ver boda button (replaces glassmorphism badge) */
+.boda-card__view-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 2px;
+    padding: 12px 24px;
+    border-radius: 40px;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 3;
+    white-space: nowrap;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.boda-card__link:hover .boda-card__view-btn {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.boda-card__view-btn:hover {
+    background: rgba(255, 255, 255, 0.28);
+}
+
+.boda-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.boda-card__link:hover .boda-card__image {
+    transform: scale(1.06);
+}
+
+.boda-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.boda-card__title {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--black);
+    transition: color 0.3s ease;
+}
+
+.boda-card__link:hover .boda-card__title {
+    color: var(--primary);
+}
+
+.boda-card__info {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--muted);
+    line-height: 1.2;
+    transition: color 0.3s ease;
+}
+
+.boda-card__link:hover .boda-card__info {
+    color: var(--black);
+}
+
+/* Text Features */
+.text-features {
+    background-color: var(--gray-light);
+    display: flex;
+    justify-content: center;
+    padding: var(--section-space) var(--page-gutter);
+}
+
+.text-features__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2xl);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: var(--container-max);
+}
+
+.feature-block {
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    padding-top: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.feature-block__title {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 24px;
+    color: #1a1a1a;
+    line-height: 1.2;
+}
+
+.feature-block__text {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--muted);
+    line-height: 1.4;
+}
+
+/* Calendar */
+.reservation-calendar {
+    padding: var(--section-space) var(--page-gutter);
+    background-color: var(--gray-light);
+}
+
+.reservation-calendar__header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.reservation-calendar__title {
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 32px;
+    color: var(--black);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.reservation-calendar__subtitle {
+    font-family: var(--font-primary);
+    font-size: 18px;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.calendar-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+}
+
+.calendar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.calendar-nav__display {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.calendar-nav__month {
+    font-family: var(--font-secondary);
+    font-size: 24px;
+    font-weight: 600;
+    min-width: 140px;
+    text-align: right;
+}
+
+.calendar-nav__year-select,
+.calendar-nav__month-select {
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    border: 1px solid #ddd;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+    background: var(--white);
+    outline: none;
+    transition: border-color var(--transition-fast);
+}
+
+.calendar-nav__year-select:hover,
+.calendar-nav__month-select:hover {
+    border-color: var(--primary);
+}
+
+.calendar-nav__btn {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.calendar-nav__btn:hover {
+    box-shadow: var(--shadow-sm);
+}
+
+.calendar-grid__daynames {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 12px;
+}
+
+.calendar-grid__daynames span {
+    text-align: center;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 14px;
+    color: #999;
+}
+
+.calendar-grid__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: 1px solid transparent;
+}
+
+.calendar-day:not(.empty):not(.booked):hover {
+    background: #f0fdff;
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.calendar-day.selected {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.calendar-day.booked {
+    background: #fff0f0;
+    color: var(--error);
+    cursor: not-allowed;
+    border: 1px solid #ffcccc;
+}
+
+.calendar-day.empty {
+    cursor: default;
+}
+
+.selected-date-info {
+    max-width: 800px;
+    margin: 24px auto 0;
+    padding: 16px 32px;
+    background: #f0fdff;
+    border-radius: var(--radius);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-primary);
+    font-weight: 600;
+}
+
+.selected-date-info--hidden {
+    display: none;
+}
+

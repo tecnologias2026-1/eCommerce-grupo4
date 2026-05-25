@@ -1,0 +1,619 @@
+/* ══════════════════════════════════════════════════
+   PLANNER — single-page wedding customization flow
+══════════════════════════════════════════════════ */
+
+.planner-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr 300px;
+    align-items: start;
+    min-height: 100vh;
+}
+
+/* ── Left nav ── */
+.planner-nav {
+    position: sticky;
+    top: 80px;
+    height: calc(100vh - 80px);
+    padding: 56px 28px 56px 40px;
+    border-right: 1px solid #ebebeb;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.planner-nav__item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.planner-nav__item::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: #e0e0e0;
+}
+
+.planner-nav__item:first-child::before { top: 50%; }
+.planner-nav__item:last-child::before  { bottom: 50%; }
+
+.planner-nav__dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    background: #fff;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    transition: all 0.25s;
+}
+
+.planner-nav__label {
+    font-family: var(--font-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #c0c0c0;
+    transition: color 0.2s;
+    white-space: nowrap;
+}
+
+.planner-nav__item--active .planner-nav__dot {
+    border-color: var(--primary);
+    background: var(--primary);
+    box-shadow: 0 0 0 4px rgba(61,170,181,0.18);
+}
+.planner-nav__item--active .planner-nav__label { color: var(--primary); }
+
+.planner-nav__item--done .planner-nav__dot {
+    border-color: var(--primary);
+    background: var(--primary);
+}
+.planner-nav__item--done .planner-nav__label { color: var(--black); }
+
+.planner-nav__item--locked .planner-nav__dot  { border-color: #e0e0e0; background: #f7f7f7; }
+.planner-nav__item--locked .planner-nav__label { color: #d0d0d0; }
+
+/* ── Center content ── */
+.planner-content {
+    padding: 60px 68px 100px;
+}
+
+.planner-section {
+    position: relative;
+    padding-bottom: 120px;
+    margin-bottom: 120px;
+    border-bottom: 1px solid #eeeeee;
+    scroll-margin-top: 36px;
+}
+
+.planner-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 24px;
+}
+
+.planner-section__lock {
+    display: none;
+    position: absolute;
+    inset: -16px;
+    background: rgba(255,255,255,0.86);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    z-index: 5;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    pointer-events: all;
+}
+
+.planner-section--locked .planner-section__lock { display: flex; }
+
+.planner-section__lock-msg {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-secondary);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #bbb;
+}
+
+.planner-section__lock-msg svg {
+    width: 15px;
+    height: 15px;
+    stroke: #ccc;
+    fill: none;
+    flex-shrink: 0;
+}
+
+.planner-section__head { margin-bottom: 36px; }
+
+.planner-section__title {
+    font-family: var(--font-primary);
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--black);
+    margin: 0 0 8px;
+}
+
+.planner-section__sub {
+    font-family: var(--font-secondary);
+    font-size: 14px;
+    color: #999;
+    margin: 0;
+}
+
+/* ── Detalles form ── */
+.planner-detalles-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-top: 8px;
+}
+
+.planner-detalles-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.planner-detalles-label {
+    font-family: var(--font-secondary);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #aaa;
+}
+
+.planner-detalles-input {
+    padding: 14px 16px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: var(--radius);
+    font-family: var(--font-secondary);
+    font-size: 16px;
+    color: var(--black);
+    background: #fafafa;
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.planner-detalles-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: #fff;
+}
+
+/* ── Venue cards grid ── */
+.planner-venue-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+.planner-venue-card {
+    background: #eaeaea;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.planner-venue-card.is-selected { border-color: var(--primary); }
+
+.planner-venue-card__img {
+    position: relative;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.planner-venue-card__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.planner-venue-card__rec {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--primary);
+    color: #fff;
+    font-family: var(--font-secondary);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.planner-venue-card__check {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.planner-venue-card__check svg {
+    width: 14px;
+    height: 14px;
+    stroke: #fff;
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.planner-venue-card.is-selected .planner-venue-card__check {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.planner-venue-card__body { padding: 20px 22px 22px; }
+
+.planner-venue-card__name {
+    font-family: var(--font-secondary);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--black);
+    margin: 0 0 4px;
+    letter-spacing: 0.2px;
+}
+
+.planner-venue-card__guests {
+    font-family: var(--font-secondary);
+    font-size: 12px;
+    color: #999;
+    margin: 0 0 8px;
+}
+
+.planner-venue-card__price {
+    font-family: var(--font-secondary);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+}
+
+/* ── Service & food items grid ── */
+.planner-items-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+/* Override selection-item inside planner: compact like original venue cards */
+.planner-items-grid .selection-item__image-container { height: 155px; aspect-ratio: unset; }
+.planner-items-grid .selection-item__content { padding: 14px 16px 18px; gap: 2px; }
+.planner-items-grid .selection-item__title { font-size: 13px; }
+.planner-items-grid .selection-item__price { font-size: 15px; margin-top: 2px; }
+
+/* ── Right cart ── */
+.planner-cart {
+    position: sticky;
+    top: 80px;
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-left: 1px solid #ebebeb;
+    background: #fafafa;
+}
+
+.planner-cart__top {
+    padding: 28px 22px 20px;
+    border-bottom: 1px solid #e8e8e8;
+    flex-shrink: 0;
+}
+
+.planner-cart__guests {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.planner-cart__guests-lbl,
+.planner-cart__total-lbl {
+    font-family: var(--font-secondary);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #aaa;
+}
+
+.planner-cart__guests-input {
+    width: 68px;
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: var(--radius);
+    font-family: var(--font-secondary);
+    font-size: 14px;
+    text-align: center;
+    background: #fff;
+    color: var(--black);
+    transition: border-color 0.2s;
+}
+
+.planner-cart__guests-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.planner-cart__date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.planner-cart__date-lbl {
+    font-family: var(--font-secondary);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #aaa;
+}
+
+.planner-cart__date-input {
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: var(--radius);
+    font-family: var(--font-secondary);
+    font-size: 13px;
+    background: #fff;
+    color: var(--black);
+    transition: border-color 0.2s;
+    max-width: 160px;
+}
+
+.planner-cart__date-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.planner-venue-card__name-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.planner-venue-details-btn {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    font-family: var(--font-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: transparent;
+    border: 1px solid var(--primary);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+    margin-top: 2px;
+}
+
+.planner-venue-details-btn:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+.selection-item__title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.selection-item__title-row .selection-item__title {
+    margin-bottom: 0;
+}
+
+.selection-item__details-btn {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.selection-item__price-qty-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.selection-item__price-qty-row .selection-item__price {
+    margin: 0;
+}
+
+.selection-item__inline-qty {
+    display: none;
+    align-items: center;
+    gap: 4px;
+}
+
+.is-selected .selection-item__inline-qty {
+    display: flex;
+}
+
+.selection-item__qty-btn {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--primary);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+    flex-shrink: 0;
+}
+
+.selection-item__qty-btn:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+.selection-item__qty-val {
+    font-family: var(--font-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+    color: var(--black);
+}
+
+.planner-cart__total {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.planner-cart__total-val {
+    font-family: var(--font-primary);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.planner-cart__items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 22px;
+}
+
+.planner-cart__section { margin-bottom: 16px; }
+
+.planner-cart__section-lbl {
+    font-family: var(--font-secondary);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #c0c0c0;
+    margin: 0 0 8px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.planner-cart__row {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 7px 0;
+    border-bottom: 1px dotted #eee;
+}
+
+.planner-cart__row:last-child { border-bottom: none; }
+
+.planner-cart__row-info { flex: 1; min-width: 0; }
+
+.planner-cart__row-name {
+    font-family: var(--font-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--black);
+    margin: 0 0 2px;
+    line-height: 1.3;
+}
+
+.planner-cart__row-detail {
+    font-family: var(--font-secondary);
+    font-size: 11px;
+    color: #bbb;
+    margin: 0;
+}
+
+.planner-cart__row-price {
+    font-family: var(--font-secondary);
+    font-size: 11px;
+    font-weight: 700;
+    color: #666;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.planner-cart__row-del {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ddd;
+    font-size: 15px;
+    line-height: 1;
+    padding: 0 0 0 4px;
+    flex-shrink: 0;
+    transition: color 0.15s;
+}
+.planner-cart__row-del:hover { color: #d00; }
+
+.planner-cart__empty {
+    font-family: var(--font-secondary);
+    font-size: 13px;
+    color: #ccc;
+    text-align: center;
+    padding: 32px 0;
+    margin: 0;
+}
+
+.planner-cart__pay-wrap {
+    padding: 14px 22px 22px;
+    border-top: 1px solid #eee;
+    flex-shrink: 0;
+}
+
+.planner-cart__pay-btn {
+    display: block;
+    width: 100%;
+    background: var(--black);
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--font-secondary);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 14px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.planner-cart__pay-btn:hover { background: var(--primary); }
+
