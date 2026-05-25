@@ -2,9 +2,30 @@ const API_BASE = window.location.hostname === 'localhost' || window.location.hos
     ? 'http://localhost:3000/api/v1'
     : 'https://back-eventosdecoraciones.onrender.com/api/v1';
 
+function getAuthHeaders() {
+    const token = localStorage.getItem('authToken');
+    return token ? { 'Authorization': 'Bearer ' + token } : {};
+}
+
 async function apiFetch(path) {
-    const res = await fetch(API_BASE + path);
-    if (!res.ok) throw new Error('API error ' + res.status + ': ' + path);
+    const res = await fetch(API_BASE + path, { headers: getAuthHeaders() });
+    if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw Object.assign(new Error(err.error || 'API error ' + res.status), { status: res.status, data: err });
+    }
+    return res.json();
+}
+
+async function apiRequest(method, path, body) {
+    const res = await fetch(API_BASE + path, {
+        method,
+        headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+        body: body != null ? JSON.stringify(body) : undefined,
+    });
+    if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw Object.assign(new Error(err.error || 'API error ' + res.status), { status: res.status, data: err });
+    }
     return res.json();
 }
 

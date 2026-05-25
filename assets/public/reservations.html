@@ -11,7 +11,6 @@
         href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@400;600&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../../css/global.css">
-    
     <link rel="stylesheet" href="../../css/media.css">
     <script src="../../js/cookie-consent.js" defer></script>
     <script src="../../js/manager.js" defer></script>
@@ -21,125 +20,179 @@
 <body>
     <div id="header-placeholder"></div>
     <header class="hero-selection">
-        <a href="auth.html" class="btn-logout">Cerrar Sesión</a>
+        <a href="auth.html" class="btn-logout" id="btn-logout">Cerrar Sesión</a>
         <h1 class="hero-selection__title">Reservaciones</h1>
     </header>
 
+    <div class="res-filter-bar">
+        <button class="res-filter-btn res-filter-btn--active" data-filter="all">Todas</button>
+        <button class="res-filter-btn" data-filter="pending">Pendientes</button>
+        <button class="res-filter-btn" data-filter="completed">Finalizadas</button>
+    </div>
+
     <main class="reservations-content">
-        <div class="reservations-list">
-            <!-- Rendered cards here -->
+        <div class="reservations-list" id="reservations-list">
+            <p class="empty-msg">Cargando reservaciones…</p>
         </div>
     </main>
 
-    <script src="../../js/cart.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const listContainer = document.querySelector('.reservations-list');
+        document.addEventListener('DOMContentLoaded', function () {
+            var listContainer = document.getElementById('reservations-list');
+            var allReservations = [];
+            var activeFilter = 'all';
 
-            function renderReservations(allReservations) {
+            // Logout
+            document.getElementById('btn-logout').addEventListener('click', function () {
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('authUser');
+            });
 
-            // Handle Clear History
-            const clearBtn = document.getElementById('clear-reservations');
-            if (clearBtn) {
-                clearBtn.onclick = () => {
-                    if (confirm('¿Estás seguro de que quieres borrar todo el historial?')) {
-                        localStorage.removeItem('allReservations');
-                        window.location.reload();
-                    }
-                };
+            // Filter tab clicks
+            document.querySelectorAll('.res-filter-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.res-filter-btn').forEach(function (b) {
+                        b.classList.remove('res-filter-btn--active');
+                    });
+                    btn.classList.add('res-filter-btn--active');
+                    activeFilter = btn.dataset.filter;
+                    renderCards();
+                });
+            });
+
+            function statusLabel(status) {
+                var map = { pending: 'Pendiente', confirmed: 'Confirmada', cancelled: 'Cancelada', completed: 'Finalizada' };
+                return map[status] || status;
             }
 
-            // allReservations list: normalizes API response to local shape if needed
-            if (allReservations.length === 0) {
-                listContainer.innerHTML = '<p class="empty-msg">No hay reservaciones registradas aún.</p>';
-                return;
+            function formatPrice(value) {
+                var n = Number(value);
+                return isNaN(n) ? 'COL$ 0' : 'COL$ ' + n.toLocaleString('es-CO');
             }
 
-            allReservations.sort((a, b) => new Date(b.timestamp || b.created_at) - new Date(a.timestamp || a.created_at));
-
-            listContainer.innerHTML = '';
-            allReservations.forEach((res, index) => {
-                // Normalize API shape (snake_case) to local shape (camelCase)
-                const groom = res.groom || res.groom_name || '';
-                const bride = res.bride || res.bride_name || '';
-                const venue = res.venue || res.venue_name || '';
-                const venueImage = res.venueImage || res.venue_image || '';
-                const weddingDate = res.weddingDate || res.wedding_date || '';
-                const status = res.status || 'Pendiente';
-                const totalPrice = res.totalPrice || res.total_price
-                    ? (res.totalPrice || ('COL$ ' + Number(res.total_price).toLocaleString('es-CO')))
-                    : 'COL$ 0';
-
-                const card = document.createElement('div');
-                card.className = 'res-card';
-                card.style.cursor = 'pointer';
-                card.dataset.index = index;
-                card.setAttribute('role', 'button');
-                card.setAttribute('tabindex', '0');
-                card.setAttribute('aria-label', `Ver detalle de la reserva de ${groom} y ${bride}`);
-                card.innerHTML = `
-                    <div class="res-card__info">
-                        <h2 class="res-card__title">${groom.toUpperCase()} Y<br>${bride.toUpperCase()}</h2>
-                        <p class="res-card__venue">${venue}</p>
-                        <p class="res-card__date">Fecha: ${weddingDate}</p>
-                        <p class="res-card__status">Estado: <span>${status}</span></p>
-                        <p class="res-card__price">${totalPrice}</p>
-                    </div>
-
-                    <div class="res-card__media-grid">
-                        <div class="media-slot">
-                            <img src="${venueImage || 'https://via.placeholder.com/300x200?text=Hacienda'}" alt="Hacienda" loading="lazy">
-                            <span>CEREMONIA PREMIUM</span>
-                        </div>
-                        <div class="media-slot empty">
-                            <div class="placeholder-img"></div>
-                            <span>RECEPCION PREMIUM</span>
-                        </div>
-                        <div class="media-slot empty">
-                            <div class="placeholder-img"></div>
-                            <span>COMIDA PREMIUM</span>
-                        </div>
-                        <div class="media-slot empty">
-                            <div class="placeholder-img"></div>
-                            <span>DECORACION FLORAL</span>
-                        </div>
-                    </div>
-                `;
-
-                card.addEventListener('click', () => {
-                    localStorage.setItem('viewingReservation', JSON.stringify(res));
-                    window.location.href = 'reservations_view.html';
+            function renderCards() {
+                var filtered = allReservations.filter(function (r) {
+                    if (activeFilter === 'all') return true;
+                    if (activeFilter === 'pending') return r.status === 'pending';
+                    if (activeFilter === 'completed') return r.status === 'completed';
+                    return true;
                 });
 
-                card.addEventListener('keydown', (event) => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
+                if (filtered.length === 0) {
+                    listContainer.innerHTML = '<p class="empty-msg">No hay reservaciones para mostrar.</p>';
+                    return;
+                }
+
+                listContainer.innerHTML = '';
+                filtered.forEach(function (res) {
+                    var groom  = res.groom_name   || '';
+                    var bride  = res.bride_name   || '';
+                    var venue  = res.venue_name   || '';
+                    var date   = res.wedding_date || '';
+                    var status = res.status       || 'pending';
+                    var code   = res.code         || res.id || '';
+                    var price  = formatPrice(res.total_price);
+                    var canConclude = status === 'pending' || status === 'confirmed';
+
+                    var card = document.createElement('div');
+                    card.className = 'res-card';
+                    card.dataset.code = code;
+
+                    card.innerHTML = `
+                        <div class="res-card__info">
+                            <h2 class="res-card__title">${groom.toUpperCase()} Y<br>${bride.toUpperCase()}</h2>
+                            <p class="res-card__venue">${venue}</p>
+                            <p class="res-card__date">Fecha: ${date}</p>
+                            <p class="res-card__status">Estado: <span data-status="${status}">${statusLabel(status)}</span></p>
+                            <p class="res-card__price">${price}</p>
+                            ${canConclude ? `<button class="btn-conclude" data-code="${code}">Marcar como concluida</button>` : ''}
+                        </div>
+
+                        <div class="res-card__media-grid">
+                            <div class="media-slot">
+                                <img src="${res.venue_image || 'https://via.placeholder.com/300x200?text=Hacienda'}" alt="${venue}" loading="lazy">
+                                <span>HACIENDA</span>
+                            </div>
+                            <div class="media-slot empty">
+                                <div class="placeholder-img"></div>
+                                <span>CEREMONIA</span>
+                            </div>
+                            <div class="media-slot empty">
+                                <div class="placeholder-img"></div>
+                                <span>RECEPCIÓN</span>
+                            </div>
+                            <div class="media-slot empty">
+                                <div class="placeholder-img"></div>
+                                <span>DECORACIÓN</span>
+                            </div>
+                        </div>
+                    `;
+
+                    // Navigate to detail on card click (but not on conclude button)
+                    card.addEventListener('click', function (e) {
+                        if (e.target.closest('.btn-conclude')) return;
                         localStorage.setItem('viewingReservation', JSON.stringify(res));
                         window.location.href = 'reservations_view.html';
-                    }
-                });
-
-                listContainer.appendChild(card);
-            });
-            } // end renderReservations
-
-            // Try API first, fall back to localStorage
-            const storedEmail = localStorage.getItem('userEmail') || '';
-            if (typeof apiFetch === 'function' && storedEmail) {
-                apiFetch('/reservations?email=' + encodeURIComponent(storedEmail))
-                    .then(function (data) {
-                        if (Array.isArray(data) && data.length > 0) {
-                            renderReservations(data);
-                        } else {
-                            renderReservations(JSON.parse(localStorage.getItem('allReservations') || '[]'));
-                        }
-                    })
-                    .catch(function () {
-                        renderReservations(JSON.parse(localStorage.getItem('allReservations') || '[]'));
                     });
-            } else {
-                renderReservations(JSON.parse(localStorage.getItem('allReservations') || '[]'));
+
+                    // Conclude button
+                    var concludeBtn = card.querySelector('.btn-conclude');
+                    if (concludeBtn) {
+                        concludeBtn.addEventListener('click', function (e) {
+                            e.stopPropagation();
+                            concludeReservation(code, card);
+                        });
+                    }
+
+                    listContainer.appendChild(card);
+                });
             }
+
+            function concludeReservation(code, card) {
+                if (!confirm('¿Marcar esta reserva como finalizada?')) return;
+
+                var btn = card.querySelector('.btn-conclude');
+                if (btn) { btn.disabled = true; btn.textContent = 'Actualizando…'; }
+
+                apiRequest('PATCH', '/reservations/' + code + '/status', { status: 'completed' })
+                    .then(function () {
+                        var res = allReservations.find(function (r) { return (r.code || r.id) === code; });
+                        if (res) res.status = 'completed';
+                        renderCards();
+                    })
+                    .catch(function (err) {
+                        alert('No se pudo actualizar: ' + (err.message || 'Error desconocido'));
+                        if (btn) { btn.disabled = false; btn.textContent = 'Marcar como concluida'; }
+                    });
+            }
+
+            // Load all reservations from API
+            function loadReservations() {
+                if (typeof apiFetch !== 'function') {
+                    listContainer.innerHTML = '<p class="empty-msg">Error: manager.js no cargó.</p>';
+                    return;
+                }
+
+                apiFetch('/reservations')
+                    .then(function (data) {
+                        if (!Array.isArray(data)) throw new Error('Respuesta inesperada');
+                        allReservations = data.sort(function (a, b) {
+                            return new Date(b.created_at || 0) - new Date(a.created_at || 0);
+                        });
+                        renderCards();
+                    })
+                    .catch(function (err) {
+                        var status = err.status || 0;
+                        var msg = err.message || '';
+                        if (status === 401 || status === 403 || msg.includes('401') || msg.includes('403')) {
+                            window.location.href = 'auth.html';
+                            return;
+                        }
+                        listContainer.innerHTML = '<p class="empty-msg">Error al cargar reservaciones.</p>';
+                    });
+            }
+
+            loadReservations();
         });
     </script>
     <div id="footer-placeholder"></div>

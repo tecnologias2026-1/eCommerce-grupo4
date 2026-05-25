@@ -1483,6 +1483,70 @@ section.feature,
     padding: 100px 0;
 }
 
+/* Reservations filter bar */
+.res-filter-bar {
+    display: flex;
+    gap: 12px;
+    padding: 32px var(--page-gutter) 0;
+    max-width: var(--content-shell-max);
+    margin: 0 auto;
+}
+
+.res-filter-btn {
+    font-family: var(--font-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    border: 2px solid #ddd;
+    background: transparent;
+    color: #777;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.res-filter-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.res-filter-btn--active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+}
+
+/* Conclude button on reservation cards */
+.btn-conclude {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 10px 22px;
+    font-family: var(--font-secondary);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    background: transparent;
+    border: 2px solid var(--black);
+    color: var(--black);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.btn-conclude:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+/* Status color overrides */
+.res-card__status span[data-status="pending"]   { color: #e07b00; }
+.res-card__status span[data-status="confirmed"] { color: #1a7a3c; }
+.res-card__status span[data-status="completed"] { color: #1a7a3c; }
+.res-card__status span[data-status="cancelled"] { color: #b00020; }
+
 .res-view-container {
     max-width: var(--content-shell-max);
     margin: 40px auto;
