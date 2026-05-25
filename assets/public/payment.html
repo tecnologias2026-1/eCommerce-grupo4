@@ -288,8 +288,8 @@
 
                         var cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
                         var venue = cart.selectedVenue || {};
-                        var totalStr = document.getElementById('total-display')
-                            ? document.getElementById('total-display').textContent
+                        var totalStr = document.getElementById('final-total')
+                            ? document.getElementById('final-total').textContent
                             : 'COL$ 0';
 
                         function makeCode() {
@@ -325,7 +325,7 @@
                         }
 
                         // Try POST to API
-                        if (typeof apiFetch === 'function' && typeof API_BASE !== 'undefined') {
+                        if (typeof API_BASE !== 'undefined') {
                             fetch(API_BASE + '/reservations', {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
@@ -334,14 +334,24 @@
                                     bride_name: brideVal,
                                     email: emailVal,
                                     phone: phoneVal,
+                                    venue_slug: venue.slug || '',
                                     wedding_date: dateVal,
                                     guest_count: parseInt(reservation.guests) || 0,
                                     special_requirements: commentsVal,
                                     deposit_amount: depositAmt,
+                                    total_price: parseInt(String(totalStr).replace(/[^\d]/g, '')) || 0,
                                     cart: cart
                                 })
                             })
-                            .then(function (res) { return res.ok ? res.json() : null; })
+                            .then(function (res) {
+                                if (!res.ok) {
+                                    return res.text().then(function(text) {
+                                        console.error('[Reserva] Error del servidor:', res.status, text);
+                                        return null;
+                                    });
+                                }
+                                return res.json();
+                            })
                             .then(function (data) {
                                 if (data && data.code) {
                                     localStorage.setItem('reservationCode', data.code);
@@ -352,8 +362,12 @@
                                 }
                                 doNavigate();
                             })
-                            .catch(function () { doNavigate(); });
+                            .catch(function (err) {
+                                console.error('[Reserva] Error de red al enviar al backend:', err);
+                                doNavigate();
+                            });
                         } else {
+                            console.warn('[Reserva] API_BASE no definido — manager.js no cargó correctamente');
                             doNavigate();
                         }
                     })();
