@@ -18,6 +18,25 @@
         #global-guest-container {
             display: none !important;
         }
+
+        /* Fix header buttons: show text, proper size */
+        .header-btn__text {
+            display: inline !important;
+        }
+        .header-btn__icon {
+            display: none !important;
+        }
+        .header-btn {
+            padding: 10px 24px !important;
+            font-size: 15px !important;
+        }
+        .header-btn--fill {
+            background: #000 !important;
+            color: #fff !important;
+        }
+        .header-btn--outline {
+            color: #000 !important;
+        }
     </style>
     <script src="js/cookie-consent.js" defer></script>
     <script src="js/manager.js" defer></script>
@@ -149,26 +168,6 @@
         </ul>
     </section>
 
-    <!-- Quienes Somos Section (Figma 626:4716) -->
-    <section id="about-us" class="about-us" data-name="Feature" data-node-id="626:4716">
-        <div class="about-us__container">
-            <div class="about-us__header">
-                <h2 class="about-us__title">Quienes somos</h2>
-                <p class="about-us__description">En Eventos Decoraciones nos especializamos en diseñar bodas únicas y
-                    memorables, acompañando a cada pareja en la creación de un evento que refleje su estilo,
-                    personalidad y
-                    sueños.</p>
-            </div>
-            <div class="about-us__image-container">
-                <div class="slideshow-container"
-                    data-slideshow='["assets/images/quienes somos.png","assets/images/quienes somos2.png","assets/images/quienes somos3.png"]'>
-                    <img src="assets/images/quienes somos.png" alt="Sobre nosotros - Quienes somos"
-                        class="about-us__image" loading="lazy" decoding="async">
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Nuestra Historia Section (Figma 864:5604) -->
     <section class="our-history" data-name="Row characteristic" data-node-id="864:5604">
         <div class="our-history__container">
@@ -208,36 +207,6 @@
                     <img src="assets/images/nuestra trayectoria.png" alt="Nuestra Trayectoria"
                         class="our-trajectory__image" loading="lazy" decoding="async">
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Misión y Valores Section (Figma 863:4597) -->
-    <section class="mission-vision" data-name="Feature" data-node-id="863:4597">
-        <div class="mission-vision__header">
-            <h2 class="mission-vision__title">Misión y valores</h2>
-            <div class="mission-vision__content">
-                <p>
-                    <strong class="mission-vision__label">Misión:</strong>
-                    Nuestra misión es ayudar a las parejas a planificar la boda de sus sueños de manera sencilla,
-                    organizada y personalizada, brindando herramientas intuitivas, inspiración creativa y asesoramiento
-                    confiable para que cada detalle refleje su historia y estilo único, reduciendo el estrés y
-                    permitiéndoles disfrutar plenamente cada etapa del proceso.
-                </p>
-                <p>
-                    <strong class="mission-vision__label">Valores:</strong>
-                    Nos guiamos por la creatividad para ofrecer ideas únicas, la empatía para comprender las necesidades
-                    de cada pareja, la excelencia en el servicio para garantizar calidad en cada recomendación, la
-                    transparencia en la información y el compromiso de acompañar a nuestros usuarios con confianza y
-                    dedicación en uno de los momentos más importantes de sus vidas.
-                </p>
-            </div>
-        </div>
-        <div class="mission-vision__image-container">
-            <div class="slideshow-container"
-                data-slideshow='["assets/images/mision y valores.png","assets/images/mision y valores 2.png","assets/images/mision y valores 3.png"]'>
-                <img src="assets/images/mision y valores.png" alt="Nuestra Misión y Valores"
-                    class="mission-vision__image" loading="lazy" decoding="async">
             </div>
         </div>
     </section>

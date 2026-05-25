@@ -1,380 +1,941 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pago</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@600&family=Inter:wght@400;500;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="../../css/global.css">
-    
-    <link rel="stylesheet" href="../../css/media.css">
-    <script src="../../js/cookie-consent.js" defer></script>
-    <script src="../../js/manager.js" defer></script>
-    <script src="../../js/reveal.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserva tu Boda - E&D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/media.css">
+  <script src="../../js/cookie-consent.js" defer></script>
+  <script src="../../js/manager.js" defer></script>
+  <style>
+    /* ── Planner chrome reuse ── */
+    #footer-placeholder { display: none; min-height: 0; }
+    #header-placeholder { min-height: 48px; }
+    .header { min-height: 48px; padding: 6px 24px; }
+    .logo { height: 26px; width: 90px; }
+    .header-btn__icon { display: block; }
+    .header-btn__text { display: none; }
+    .header-btn { width: 36px; height: 36px; padding: 0; border-radius: 50%; justify-content: center; }
+
+    /* ── Payment layout ── */
+    .pay-layout {
+      display: grid;
+      grid-template-columns: 200px 1fr 460px;
+      min-height: calc(100vh - 48px);
+    }
+
+    /* ── Left nav (reuses planner-nav) ── */
+    .pay-nav {
+      position: sticky;
+      top: 48px;
+      height: calc(100vh - 48px);
+      padding: 40px 24px 40px 36px;
+      border-right: 1px solid #ebebeb;
+      display: flex;
+      flex-direction: column;
+      overflow-y: hidden;
+    }
+    .pay-nav__section-label {
+      font-family: var(--font-secondary);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: #ccc;
+      margin: 0 0 4px 29px;
+    }
+    .pay-nav__section-label:not(:first-child) { margin-top: 20px; }
+    .pay-nav__divider {
+      height: 1px;
+      background: #f0f0f0;
+      margin: 12px 0 12px 29px;
+    }
+
+    /* Nav items reuse planner-nav__item */
+    .pay-nav .planner-nav__item { padding: 9px 0; }
+
+    /* ── Center content ── */
+    .pay-content {
+      padding: 56px 60px 80px;
+      overflow-y: auto;
+    }
+
+    /* ── Step sections ── */
+    .pay-step { display: none; }
+    .pay-step.pay-step--active { display: block; }
+
+    .pay-step__head { margin-bottom: 40px; }
+    .pay-step__title {
+      font-family: var(--font-primary);
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--black);
+      margin: 0 0 8px;
+    }
+    .pay-step__sub {
+      font-family: var(--font-secondary);
+      font-size: 13px;
+      color: #999;
+      margin: 0;
+    }
+
+    /* ── Form grid (2-col) ── */
+    .pay-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .pay-form-grid .pay-field--full { grid-column: 1 / -1; }
+
+    .pay-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pay-field label {
+      font-family: var(--font-secondary);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #aaa;
+    }
+    .pay-field input,
+    .pay-field textarea {
+      padding: 13px 15px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: var(--radius);
+      font-family: var(--font-primary);
+      font-size: 16px;
+      color: var(--black);
+      background: #fafafa;
+      transition: border-color 0.2s, background 0.2s;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .pay-field input:focus,
+    .pay-field textarea:focus { outline: none; border-color: var(--primary); background: #fff; }
+    .pay-field input[readonly] { background: #f3f3f3; cursor: default; color: #888; }
+    .pay-field textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+    .pay-field__hint { font-size: 11px; color: #bbb; font-style: italic; }
+    .pay-field__error { font-size: 11px; color: var(--error); display: none; }
+    .pay-field input.is-invalid { border-color: var(--error); }
+
+    /* ── Step action bar ── */
+    .pay-step__actions {
+      margin-top: 48px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 14px;
+    }
+    .pay-btn-back {
+      padding: 12px 28px;
+      background: transparent;
+      border: 1.5px solid #ddd;
+      border-radius: var(--radius);
+      font-family: var(--font-secondary);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #888;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .pay-btn-back:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* ── Pago step ── */
+    .pay-deposit-info {
+      background: #f8f9ff;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+    .pay-deposit-info__title {
+      font-family: var(--font-secondary);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #aaa;
+      margin: 0 0 14px;
+    }
+    .pay-deposit-info__row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .pay-deposit-info__row:last-child { border-bottom: none; font-weight: 700; }
+    .pay-deposit-info__lbl { font-family: var(--font-secondary); font-size: 12px; color: #888; }
+    .pay-deposit-info__val { font-family: var(--font-secondary); font-size: 13px; font-weight: 700; color: var(--black); }
+    .pay-deposit-info__val.accent { color: var(--primary); font-size: 15px; }
+
+    .pay-mp-section { margin-top: 32px; }
+    .pay-mp-label {
+      font-family: var(--font-secondary);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #aaa;
+      margin: 0 0 14px;
+    }
+
+    /* ── Confirmation step ── */
+    .pay-confirm-summary {
+      background: #f8f9ff;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .pay-confirm-summary__head {
+      background: var(--primary);
+      padding: 18px 24px;
+    }
+    .pay-confirm-summary__head-title {
+      font-family: var(--font-secondary);
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+      margin: 0;
+    }
+    .pay-confirm-summary__body { padding: 20px 24px; }
+    .pay-confirm-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .pay-confirm-row:last-child { border-bottom: none; }
+    .pay-confirm-row__lbl { font-family: var(--font-secondary); font-size: 12px; color: #888; }
+    .pay-confirm-row__val { font-family: var(--font-secondary); font-size: 13px; font-weight: 700; color: var(--black); }
+    .pay-confirm-row__val.accent { color: var(--primary); }
+
+    .pay-confirm-note {
+      font-family: var(--font-primary);
+      font-size: 13px;
+      color: #999;
+      line-height: 1.7;
+      margin: 0 0 32px;
+    }
+
+    /* ── Right summary panel ── */
+    .pay-summary {
+      position: sticky;
+      top: 48px;
+      height: calc(100vh - 48px);
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid #ebebeb;
+      background: #fafafa;
+      overflow: hidden;
+    }
+    .pay-summary__top {
+      padding: 24px 22px 18px;
+      border-bottom: 1px solid #e8e8e8;
+      flex-shrink: 0;
+    }
+    .pay-summary__title {
+      font-family: var(--font-secondary);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: #aaa;
+      margin: 0 0 14px;
+    }
+    .pay-summary__total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .pay-summary__total-lbl {
+      font-family: var(--font-secondary);
+      font-size: 12px;
+      color: #bbb;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .pay-summary__total-val {
+      font-family: var(--font-secondary);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .pay-summary__items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 22px;
+    }
+    .pay-summary__section { margin-bottom: 18px; }
+    .pay-summary__section-lbl {
+      font-family: var(--font-secondary);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: #ccc;
+      margin: 0 0 8px;
+    }
+    .pay-summary__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .pay-summary__row:last-child { border-bottom: none; }
+    .pay-summary__row-name {
+      font-family: var(--font-secondary);
+      font-size: 12px;
+      color: var(--black);
+      font-weight: 600;
+      flex: 1;
+    }
+    .pay-summary__row-detail {
+      font-family: var(--font-secondary);
+      font-size: 11px;
+      color: #aaa;
+    }
+    .pay-summary__row-price {
+      font-family: var(--font-secondary);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--black);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .pay-summary__empty {
+      font-family: var(--font-secondary);
+      font-size: 12px;
+      color: #ccc;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .pay-summary__notes {
+      padding: 14px 22px;
+      border-top: 1px solid #e8e8e8;
+      flex-shrink: 0;
+    }
+    .pay-summary__notes-lbl {
+      font-family: var(--font-secondary);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #ccc;
+      margin: 0 0 6px;
+    }
+    .pay-summary__notes-text {
+      font-family: var(--font-primary);
+      font-size: 12px;
+      color: #999;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* ── Nav connecting line through divider ── */
+    #pnav-detalles::before { top: 50%; }
+    .pay-nav__divider,
+    .pay-nav__section-label:not(:first-child) { position: relative; }
+    .pay-nav__divider::before,
+    .pay-nav__section-label:not(:first-child)::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: #e0e0e0;
+    }
+
+    /* ── Nav logo ── */
+    .pay-nav__logo-wrap { margin-top: auto; padding-top: 28px; }
+    .pay-nav__logo-wrap img { width: 78px; height: auto; object-fit: contain; opacity: 0.55; display: block; }
+
+    /* ── Confirmation success banner ── */
+    .pay-success-banner {
+      text-align: center;
+      padding: 48px 32px 36px;
+      background: linear-gradient(135deg, #f0fafb 0%, #e6f7f8 100%);
+      border-radius: 20px;
+      margin-bottom: 28px;
+    }
+    .pay-success-banner__icon {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 22px;
+    }
+    .pay-success-banner__icon svg { width: 36px; height: 36px; stroke: #fff; }
+    .pay-success-banner__title {
+      font-family: var(--font-secondary);
+      font-size: 26px; font-weight: 700;
+      color: var(--black); margin: 0 0 10px;
+    }
+    .pay-success-banner__sub {
+      font-family: var(--font-primary);
+      font-size: 14px; color: #777; line-height: 1.65; margin: 0;
+    }
+    .pay-success-code {
+      text-align: center;
+      background: var(--primary);
+      border-radius: 16px;
+      padding: 26px 32px;
+      margin-bottom: 32px;
+    }
+    .pay-success-code__label {
+      font-family: var(--font-secondary);
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: rgba(255,255,255,0.7); margin: 0 0 8px;
+    }
+    .pay-success-code__value {
+      font-family: var(--font-secondary);
+      font-size: 34px; font-weight: 700;
+      color: #fff; letter-spacing: 4px; margin: 0;
+    }
+  </style>
 </head>
-
 <body>
-    <div id="header-placeholder"></div>
-    <header class="hero-selection" data-reveal>
-        <div class="hero-selection__top">
-                <h1 class="hero-selection__title" data-reveal>PAGO</h1>
-        </div>
-    </header>
+  <div id="header-placeholder"></div>
 
-    <main class="userdata-content" data-reveal>
-        <form class="userdata-form" aria-labelledby="payment-form-legend" data-reveal>
-            <fieldset class="form-grid">
-                <legend id="payment-form-legend" class="visually-hidden">Datos de contacto y reserva</legend>
-                <div class="form-group" data-reveal data-reveal-delay="100">
-                    <label for="groom-name">Nombre del Novio</label>
-                    <input type="text" id="groom-name" autocomplete="name" placeholder="Ej. Juan Pérez">
-                </div>
-                <div class="form-group" data-reveal data-reveal-delay="200">
-                    <label for="bride-name">Nombre de la Novia</label>
-                    <input type="text" id="bride-name" autocomplete="name" placeholder="Ej. María García">
-                </div>
-                <div class="form-group" data-reveal data-reveal-delay="300">
-                    <label for="email">Correo Electrónico</label>
-                    <input type="email" id="email" autocomplete="email" placeholder="email@ejemplo.com">
-                    <p class="form-error-text" id="email-error">correo no valido</p>
-                </div>
-                <div class="form-group" data-reveal data-reveal-delay="400">
-                    <label for="phone">Teléfono de Contacto</label>
-                    <input type="tel" id="phone" autocomplete="tel" placeholder="+57 300 000 0000">
-                    <p class="form-error-text" id="phone-error">caracter invalido</p>
-                </div>
-                <div class="form-group" data-reveal data-reveal-delay="500">
-                    <label for="wedding-date">Fecha tentativa de la boda</label>
-                    <input type="date" id="wedding-date" readonly>
-                    <p class="form-help-text">Para editar fecha revise nuevamente el inicio por disponibilidad</p>
-                </div>
-                <div class="form-group" data-reveal data-reveal-delay="600">
-                    <label for="deposit">Abono de la Reserva</label>
-                    <input type="text" id="deposit" placeholder="">
-                    <p class="form-error-text" id="deposit-error"></p>
-                </div>
-                <div class="form-group full-width" data-reveal data-reveal-delay="700">
-                    <label for="comments">¿Tienes algún requerimiento especial?</label>
-                    <input type="text" id="comments"
-                        placeholder="Ej. Necesitamos acceso para personas con movilidad reducida">
-                </div>
-            </fieldset>
-        </form>
-    </main>
+  <div class="pay-layout">
 
-    <footer class="summary-pago" data-reveal>
-        <div class="summary-cart">
-            <span class="summary-total-label">Costo Total</span>
-            <span class="summary-total-value" id="final-total">COL$ 0</span>
+    <!-- ── LEFT: Nav ────────────────────────────────── -->
+    <aside class="pay-nav" id="pay-nav">
+
+      <p class="pay-nav__section-label">Tu Boda</p>
+
+      <a class="planner-nav__item planner-nav__item--done" id="pnav-detalles" href="planner.html" title="Volver a Detalles">
+        <span class="planner-nav__dot"></span>
+        <span class="planner-nav__label">Detalles</span>
+      </a>
+      <a class="planner-nav__item" id="pnav-lugar" href="planner.html#section-lugar">
+        <span class="planner-nav__dot"></span>
+        <span class="planner-nav__label">Lugar</span>
+      </a>
+      <a class="planner-nav__item" id="pnav-ceremonia" href="planner.html#section-ceremonia">
+        <span class="planner-nav__dot"></span>
+        <span class="planner-nav__label">Ceremonia</span>
+      </a>
+      <a class="planner-nav__item" id="pnav-recepcion" href="planner.html#section-recepcion">
+        <span class="planner-nav__dot"></span>
+        <span class="planner-nav__label">Recepción</span>
+      </a>
+      <a class="planner-nav__item" id="pnav-comida" href="planner.html#section-comida">
+        <span class="planner-nav__dot"></span>
+        <span class="planner-nav__label">Comida</span>
+      </a>
+      <a class="planner-nav__item" id="pnav-otros" href="planner.html#section-otros">
+        <span class="planner-nav__dot"></span>
+        <span class="planner-nav__label">Otros</span>
+      </a>
+
+      <div class="pay-nav__divider"></div>
+      <p class="pay-nav__section-label">Reserva</p>
+
+      <a class="planner-nav__item planner-nav__item--active" id="pnav-contacto" data-paystep="contacto" href="#contacto">
+        <span class="planner-nav__dot"></span>
+        <span class="planner-nav__label">Contacto</span>
+      </a>
+      <a class="planner-nav__item planner-nav__item--locked" id="pnav-pago" data-paystep="pago" href="#pago">
+        <span class="planner-nav__dot"></span>
+        <span class="planner-nav__label">Pago</span>
+      </a>
+      <a class="planner-nav__item planner-nav__item--locked" id="pnav-confirmacion" data-paystep="confirmacion" href="#confirmacion">
+        <span class="planner-nav__dot"></span>
+        <span class="planner-nav__label">Confirmación</span>
+      </a>
+
+      <div class="pay-nav__logo-wrap">
+        <a href="../../index.html"><img src="/assets/images/Logo.svg" alt="Logo"></a>
+      </div>
+
+    </aside>
+
+    <!-- ── CENTER: Step forms ────────────────────────── -->
+    <main class="pay-content" id="pay-content">
+
+      <!-- Step 1: Contacto -->
+      <section class="pay-step pay-step--active" id="pay-step-contacto">
+        <div class="pay-step__head">
+          <h2 class="pay-step__title">Datos de contacto</h2>
+          <p class="pay-step__sub">Completa la información para confirmar tu reserva. Estos datos se usarán para comunicarnos contigo.</p>
         </div>
-        <span class="summary-footer-note">Procesaremos tu pago por medio de Mercado Pago.</span>
-        <a class="btn-pay-mp" id="btn-pay-mp" href="confirm.html" role="button">
+
+        <div class="pay-form-grid">
+          <div class="pay-field">
+            <label for="pay-groom">Nombre del Novio</label>
+            <input type="text" id="pay-groom" autocomplete="name" placeholder="Ej. Juan Pérez">
+          </div>
+          <div class="pay-field">
+            <label for="pay-bride">Nombre de la Novia</label>
+            <input type="text" id="pay-bride" autocomplete="name" placeholder="Ej. María García">
+          </div>
+          <div class="pay-field">
+            <label for="pay-email">Correo Electrónico</label>
+            <input type="email" id="pay-email" autocomplete="email" placeholder="email@ejemplo.com">
+            <span class="pay-field__error" id="pay-email-error">El correo debe contener @</span>
+          </div>
+          <div class="pay-field">
+            <label for="pay-phone">Teléfono de Contacto</label>
+            <input type="tel" id="pay-phone" autocomplete="tel" placeholder="+57 300 000 0000">
+            <span class="pay-field__error" id="pay-phone-error">Solo se permiten números</span>
+          </div>
+          <div class="pay-field">
+            <label for="pay-date">Fecha de la Boda</label>
+            <input type="date" id="pay-date" readonly>
+            <span class="pay-field__hint">Para cambiar la fecha regresa al planner</span>
+          </div>
+          <div class="pay-field pay-field--full">
+            <label for="pay-comments">Requerimientos especiales</label>
+            <textarea id="pay-comments" placeholder="Ej. Necesitamos acceso para personas con movilidad reducida..."></textarea>
+          </div>
+        </div>
+
+        <div class="pay-step__actions">
+          <button class="pay-btn-back" onclick="window.location.href='planner.html'">← Volver al planner</button>
+          <button class="btn-primary" onclick="goToStep('pago')">
+            <span class="btn-primary__text">Continuar al pago</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Step 2: Pago -->
+      <section class="pay-step" id="pay-step-pago">
+        <div class="pay-step__head">
+          <h2 class="pay-step__title">Abono y pago</h2>
+          <p class="pay-step__sub">Ingresa el monto del abono inicial. El mínimo es el 50% del total para confirmar tu reserva.</p>
+        </div>
+
+        <div class="pay-deposit-info" id="pay-deposit-info"></div>
+
+        <div class="pay-form-grid">
+          <div class="pay-field pay-field--full">
+            <label for="pay-deposit">Monto del abono</label>
+            <input type="text" id="pay-deposit" placeholder="">
+            <span class="pay-field__error" id="pay-deposit-error"></span>
+          </div>
+        </div>
+
+        <div class="pay-mp-section">
+          <p class="pay-mp-label">Procesar con</p>
+          <a class="btn-pay-mp" id="btn-pay-mp" href="confirm.html" role="button">
             <span class="btn-pay-mp__logo-wrap">
-                <img src="../images/mercado-pago-badge.png" alt="Mercado Pago">
+              <img src="../images/mercado-pago-badge.png" alt="Mercado Pago">
             </span>
             <span>Ir a pagar</span>
-        </a>
-    </footer>
+          </a>
+        </div>
 
-    <div id="footer-placeholder"></div>
+        <div class="pay-step__actions">
+          <button class="pay-btn-back" onclick="goToStep('contacto')">← Volver</button>
+        </div>
+      </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            updateTotal();
+      <!-- Step 3: Confirmación -->
+      <section class="pay-step" id="pay-step-confirmacion">
+
+        <div class="pay-success-banner">
+          <div class="pay-success-banner__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          </div>
+          <h2 class="pay-success-banner__title">¡Reserva Confirmada!</h2>
+          <p class="pay-success-banner__sub">Hemos recibido tu reserva correctamente. En las próximas 24 horas nuestro equipo se pondrá en contacto contigo.</p>
+        </div>
+
+        <div class="pay-success-code">
+          <p class="pay-success-code__label">Código de reserva</p>
+          <p class="pay-success-code__value" id="pay-confirm-code">--</p>
+        </div>
+
+        <div class="pay-confirm-summary" id="pay-confirm-summary"></div>
+
+        <div class="pay-step__actions">
+          <a class="btn-primary" href="../../index.html">
+            <span class="btn-primary__text">Ir al inicio</span>
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ── RIGHT: Summary ────────────────────────────── -->
+    <aside class="pay-summary" id="pay-summary-panel">
+      <div class="pay-summary__top">
+        <p class="pay-summary__title">Tu selección</p>
+        <div class="pay-summary__total-row">
+          <span class="pay-summary__total-lbl">Total</span>
+          <span class="pay-summary__total-val" id="pay-total-val">COL$ 0</span>
+        </div>
+      </div>
+      <div class="pay-summary__items" id="pay-summary-items">
+        <p class="pay-summary__empty">Cargando resumen...</p>
+      </div>
+      <div class="pay-summary__notes" id="pay-summary-notes" style="display:none">
+        <p class="pay-summary__notes-lbl">Notas</p>
+        <p class="pay-summary__notes-text" id="pay-summary-notes-text"></p>
+      </div>
+    </aside>
+
+  </div><!-- /pay-layout -->
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+  (function () {
+
+    /* ──── Helpers ─────────────────────────────────── */
+    function getCart() { return JSON.parse(localStorage.getItem('weddingCart') || '{}'); }
+    function fmt(n) { return 'COL$ ' + Number(n).toLocaleString('es-CO'); }
+    function raw(str) { return parseInt(String(str).replace(/[^\d]/g, '')) || 0; }
+
+    /* ──── Planner nav states ──────────────────────── */
+    function initPlannerNav() {
+      var cart = getCart();
+      var states = {
+        lugar:     !!cart.selectedVenue,
+        ceremonia: !!(cart.ceremony && Object.keys(cart.ceremony).length),
+        recepcion: !!(cart.reception && Object.keys(cart.reception).length),
+        comida:    !!(cart.food && Object.keys(cart.food).length),
+        otros:     !!(cart.others && Object.keys(cart.others).length)
+      };
+      Object.keys(states).forEach(function (k) {
+        var el = document.getElementById('pnav-' + k);
+        if (!el) return;
+        el.classList.remove('planner-nav__item--locked', 'planner-nav__item--done');
+        el.classList.add(states[k] ? 'planner-nav__item--done' : 'planner-nav__item--locked');
+      });
+    }
+
+    /* ──── Summary render ──────────────────────────── */
+    function renderSummary() {
+      var cart  = getCart();
+      var total = 0;
+      var html  = '';
+
+      if (cart.selectedVenue) {
+        var vp = raw(cart.selectedVenue.price); total += vp;
+        html += summarySection('Lugar', [{ name: cart.selectedVenue.name, detail: cart.selectedVenue.guests, price: vp }]);
+      }
+      if (cart.ceremony && Object.keys(cart.ceremony).length) {
+        var ci = Object.values(cart.ceremony).map(function (i) {
+          var p = raw(i.price); total += p;
+          return { name: i.name, detail: null, price: p };
         });
+        html += summarySection('Ceremonia', ci);
+      }
+      if (cart.reception && Object.keys(cart.reception).length) {
+        var ri = Object.values(cart.reception).map(function (i) {
+          var p = raw(i.price); total += p;
+          return { name: i.name, detail: 'Recepción', price: p };
+        });
+        html += summarySection('Recepción', ri);
+      }
+      if (cart.food && Object.keys(cart.food).length) {
+        var fi = Object.values(cart.food).map(function (i) {
+          var tp = i.totalPrice || (parseInt(i.unitPrice) * (i.quantity || 1)); total += tp;
+          return { name: i.name, detail: (i.quantity || 1) + ' pers. · ' + fmt(i.unitPrice) + ' c/u', price: tp };
+        });
+        html += summarySection('Comida', fi);
+      }
+      if (cart.others && Object.keys(cart.others).length) {
+        var oi = Object.values(cart.others).map(function (i) {
+          var tp = i.totalPrice || (parseInt(i.unitPrice) * (i.quantity || 1)); total += tp;
+          return { name: i.name, detail: (i.quantity || 1) > 1 ? 'x' + i.quantity : null, price: tp };
+        });
+        html += summarySection('Servicios adicionales', oi);
+      }
 
-        function parsePrice(priceStr) {
-            if (typeof priceStr === 'number') return priceStr;
-            return parseInt(String(priceStr).replace(/[^0-9]/g, '')) || 0;
+      document.getElementById('pay-total-val').textContent = fmt(total);
+      var el = document.getElementById('pay-summary-items');
+      el.innerHTML = html || '<p class="pay-summary__empty">Sin selecciones</p>';
+
+      // Notes
+      var notes = localStorage.getItem('weddingNotes') || '';
+      var notesWrap = document.getElementById('pay-summary-notes');
+      if (notes.trim()) {
+        document.getElementById('pay-summary-notes-text').textContent = notes;
+        notesWrap.style.display = 'block';
+      } else {
+        notesWrap.style.display = 'none';
+      }
+
+      return total;
+    }
+
+    function summarySection(title, items) {
+      return '<div class="pay-summary__section">' +
+        '<p class="pay-summary__section-lbl">' + title + '</p>' +
+        items.map(function (it) {
+          return '<div class="pay-summary__row">' +
+            '<div><p class="pay-summary__row-name">' + it.name + '</p>' +
+            (it.detail ? '<p class="pay-summary__row-detail">' + it.detail + '</p>' : '') +
+            '</div><span class="pay-summary__row-price">' + fmt(it.price) + '</span></div>';
+        }).join('') + '</div>';
+    }
+
+    /* ──── Deposit info panel ──────────────────────── */
+    function renderDepositInfo(total) {
+      var minimo = Math.round(total * 0.5);
+      document.getElementById('pay-deposit').placeholder = fmt(minimo) + ' (mínimo 50%)';
+      document.getElementById('pay-deposit').dataset.minimo = minimo;
+      document.getElementById('pay-deposit').dataset.total  = total;
+
+      document.getElementById('pay-deposit-info').innerHTML =
+        '<p class="pay-deposit-info__title">Resumen de cobro</p>' +
+        '<div class="pay-deposit-info__row"><span class="pay-deposit-info__lbl">Total de la reserva</span><span class="pay-deposit-info__val">' + fmt(total) + '</span></div>' +
+        '<div class="pay-deposit-info__row"><span class="pay-deposit-info__lbl">Abono mínimo (50%)</span><span class="pay-deposit-info__val accent">' + fmt(minimo) + '</span></div>';
+    }
+
+    /* ──── Step navigation ─────────────────────────── */
+    var completedSteps = {};
+    var currentStep = 'contacto';
+    var stepOrder    = ['contacto', 'pago', 'confirmacion'];
+
+    window.goToStep = function (step) {
+      if (step === 'pago' && !validateContacto()) return;
+      if (step === 'confirmacion' && !validatePago()) return;
+
+      document.querySelectorAll('.pay-step').forEach(function (s) {
+        s.classList.remove('pay-step--active');
+      });
+      var target = document.getElementById('pay-step-' + step);
+      if (target) target.classList.add('pay-step--active');
+
+      // Update nav
+      var stepIndex = stepOrder.indexOf(step);
+      stepOrder.forEach(function (s, i) {
+        var navEl = document.getElementById('pnav-' + s);
+        if (!navEl) return;
+        navEl.classList.remove('planner-nav__item--active', 'planner-nav__item--locked', 'planner-nav__item--done');
+        if (i < stepIndex) navEl.classList.add('planner-nav__item--done');
+        else if (i === stepIndex) navEl.classList.add('planner-nav__item--active');
+        else navEl.classList.add('planner-nav__item--locked');
+      });
+
+      currentStep = step;
+      if (step === 'confirmacion') buildConfirmation();
+      document.getElementById('pay-content').scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    /* ──── Validation ──────────────────────────────── */
+    function validateContacto() {
+      var fields = ['pay-groom', 'pay-bride', 'pay-email', 'pay-phone', 'pay-date'];
+      var ok = true;
+
+      document.getElementById('pay-email-error').style.display = 'none';
+      document.getElementById('pay-phone-error').style.display = 'none';
+      fields.forEach(function (id) {
+        var inp = document.getElementById(id);
+        if (inp) inp.classList.remove('is-invalid');
+      });
+
+      fields.forEach(function (id) {
+        var inp = document.getElementById(id);
+        if (!inp) return;
+        if (!inp.value.trim()) {
+          inp.classList.add('is-invalid');
+          ok = false;
+        } else {
+          if (id === 'pay-email' && !inp.value.includes('@')) {
+            inp.classList.add('is-invalid');
+            document.getElementById('pay-email-error').style.display = 'block';
+            ok = false;
+          }
+          if (id === 'pay-phone' && !/^\d+$/.test(inp.value.trim())) {
+            inp.classList.add('is-invalid');
+            document.getElementById('pay-phone-error').style.display = 'block';
+            ok = false;
+          }
         }
+      });
 
-        function updateTotal() {
-            const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
-            let total = 0;
+      if (!ok && typeof showCustomAlert === 'function') {
+        showCustomAlert('Información incompleta', 'Por favor completa todos los campos requeridos correctamente.');
+      }
+      return ok;
+    }
 
-            if (cart.selectedVenue) {
-                total += parsePrice(cart.selectedVenue.price);
-            }
-            if (cart.ceremony) {
-                Object.values(cart.ceremony).forEach(item => { total += parsePrice(item.price); });
-            }
-            if (cart.reception) {
-                Object.values(cart.reception).forEach(item => { total += parsePrice(item.price); });
-            }
-            if (cart.food) {
-                Object.values(cart.food).forEach(item => {
-                    total += parsePrice(item.unitPrice) * (item.quantity || 1);
-                });
-            }
-            if (cart.others) {
-                Object.values(cart.others).forEach(item => {
-                    total += item.totalPrice || parsePrice(item.price);
-                });
-            }
+    function validatePago() {
+      var inp  = document.getElementById('pay-deposit');
+      var err  = document.getElementById('pay-deposit-error');
+      var val  = parseInt((inp.value || '').replace(/[^\d]/g, '')) || 0;
+      var min  = parseInt(inp.dataset.minimo) || 0;
+      var tot  = parseInt(inp.dataset.total) || 0;
+      inp.classList.remove('is-invalid');
+      err.style.display = 'none';
 
-            const totalEl = document.getElementById('final-total');
-            if (totalEl) {
-                totalEl.textContent = 'COL$ ' + total.toLocaleString('es-CO');
-            }
-        }
+      if (!val) {
+        inp.classList.add('is-invalid');
+        err.textContent = 'Ingresa el monto del abono';
+        err.style.display = 'block';
+        return false;
+      }
+      if (val < min) {
+        inp.classList.add('is-invalid');
+        err.textContent = 'Debe ser mínimo el 50% (' + fmt(min) + ')';
+        err.style.display = 'block';
+        return false;
+      }
+      if (val > tot) {
+        inp.classList.add('is-invalid');
+        err.textContent = 'No puede superar el total (' + fmt(tot) + ')';
+        err.style.display = 'block';
+        return false;
+      }
+      return true;
+    }
 
-        window.addEventListener('storage', (event) => {
-            if (event.key === 'weddingCart') updateTotal();
+    /* ──── Confirmation ────────────────────────────── */
+    var _confirmationBuilt = false;
+
+    function buildConfirmation() {
+      if (_confirmationBuilt) return;
+      _confirmationBuilt = true;
+
+      var groom  = (document.getElementById('pay-groom') || {}).value || '';
+      var bride  = (document.getElementById('pay-bride') || {}).value || '';
+      var email  = (document.getElementById('pay-email') || {}).value || '';
+      var phone  = (document.getElementById('pay-phone') || {}).value || '';
+      var date   = (document.getElementById('pay-date') || {}).value || '';
+      var dep    = (document.getElementById('pay-deposit') || {}).value || '';
+      var total  = document.getElementById('pay-total-val').textContent;
+
+      var code = '#WP-' + Math.floor(100000 + Math.random() * 900000);
+      var codeEl = document.getElementById('pay-confirm-code');
+      if (codeEl) codeEl.textContent = code;
+
+      document.getElementById('pay-confirm-summary').innerHTML =
+        '<div class="pay-confirm-summary__head"><p class="pay-confirm-summary__head-title">Resumen de tu reserva</p></div>' +
+        '<div class="pay-confirm-summary__body">' +
+        row('Novios', groom + ' & ' + bride) +
+        row('Correo', email) +
+        row('Teléfono', phone) +
+        row('Fecha de la boda', date) +
+        row('Total de la reserva', total) +
+        row('Abono confirmado', 'COL$ ' + dep.replace(/[^\d]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.'), true) +
+        '</div>';
+
+      saveReservation(groom, bride, email, phone, date, dep, total, code);
+    }
+
+    function row(lbl, val, accent) {
+      return '<div class="pay-confirm-row"><span class="pay-confirm-row__lbl">' + lbl + '</span>' +
+             '<span class="pay-confirm-row__val' + (accent ? ' accent' : '') + '">' + val + '</span></div>';
+    }
+
+    /* ──── Save reservation ────────────────────────── */
+    function saveReservation(groom, bride, email, phone, date, dep, total, code) {
+      var cart = getCart();
+      var venue = cart.selectedVenue || {};
+      var depAmt = parseInt((dep || '').replace(/[^\d]/g, '')) || 0;
+      var notes  = localStorage.getItem('weddingNotes') || '';
+
+      var reservation = {
+        id: code || ('#WP-' + Math.floor(100000 + Math.random() * 900000)),
+        groom: groom, bride: bride, email: email, phone: phone,
+        venue: venue.name || '', venueImage: venue.image || '',
+        guests: venue.guests || localStorage.getItem('selectedGuests') || '0',
+        weddingDate: date, status: 'Pendiente', totalPrice: total,
+        depositAmount: depAmt, cart: cart, comments: notes, timestamp: Date.now()
+      };
+
+      var all = JSON.parse(localStorage.getItem('allReservations') || '[]');
+      all.push(reservation);
+      localStorage.setItem('allReservations', JSON.stringify(all));
+
+      if (typeof API_BASE !== 'undefined') {
+        fetch(API_BASE + '/reservations', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            groom_name: groom, bride_name: bride, email: email, phone: phone,
+            venue_slug: venue.slug || '', wedding_date: date,
+            guest_count: parseInt(reservation.guests) || 0,
+            special_requirements: notes, deposit_amount: depAmt,
+            total_price: parseInt(String(total).replace(/[^\d]/g, '')) || 0,
+            cart: cart
+          })
+        })
+        .then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (data) {
+          if (data && data.code) {
+            localStorage.setItem('reservationCode', data.code);
+            var a2 = JSON.parse(localStorage.getItem('allReservations') || '[]');
+            if (a2.length) a2[a2.length - 1].id = data.code;
+            localStorage.setItem('allReservations', JSON.stringify(a2));
+          }
+          localStorage.removeItem('weddingCart');
+        })
+        .catch(function () { localStorage.removeItem('weddingCart'); });
+      } else {
+        localStorage.removeItem('weddingCart');
+      }
+    }
+
+    /* ──── Deposit field formatting ────────────────── */
+    function initDepositField() {
+      var inp = document.getElementById('pay-deposit');
+      if (!inp) return;
+      inp.addEventListener('input', function () {
+        var raw2 = inp.value.replace(/[^\d]/g, '');
+        inp.value = raw2 ? parseInt(raw2).toLocaleString('es-CO') : '';
+        validatePago();
+      });
+    }
+
+    /* ──── MP button ───────────────────────────────── */
+    function initMPButton() {
+      var btn = document.getElementById('btn-pay-mp');
+      if (!btn) return;
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (!validatePago()) return;
+        goToStep('confirmacion');
+      });
+    }
+
+    /* ──── Payment nav clicks ──────────────────────── */
+    function initPayNav() {
+      document.querySelectorAll('[data-paystep]').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.preventDefault();
+          var step = this.dataset.paystep;
+          var idx  = stepOrder.indexOf(step);
+          var cur  = stepOrder.indexOf(currentStep);
+          if (idx <= cur) goToStep(step);
         });
+      });
+    }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const dateInput = document.getElementById('wedding-date');
-            const storedDate = localStorage.getItem('selectedWeddingDate');
-            if (dateInput && storedDate) {
-                dateInput.value = storedDate;
-            }
+    /* ──── Init ────────────────────────────────────── */
+    document.addEventListener('DOMContentLoaded', function () {
+      var date = localStorage.getItem('selectedWeddingDate') || '';
+      if (date) document.getElementById('pay-date').value = date;
 
-            const depositInput = document.getElementById('deposit');
-            const depositError = document.getElementById('deposit-error');
+      var notes = localStorage.getItem('weddingNotes') || '';
+      if (notes) document.getElementById('pay-comments').value = notes;
 
-            function updateDepositPlaceholder() {
-                const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
-                let total = 0;
-                if (cart.selectedVenue) total += parsePrice(cart.selectedVenue.price);
-                if (cart.ceremony) Object.values(cart.ceremony).forEach(item => { total += parsePrice(item.price); });
-                if (cart.reception) Object.values(cart.reception).forEach(item => { total += parsePrice(item.price); });
-                if (cart.food) Object.values(cart.food).forEach(item => { total += parsePrice(item.unitPrice) * (item.quantity || 1); });
-                if (cart.others) Object.values(cart.others).forEach(item => { total += item.totalPrice || parsePrice(item.price); });
+      initPlannerNav();
+      var total = renderSummary();
+      renderDepositInfo(total);
+      initDepositField();
+      initMPButton();
+      initPayNav();
+    });
 
-                const minimo = Math.round(total * 0.5);
-                if (depositInput) {
-                    depositInput.placeholder = 'COL$ ' + minimo.toLocaleString('es-CO') + ' (mínimo 50%)';
-                    depositInput.dataset.minimo = minimo;
-                    depositInput.dataset.total = total;
-                }
-            }
+  })();
+  </script>
 
-            updateDepositPlaceholder();
-            window.addEventListener('storage', updateDepositPlaceholder);
-
-            function validateDeposit() {
-                if (!depositInput || !depositError) return;
-                const val = parseInt(depositInput.value.replace(/[^\d]/g, '')) || 0;
-                const minimo = parseInt(depositInput.dataset.minimo) || 0;
-                const total = parseInt(depositInput.dataset.total) || 0;
-
-                if (depositInput.value.trim() === '') {
-                    depositError.style.display = 'none';
-                    depositInput.classList.remove('field--invalid');
-                    return;
-                }
-
-                if (val < minimo) {
-                    depositError.textContent = 'Debe ser mínimo el 50% (COL$ ' + minimo.toLocaleString('es-CO') + ')';
-                    depositError.style.display = 'block';
-                    depositInput.classList.add('field--invalid');
-                } else if (val > total) {
-                    depositError.textContent = 'La cantidad no puede superar el total (COL$ ' + total.toLocaleString('es-CO') + ')';
-                    depositError.style.display = 'block';
-                    depositInput.classList.add('field--invalid');
-                } else {
-                    depositError.style.display = 'none';
-                    depositInput.classList.remove('field--invalid');
-                }
-            }
-
-            if (depositInput) {
-                depositInput.addEventListener('input', () => {
-                    // Auto-format with thousand separators
-                    const raw = depositInput.value.replace(/[^\d]/g, '');
-                    if (raw) {
-                        const formatted = parseInt(raw).toLocaleString('es-CO');
-                        depositInput.value = formatted;
-                    } else {
-                        depositInput.value = '';
-                    }
-                    validateDeposit();
-                });
-            }
-
-            const payBtn = document.getElementById('btn-pay-mp');
-            if (payBtn) {
-                payBtn.addEventListener('click', (e) => {
-                    const requiredFieldIds = ['groom-name', 'bride-name', 'email', 'phone', 'wedding-date', 'deposit'];
-                    let isComplete = true;
-                    let hasInvalidFormat = false;
-
-                    // Reset previous validation states
-                    requiredFieldIds.forEach(id => {
-                        const input = document.getElementById(id);
-                        if (input) input.classList.remove('field--invalid');
-                    });
-                    
-                    // Specific error message reset
-                    const emailError = document.getElementById('email-error');
-                    const phoneError = document.getElementById('phone-error');
-                    if (emailError) emailError.style.display = 'none';
-                    if (phoneError) phoneError.style.display = 'none';
-
-                    for (const id of requiredFieldIds) {
-                        const input = document.getElementById(id);
-                        if (!input) continue;
-
-                        const value = input.value.trim();
-                        
-                        // 1. Check if empty
-                        if (!value) {
-                            isComplete = false;
-                            input.classList.add('field--invalid');
-                        } else {
-                            // 2. Format validation
-                            if (id === 'email' && !value.includes('@')) {
-                                hasInvalidFormat = true;
-                                input.classList.add('field--invalid');
-                                if (emailError) emailError.style.display = 'block';
-                            }
-                            if (id === 'phone' && !/^\d+$/.test(value)) {
-                                hasInvalidFormat = true;
-                                input.classList.add('field--invalid');
-                                if (phoneError) phoneError.style.display = 'block';
-                            }
-                        }
-                    }
-
-                    if (!isComplete) {
-                        e.preventDefault();
-                        if (typeof showCustomAlert === 'function') {
-                            showCustomAlert('informacion incompleta', 'llena los datos para continuar con el pago');
-                        } else {
-                            alert('informacion incometa. llena los datos para continuar con el pago');
-                        }
-                        return;
-                    }
-
-                    // Validate deposit separately
-                    const depositEl = document.getElementById('deposit');
-                    const depositMsg = document.getElementById('deposit-error');
-                    if (depositEl && depositMsg && depositMsg.style.display === 'block') {
-                        e.preventDefault();
-                        if (typeof showCustomAlert === 'function') {
-                            showCustomAlert('abono invalido', depositMsg.textContent);
-                        } else {
-                            alert(depositMsg.textContent);
-                        }
-                        return;
-                    }
-
-                    if (hasInvalidFormat) {
-                        e.preventDefault();
-                        if (typeof showCustomAlert === 'function') {
-                            showCustomAlert('datos invalidos', 'revisa que el correo tenga @ y el telefono sea solo numeros');
-                        } else {
-                            alert('formato incorrecto. Revisa el correo y el teléfono');
-                        }
-                        return;
-                    }
-
-                    // All validations passed — save reservation and navigate
-                    e.preventDefault();
-                    (function submitReservation() {
-                        var groomVal   = (document.getElementById('groom-name') || {}).value || '';
-                        var brideVal   = (document.getElementById('bride-name') || {}).value || '';
-                        var emailVal   = (document.getElementById('email') || {}).value || '';
-                        var phoneVal   = (document.getElementById('phone') || {}).value || '';
-                        var dateVal    = (document.getElementById('wedding-date') || {}).value || '';
-                        var depositRaw = ((document.getElementById('deposit') || {}).value || '').replace(/[^\d]/g, '');
-                        var depositAmt = parseInt(depositRaw) || 0;
-                        var commentsVal = (document.getElementById('comments') || {}).value || '';
-
-                        var cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
-                        var venue = cart.selectedVenue || {};
-                        var totalStr = document.getElementById('final-total')
-                            ? document.getElementById('final-total').textContent
-                            : 'COL$ 0';
-
-                        function makeCode() {
-                            return '#WP-' + Math.floor(100000 + Math.random() * 900000);
-                        }
-
-                        var reservation = {
-                            id: makeCode(),
-                            groom: groomVal,
-                            bride: brideVal,
-                            email: emailVal,
-                            phone: phoneVal,
-                            venue: venue.name || '',
-                            venueImage: venue.image || '',
-                            guests: venue.guests || localStorage.getItem('selectedGuests') || '0',
-                            weddingDate: dateVal,
-                            status: 'Pendiente',
-                            totalPrice: totalStr,
-                            depositAmount: depositAmt,
-                            cart: cart,
-                            comments: commentsVal,
-                            timestamp: Date.now()
-                        };
-
-                        // Save to localStorage as fallback
-                        var allReservations = JSON.parse(localStorage.getItem('allReservations') || '[]');
-                        allReservations.push(reservation);
-                        localStorage.setItem('allReservations', JSON.stringify(allReservations));
-
-                        function doNavigate() {
-                            localStorage.removeItem('weddingCart');
-                            window.location.href = payBtn.getAttribute('href') || 'confirm.html';
-                        }
-
-                        // Try POST to API
-                        if (typeof API_BASE !== 'undefined') {
-                            fetch(API_BASE + '/reservations', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({
-                                    groom_name: groomVal,
-                                    bride_name: brideVal,
-                                    email: emailVal,
-                                    phone: phoneVal,
-                                    venue_slug: venue.slug || '',
-                                    wedding_date: dateVal,
-                                    guest_count: parseInt(reservation.guests) || 0,
-                                    special_requirements: commentsVal,
-                                    deposit_amount: depositAmt,
-                                    total_price: parseInt(String(totalStr).replace(/[^\d]/g, '')) || 0,
-                                    cart: cart
-                                })
-                            })
-                            .then(function (res) {
-                                if (!res.ok) {
-                                    return res.text().then(function(text) {
-                                        console.error('[Reserva] Error del servidor:', res.status, text);
-                                        return null;
-                                    });
-                                }
-                                return res.json();
-                            })
-                            .then(function (data) {
-                                if (data && data.code) {
-                                    localStorage.setItem('reservationCode', data.code);
-                                    var all2 = JSON.parse(localStorage.getItem('allReservations') || '[]');
-                                    var last = all2[all2.length - 1];
-                                    if (last) { last.id = data.code; }
-                                    localStorage.setItem('allReservations', JSON.stringify(all2));
-                                }
-                                doNavigate();
-                            })
-                            .catch(function (err) {
-                                console.error('[Reserva] Error de red al enviar al backend:', err);
-                                doNavigate();
-                            });
-                        } else {
-                            console.warn('[Reserva] API_BASE no definido — manager.js no cargó correctamente');
-                            doNavigate();
-                        }
-                    })();
-                });
-            }
-        });
-    </script>
 </body>
-
 </html>

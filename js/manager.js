@@ -168,10 +168,6 @@ function updateFooterState() {
             link.setAttribute("href", getPublicPagePath("auth.html"));
             return;
         }
-
-        if (href.includes("index.html#about-us") || href === "#about-us") {
-            link.setAttribute("href", getHomePath("about-us"));
-        }
     });
 }
 
