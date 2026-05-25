@@ -142,7 +142,8 @@
     .pay-step__actions {
       margin-top: 48px;
       display: flex;
-      justify-content: flex-end;
+      justify-content: flex-start;
+      align-items: center;
       gap: 14px;
     }
     .pay-btn-back {
@@ -506,10 +507,10 @@
         </div>
 
         <div class="pay-step__actions">
-          <button class="pay-btn-back" onclick="window.location.href='planner.html'">Volver al planner</button>
           <button class="btn-primary" onclick="goToStep('pago')">
             <span class="btn-primary__text">Continuar al pago</span>
           </button>
+          <button class="pay-btn-back" onclick="window.location.href='planner.html'">Volver al planner</button>
         </div>
       </section>
 
@@ -532,16 +533,16 @@
 
         <div class="pay-mp-section">
           <p class="pay-mp-label">Procesar con</p>
+        </div>
+
+        <div class="pay-step__actions">
           <a class="btn-pay-mp" id="btn-pay-mp" href="#" role="button">
             <span class="btn-pay-mp__logo-wrap">
               <img src="../images/mercado-pago-badge.png" alt="Mercado Pago">
             </span>
             <span>Ir a pagar</span>
           </a>
-        </div>
-
-        <div class="pay-step__actions">
-          <button class="pay-btn-back" onclick="goToStep('contacto')">← Volver</button>
+          <button class="pay-btn-back" onclick="goToStep('contacto')">Volver a datos de contacto</button>
         </div>
       </section>
 

@@ -1227,8 +1227,9 @@
       if (!modalItem || !modalCat) return;
 
       if (modalIsVenue) {
+        var venueCard = modalItem;
         closeModal();
-        handleVenueClick(modalItem);
+        handleVenueClick(venueCard);
         return;
       }
 
@@ -1442,8 +1443,9 @@
       });
       document.getElementById('vdp-select-btn').addEventListener('click', function () {
         if (!vdpCard) return;
+        var card = vdpCard;
         closeVenueDetailsPopup();
-        handleVenueClick(vdpCard);
+        handleVenueClick(card);
       });
     });
   })();

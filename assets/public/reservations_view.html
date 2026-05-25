@@ -79,6 +79,11 @@
                     localStorage.removeItem('authToken');
                     localStorage.removeItem('authUser');
                 });
+                // Defer so this runs after updateHeaderState() resets the logo href
+                setTimeout(function () {
+                    var logo = headerEl.querySelector('.logo');
+                    if (logo) logo.setAttribute('href', 'reservations.html');
+                }, 0);
             });
             observer.observe(headerEl, { childList: true, subtree: true });
         })();
