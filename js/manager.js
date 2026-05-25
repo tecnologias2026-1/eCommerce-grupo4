@@ -1,6 +1,6 @@
 const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:3000/api/v1'
-    : 'https://tu-backend.railway.app/api/v1';
+    : 'https://back-eventosdecoraciones.onrender.com/api/v1';
 
 async function apiFetch(path) {
     const res = await fetch(API_BASE + path);
