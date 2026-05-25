@@ -73,6 +73,66 @@
         .res-card { gap: 48px; }
         .res-card__title { font-size: 38px; }
         .empty-msg { font-size: 16px; padding: 60px 0; color: #bbb; }
+
+        /* ── Cold-start / retry states ── */
+        .server-status {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            padding: 64px 24px;
+            text-align: center;
+        }
+        .server-status__icon {
+            width: 48px;
+            height: 48px;
+            border: 3px solid #e0e0e0;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+            flex-shrink: 0;
+        }
+        .server-status__icon--error {
+            animation: none;
+            border-color: transparent;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23bbb' stroke-width='1.5' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='8' x2='12' y2='12'/%3E%3Ccircle cx='12' cy='16' r='.5' fill='%23bbb'/%3E%3C/svg%3E") center/contain no-repeat;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .server-status__title {
+            font-family: var(--font-primary);
+            font-size: 15px;
+            font-weight: 600;
+            color: #444;
+            margin: 0;
+        }
+        .server-status__text {
+            font-family: var(--font-primary);
+            font-size: 14px;
+            color: #999;
+            margin: 0;
+            max-width: 340px;
+            line-height: 1.6;
+        }
+        .server-status__countdown {
+            font-family: var(--font-primary);
+            font-size: 13px;
+            color: #bbb;
+            margin: 0;
+        }
+        .server-status__retry {
+            margin-top: 4px;
+            padding: 10px 28px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            font-family: var(--font-primary);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .server-status__retry:hover { background: var(--primary-hover); }
     </style>
 </head>
 
@@ -89,9 +149,7 @@
     </div>
 
     <main class="reservations-content">
-        <div class="reservations-list" id="reservations-list">
-            <p class="empty-msg">Cargando reservaciones…</p>
-        </div>
+        <div class="reservations-list" id="reservations-list"></div>
     </main>
 
     <script>
@@ -240,15 +298,101 @@
                     });
             }
 
-            // Load all reservations from API
+            // ── Server-status helpers ──────────────────────────────────
+            function showLoading() {
+                listContainer.innerHTML =
+                    '<div class="server-status">' +
+                    '  <div class="server-status__icon"></div>' +
+                    '  <p class="server-status__title">Cargando reservaciones…</p>' +
+                    '</div>';
+            }
+
+            function showWakingUp(secondsLeft) {
+                listContainer.innerHTML =
+                    '<div class="server-status">' +
+                    '  <div class="server-status__icon"></div>' +
+                    '  <p class="server-status__title">El servidor está iniciando</p>' +
+                    '  <p class="server-status__text">El servicio estaba inactivo y está despertando. Esto puede tomar hasta 60 segundos la primera vez.</p>' +
+                    '  <p class="server-status__countdown" id="wakeup-countdown">Esperando' + (secondsLeft ? ' (~' + secondsLeft + 's)' : '…') + '</p>' +
+                    '</div>';
+            }
+
+            function showRetryError(autoRetryIn) {
+                listContainer.innerHTML =
+                    '<div class="server-status">' +
+                    '  <div class="server-status__icon server-status__icon--error"></div>' +
+                    '  <p class="server-status__title">No se pudo conectar</p>' +
+                    '  <p class="server-status__text">El servidor tardó demasiado en responder. Suele ocurrir después de un período de inactividad en Render.</p>' +
+                    '  <button class="server-status__retry" id="retry-btn">Reintentar</button>' +
+                    (autoRetryIn ? '<p class="server-status__countdown" id="retry-countdown">Reintento automático en ' + autoRetryIn + 's…</p>' : '') +
+                    '</div>';
+
+                document.getElementById('retry-btn').addEventListener('click', function () {
+                    clearRetryCountdown();
+                    loadReservations();
+                });
+            }
+
+            var retryTimer = null;
+            var countdownTimer = null;
+            var wakeupTimer = null;
+
+            function clearAllTimers() {
+                clearTimeout(retryTimer);
+                clearTimeout(wakeupTimer);
+                clearInterval(countdownTimer);
+                retryTimer = null;
+                wakeupTimer = null;
+                countdownTimer = null;
+            }
+
+            function clearRetryCountdown() {
+                clearTimeout(retryTimer);
+                clearInterval(countdownTimer);
+                retryTimer = null;
+                countdownTimer = null;
+            }
+
+            function startAutoRetry(seconds) {
+                var remaining = seconds;
+                countdownTimer = setInterval(function () {
+                    remaining--;
+                    var el = document.getElementById('retry-countdown');
+                    if (el) el.textContent = 'Reintento automático en ' + remaining + 's…';
+                    if (remaining <= 0) {
+                        clearRetryCountdown();
+                        loadReservations();
+                    }
+                }, 1000);
+            }
+
+            // ── Load all reservations from API ─────────────────────────
             function loadReservations() {
                 if (typeof apiFetch !== 'function') {
                     listContainer.innerHTML = '<p class="empty-msg">Error: manager.js no cargó.</p>';
                     return;
                 }
 
+                clearAllTimers();
+                showLoading();
+
+                // After 12s with no response, switch to "waking up" message
+                var elapsed = 0;
+                wakeupTimer = setTimeout(function () {
+                    showWakingUp(48);
+                    // update countdown every second
+                    var remaining = 48;
+                    countdownTimer = setInterval(function () {
+                        remaining--;
+                        var el = document.getElementById('wakeup-countdown');
+                        if (el && remaining > 0) el.textContent = 'Esperando (~' + remaining + 's)';
+                        if (remaining <= 0) clearInterval(countdownTimer);
+                    }, 1000);
+                }, 12000);
+
                 apiFetch('/reservations')
                     .then(function (data) {
+                        clearAllTimers();
                         if (!Array.isArray(data)) throw new Error('Respuesta inesperada');
                         allReservations = data.sort(function (a, b) {
                             return new Date(b.created_at || 0) - new Date(a.created_at || 0);
@@ -256,13 +400,16 @@
                         renderCards();
                     })
                     .catch(function (err) {
+                        clearAllTimers();
                         var status = err.status || 0;
                         var msg = err.message || '';
                         if (status === 401 || status === 403 || msg.includes('401') || msg.includes('403')) {
                             window.location.href = 'auth.html';
                             return;
                         }
-                        listContainer.innerHTML = '<p class="empty-msg">Error al cargar reservaciones.</p>';
+                        // Network error / timeout → cold start scenario
+                        showRetryError(40);
+                        startAutoRetry(40);
                     });
             }
 
