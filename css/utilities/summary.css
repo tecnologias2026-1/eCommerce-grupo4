@@ -278,3 +278,97 @@
     transform: scale(1.1);
 }
 
+/* ── Summary popup: reposition close button when panel is full-width on mobile ── */
+@media (max-width: 640px) {
+    .summary-popup__close {
+        left: auto;
+        right: 16px;
+        top: 16px;
+    }
+}
+
+/* ── Wedding modal popup (created by manager.js) ── */
+.wedding-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 20000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.wedding-modal-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.wedding-popup {
+    width: 92%;
+    max-width: 900px;
+    height: 85vh;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 32px 100px rgba(0, 0, 0, 0.25);
+    transform: translateY(24px) scale(0.97);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wedding-modal-backdrop.active .wedding-popup {
+    transform: none;
+}
+
+.wedding-popup__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.2s;
+}
+
+.wedding-popup__close:hover {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.wedding-popup__content {
+    flex: 1;
+    overflow: hidden;
+}
+
+.wedding-popup__iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .wedding-popup {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        transform: translateY(30px);
+    }
+}
+

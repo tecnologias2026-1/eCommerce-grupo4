@@ -368,6 +368,13 @@
       background: #e0e0e0;
     }
 
+    /* ── Mobile: reset sticky height/top so media.css takes over ── */
+    @media (max-width: 768px) {
+      .header { flex-direction: row !important; }
+      .pay-nav { height: auto !important; top: 48px !important; }
+      .pay-summary { height: auto !important; top: auto !important; }
+    }
+
     /* ── Confirmation success banner ── */
     .pay-success-banner {
       text-align: center;

@@ -62,6 +62,13 @@
             white-space: normal;
             width: auto;
         }
+
+        /* ── Mobile: reduce wide paddings ── */
+        @media (max-width: 768px) {
+            .header { flex-direction: row !important; }
+            .hero-selection { padding: 24px 16px 20px !important; }
+            .hero-selection__title { font-size: 22px !important; }
+        }
     </style>
 </head>
 

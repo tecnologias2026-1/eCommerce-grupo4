@@ -71,8 +71,11 @@
       }
 
       document.getElementById('planner-total').textContent = fmt(total);
+      var itemsHtml = html || '<p class="planner-cart__empty">Tu selección aparecerá aquí</p>';
       var container = document.getElementById('planner-cart-items');
-      container.innerHTML = html || '<p class="planner-cart__empty">Tu selección aparecerá aquí</p>';
+      container.innerHTML = itemsHtml;
+      var drawerList = document.getElementById('planner-drawer-list');
+      if (drawerList) drawerList.innerHTML = itemsHtml;
     }
 
     function cartSection(title, items) {
@@ -560,5 +563,49 @@
         closeVenueDetailsPopup();
         handleVenueClick(card);
       });
+    });
+
+    /* ──── Mobile cart drawer ────────────────────── */
+    function openDrawer() {
+      var drawer   = document.getElementById('planner-cart-drawer');
+      var backdrop = document.getElementById('planner-drawer-backdrop');
+      var cartTop  = document.querySelector('.planner-cart__top');
+      if (drawer)   { drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden', 'false'); }
+      if (backdrop) backdrop.classList.add('is-active');
+      if (cartTop)  cartTop.classList.add('is-open');
+    }
+
+    function closeDrawer() {
+      var drawer   = document.getElementById('planner-cart-drawer');
+      var backdrop = document.getElementById('planner-drawer-backdrop');
+      var cartTop  = document.querySelector('.planner-cart__top');
+      if (drawer)   { drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden', 'true'); }
+      if (backdrop) backdrop.classList.remove('is-active');
+      if (cartTop)  cartTop.classList.remove('is-open');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      function updateCartBarHeight() {
+        var bar = document.querySelector('.planner-cart');
+        if (!bar) return;
+        document.documentElement.style.setProperty('--cart-bar-height', bar.offsetHeight + 'px');
+      }
+      updateCartBarHeight();
+      window.addEventListener('resize', updateCartBarHeight);
+
+      var cartTop = document.querySelector('.planner-cart__top');
+      if (cartTop) {
+        cartTop.addEventListener('click', function () {
+          var drawer = document.getElementById('planner-cart-drawer');
+          if (!drawer || window.getComputedStyle(drawer).display === 'none') return;
+          drawer.classList.contains('is-open') ? closeDrawer() : openDrawer();
+        });
+      }
+
+      var drawerClose = document.getElementById('planner-drawer-close');
+      if (drawerClose) drawerClose.addEventListener('click', function (e) { e.stopPropagation(); closeDrawer(); });
+
+      var drawerBackdrop = document.getElementById('planner-drawer-backdrop');
+      if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
     });
   })();

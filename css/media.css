@@ -105,6 +105,7 @@
     .venue-card {
         height: 440px;
     }
+/* ↑ tablet keeps 2-col; mobile (768px) will override below */
 
     .venue-options-selector {
         padding: 60px var(--page-gutter) var(--space-md);
@@ -362,7 +363,7 @@
     }
 
     .bodas-ejemplares__grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: var(--space-md);
     }
 
@@ -375,7 +376,7 @@
     }
 
     .text-features__grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 20px;
     }
 
@@ -492,7 +493,7 @@
     }
 
     .venue-gallery__grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
     }
 
     .venue-gallery__title {
@@ -559,7 +560,7 @@
     }
 
     .wedding-features {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: var(--space-md);
     }
 
@@ -1369,6 +1370,7 @@
     }
 
     .ceremony-options {
+        grid-template-columns: 1fr;
         padding: 16px var(--page-gutter);
     }
 
@@ -1400,5 +1402,341 @@
 
     .cookie-consent-modal__btn {
         width: 100%;
+    }
+}
+
+/* ================================================
+   PLANNER — 3-column layout → mobile single column
+   ================================================ */
+@media (max-width: 768px) {
+    .planner-layout {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Left nav → horizontal scrollable tab strip */
+    .planner-nav {
+        order: 0;
+        position: sticky;
+        top: 48px;
+        height: auto !important;
+        padding: 0 8px !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        border-right: none !important;
+        border-bottom: 1px solid #ebebeb;
+        z-index: 100;
+        background: #fff;
+        gap: 0 !important;
+        scrollbar-width: none;
+    }
+    .planner-nav::-webkit-scrollbar { display: none; }
+
+    .planner-nav__item {
+        flex-direction: row;
+        padding: 12px 10px !important;
+        flex-shrink: 0;
+        gap: 6px;
+    }
+    .planner-nav__item::before { display: none !important; }
+    .planner-nav__dot { display: none !important; }
+    .planner-nav__label { font-size: 10px !important; white-space: nowrap; }
+    .planner-nav__section-label { display: none !important; }
+
+    /* Center content — full width */
+    .planner-content {
+        order: 1;
+        padding: 24px 16px 90px !important;
+    }
+
+    .planner-section {
+        padding-bottom: 40px !important;
+        margin-bottom: 40px !important;
+    }
+
+    .planner-section__title { font-size: 20px !important; }
+
+    /* Details form: 2-col → 1-col */
+    .planner-detalles-form {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Venue cards: 2-col → 1-col */
+    .planner-venue-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Items grid (ceremony, reception, food, otros): 2-col → 1-col */
+    .planner-items-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Right cart → fixed bottom bar */
+    .planner-cart {
+        order: 2;
+        position: fixed !important;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto !important;
+        height: auto !important;
+        border-left: none !important;
+        border-top: 1px solid #e0e0e0;
+        flex-direction: row !important;
+        align-items: center;
+        padding: 10px 16px !important;
+        z-index: 200;
+        box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.10);
+        gap: 12px;
+        overflow: visible !important;
+    }
+
+    .planner-cart__top {
+        flex: 1;
+        padding: 0 !important;
+        border-bottom: none !important;
+        min-width: 0;
+    }
+
+    .planner-cart__total {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1px;
+    }
+
+    .planner-cart__total-lbl { font-size: 9px !important; }
+    .planner-cart__total-val { font-size: 15px !important; }
+
+    /* Hide detailed cart items — just show total + button */
+    .planner-cart__items { display: none !important; }
+
+    .planner-cart__pay-wrap {
+        padding: 0 !important;
+        border-top: none !important;
+        flex-shrink: 0;
+    }
+
+    .planner-cart__pay-btn {
+        padding: 10px 18px !important;
+        font-size: 11px !important;
+        width: auto !important;
+    }
+
+    /* Keep header single row on planner/payment pages */
+    .planner-layout ~ * .header,
+    .pay-layout ~ * .header {
+        flex-direction: row;
+    }
+}
+
+/* ================================================
+   PAYMENT — 3-column layout → mobile single column
+   ================================================ */
+@media (max-width: 768px) {
+    .pay-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        min-height: calc(100vh - 48px);
+    }
+
+    /* Left nav → horizontal scrollable tab strip */
+    .pay-nav {
+        position: sticky !important;
+        top: 48px !important;
+        height: auto !important;
+        padding: 0 8px !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        border-right: none !important;
+        border-bottom: 1px solid #ebebeb;
+        z-index: 100;
+        background: #fff;
+        gap: 0 !important;
+        scrollbar-width: none;
+    }
+    .pay-nav::-webkit-scrollbar { display: none; }
+
+    .pay-nav .planner-nav__item {
+        padding: 12px 10px !important;
+        flex-shrink: 0;
+        gap: 6px;
+    }
+    .pay-nav .planner-nav__item::before { display: none !important; }
+    .pay-nav .planner-nav__dot { display: none !important; }
+    .pay-nav .planner-nav__label { font-size: 10px !important; white-space: nowrap; }
+
+    .pay-nav__section-label,
+    .pay-nav__divider { display: none !important; }
+
+    /* Center content — full width */
+    .pay-content {
+        padding: 24px 16px 90px !important;
+        overflow-y: visible !important;
+    }
+
+    .pay-step__title { font-size: 20px !important; }
+
+    /* Form grid: 2-col → 1-col */
+    .pay-form-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Right summary → fixed bottom bar */
+    .pay-summary {
+        position: fixed !important;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto !important;
+        height: auto !important;
+        border-left: none !important;
+        border-top: 1px solid #e0e0e0;
+        flex-direction: row !important;
+        align-items: center;
+        padding: 10px 16px !important;
+        z-index: 200;
+        box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.10);
+        gap: 12px;
+        overflow: visible !important;
+    }
+
+    .pay-summary__top {
+        flex: 1;
+        padding: 0 !important;
+        border-bottom: none !important;
+        min-width: 0;
+    }
+
+    .pay-summary__title { display: none !important; }
+    .pay-summary__total-lbl { font-size: 10px !important; }
+    .pay-summary__total-val { font-size: 16px !important; }
+
+    /* Hide detailed items — just show total */
+    .pay-summary__items,
+    .pay-summary__notes { display: none !important; }
+
+    .pay-step__actions { margin-bottom: 20px; }
+
+    /* Success code on confirmation step */
+    .pay-success-code__value { font-size: 24px !important; letter-spacing: 2px !important; }
+    .pay-success-banner__title { font-size: 18px !important; }
+
+    /* Payment step action buttons: stack on mobile */
+    .pay-step__actions {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+    }
+    .pay-btn-back {
+        width: 100%;
+        text-align: center;
+        order: 2;
+    }
+    .pay-step__actions .btn-primary,
+    .pay-step__actions [class*="btn"] {
+        order: 1;
+    }
+}
+
+/* ================================================
+   VDP POPUP (Venue Details) — mobile
+   Styles for inline .vdp-* classes from planner.html
+   ================================================ */
+@media (max-width: 768px) {
+    .vdp-popup {
+        max-height: 92vh !important;
+    }
+
+    .vdp-hero {
+        height: 200px !important;
+    }
+
+    .vdp-hero__overlay {
+        padding: 14px 18px 14px !important;
+    }
+
+    .vdp-hero__name {
+        font-size: 17px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .vdp-hero__price {
+        font-size: 14px !important;
+    }
+
+    .vdp-hero__guests {
+        font-size: 12px !important;
+    }
+
+    .vdp-body {
+        padding: 16px 18px 20px !important;
+    }
+
+    .vdp-features {
+        grid-template-columns: 1fr !important;
+    }
+
+    .vdp-estimation {
+        padding: 14px 16px !important;
+    }
+
+    .vdp-select-btn {
+        padding: 12px !important;
+        font-size: 12px !important;
+    }
+}
+
+/* ================================================
+   AUTH PAGE — mobile padding reduction
+   ================================================ */
+@media (max-width: 768px) {
+    .auth-page {
+        padding: 36px 20px 56px !important;
+        gap: 24px !important;
+    }
+
+    .auth-page__title {
+        font-size: 26px !important;
+    }
+
+    .auth-top-banner {
+        max-height: min(160px, 28vh) !important;
+    }
+}
+
+/* ================================================
+   EXTRA SMALL SCREENS (≤ 390px) — fine-tuning
+   ================================================ */
+@media (max-width: 390px) {
+    .planner-venue-card__name-row,
+    .selection-item__title-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+    }
+
+    .planner-venue-details-btn,
+    .selection-item__details-btn {
+        align-self: flex-start !important;
+    }
+
+    .vdp-hero {
+        height: 160px !important;
+    }
+
+    .pay-step__title {
+        font-size: 18px !important;
+    }
+
+    .pay-field input,
+    .pay-field textarea {
+        font-size: 14px !important;
+        padding: 10px 12px !important;
+    }
+
+    .auth-page {
+        padding: 24px 16px 48px !important;
     }
 }
