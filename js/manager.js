@@ -159,11 +159,6 @@ function updateFooterState() {
     links.forEach((link) => {
         const href = (link.getAttribute("href") || "").toLowerCase();
 
-        if (href.includes("place.html")) {
-            link.setAttribute("href", getPublicPagePath("place.html"));
-            return;
-        }
-
         if (href.includes("auth.html")) {
             link.setAttribute("href", getPublicPagePath("auth.html"));
             return;
