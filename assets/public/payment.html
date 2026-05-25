@@ -817,9 +817,8 @@
       var dep    = (document.getElementById('pay-deposit') || {}).value || '';
       var total  = document.getElementById('pay-total-val').textContent;
 
-      var code = '#WP-' + Math.floor(100000 + Math.random() * 900000);
       var codeEl = document.getElementById('pay-confirm-code');
-      if (codeEl) codeEl.textContent = code;
+      if (codeEl) codeEl.textContent = 'Generando…';
 
       document.getElementById('pay-confirm-summary').innerHTML =
         '<div class="pay-confirm-summary__head"><p class="pay-confirm-summary__head-title">Resumen de tu reserva</p></div>' +
@@ -832,7 +831,7 @@
         row('Abono confirmado', 'COL$ ' + dep.replace(/[^\d]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.'), true) +
         '</div>';
 
-      saveReservation(groom, bride, email, phone, date, dep, total, code);
+      saveReservation(groom, bride, email, phone, date, dep, total);
     }
 
     function row(lbl, val, accent) {
@@ -841,14 +840,14 @@
     }
 
     /* ──── Save reservation ────────────────────────── */
-    function saveReservation(groom, bride, email, phone, date, dep, total, code) {
+    function saveReservation(groom, bride, email, phone, date, dep, total) {
       var cart = getCart();
       var venue = cart.selectedVenue || {};
       var depAmt = parseInt((dep || '').replace(/[^\d]/g, '')) || 0;
       var notes  = localStorage.getItem('weddingNotes') || '';
 
       var reservation = {
-        id: code || ('#WP-' + Math.floor(100000 + Math.random() * 900000)),
+        id: null,
         groom: groom, bride: bride, email: email, phone: phone,
         venue: venue.name || '', venueImage: venue.image || '',
         guests: venue.guests || localStorage.getItem('selectedGuests') || '0',
@@ -860,33 +859,35 @@
       all.push(reservation);
       localStorage.setItem('allReservations', JSON.stringify(all));
 
-      if (typeof API_BASE !== 'undefined') {
-        fetch(API_BASE + '/reservations', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            groom_name: groom, bride_name: bride, email: email, phone: phone,
-            venue_slug: venue.slug || '', wedding_date: date,
-            guest_count: parseInt(reservation.guests) || 0,
-            special_requirements: notes, deposit_amount: depAmt,
-            total_price: parseInt(String(total).replace(/[^\d]/g, '')) || 0,
-            cart: cart
-          })
+      fetch(API_BASE + '/reservations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          groom_name: groom, bride_name: bride, email: email, phone: phone,
+          venue_slug: venue.slug || '', wedding_date: date,
+          guest_count: parseInt(reservation.guests) || 0,
+          special_requirements: notes, deposit_amount: depAmt,
+          total_price: parseInt(String(total).replace(/[^\d]/g, '')) || 0,
+          cart: cart
         })
-        .then(function (res) { return res.ok ? res.json() : null; })
-        .then(function (data) {
-          if (data && data.code) {
-            localStorage.setItem('reservationCode', data.code);
-            var a2 = JSON.parse(localStorage.getItem('allReservations') || '[]');
-            if (a2.length) a2[a2.length - 1].id = data.code;
-            localStorage.setItem('allReservations', JSON.stringify(a2));
-          }
-          localStorage.removeItem('weddingCart');
-        })
-        .catch(function () { localStorage.removeItem('weddingCart'); });
-      } else {
+      })
+      .then(function (res) { return res.ok ? res.json() : Promise.reject(res.status); })
+      .then(function (data) {
+        if (data && data.code) {
+          var codeEl = document.getElementById('pay-confirm-code');
+          if (codeEl) codeEl.textContent = data.code;
+          localStorage.setItem('reservationCode', data.code);
+          var a2 = JSON.parse(localStorage.getItem('allReservations') || '[]');
+          if (a2.length) a2[a2.length - 1].id = data.code;
+          localStorage.setItem('allReservations', JSON.stringify(a2));
+        }
         localStorage.removeItem('weddingCart');
-      }
+      })
+      .catch(function () {
+        var codeEl = document.getElementById('pay-confirm-code');
+        if (codeEl) codeEl.textContent = 'Error al generar — contáctenos';
+        localStorage.removeItem('weddingCart');
+      });
     }
 
     /* ──── Deposit field formatting ────────────────── */
