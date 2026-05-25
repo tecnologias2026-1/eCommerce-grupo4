@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personaliza tu Boda - E&D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@400;600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/global.css">
+  <link rel="stylesheet" href="../../css/media.css">
+  <script src="../../js/cookie-consent.js" defer></script>
+  <script src="../../js/manager.js" defer></script>
+  <style>
+    /* ── No footer ── */
+    #footer-placeholder { display: none; min-height: 0; }
+
+    /* ── Compact header ── */
+    #header-placeholder { min-height: 48px; }
+    .header { min-height: 48px; padding: 6px 24px; }
+    .logo { height: 26px; width: 90px; }
+
+    /* ── Icon-only action buttons ── */
+    .header-btn__icon { display: block; }
+    .header-btn__text { display: none; }
+    .header-btn {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border-radius: 50%;
+      justify-content: center;
+    }
+
+    /* ── Adjust nav/cart sticky top for compact header ── */
+    .planner-nav,
+    .planner-cart { top: 48px; height: calc(100vh - 48px); }
+
+    /* ── Nav: always fixed, no internal scroll ── */
+    .planner-nav { overflow-y: hidden; }
+  </style>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <div class="planner-layout">
+
+    <!-- ── LEFT: Section navigator ─────────────────── -->
+    <aside class="planner-nav" id="planner-nav">
+      <a class="planner-nav__item planner-nav__item--active" data-target="section-detalles" href="#section-detalles">
+        <span class="planner-nav__dot"></span>
+        <span class="planner-nav__label">Detalles</span>
+      </a>
+      <a class="planner-nav__item planner-nav__item--locked" data-target="section-lugar" href="#section-lugar">
+        <span class="planner-nav__dot"></span>
+        <span class="planner-nav__label">Lugar</span>
+      </a>
+      <a class="planner-nav__item planner-nav__item--locked" data-target="section-ceremonia" href="#section-ceremonia">
+        <span class="planner-nav__dot"></span>
+        <span class="planner-nav__label">Ceremonia</span>
+      </a>
+      <a class="planner-nav__item planner-nav__item--locked" data-target="section-recepcion" href="#section-recepcion">
+        <span class="planner-nav__dot"></span>
+        <span class="planner-nav__label">Recepción</span>
+      </a>
+      <a class="planner-nav__item planner-nav__item--locked" data-target="section-comida" href="#section-comida">
+        <span class="planner-nav__dot"></span>
+        <span class="planner-nav__label">Comida</span>
+      </a>
+      <a class="planner-nav__item planner-nav__item--locked" data-target="section-otros" href="#section-otros">
+        <span class="planner-nav__dot"></span>
+        <span class="planner-nav__label">Otros</span>
+      </a>
+    </aside>
+
+    <!-- ── CENTER: Content ─────────────────────────── -->
+    <main class="planner-content">
+
+      <!-- §1 DETALLES -->
+      <section class="planner-section" id="section-detalles">
+        <div class="planner-section__head">
+          <h2 class="planner-section__title">Cuéntanos sobre tu boda</h2>
+          <p class="planner-section__sub">Primero, indícanos la fecha y el número de invitados para personalizar las mejores opciones.</p>
+        </div>
+        <div class="planner-detalles-form">
+          <div class="planner-detalles-field">
+            <label class="planner-detalles-label" for="planner-date">Fecha de la boda</label>
+            <input type="date" id="planner-date" class="planner-detalles-input">
+          </div>
+          <div class="planner-detalles-field">
+            <label class="planner-detalles-label" for="planner-guests">Número de invitados</label>
+            <input type="number" id="planner-guests" min="1" max="2000" placeholder="Ej. 150" class="planner-detalles-input">
+          </div>
+        </div>
+      </section>
+
+      <!-- §2 LUGAR -->
+      <section class="planner-section planner-section--locked" id="section-lugar">
+        <div class="planner-section__lock">
+          <span class="planner-section__lock-msg">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            Completa la fecha e invitados primero
+          </span>
+        </div>
+        <div class="planner-section__head">
+          <h2 class="planner-section__title">Escoge tu Lugar</h2>
+          <p class="planner-section__sub">Selecciona la hacienda perfecta para tu gran día.</p>
+        </div>
+        <div class="planner-venue-grid" id="planner-venue-grid">
+
+          <article class="planner-venue-card"
+            data-name="Hacienda Paz del Río" data-slug="paz-del-rio"
+            data-price="3000000" data-guests="100"
+            data-description="Hacienda campestre en entorno natural privilegiado, con jardines exuberantes y vistas panorámicas. Perfecta para bodas íntimas y elegantes al aire libre."
+            data-features='["Capacidad para 100 invitados","Jardines privados y zonas verdes","Estacionamiento incluido","Servicio de coordinación en sitio","Catering propio disponible"]'>
+            <div class="planner-venue-card__img">
+              <img src="../images/paz del rio.png" alt="Hacienda Paz del Río" loading="lazy">
+              <span class="planner-venue-card__rec">Recomendada</span>
+              <span class="planner-venue-card__check">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+            <div class="planner-venue-card__body">
+              <div class="planner-venue-card__name-row">
+                <h4 class="planner-venue-card__name">HACIENDA PAZ DEL RÍO</h4>
+                <button class="planner-venue-details-btn" data-action="details">Ver detalles</button>
+              </div>
+              <p class="planner-venue-card__guests">100 invitados aprox</p>
+              <p class="planner-venue-card__price">COL$ 3.000.000</p>
+            </div>
+          </article>
+
+          <article class="planner-venue-card"
+            data-name="Hacienda San Juan" data-slug="san-juan"
+            data-price="6500000" data-guests="300"
+            data-description="Imponente hacienda colonial de gran extensión, ideal para celebraciones majestuosas. Cuenta con amplios salones, patios coloniales y áreas ajardinadas de ensueño."
+            data-features='["Capacidad para 300 invitados","Arquitectura colonial restaurada","Salones interiores y exteriores","Zona de glamping disponible","Equipo de coordinación incluido"]'>
+            <div class="planner-venue-card__img">
+              <img src="../images/san juan.png" alt="Hacienda San Juan" loading="lazy">
+              <span class="planner-venue-card__check">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+            <div class="planner-venue-card__body">
+              <div class="planner-venue-card__name-row">
+                <h4 class="planner-venue-card__name">HACIENDA SAN JUAN</h4>
+                <button class="planner-venue-details-btn" data-action="details">Ver detalles</button>
+              </div>
+              <p class="planner-venue-card__guests">300 invitados aprox</p>
+              <p class="planner-venue-card__price">COL$ 6.500.000</p>
+            </div>
+          </article>
+
+          <article class="planner-venue-card"
+            data-name="Hacienda Las Marías" data-slug="las-marias"
+            data-price="4500000" data-guests="170"
+            data-description="Elegante hacienda rodeada de paisajes naturales, con arquitectura tradicional y espacios íntimos que crean la atmósfera perfecta para bodas románticas."
+            data-features='["Capacidad para 170 invitados","Paisajes naturales y senderos","Terraza panorámica","Iluminación decorativa incluida","Área de fotos exclusiva"]'>
+            <div class="planner-venue-card__img">
+              <img src="../images/las marias.png" alt="Hacienda Las Marías" loading="lazy">
+              <span class="planner-venue-card__check">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+            <div class="planner-venue-card__body">
+              <div class="planner-venue-card__name-row">
+                <h4 class="planner-venue-card__name">HACIENDA LAS MARÍAS</h4>
+                <button class="planner-venue-details-btn" data-action="details">Ver detalles</button>
+              </div>
+              <p class="planner-venue-card__guests">170 invitados aprox</p>
+              <p class="planner-venue-card__price">COL$ 4.500.000</p>
+            </div>
+          </article>
+
+          <article class="planner-venue-card"
+            data-name="Hacienda El Cedro" data-slug="el-cedro"
+            data-price="5000000" data-guests="200"
+            data-description="Hacienda de montaña con majestuosos cedros centenarios, prados verdes y vistas impresionantes al valle. Un escenario natural único para una boda memorable."
+            data-features='["Capacidad para 200 invitados","Cedros centenarios y prados","Vistas al valle y montañas","Salón principal climatizado","Cocina equipada para catering externo"]'>
+            <div class="planner-venue-card__img">
+              <img src="../images/el cedro.png" alt="Hacienda El Cedro" loading="lazy">
+              <span class="planner-venue-card__check">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+            <div class="planner-venue-card__body">
+              <div class="planner-venue-card__name-row">
+                <h4 class="planner-venue-card__name">HACIENDA EL CEDRO</h4>
+                <button class="planner-venue-details-btn" data-action="details">Ver detalles</button>
+              </div>
+              <p class="planner-venue-card__guests">200 invitados aprox</p>
+              <p class="planner-venue-card__price">COL$ 5.000.000</p>
+            </div>
+          </article>
+
+          <article class="planner-venue-card"
+            data-name="Hacienda Arkadia" data-slug="arkadia"
+            data-price="7000000" data-guests="350"
+            data-description="La hacienda más grande y lujosa de nuestra colección. Arkadia combina grandiosidad y elegancia con infraestructura de primer nivel para eventos de gran escala."
+            data-features='["Capacidad para 350 invitados","Múltiples salones y jardines","Piscina y áreas de descanso","Iluminación profesional integrada","Alojamiento disponible en el predio","Coordinador exclusivo asignado"]'>
+            <div class="planner-venue-card__img">
+              <img src="../images/arkadia.png" alt="Hacienda Arkadia" loading="lazy">
+              <span class="planner-venue-card__rec">Recomendada</span>
+              <span class="planner-venue-card__check">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+            <div class="planner-venue-card__body">
+              <div class="planner-venue-card__name-row">
+                <h4 class="planner-venue-card__name">HACIENDA ARKADIA</h4>
+                <button class="planner-venue-details-btn" data-action="details">Ver detalles</button>
+              </div>
+              <p class="planner-venue-card__guests">350 invitados aprox</p>
+              <p class="planner-venue-card__price">COL$ 7.000.000</p>
+            </div>
+          </article>
+
+          <article class="planner-venue-card"
+            data-name="Hacienda Botania" data-slug="botania"
+            data-price="3000000" data-guests="100"
+            data-description="Hacienda boutique rodeada de jardines botánicos y vegetación exuberante. Un refugio verde y tranquilo ideal para bodas íntimas con un toque natural y romántico."
+            data-features='["Capacidad para 100 invitados","Jardines botánicos privados","Ambiente íntimo y exclusivo","Terraza con hamacas y zona lounge","Parqueadero privado"]'>
+            <div class="planner-venue-card__img">
+              <img src="../images/botania.png" alt="Hacienda Botania" loading="lazy">
+              <span class="planner-venue-card__check">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+            <div class="planner-venue-card__body">
+              <div class="planner-venue-card__name-row">
+                <h4 class="planner-venue-card__name">HACIENDA BOTANIA</h4>
+                <button class="planner-venue-details-btn" data-action="details">Ver detalles</button>
+              </div>
+              <p class="planner-venue-card__guests">100 invitados aprox</p>
+              <p class="planner-venue-card__price">COL$ 3.000.000</p>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- §2 CEREMONIA -->
+      <section class="planner-section planner-section--locked" id="section-ceremonia">
+        <div class="planner-section__lock">
+          <span class="planner-section__lock-msg">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            Selecciona un lugar primero
+          </span>
+        </div>
+        <div class="planner-section__head">
+          <h2 class="planner-section__title">Diseña tu Ceremonia</h2>
+          <p class="planner-section__sub">Elige los elementos que harán única tu ceremonia. Solo puedes seleccionar uno.</p>
+        </div>
+        <div class="planner-items-grid" id="grid-ceremonia">
+          <section class="selection-item" data-id="montaje" data-name="Montaje de ceremonia" data-price="800000"
+            data-description="Estructura completa para altar, mesa de ceremonia y organización profesional del espacio."
+            data-features='["Montaje profesional de altar y mobiliario","Organización completa del espacio","Incluye mesa de ceremonia y decoración básica"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/ceremonia campestre w3.png" alt="Montaje">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Montaje de ceremonia</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Servicio profesional</p>
+              <p class="selection-item__price">COL$ 800.000</p>
+            </div>
+          </section>
+
+          <section class="selection-item" data-id="altar" data-name="Arreglo floral para altar" data-price="1200000"
+            data-description="Composición floral majestuosa con flores de temporada, diseñada para resaltar el punto focal de la unión."
+            data-features='["Arreglo floral premium","Flores de temporada seleccionadas","Diseño personalizado para altar","Incluye instalación profesional"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/c2.png" alt="Altar">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Arreglo floral para altar</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Arreglo Premium</p>
+              <p class="selection-item__price">COL$ 1.200.000</p>
+            </div>
+          </section>
+
+          <section class="selection-item" data-id="sillas" data-name="Sillas y decoración de asientos" data-price="650000"
+            data-set-capacity="50"
+            data-description="Sillas tipo tiffany con decoración personalizada en cintas y bouquets laterales. El precio se ajusta según la cantidad de invitados."
+            data-features='["Sillas tipo tiffany","Decoración personalizada en cintas","Bouquets laterales","Set base para 50 personas","Precio ajustado por invitado"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/c3.png" alt="Sillas">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Sillas y decoración de asientos</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Set para 50 personas</p>
+              <p class="selection-item__price"><span id="sillas-price-display">COL$ 650.000</span></p>
+            </div>
+          </section>
+
+          <section class="selection-item" data-id="camino" data-name="Decoración de camino al altar" data-price="450000"
+            data-description="Delicada huella de pétalos y pequeños arreglos que enmarcan el recorrido nupcial."
+            data-features='["Pétalos naturales","Pequeños arreglos florales","Diseño personalizado del recorrido","Montaje incluido"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/c1.png" alt="Camino">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Decoración de camino al altar</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Camino Clásico</p>
+              <p class="selection-item__price">COL$ 450.000</p>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- §3 RECEPCIÓN -->
+      <section class="planner-section planner-section--locked" id="section-recepcion">
+        <div class="planner-section__lock">
+          <span class="planner-section__lock-msg">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            Selecciona un lugar primero
+          </span>
+        </div>
+        <div class="planner-section__head">
+          <h2 class="planner-section__title">Diseña tu Recepción</h2>
+          <p class="planner-section__sub">Elige el estilo de recepción que mejor refleja su personalidad.</p>
+        </div>
+        <div class="planner-items-grid" id="grid-recepcion">
+          <section class="selection-item" data-id="recep-clasica" data-name="Recepción Clásica" data-price="2500000"
+            data-description="Un ambiente sobrio y sofisticado en salones interiores, con mantelería blanca y detalles dorados."
+            data-features='["Mantelería blanca de alta calidad","Detalles dorados decorativos","Iluminación ambiental cálida","Salón interior completo","Servicio de meseros incluido"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/r1.png" alt="Recepción Clásica">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Recepción Clásica</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Elegancia atemporal</p>
+              <p class="selection-item__price">COL$ 2.500.000</p>
+            </div>
+          </section>
+
+          <section class="selection-item" data-id="recep-elegante" data-name="Recepción Elegante" data-price="4000000"
+            data-description="Decoración de lujo con cristalería, arreglos florales altos y una iluminación ambiental diseñada."
+            data-features='["Cristalería fina","Arreglos florales altos","Iluminación ambiental diseñada","Mobiliario premium","Servicio de meseros y maître"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/r2.png" alt="Recepción Elegante">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Recepción Elegante</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Lujo sin límites</p>
+              <p class="selection-item__price">COL$ 4.000.000</p>
+            </div>
+          </section>
+
+          <section class="selection-item" data-id="recep-campestre" data-name="Recepción Campestre" data-price="3200000"
+            data-description="Ambientes abiertos, decoración rústica pero chic, perfecta para bodas al aire libre o en carpas."
+            data-features='["Ambientes abiertos al aire libre","Decoración rústica chic","Opción de carpa incluida","Mobiliario de madera","Iluminación tipo jardín"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/r3.png" alt="Recepción Campestre">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Recepción Campestre</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Natural y auténtico</p>
+              <p class="selection-item__price">COL$ 3.200.000</p>
+            </div>
+          </section>
+
+          <section class="selection-item" data-id="recep-playa" data-name="Recepción de Playa" data-price="5000000"
+            data-description="Decoración en tonos arena y coral, con altar de conchas y velas flotantes. Coctelería tropical y lounge junto a la orilla."
+            data-features='["Decoración en tonos arena y coral","Altar de conchas","Velas flotantes","Coctelería tropical","Lounge junto a la orilla"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/r4.jpg" alt="Recepción de Playa">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Recepción de Playa</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Paraíso tropical</p>
+              <p class="selection-item__price">COL$ 5.000.000</p>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- §4 COMIDA -->
+      <section class="planner-section planner-section--locked" id="section-comida">
+        <div class="planner-section__lock">
+          <span class="planner-section__lock-msg">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            Selecciona un lugar primero
+          </span>
+        </div>
+        <div class="planner-section__head">
+          <h2 class="planner-section__title">Selecciona tu Menú</h2>
+          <p class="planner-section__sub">Puedes elegir varios menús para distintos grupos de invitados.</p>
+        </div>
+        <div class="planner-items-grid" id="grid-comida">
+          <section class="selection-item food-item" data-id="menu-servido" data-name="Menú Servido" data-price="120000"
+            data-description="Entrada, plato fuerte y postre servidos directamente a tus invitados con la mejor atención."
+            data-features='["Entrada, plato fuerte y postre","Servicio a la mesa","Menús personalizados por comensal","Opción de selección previa"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/f1.png" alt="Menú Servido">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Menú Servido</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Clásico a la mesa</p>
+              <div class="selection-item__price-qty-row">
+                <p class="selection-item__price">COL$ 120.000 <span class="selection-item__price-sub">/ persona</span></p>
+                <div class="selection-item__inline-qty">
+                  <button class="selection-item__qty-btn" data-dir="-1">−</button>
+                  <span class="selection-item__qty-val">1</span>
+                  <button class="selection-item__qty-btn" data-dir="1">+</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="selection-item food-item" data-id="menu-gourmet" data-name="Menú Gourmet" data-price="180000"
+            data-description="Platos de autor con ingredientes de alta gama y una presentación artística inolvidable."
+            data-features='["Platos de autor","Ingredientes de alta gama","Presentación artística","Maridaje sugerido","Servicio personalizado"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/f2.webp" alt="Menú Gourmet">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Menú Gourmet</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Experiencia Premium</p>
+              <div class="selection-item__price-qty-row">
+                <p class="selection-item__price">COL$ 180.000 <span class="selection-item__price-sub">/ persona</span></p>
+                <div class="selection-item__inline-qty">
+                  <button class="selection-item__qty-btn" data-dir="-1">−</button>
+                  <span class="selection-item__qty-val">1</span>
+                  <button class="selection-item__qty-btn" data-dir="1">+</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="selection-item food-item" data-id="menu-campestre" data-name="Menú Campestre" data-price="140000"
+            data-description="Asados premium y acompañamientos rústicos servidos en un ambiente relajado y cálido."
+            data-features='["Asados premium","Acompañamientos rústicos","Opción de parrilla abierta","Postres tradicionales"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/f3.jpg" alt="Menú Campestre">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Menú Campestre</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Sabor Tradicional</p>
+              <div class="selection-item__price-qty-row">
+                <p class="selection-item__price">COL$ 140.000 <span class="selection-item__price-sub">/ persona</span></p>
+                <div class="selection-item__inline-qty">
+                  <button class="selection-item__qty-btn" data-dir="-1">−</button>
+                  <span class="selection-item__qty-val">1</span>
+                  <button class="selection-item__qty-btn" data-dir="1">+</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="selection-item food-item" data-id="menu-pasabocas" data-name="Pasabocas" data-price="75000"
+            data-description="Selección de pasabocas dulces y salados, proteicos y vegetarianos, perfectos para compartir."
+            data-features='["Pasabocas dulces y salados","Opciones proteicas y vegetarianas","Selección variada","Presentación tipo buffet"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/f6.jpg" alt="Pasabocas">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Pasabocas</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Bocaditos de Elegancia</p>
+              <div class="selection-item__price-qty-row">
+                <p class="selection-item__price">COL$ 75.000 <span class="selection-item__price-sub">/ persona</span></p>
+                <div class="selection-item__inline-qty">
+                  <button class="selection-item__qty-btn" data-dir="-1">−</button>
+                  <span class="selection-item__qty-val">1</span>
+                  <button class="selection-item__qty-btn" data-dir="1">+</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="selection-item food-item" data-id="menu-vegetariano" data-name="Menú Vegetariano" data-price="135000"
+            data-description="Increíbles creaciones a base de plantas para deleitar a todos tus invitados."
+            data-features='["Platos 100% vegetales","Alta gastronomía verde","Ingredientes orgánicos y locales"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/f4.png" alt="Menú Vegetariano">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Menú Vegetariano</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Opción Saludable</p>
+              <div class="selection-item__price-qty-row">
+                <p class="selection-item__price">COL$ 135.000 <span class="selection-item__price-sub">/ persona</span></p>
+                <div class="selection-item__inline-qty">
+                  <button class="selection-item__qty-btn" data-dir="-1">−</button>
+                  <span class="selection-item__qty-val">1</span>
+                  <button class="selection-item__qty-btn" data-dir="1">+</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="selection-item food-item" data-id="menu-infantil" data-name="Menú Infantil" data-price="65000"
+            data-description="Opciones nutritivas y divertidas que a los niños les encantarán."
+            data-features='["Opciones nutritivas","Presentaciones divertidas","Aprobado por los más pequeños"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/f5.png" alt="Menú Infantil">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Menú Infantil</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Para los más pequeños</p>
+              <div class="selection-item__price-qty-row">
+                <p class="selection-item__price">COL$ 65.000 <span class="selection-item__price-sub">/ niño</span></p>
+                <div class="selection-item__inline-qty">
+                  <button class="selection-item__qty-btn" data-dir="-1">−</button>
+                  <span class="selection-item__qty-val">1</span>
+                  <button class="selection-item__qty-btn" data-dir="1">+</button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- §5 OTROS -->
+      <section class="planner-section planner-section--locked" id="section-otros">
+        <div class="planner-section__lock">
+          <span class="planner-section__lock-msg">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            Selecciona un lugar primero
+          </span>
+        </div>
+        <div class="planner-section__head">
+          <h2 class="planner-section__title">Servicios Adicionales</h2>
+          <p class="planner-section__sub">Personaliza cada detalle para que tu boda sea verdaderamente única.</p>
+        </div>
+        <div class="planner-items-grid" id="grid-otros">
+          <section class="selection-item" data-id="dec-floral" data-name="Decoración Floral" data-price="1800000" data-has-qty="true"
+            data-description="Diseños florales espectaculares para centros de mesa, entrada y rincones especiales."
+            data-features='["Centros de mesa personalizados","Arreglos para entrada","Decoración de rincones especiales","Paleta de colores a tu elección","Instalación profesional"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/o1.png" alt="Decoración Floral">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Decoración Floral</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Arreglos Exclusivos</p>
+              <div class="selection-item__price-qty-row">
+                <p class="selection-item__price">COL$ 1.800.000</p>
+                <div class="selection-item__inline-qty">
+                  <button class="selection-item__qty-btn" data-dir="-1">−</button>
+                  <span class="selection-item__qty-val">1</span>
+                  <button class="selection-item__qty-btn" data-dir="1">+</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="selection-item" data-id="detalles-pers" data-name="Detalles Personalizados" data-price="950000" data-has-qty="true"
+            data-description="Invitaciones, menús impresos, recordatorios para invitados y señalización temática para tu evento."
+            data-features='["Invitaciones personalizadas","Menús impresos","Recordatorios para invitados","Señalización temática","Diseño gráfico incluido"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/o2.png" alt="Detalles Personalizados">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Detalles Personalizados</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Papelería y Recuerdos</p>
+              <div class="selection-item__price-qty-row">
+                <p class="selection-item__price">COL$ 950.000</p>
+                <div class="selection-item__inline-qty">
+                  <button class="selection-item__qty-btn" data-dir="-1">−</button>
+                  <span class="selection-item__qty-val">1</span>
+                  <button class="selection-item__qty-btn" data-dir="1">+</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="selection-item" data-id="ambientacion" data-name="Ambientación" data-price="1200000" data-has-qty="true"
+            data-description="Iluminación decorativa, mobiliario lounge adicional y elementos de escenografía para transformar el espacio."
+            data-features='["Iluminación decorativa","Mobiliario lounge","Elementos de escenografía","Transformación completa del espacio","Montaje y desmontaje incluido"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/o3.png" alt="Ambientación">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Ambientación</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Atmósfera Única</p>
+              <div class="selection-item__price-qty-row">
+                <p class="selection-item__price">COL$ 1.200.000</p>
+                <div class="selection-item__inline-qty">
+                  <button class="selection-item__qty-btn" data-dir="-1">−</button>
+                  <span class="selection-item__qty-val">1</span>
+                  <button class="selection-item__qty-btn" data-dir="1">+</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="selection-item" data-id="sonido-ilu" data-name="Sonido e Iluminación" data-price="2200000" data-has-qty="true"
+            data-description="Sistema de sonido profesional e iluminación decorativa con luces cálidas, LED ambiental y efectos especiales."
+            data-features='["Sistema de sonido profesional","Luces cálidas ambientales","Barras de LED ambiental","Focos direccionales","Efectos especiales","Técnico incluido"]'>
+            <div class="selection-item__image-container">
+              <img src="../images/o5.jpeg" alt="Sonido e Iluminación">
+              <div class="selection-item__badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            </div>
+            <div class="selection-item__content">
+              <div class="selection-item__title-row">
+                <h3 class="selection-item__title">Sonido e Iluminación</h3>
+                <button class="planner-venue-details-btn selection-item__details-btn" data-action="item-details">Ver detalles</button>
+              </div>
+              <p class="selection-item__name">Ambientación Sensorial</p>
+              <div class="selection-item__price-qty-row">
+                <p class="selection-item__price">COL$ 2.200.000</p>
+                <div class="selection-item__inline-qty">
+                  <button class="selection-item__qty-btn" data-dir="-1">−</button>
+                  <span class="selection-item__qty-val">1</span>
+                  <button class="selection-item__qty-btn" data-dir="1">+</button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- Pay bar -->
+      <div style="padding: 8px 0 40px; text-align: center;">
+        <button class="btn-primary" onclick="goToPay(event)">
+          <span class="btn-primary__text">Continuar al Pago</span>
+        </button>
+      </div>
+
+    </main>
+
+    <!-- ── RIGHT: Cart ──────────────────────────────── -->
+    <aside class="planner-cart">
+      <div class="planner-cart__top">
+        <div class="planner-cart__total">
+          <span class="planner-cart__total-lbl">Total estimado</span>
+          <span class="planner-cart__total-val" id="planner-total">COL$ 0</span>
+        </div>
+      </div>
+
+      <div class="planner-cart__items" id="planner-cart-items">
+        <p class="planner-cart__empty">Tu selección aparecerá aquí</p>
+      </div>
+
+      <div class="planner-cart__pay-wrap">
+        <button class="planner-cart__pay-btn" onclick="goToPay(event)">Ir a Pagar</button>
+      </div>
+    </aside>
+
+  </div><!-- /planner-layout -->
+
+  <!-- ── Shared modal ─────────────────────────────── -->
+  <div class="selection-modal-backdrop" id="planner-modal">
+    <div class="selection-modal">
+      <button class="selection-modal__close" id="pm-close">&times;</button>
+      <img class="selection-modal__image" id="pm-img" src="" alt="">
+      <div class="selection-modal__body">
+        <h3 class="selection-modal__title" id="pm-title"></h3>
+        <p class="selection-modal__price" id="pm-price"></p>
+        <p class="selection-modal__desc" id="pm-desc"></p>
+        <ul class="selection-modal__features" id="pm-features"></ul>
+        <div class="selection-modal__qty" id="pm-qty-section" style="display:none;">
+          <span class="selection-modal__qty-label">Cantidad:</span>
+          <button class="selection-modal__qty-btn" id="pm-qty-minus">−</button>
+          <input type="number" class="selection-modal__qty-input" id="pm-qty" value="1" min="1">
+          <button class="selection-modal__qty-btn" id="pm-qty-plus">+</button>
+        </div>
+        <button class="selection-modal__add-btn" id="pm-add-btn">AGREGAR AL CARRITO</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+  (function () {
+    /* ──── Helpers ──────────────────────────────── */
+    function getCart() {
+      return JSON.parse(localStorage.getItem('weddingCart') || '{}');
+    }
+    function saveCart(cart) {
+      localStorage.setItem('weddingCart', JSON.stringify(cart));
+      renderCart();
+      syncItemStates();
+      updateSectionLocks();
+    }
+    function fmt(n) {
+      return 'COL$ ' + Number(n).toLocaleString('es-CO');
+    }
+    function raw(str) {
+      return parseInt(String(str).replace(/[^\d]/g, '')) || 0;
+    }
+
+    /* ──── Cart render ──────────────────────────── */
+    function renderCart() {
+      var cart = getCart();
+      var total = 0;
+      var html = '';
+
+      if (cart.selectedVenue) {
+        var vp = raw(cart.selectedVenue.price);
+        total += vp;
+        html += cartSection('Lugar', [
+          { name: cart.selectedVenue.name, detail: cart.selectedVenue.guests + ' invitados aprox', price: vp, cat: 'venue', id: null }
+        ]);
+      }
+
+      if (cart.ceremony && Object.keys(cart.ceremony).length) {
+        var citems = Object.values(cart.ceremony).map(function (i) {
+          var p = raw(i.price); total += p;
+          return { name: i.name, detail: i.detail || null, price: p, cat: 'ceremony', id: i.id };
+        });
+        html += cartSection('Ceremonia', citems);
+      }
+
+      if (cart.reception && Object.keys(cart.reception).length) {
+        var ritems = Object.values(cart.reception).map(function (i) {
+          var p = raw(i.price); total += p;
+          return { name: i.name, detail: 'Recepción completa', price: p, cat: 'reception', id: i.id };
+        });
+        html += cartSection('Recepción', ritems);
+      }
+
+      if (cart.food && Object.keys(cart.food).length) {
+        var fitems = Object.values(cart.food).map(function (i) {
+          var tp = i.totalPrice || (parseInt(i.unitPrice) * (i.quantity || 1)); total += tp;
+          return {
+            name: i.name,
+            detail: (i.quantity || 1) + ' persona' + ((i.quantity || 1) !== 1 ? 's' : '') + ' · ' + fmt(i.unitPrice) + ' c/u',
+            price: tp, cat: 'food', id: i.id
+          };
+        });
+        html += cartSection('Comida', fitems);
+      }
+
+      if (cart.others && Object.keys(cart.others).length) {
+        var oitems = Object.values(cart.others).map(function (i) {
+          var tp = i.totalPrice || (parseInt(i.unitPrice) * (i.quantity || 1)); total += tp;
+          return {
+            name: i.name,
+            detail: (i.quantity || 1) > 1 ? 'Cantidad: ' + i.quantity : null,
+            price: tp, cat: 'others', id: i.id
+          };
+        });
+        html += cartSection('Otros', oitems);
+      }
+
+      document.getElementById('planner-total').textContent = fmt(total);
+      var container = document.getElementById('planner-cart-items');
+      container.innerHTML = html || '<p class="planner-cart__empty">Tu selección aparecerá aquí</p>';
+    }
+
+    function cartSection(title, items) {
+      return '<div class="planner-cart__section">' +
+        '<p class="planner-cart__section-lbl">' + title + '</p>' +
+        items.map(function (item) {
+          var delBtn = item.cat === 'venue'
+            ? '<button class="planner-cart__row-del" onclick="plannerRemove(\'venue\',null)">×</button>'
+            : '<button class="planner-cart__row-del" onclick="plannerRemove(\'' + item.cat + '\',\'' + item.id + '\')">×</button>';
+          return '<div class="planner-cart__row">' +
+            '<div class="planner-cart__row-info">' +
+              '<p class="planner-cart__row-name">' + item.name + '</p>' +
+              (item.detail ? '<p class="planner-cart__row-detail">' + item.detail + '</p>' : '') +
+            '</div>' +
+            '<span class="planner-cart__row-price">' + fmt(item.price) + '</span>' +
+            delBtn +
+          '</div>';
+        }).join('') +
+        '</div>';
+    }
+
+    /* ──── Public remove (called via onclick) ───── */
+    window.plannerRemove = function (cat, id) {
+      var cart = getCart();
+      if (cat === 'venue') {
+        delete cart.selectedVenue;
+        delete cart.ceremony;
+        delete cart.reception;
+        delete cart.food;
+        delete cart.others;
+      } else if (cart[cat]) {
+        delete cart[cat][id];
+      }
+      saveCart(cart);
+      syncVenueCards();
+    };
+
+    /* ──── Section locks ─────────────────────────── */
+    function hasDetalles() {
+      var g = (document.getElementById('planner-guests') || {}).value || '';
+      var d = (document.getElementById('planner-date') || {}).value || '';
+      return g.trim() !== '' && d.trim() !== '';
+    }
+
+    function updateSectionLocks() {
+      var det      = hasDetalles();
+      var hasVenue = !!getCart().selectedVenue;
+
+      var lugar = document.getElementById('section-lugar');
+      if (lugar) lugar.classList.toggle('planner-section--locked', !det);
+
+      ['ceremonia', 'recepcion', 'comida', 'otros'].forEach(function (id) {
+        var s = document.getElementById('section-' + id);
+        if (s) s.classList.toggle('planner-section--locked', !hasVenue);
+      });
+
+      updateNavLocks(det, hasVenue);
+    }
+
+    function updateNavLocks(det, hasVenue) {
+      document.querySelectorAll('.planner-nav__item').forEach(function (item) {
+        var t = item.dataset.target;
+        if (t === 'section-detalles') {
+          item.classList.remove('planner-nav__item--locked');
+        } else if (t === 'section-lugar') {
+          item.classList.toggle('planner-nav__item--locked', !det);
+        } else {
+          item.classList.toggle('planner-nav__item--locked', !hasVenue);
+        }
+      });
+    }
+
+    /* ──── Direct item select / deselect ────────── */
+    function handleItemSelect(item, cat) {
+      var cart = getCart();
+      var id       = item.dataset.id;
+      var name     = item.dataset.name;
+      var priceRaw = parseInt(item.dataset.price) || 0;
+      var isSel    = item.classList.contains('is-selected');
+
+      if (isSel) {
+        if (cart[cat]) delete cart[cat][id];
+      } else {
+        if (!cart[cat]) cart[cat] = {};
+        if (cat === 'ceremony') {
+          cart.ceremony = {};
+          cart.ceremony[id] = { id: id, name: name, price: fmt(priceRaw) };
+        } else if (cat === 'reception') {
+          cart.reception = {};
+          cart.reception[id] = { id: id, name: name, price: fmt(priceRaw) };
+        } else if (cat === 'food') {
+          cart.food[id] = { id: id, name: name, mode: 'full', quantity: 1, unitPrice: priceRaw, totalPrice: priceRaw };
+        } else if (cat === 'others') {
+          cart.others[id] = { id: id, name: name, quantity: 1, unitPrice: priceRaw, totalPrice: priceRaw, priceLabel: fmt(priceRaw) };
+        }
+      }
+
+      saveCart(cart);
+      updateInlineQtyDisplay(item, cat);
+    }
+
+    /* ──── Inline qty +/- on card ────────────────── */
+    function handleInlineQty(item, cat, dir) {
+      var cart = getCart();
+      var id   = item.dataset.id;
+      if (!cart[cat] || !cart[cat][id]) return;
+      var entry    = cart[cat][id];
+      var newQty   = Math.max(1, (entry.quantity || 1) + dir);
+      var priceRaw = parseInt(item.dataset.price) || 0;
+      entry.quantity   = newQty;
+      entry.totalPrice = priceRaw * newQty;
+      saveCart(cart);
+      updateInlineQtyDisplay(item, cat);
+    }
+
+    function updateInlineQtyDisplay(item, cat) {
+      var qtyVal = item.querySelector('.selection-item__qty-val');
+      if (!qtyVal) return;
+      var cart = getCart();
+      var qty  = ((cart[cat] || {})[item.dataset.id] || {}).quantity || 1;
+      qtyVal.textContent = qty;
+    }
+
+    /* ──── Sync item selected states ─────────────── */
+    function syncItemStates() {
+      var cart = getCart();
+      var cer  = cart.ceremony || {};
+      var rec  = cart.reception || {};
+      var food = cart.food || {};
+      var oth  = cart.others || {};
+
+      document.querySelectorAll('#grid-ceremonia .selection-item').forEach(function (el) {
+        el.classList.toggle('is-selected', !!cer[el.dataset.id]);
+        updateInlineQtyDisplay(el, 'ceremony');
+      });
+      document.querySelectorAll('#grid-recepcion .selection-item').forEach(function (el) {
+        el.classList.toggle('is-selected', !!rec[el.dataset.id]);
+        updateInlineQtyDisplay(el, 'reception');
+      });
+      document.querySelectorAll('#grid-comida .selection-item').forEach(function (el) {
+        el.classList.toggle('is-selected', !!food[el.dataset.id]);
+        updateInlineQtyDisplay(el, 'food');
+      });
+      document.querySelectorAll('#grid-otros .selection-item').forEach(function (el) {
+        el.classList.toggle('is-selected', !!oth[el.dataset.id]);
+        updateInlineQtyDisplay(el, 'others');
+      });
+    }
+
+    /* ──── Pay validation ─────────────────────────── */
+    window.goToPay = function (e) {
+      var guests = (document.getElementById('planner-guests').value || '').trim();
+      var date   = (document.getElementById('planner-date').value || '').trim();
+      if (!guests || !date) {
+        if (typeof showCustomAlert === 'function') {
+          showCustomAlert('Información incompleta', 'Por favor ingresa el número de invitados y la fecha de la boda antes de continuar.');
+        } else {
+          alert('Por favor ingresa el número de invitados y la fecha de la boda antes de continuar.');
+        }
+        return;
+      }
+      localStorage.setItem('selectedWeddingDate', date);
+      window.location.href = 'payment.html';
+    };
+
+    function syncVenueCards() {
+      var cart = getCart();
+      var selSlug = cart.selectedVenue ? cart.selectedVenue.slug : null;
+      document.querySelectorAll('.planner-venue-card').forEach(function (c) {
+        c.classList.toggle('is-selected', c.dataset.slug === selSlug);
+      });
+    }
+
+    /* ──── Venue click ───────────────────────────── */
+    function handleVenueClick(card) {
+      var cart = getCart();
+      var isSelected = card.classList.contains('is-selected');
+
+      if (isSelected) {
+        delete cart.selectedVenue;
+        delete cart.ceremony;
+        delete cart.reception;
+        delete cart.food;
+        delete cart.others;
+        saveCart(cart);
+        syncVenueCards();
+        return;
+      }
+
+      var priceRaw = parseInt(card.dataset.price) || 0;
+      cart.selectedVenue = {
+        name:   card.dataset.name,
+        slug:   card.dataset.slug,
+        guests: card.dataset.guests + ' invitados aprox',
+        price:  fmt(priceRaw),
+        image:  card.querySelector('img').getAttribute('src')
+      };
+
+      saveCart(cart);
+      syncVenueCards();
+    }
+
+    /* ──── Modal ─────────────────────────────────── */
+    var modalItem    = null;
+    var modalCat     = null;
+    var modalIsVenue = false;
+
+    function openModal(item, cat) {
+      modalItem    = item;
+      modalCat     = cat;
+      modalIsVenue = false;
+
+      var priceRaw = parseInt(item.dataset.price) || 0;
+      var isFood   = cat === 'food';
+      var hasQty   = isFood || cat === 'others';
+      var isSelected = item.classList.contains('is-selected');
+
+      document.getElementById('pm-img').src   = (item.querySelector('img') || {}).src || '';
+      document.getElementById('pm-img').alt   = item.dataset.name;
+      document.getElementById('pm-title').textContent = item.dataset.name;
+      document.getElementById('pm-price').textContent = fmt(priceRaw) + (isFood ? ' / persona' : '');
+      document.getElementById('pm-desc').textContent  = item.dataset.description || '';
+
+      try {
+        var feats = JSON.parse(item.dataset.features || '[]');
+        document.getElementById('pm-features').innerHTML = feats.map(function (f) { return '<li>' + f + '</li>'; }).join('');
+      } catch (e) { document.getElementById('pm-features').innerHTML = ''; }
+
+      var qtySection = document.getElementById('pm-qty-section');
+      if (hasQty) {
+        qtySection.style.display = 'flex';
+        var cart = getCart();
+        var existing = (cart[cat] || {})[item.dataset.id];
+        document.getElementById('pm-qty').value = existing ? existing.quantity : 1;
+      } else {
+        qtySection.style.display = 'none';
+      }
+
+      document.getElementById('pm-add-btn').textContent = isSelected ? 'QUITAR DEL CARRITO' : 'AGREGAR AL CARRITO';
+      document.getElementById('planner-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function openVenueModal(card) {
+      modalItem    = card;
+      modalCat     = 'venue';
+      modalIsVenue = true;
+
+      var priceRaw   = parseInt(card.dataset.price) || 0;
+      var isSelected = card.classList.contains('is-selected');
+
+      document.getElementById('pm-img').src   = (card.querySelector('img') || {}).src || '';
+      document.getElementById('pm-img').alt   = card.dataset.name;
+      document.getElementById('pm-title').textContent = card.dataset.name;
+      document.getElementById('pm-price').textContent = fmt(priceRaw);
+      document.getElementById('pm-desc').textContent  = card.dataset.description || '';
+
+      try {
+        var feats = JSON.parse(card.dataset.features || '[]');
+        document.getElementById('pm-features').innerHTML = feats.map(function (f) { return '<li>' + f + '</li>'; }).join('');
+      } catch (e) { document.getElementById('pm-features').innerHTML = ''; }
+
+      document.getElementById('pm-qty-section').style.display = 'none';
+      document.getElementById('pm-add-btn').textContent = isSelected ? 'QUITAR SELECCIÓN' : 'SELECCIONAR HACIENDA';
+      document.getElementById('planner-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('planner-modal').classList.remove('active');
+      document.body.style.overflow = '';
+      modalItem    = null;
+      modalCat     = null;
+      modalIsVenue = false;
+    }
+
+    function modalConfirm() {
+      if (!modalItem || !modalCat) return;
+
+      if (modalIsVenue) {
+        closeModal();
+        handleVenueClick(modalItem);
+        return;
+      }
+
+      var cart = getCart();
+      var id   = modalItem.dataset.id;
+      var name = modalItem.dataset.name;
+      var priceRaw = parseInt(modalItem.dataset.price) || 0;
+      var isSelected = modalItem.classList.contains('is-selected');
+      var cat = modalCat;
+
+      if (isSelected) {
+        if (cart[cat]) delete cart[cat][id];
+      } else {
+        if (!cart[cat]) cart[cat] = {};
+
+        if (cat === 'ceremony') {
+          cart.ceremony = {};
+          cart.ceremony[id] = { id: id, name: name, price: fmt(priceRaw) };
+
+        } else if (cat === 'reception') {
+          cart.reception = {};
+          cart.reception[id] = { id: id, name: name, price: fmt(priceRaw) };
+
+        } else if (cat === 'food') {
+          var qty = parseInt(document.getElementById('pm-qty').value) || 1;
+          cart.food[id] = { id: id, name: name, mode: 'full', quantity: qty, unitPrice: priceRaw, totalPrice: priceRaw * qty };
+
+        } else if (cat === 'others') {
+          var qtyO = parseInt(document.getElementById('pm-qty').value) || 1;
+          cart.others[id] = { id: id, name: name, quantity: qtyO, unitPrice: priceRaw, totalPrice: priceRaw * qtyO, priceLabel: fmt(priceRaw) };
+        }
+      }
+
+      saveCart(cart);
+      closeModal();
+    }
+
+    /* ──── Left nav scroll tracking ─────────────── */
+    var sections = document.querySelectorAll('.planner-section');
+
+    function updateNavActive() {
+      var current = null;
+      sections.forEach(function (s) {
+        if (s.getBoundingClientRect().top <= 160) current = s.id;
+      });
+      if (!current) current = 'section-detalles';
+      document.querySelectorAll('.planner-nav__item').forEach(function (item) {
+        item.classList.toggle('planner-nav__item--active', item.dataset.target === current);
+      });
+    }
+
+    /* ──── Init ──────────────────────────────────── */
+    document.addEventListener('DOMContentLoaded', function () {
+      // Restore guest count
+      var storedGuests = localStorage.getItem('selectedGuests');
+      if (storedGuests) document.getElementById('planner-guests').value = storedGuests;
+
+      // Restore wedding date
+      var storedDate = localStorage.getItem('selectedWeddingDate');
+      if (storedDate) document.getElementById('planner-date').value = storedDate;
+
+      // Initial state
+      syncVenueCards();
+      syncItemStates();
+      updateSectionLocks();
+      renderCart();
+
+      // Scroll nav
+      window.addEventListener('scroll', updateNavActive, { passive: true });
+      updateNavActive();
+
+      // Nav clicks
+      document.querySelectorAll('.planner-nav__item').forEach(function (item) {
+        item.addEventListener('click', function (e) {
+          e.preventDefault();
+          var target = document.getElementById(this.dataset.target);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      // Venue card clicks (ignore clicks on the details button)
+      document.querySelectorAll('.planner-venue-card').forEach(function (card) {
+        card.addEventListener('click', function (e) {
+          if (e.target.closest('[data-action="details"]')) return;
+          handleVenueClick(card);
+        });
+      });
+
+      // Venue details buttons (only those inside venue cards, not service items)
+      document.querySelectorAll('.planner-venue-card .planner-venue-details-btn').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          openVenueModal(btn.closest('.planner-venue-card'));
+        });
+      });
+
+      // Service items – event delegation per grid
+      var catMap = { 'grid-ceremonia': 'ceremony', 'grid-recepcion': 'reception', 'grid-comida': 'food', 'grid-otros': 'others' };
+      ['grid-ceremonia', 'grid-recepcion', 'grid-comida', 'grid-otros'].forEach(function (gridId) {
+        var grid = document.getElementById(gridId);
+        if (!grid) return;
+        grid.addEventListener('click', function (e) {
+          // Details button → open modal
+          if (e.target.closest('[data-action="item-details"]')) {
+            var item = e.target.closest('.selection-item');
+            if (item) openModal(item, catMap[gridId]);
+            return;
+          }
+          // Inline qty button → adjust quantity
+          var qtyBtn = e.target.closest('.selection-item__qty-btn');
+          if (qtyBtn) {
+            var item = qtyBtn.closest('.selection-item');
+            if (item) handleInlineQty(item, catMap[gridId], parseInt(qtyBtn.dataset.dir));
+            return;
+          }
+          // Anywhere else on the card → direct select/deselect
+          var item = e.target.closest('.selection-item');
+          if (item) handleItemSelect(item, catMap[gridId]);
+        });
+      });
+
+      // Modal
+      document.getElementById('pm-close').addEventListener('click', closeModal);
+      document.getElementById('planner-modal').addEventListener('click', function (e) {
+        if (e.target === this) closeModal();
+      });
+      document.getElementById('pm-add-btn').addEventListener('click', modalConfirm);
+      document.getElementById('pm-qty-minus').addEventListener('click', function () {
+        var inp = document.getElementById('pm-qty');
+        var v = parseInt(inp.value) || 1;
+        if (v > 1) inp.value = v - 1;
+      });
+      document.getElementById('pm-qty-plus').addEventListener('click', function () {
+        var inp = document.getElementById('pm-qty');
+        inp.value = (parseInt(inp.value) || 1) + 1;
+      });
+
+      // Guest count
+      document.getElementById('planner-guests').addEventListener('input', function () {
+        localStorage.setItem('selectedGuests', this.value);
+        renderCart();
+        updateSectionLocks();
+      });
+
+      // Wedding date
+      document.getElementById('planner-date').addEventListener('change', function () {
+        localStorage.setItem('selectedWeddingDate', this.value);
+        updateSectionLocks();
+      });
+    });
+  })();
+  </script>
+
+</body>
+</html>

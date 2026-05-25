@@ -29,47 +29,6 @@ async function apiRequest(method, path, body) {
     return res.json();
 }
 
-const LOGO_ONLY_PAGES = new Set([
-    "index.html",
-    "auth.html",
-    "confirm.html",
-    "reservations_view.html",
-    "reservations.html",
-    "reservcode.html",
-    "weding1.html",
-    "weding2.html",
-    "weding3.html",
-    "weding4.html",
-]);
-
-const WORKFLOW_PAGES = new Set([
-    "place.html",
-    "ceremony.html",
-    "reception.html",
-    "food.html",
-    "others.html",
-    "payment.html",
-]);
-
-const STEP_SEQUENCE = ["place", "ceremony", "reception", "food", "others", "payment"];
-
-const STEP_BY_PAGE = {
-    "place.html": "place",
-    "ceremony.html": "ceremony",
-    "reception.html": "reception",
-    "food.html": "food",
-    "others.html": "others",
-    "payment.html": "payment",
-};
-
-const PAGE_BY_STEP = {
-    place: "place.html",
-    ceremony: "ceremony.html",
-    reception: "reception.html",
-    food: "food.html",
-    others: "others.html",
-    payment: "payment.html",
-};
 
 function getCurrentPageName() {
     const rawPath = window.location.pathname || "";
@@ -178,54 +137,16 @@ function cargarComponente(id, url) {
 
 function updateHeaderState() {
     const header = document.querySelector("#header-placeholder .header");
-    if (!header) {
-        return;
-    }
+    if (!header) return;
 
-    const pageName = getCurrentPageName();
-    const navLinks = header.querySelectorAll(".nav a[data-step]");
-    const activeStep = STEP_BY_PAGE[pageName];
-    const nav = header.querySelector(".nav");
     const logoLink = header.querySelector(".logo");
+    if (logoLink) logoLink.setAttribute("href", getHomePath());
 
-    if (logoLink) {
-        logoLink.setAttribute("href", getHomePath());
-    }
+    const reservBtn = header.querySelector("[data-header-btn='reserva']");
+    if (reservBtn) reservBtn.setAttribute("href", getPublicPagePath("reservcode.html"));
 
-    header.classList.remove("header--logo-only");
-
-    if (LOGO_ONLY_PAGES.has(pageName)) {
-        header.classList.add("header--logo-only");
-    }
-
-    navLinks.forEach((link) => {
-        const step = link.dataset.step;
-        const stepPage = step ? PAGE_BY_STEP[step] : null;
-        if (stepPage) {
-            link.setAttribute("href", getPublicPagePath(stepPage));
-        }
-
-        link.classList.remove("nav__link--active", "nav__link--blocked");
-        link.removeAttribute("aria-disabled");
-        link.removeAttribute("tabindex");
-    });
-
-    if (activeStep) {
-        const activeLink = header.querySelector(`.nav a[data-step="${activeStep}"]`);
-        if (activeLink) {
-            activeLink.classList.add("nav__link--active");
-        }
-    }
-
-    // Add click listener to the cart to open summary popup
-    const cart = header.querySelector(".cart");
-    if (cart) {
-        cart.addEventListener("click", () => {
-            if (typeof showSummaryPopup === "function") {
-                showSummaryPopup();
-            }
-        });
-    }
+    const loginBtn = header.querySelector("[data-header-btn='login']");
+    if (loginBtn) loginBtn.setAttribute("href", getPublicPagePath("auth.html"));
 }
 
 function updateFooterState() {
@@ -275,8 +196,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarComponente("header-placeholder", getPublicPagePath("header.html")).then((target) => {
         normalizeImageSources(target);
         updateHeaderState();
-        updateHeaderPrice();
-        initGlobalGuestSelector();
     });
     cargarComponente("footer-placeholder", getPublicPagePath("footer.html")).then((target) => {
         normalizeImageSources(target);
@@ -284,28 +203,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-function initGlobalGuestSelector() {
-    const globalGuestInput = document.getElementById('global-guest-count');
-    if (!globalGuestInput) return;
-
-    // Load initial value
-    const storedGuests = localStorage.getItem('selectedGuests');
-    if (storedGuests) {
-        globalGuestInput.value = storedGuests;
-    }
-
-    // Dispatch initial event so venue-filter.js runs right away with stored value
-    window.dispatchEvent(new CustomEvent('guestsChanged'));
-
-    globalGuestInput.addEventListener('input', () => {
-        if (typeof CookieConsent === 'undefined' || CookieConsent.hasConsent()) {
-            localStorage.setItem('selectedGuests', globalGuestInput.value);
-        }
-        updateHeaderPrice();
-        // Dispatch event for local scripts to react (like venue-filter.js)
-        window.dispatchEvent(new CustomEvent('guestsChanged'));
-    });
-}
 
 function initVenueGalleries() {
     const grids = document.querySelectorAll('.venue-features-grid');
@@ -407,66 +304,9 @@ function showSummaryPopup() {
     }
 }
 
-function updateHeaderPrice() {
-    const cart = JSON.parse(localStorage.getItem('weddingCart') || '{}');
-    const badge = document.getElementById('cart-badge');
-    const totalEl = document.getElementById('cart-total');
-    if (!badge) return;
-
-    let count = 0;
-    let total = 0;
-
-    function parsePrice(priceStr) {
-        if (typeof priceStr === 'number') return priceStr;
-        return parseInt(String(priceStr).replace(/[^0-9]/g, "")) || 0;
-    }
-
-    if (cart.selectedVenue) {
-        count++;
-        total += parsePrice(cart.selectedVenue.price);
-    }
-    if (cart.ceremony) {
-        const items = Object.values(cart.ceremony);
-        count += items.length;
-        items.forEach(item => { total += parsePrice(item.price); });
-    }
-    if (cart.reception) {
-        const items = Object.values(cart.reception);
-        count += items.length;
-        items.forEach(item => { total += parsePrice(item.price); });
-    }
-    if (cart.food) {
-        const items = Object.values(cart.food);
-        count += items.length;
-        items.forEach(item => {
-            total += parsePrice(item.unitPrice) * (item.quantity || 1);
-        });
-    }
-    if (cart.others) {
-        const items = Object.values(cart.others);
-        count += items.length;
-        items.forEach(item => { total += item.totalPrice || parsePrice(item.price); });
-    }
-
-    badge.textContent = count;
-    badge.dataset.count = count;
-    if (totalEl) {
-        totalEl.textContent = total > 0 ? 'COL$ ' + total.toLocaleString('es-CO') : 'COL$ 0';
-    }
-}
-
 window.addEventListener('message', (event) => {
-    if (event.data.type === 'CART_UPDATED') {
-        updateHeaderPrice();
-    }
     if (event.data.type === 'SHOW_CART') {
         showSummaryPopup();
-    }
-});
-
-window.addEventListener('storage', (event) => {
-    if (event.key === 'weddingCart' || event.key === 'selectedGuests') {
-        updateHeaderPrice();
     }
 });
 
