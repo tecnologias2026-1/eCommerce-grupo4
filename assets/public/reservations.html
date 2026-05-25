@@ -174,11 +174,14 @@
             var allReservations = [];
             var activeFilter = 'all';
 
-            // Logout
-            document.getElementById('btn-logout').addEventListener('click', function () {
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('authUser');
-            });
+            // Logout (btn-logout is hidden via CSS; the header logout button is wired separately above)
+            var logoutBtn = document.getElementById('btn-logout');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function () {
+                    localStorage.removeItem('authToken');
+                    localStorage.removeItem('authUser');
+                });
+            }
 
             // Filter tab clicks
             document.querySelectorAll('.res-filter-btn').forEach(function (btn) {
