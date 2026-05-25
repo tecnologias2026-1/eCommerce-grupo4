@@ -44,13 +44,41 @@
         }
         [data-header-btn="logout"] .header-btn__icon { display: block; }
         [data-header-btn="logout"] .header-btn__text { display: none; }
+
+        /* ── Page section heading ── */
+        .hero-selection {
+            padding: 44px 68px 36px;
+            background: #fff;
+            border-bottom: 1px solid #ebebeb;
+            flex-direction: row;
+            align-items: center;
+            gap: 0;
+        }
+        .hero-selection__title {
+            font-size: 30px;
+            letter-spacing: 2px;
+            text-align: left;
+            padding: 0;
+            white-space: normal;
+            width: auto;
+        }
+        /* Logout button moved to header — hide from hero-selection */
+        #btn-logout { display: none; }
+
+        /* ── Content area ── */
+        .res-filter-bar { padding: 28px 68px 0; max-width: none; }
+        .reservations-content { padding: 40px 68px 80px; }
+
+        /* ── Card refinements ── */
+        .res-card { gap: 48px; }
+        .res-card__title { font-size: 38px; }
+        .empty-msg { font-size: 16px; padding: 60px 0; color: #bbb; }
     </style>
 </head>
 
 <body>
     <div id="header-placeholder"></div>
     <header class="hero-selection">
-        <a href="auth.html" class="btn-logout" id="btn-logout">Cerrar Sesión</a>
         <h1 class="hero-selection__title">Reservaciones</h1>
     </header>
 

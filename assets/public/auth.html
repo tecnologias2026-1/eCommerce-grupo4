@@ -15,6 +15,134 @@
     <script src="../../js/cookie-consent.js" defer></script>
     <script src="../../js/manager.js" defer></script>
     <script src="../../js/reveal.js" defer></script>
+    <style>
+      /* ── Compact header + back arrow ── */
+      #header-placeholder { min-height: 48px; }
+      .header { min-height: 48px; padding: 6px 24px; }
+      .logo {
+        display: inline-flex !important; align-items: center; justify-content: center;
+        width: 32px; height: 32px; border: 1.5px solid #ddd; border-radius: 50%;
+        text-decoration: none; transition: border-color 0.2s;
+      }
+      .logo:hover { border-color: #888; }
+      .logo img { display: none; }
+      .logo::before {
+        content: '';
+        display: block; width: 8px; height: 8px;
+        border-left: 2px solid #666; border-bottom: 2px solid #666;
+        transform: rotate(45deg) translateX(2px);
+      }
+      /* Already on login page — hide login button */
+      [data-header-btn="login"] { display: none !important; }
+      /* No footer */
+      #footer-placeholder { display: none; min-height: 0; }
+
+      /* ── Page container ── */
+      .auth-page {
+        max-width: 480px;
+        padding: 72px 32px 96px;
+        gap: 32px;
+        align-items: flex-start;
+      }
+
+      /* ── Title ── */
+      .auth-page__title {
+        font-size: 36px;
+        letter-spacing: 1px;
+        margin: 0 0 4px;
+      }
+
+      /* ── Form structure ── */
+      .auth-form { gap: 24px; }
+      .auth-form__group { gap: 8px; }
+      .auth-form__password-block { gap: 12px; }
+
+      /* ── Labels ── */
+      .auth-form__label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        color: #aaa;
+      }
+
+      /* ── Inputs ── */
+      .auth-form__input {
+        min-height: unset;
+        max-width: 100%;
+        padding: 13px 15px;
+        font-size: 15px;
+        font-weight: 400;
+        border: 1.5px solid #e0e0e0;
+        border-radius: 8px;
+        background: #fafafa;
+        transition: border-color 0.2s, background 0.2s;
+        line-height: 1.5;
+      }
+      .auth-form__input:focus {
+        border-color: var(--primary);
+        background: #fff;
+        box-shadow: none;
+      }
+      .auth-form__input::placeholder { font-size: 14px; font-weight: 400; }
+      .auth-form__password-row { gap: 12px; }
+      .auth-form__eye { width: 24px; height: 24px; }
+      .auth-form__eye-icon svg { width: 22px; height: 22px; }
+
+      /* ── Forgot link ── */
+      .auth-form__forgot { font-size: 13px; color: var(--primary); }
+
+      /* ── Submit button ── */
+      .auth-form__submit {
+        padding: 13px 36px;
+        min-height: unset;
+        border-radius: var(--radius);
+        background: var(--black);
+        align-self: flex-start;
+      }
+      .auth-form__submit:hover { background: var(--primary); }
+      .auth-form__submit-text {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+
+      /* ── Recovery modal ── */
+      .modal-overlay {
+        position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+        z-index: 9000; display: flex; align-items: center; justify-content: center;
+      }
+      .modal-overlay[aria-hidden="true"] { display: none; }
+      .modal-content {
+        background: #fff; border-radius: 16px; padding: 36px 40px;
+        max-width: 420px; width: 90%; box-shadow: 0 24px 80px rgba(0,0,0,0.18);
+      }
+      .modal-title {
+        font-family: var(--font-secondary); font-size: 18px; font-weight: 700;
+        letter-spacing: 1px; margin: 0 0 10px; color: var(--black);
+      }
+      .modal-description {
+        font-family: var(--font-primary); font-size: 14px; color: #888;
+        margin: 0 0 22px; line-height: 1.5;
+      }
+      .modal-input {
+        width: 100%; padding: 12px 14px; border: 1.5px solid #e0e0e0;
+        border-radius: 8px; font-size: 15px; font-family: var(--font-primary);
+        background: #fafafa; box-sizing: border-box; outline: none;
+        transition: border-color 0.2s;
+      }
+      .modal-input:focus { border-color: var(--primary); background: #fff; }
+      .modal-form-group { margin-bottom: 22px; }
+      .modal-actions { display: flex; gap: 12px; }
+      .modal-btn {
+        padding: 11px 24px; border-radius: var(--radius); cursor: pointer;
+        font-family: var(--font-secondary); font-size: 12px; font-weight: 700;
+        letter-spacing: 0.5px; border: none; transition: background 0.2s;
+      }
+      .modal-btn--primary { background: var(--black); color: #fff; }
+      .modal-btn--primary:hover { background: var(--primary); }
+      .modal-btn--secondary { background: transparent; border: 1.5px solid #ddd; color: #777; }
+      .modal-btn--secondary:hover { border-color: var(--primary); color: var(--primary); }
+    </style>
   </head>
   <body class="auth-body">
     <div id="header-placeholder"></div>
