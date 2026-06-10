@@ -20,10 +20,9 @@
     --mp-blue: #0099de;
     --mp-blue-hover: #0088c7;
 
-    /* Typography */
+    /* Typography — Syne (sans) para títulos, botones y precios; Spectral (serif) como secundaria para texto editorial y etiquetas */
     --font-primary: "Syne", sans-serif;
-    --font-secondary: "Spectral SC", serif;
-    --font-sans: "Inter", sans-serif;
+    --font-secondary: "Spectral", serif;
     --title-letter-spacing: -0.96px;
 
     /* Spacing */
@@ -37,8 +36,8 @@
     --space-4xl: 80px;
     --space-5xl: 120px;
     --page-gutter: clamp(20px, 7vw, 120px);
-    --section-space: clamp(40px, 6vw, 80px);
-    --section-space-lg: clamp(56px, 8vw, 120px);
+    --section-space: clamp(64px, 8vw, 120px);
+    --section-space-lg: clamp(96px, 10vw, 160px);
     --hero-max-height: calc(100vh - var(--space-xl));
 
     /* Layout */

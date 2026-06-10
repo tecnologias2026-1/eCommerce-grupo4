@@ -26,7 +26,7 @@
 .btn-continue-pay,
 .btn-pay-more {
     border: 0;
-    border-radius: 10px;
+    border-radius: var(--radius);
     background: var(--primary);
     color: var(--white);
     cursor: pointer;
@@ -55,8 +55,8 @@
 
 .btn-primary__text {
     font-family: var(--font-primary);
-    font-weight: 800;
-    font-size: 24px;
+    font-weight: 600;
+    font-size: 18px;
     line-height: normal;
     color: var(--white);
     text-align: center;
@@ -68,7 +68,7 @@
     border: 1px solid var(--primary);
     color: var(--primary);
     padding: var(--space-sm) var(--space-md);
-    border-radius: 4px;
+    border-radius: var(--radius);
     cursor: pointer;
     font-family: var(--font-primary);
     transition: all var(--transition-fast);
@@ -104,7 +104,7 @@
 
 .btn-submit-booking {
     padding: var(--space-md) calc(var(--space-3xl) + var(--space-lg));
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 18px;
     height: 62px;
     display: flex;
@@ -118,7 +118,7 @@
 
 .btn-reserve {
     padding: var(--space-md) calc(var(--space-2xl) + var(--space-lg));
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 18px;
     text-decoration: none;
     box-shadow: var(--shadow-sm);
@@ -134,7 +134,7 @@
 
 .btn-home {
     padding: var(--space-md) calc(var(--space-2xl) + var(--space-lg));
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 18px;
     text-decoration: none;
     min-width: 250px;
@@ -149,7 +149,7 @@
 
 .btn-verify {
     padding: var(--space-lg) calc(var(--space-3xl) + var(--space-lg));
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 18px;
     text-decoration: none;
     min-width: 250px;

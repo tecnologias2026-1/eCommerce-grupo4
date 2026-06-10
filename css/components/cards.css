@@ -11,7 +11,7 @@
 
 .res-card:hover {
     background: var(--gray-light);
-    transform: translateX(10px);
+    transform: translateX(4px);
 }
 
 .res-card:last-child {
@@ -26,7 +26,7 @@
 
 .res-card__title {
     font-family: var(--font-primary);
-    font-weight: 800;
+    font-weight: 700;
     font-size: 48px;
     line-height: 1.1;
     margin: 0 0 20px 0;
@@ -34,21 +34,19 @@
 }
 
 .res-card__venue {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 18px;
     margin: 0;
     color: #333;
-    text-transform: uppercase;
 }
 
 .res-card__date,
 .res-card__status {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 16px;
     color: #777;
     margin: 0;
-    text-transform: uppercase;
 }
 
 .res-card__status span {
@@ -57,7 +55,7 @@
 }
 
 .res-card__price {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 700;
     font-size: 20px;
     margin-top: 20px;
@@ -117,11 +115,10 @@
 }
 
 .res-filter-btn {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 14px;
     font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    letter-spacing: 0.3px;
     padding: 10px 24px;
     border: 2px solid #ddd;
     background: transparent;
@@ -147,15 +144,14 @@
     display: inline-block;
     margin-top: 16px;
     padding: 10px 22px;
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 13px;
     font-weight: 600;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
+    letter-spacing: 0.3px;
     background: transparent;
-    border: 2px solid var(--black);
+    border: 1px solid var(--black);
     color: var(--black);
-    border-radius: 4px;
+    border-radius: var(--radius);
     cursor: pointer;
     transition: all var(--transition-normal);
 }
@@ -192,7 +188,7 @@
 .back-link {
     text-decoration: none;
     color: var(--muted);
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -205,7 +201,7 @@
 }
 
 .res-view-id {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 16px;
     color: var(--primary);
     font-weight: 600;
@@ -233,7 +229,7 @@
 
 .res-view-main-title {
     font-family: var(--font-primary);
-    font-weight: 800;
+    font-weight: 700;
     font-size: 48px;
     line-height: 1.1;
     margin: 0 0 40px 0;
@@ -247,19 +243,17 @@
 
 .detail-label {
     font-family: var(--font-secondary);
-    font-size: 14px;
+    font-size: 13px;
     color: var(--muted);
-    text-transform: uppercase;
     margin-bottom: 8px;
     display: block;
 }
 
 .detail-value {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 20px;
     font-weight: 600;
     color: var(--black);
-    text-transform: uppercase;
 }
 
 .detail-value--status {
@@ -359,14 +353,14 @@
 
 .summary-section__title {
     margin: 0;
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 17px;
-    letter-spacing: 2.5px;
+    letter-spacing: 1px;
     color: var(--black);
     text-transform: uppercase;
     padding-bottom: 14px;
-    border-bottom: 2px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
 }
 
 .summary-section__remove {
@@ -503,12 +497,11 @@
     font-weight: 600;
     font-size: 13px;
     color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 0.3px;
 }
 
 .summary-total-value {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 28px;
     color: var(--primary);
@@ -522,7 +515,6 @@
     text-align: center;
     max-width: 240px;
     line-height: 1.5;
-    font-style: italic;
 }
 
 .summary-warning {
@@ -607,7 +599,7 @@
 }
 
 .payment-value {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 16px;
     color: var(--black);
@@ -629,7 +621,7 @@
 }
 
 .userdata-form__title {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 32px;
     margin-bottom: 40px;
     text-align: center;

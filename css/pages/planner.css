@@ -21,6 +21,11 @@
     overflow-y: auto;
 }
 
+/* On desktop the strip is transparent — items remain direct flex children of the nav */
+.planner-nav__strip {
+    display: contents;
+}
+
 .planner-nav__item {
     display: flex;
     align-items: center;
@@ -60,8 +65,7 @@
     font-family: var(--font-secondary);
     font-size: 12px;
     font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    letter-spacing: 0.3px;
     color: #c0c0c0;
     transition: color 0.2s;
     white-space: nowrap;
@@ -123,9 +127,8 @@
     gap: 10px;
     font-family: var(--font-secondary);
     font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.3px;
     color: #bbb;
 }
 
@@ -142,7 +145,7 @@
 .planner-section__title {
     font-family: var(--font-primary);
     font-size: 32px;
-    font-weight: 800;
+    font-weight: 700;
     color: var(--black);
     margin: 0 0 8px;
 }
@@ -170,18 +173,17 @@
 
 .planner-detalles-label {
     font-family: var(--font-secondary);
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #aaa;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #999;
 }
 
 .planner-detalles-input {
     padding: 14px 16px;
     border: 1.5px solid #e0e0e0;
     border-radius: var(--radius);
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 16px;
     color: var(--black);
     background: #fafafa;
@@ -236,8 +238,7 @@
     font-family: var(--font-secondary);
     font-size: 10px;
     font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    letter-spacing: 0.3px;
     padding: 4px 10px;
     border-radius: 20px;
 }
@@ -276,7 +277,7 @@
 .planner-venue-card__body { padding: 20px 22px 22px; }
 
 .planner-venue-card__name {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 13px;
     font-weight: 700;
     color: var(--black);
@@ -292,7 +293,7 @@
 }
 
 .planner-venue-card__price {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 15px;
     font-weight: 700;
     color: var(--primary);
@@ -340,11 +341,10 @@
 .planner-cart__guests-lbl,
 .planner-cart__total-lbl {
     font-family: var(--font-secondary);
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: #aaa;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #999;
 }
 
 .planner-cart__guests-input {
@@ -352,7 +352,7 @@
     padding: 6px 8px;
     border: 1px solid #ddd;
     border-radius: var(--radius);
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 14px;
     text-align: center;
     background: #fff;
@@ -374,18 +374,17 @@
 
 .planner-cart__date-lbl {
     font-family: var(--font-secondary);
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: #aaa;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #999;
 }
 
 .planner-cart__date-input {
     padding: 6px 8px;
     border: 1px solid #ddd;
     border-radius: var(--radius);
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 13px;
     background: #fff;
     color: var(--black);
@@ -412,8 +411,7 @@
     font-family: var(--font-secondary);
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    letter-spacing: 0.3px;
     color: var(--primary);
     background: transparent;
     border: 1px solid var(--primary);
@@ -491,7 +489,7 @@
 }
 
 .selection-item__qty-val {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 14px;
     font-weight: 600;
     min-width: 20px;
@@ -522,11 +520,10 @@
 
 .planner-cart__section-lbl {
     font-family: var(--font-secondary);
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #c0c0c0;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: #b0b0b0;
     margin: 0 0 8px;
     padding-bottom: 5px;
     border-bottom: 1px solid #eee;
@@ -561,7 +558,7 @@
 }
 
 .planner-cart__row-price {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 11px;
     font-weight: 700;
     color: #666;
@@ -604,11 +601,10 @@
     color: #fff;
     text-align: center;
     text-decoration: none;
-    font-family: var(--font-secondary);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
     padding: 14px;
     border: none;
     border-radius: var(--radius);

@@ -38,7 +38,7 @@
 }
 
 .cookie-consent-modal__title {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 32px;
     margin: 0 0 var(--space-lg);
@@ -66,8 +66,8 @@
 .cookie-consent-modal__btn {
     border: none;
     padding: 12px var(--space-2xl);
-    border-radius: 30px;
-    font-family: var(--font-secondary);
+    border-radius: var(--radius);
+    font-family: var(--font-primary);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;

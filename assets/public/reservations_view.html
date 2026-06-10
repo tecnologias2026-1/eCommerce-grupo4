@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@400;600;800&family=Inter:wght@400;500;600&family=Syne:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Syne:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/media.css">
@@ -47,7 +47,7 @@
 
         /* ── Page section heading ── */
         .hero-selection {
-            padding: 44px 68px 36px;
+            padding: 44px var(--page-gutter) 36px;
             background: #fff;
             border-bottom: 1px solid #ebebeb;
             flex-direction: row;
@@ -56,7 +56,7 @@
         }
         .hero-selection__title {
             font-size: 30px;
-            letter-spacing: 2px;
+            letter-spacing: var(--title-letter-spacing);
             text-align: left;
             padding: 0;
             white-space: normal;
@@ -103,11 +103,11 @@
 
     <main class="res-view-container">
         <div class="res-view-header">
-            <span class="res-view-id">CÓDIGO DE RESERVA: <span id="res-id" class="res-view-id__value">123456</span></span>
+            <span class="res-view-id">Código de reserva: <span id="res-id" class="res-view-id__value">123456</span></span>
         </div>
 
         <div class="res-view-grid">
-            <h2 class="res-view-main-title" id="res-couple">JUAN Y MARIA</h2>
+            <h2 class="res-view-main-title" id="res-couple">Juan y María</h2>
 
             <div class="res-info-col">
                 <div class="detail-group">
@@ -146,19 +146,19 @@
             <div class="res-card__media-grid res-media-full">
                 <div class="media-slot">
                     <img id="res-image-grid" src="" alt="Hacienda" loading="lazy">
-                    <span>HACIENDA</span>
+                    <span>Hacienda</span>
                 </div>
                 <div class="media-slot">
                     <img src="../images/c1.png" alt="Ceremonia" loading="lazy">
-                    <span>CEREMONIA PREMIUM</span>
+                    <span>Ceremonia Premium</span>
                 </div>
                 <div class="media-slot">
                     <img src="../images/r1.png" alt="Recepción" loading="lazy">
-                    <span>RECEPCION PREMIUM</span>
+                    <span>Recepción Premium</span>
                 </div>
                 <div class="media-slot">
                     <img src="../images/f1.png" alt="Decoración" loading="lazy">
-                    <span>DECORACION FLORAL</span>
+                    <span>Decoración floral</span>
                 </div>
             </div>
         </div>

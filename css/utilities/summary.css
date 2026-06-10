@@ -125,7 +125,7 @@
 }
 
 .notification-modal__title {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 22px;
     margin-bottom: 12px;
     color: var(--black);
@@ -146,11 +146,11 @@
     color: var(--white);
     border: none;
     padding: 14px 40px;
-    border-radius: 10px;
-    font-family: var(--font-secondary);
+    border-radius: var(--radius);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 14px;
-    letter-spacing: 1px;
+    letter-spacing: 0.3px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -200,7 +200,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--space-3xl);
+    padding: var(--space-3xl) var(--page-gutter);
     width: 100%;
     gap: var(--space-xl);
 }
@@ -231,8 +231,8 @@
     display: flex;
     gap: var(--space-xl);
     font-family: var(--font-primary);
-    font-weight: 600;
-    font-size: 24px;
+    font-weight: 500;
+    font-size: 18px;
     color: var(--muted);
     white-space: nowrap;
     flex-shrink: 0;

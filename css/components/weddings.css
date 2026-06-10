@@ -17,7 +17,7 @@
 
 .wedding-header__title {
     margin: 0;
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 48px;
     line-height: 1.1;
@@ -36,10 +36,10 @@
 .wedding-header__location {
     margin: 0;
     font-family: var(--font-primary);
-    font-weight: 600;
-    font-size: 24px;
+    font-weight: 500;
+    font-size: 18px;
     color: var(--muted);
-    line-height: 1.2;
+    line-height: 1.4;
 }
 
 .wedding-header__close {
@@ -105,14 +105,14 @@
     background-color: var(--gray-light);
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-lg);
     overflow: hidden;
     border-radius: var(--radius);
     transition: transform var(--transition-normal);
 }
 
 .wedding-feature-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
 }
 
 .wedding-feature-card__image-container {
@@ -180,12 +180,10 @@
 /* Staggered Fade + Slide for contents inside */
 .wedding-feature-card__info-title {
     margin: 0;
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 22px;
     color: var(--white);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
     opacity: 0;
     transform: translateY(15px);
     transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
@@ -193,7 +191,7 @@
 
 .wedding-feature-card__info-desc {
     margin: 0;
-    font-family: var(--font-sans);
+    font-family: var(--font-secondary);
     font-weight: 400;
     font-size: 14px;
     color: rgba(255, 255, 255, 0.85);
@@ -211,12 +209,11 @@
 
 .wedding-feature-card__title {
     margin: 0;
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
-    font-size: 24px;
+    font-size: 22px;
     color: var(--black);
-    text-transform: uppercase;
-    line-height: 1.1;
+    line-height: 1.2;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
@@ -263,7 +260,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
-    padding: 80px 110px;
+    padding: var(--space-4xl) var(--page-gutter);
     box-sizing: border-box;
     overflow: hidden;
     gap: 16px;
@@ -337,10 +334,10 @@
 
 .hero__button-text {
     font-family: var(--font-primary);
-    font-weight: 700;
-    font-size: 20px;
+    font-weight: 600;
+    font-size: 18px;
     color: var(--white);
-    letter-spacing: -0.2px;
+    letter-spacing: 0;
 }
 
 /* Section Scroll Indicator */
@@ -385,7 +382,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: var(--section-space) var(--page-gutter) clamp(40px, 5vw, 56px);
+    /* el padding inferior iguala el gap del grid de bodas para efecto collage */
+    padding: var(--section-space) var(--page-gutter) var(--space-xl);
     gap: var(--space-2xl);
 }
 
@@ -399,7 +397,7 @@
 
 .nuestras-bodas__title {
     margin: 0;
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 48px;
     line-height: 1.1;
@@ -410,10 +408,12 @@
 .nuestras-bodas__subtitle {
     margin: 0;
     font-family: var(--font-primary);
-    font-weight: 600;
-    font-size: 24px;
+    font-weight: 500;
+    font-size: 18px;
     color: var(--muted);
-    line-height: 1.2;
+    line-height: 1.5;
+    max-width: 880px;
+    margin-inline: auto;
 }
 
 .nuestras-bodas__image-container {
@@ -425,70 +425,10 @@
     position: relative;
 }
 
-/* Glassmorphism overlay for nuestras-bodas image */
-.nuestras-bodas__image-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.boda-card__link:hover .nuestras-bodas__image-container::before {
-    opacity: 1;
-}
-
 .nuestras-bodas__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.boda-card__link:hover .nuestras-bodas__image {
-    transform: scale(1.06);
-}
-
-/* Nuestra Boda button */
-.nuestras-bodas__view-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.85);
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: var(--white);
-    font-family: var(--font-secondary);
-    font-weight: 600;
-    font-size: 15px;
-    letter-spacing: 2.5px;
-    padding: 14px 28px;
-    border-radius: 40px;
-    opacity: 0;
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 3;
-    white-space: nowrap;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-}
-
-.boda-card__link:hover .nuestras-bodas__view-btn {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.nuestras-bodas__view-btn:hover {
-    background: rgba(255, 255, 255, 0.28);
 }
 
 .nuestras-bodas__details {
@@ -498,25 +438,20 @@
     flex-direction: column;
     gap: var(--space-sm);
     text-align: left;
-}
-
-.nuestras-bodas__wedding-title {
-    margin: 0;
-    font-family: var(--font-secondary);
-    font-weight: 600;
-    font-size: 48px;
-    line-height: 1.1;
-    color: var(--black);
-    letter-spacing: var(--title-letter-spacing);
+    margin-top: var(--space-lg);
 }
 
 .nuestras-bodas__wedding-info {
     margin: 0;
-    font-family: var(--font-secondary);
-    font-weight: 600;
-    font-size: 24px;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 16px;
     color: var(--muted);
-    line-height: 1.2;
+    line-height: 1.4;
+}
+
+.nuestras-bodas__wedding-info p {
+    margin: 0;
 }
 
 /* Bodas Ejemplares */
@@ -525,7 +460,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: var(--section-space) var(--page-gutter) var(--section-space-lg);
+    /* el padding superior iguala el gap del grid para efecto collage con la boda principal */
+    padding: var(--space-xl) var(--page-gutter) var(--section-space-lg);
     gap: var(--space-2xl);
 }
 
@@ -536,7 +472,7 @@
 
 .bodas-ejemplares__title {
     margin: 0;
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 48px;
     line-height: 1.1;
@@ -569,13 +505,9 @@
     color: inherit;
     display: flex;
     flex-direction: column;
-    gap: var(--space-xl);
+    gap: var(--space-lg);
     width: 100%;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.boda-card__link:hover {
-    transform: translateY(-10px);
+    cursor: pointer;
 }
 
 .boda-card__image-container {
@@ -587,70 +519,10 @@
     box-shadow: var(--shadow-sm);
 }
 
-/* Elegant glassmorphism dark overlay */
-.boda-card__image-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.boda-card__link:hover .boda-card__image-container::before {
-    opacity: 1;
-}
-
-/* Ver boda button (replaces glassmorphism badge) */
-.boda-card__view-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.85);
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: var(--white);
-    font-family: var(--font-secondary);
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 2px;
-    padding: 12px 24px;
-    border-radius: 40px;
-    opacity: 0;
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 3;
-    white-space: nowrap;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-}
-
-.boda-card__link:hover .boda-card__view-btn {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.boda-card__view-btn:hover {
-    background: rgba(255, 255, 255, 0.28);
-}
-
 .boda-card__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.boda-card__link:hover .boda-card__image {
-    transform: scale(1.06);
 }
 
 .boda-card__content {
@@ -659,27 +531,59 @@
     gap: var(--space-sm);
 }
 
-.boda-card__title {
+/* Al hacer hover, el nombre de los novios se convierte en un botón cyan
+   del ancho de la foto con "Ver detalles" justificado a la derecha */
+.boda-card__title,
+.nuestras-bodas__wedding-title {
     margin: 0;
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
-    font-size: 24px;
+    font-size: 22px;
+    line-height: 1.2;
     color: var(--black);
-    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 0;
+    border-radius: var(--radius);
+    transition: background 0.25s ease, color 0.25s ease, padding 0.25s ease;
 }
 
-.boda-card__link:hover .boda-card__title {
-    color: var(--primary);
+.boda-card__title::after,
+.nuestras-bodas__wedding-title::after {
+    content: 'Ver detalles';
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.boda-card__link:hover .boda-card__title,
+.boda-card__link:hover .nuestras-bodas__wedding-title {
+    background: var(--primary);
+    color: var(--white);
+    padding: 10px 14px;
+}
+
+.boda-card__link:hover .boda-card__title::after,
+.boda-card__link:hover .nuestras-bodas__wedding-title::after {
+    opacity: 1;
 }
 
 .boda-card__info {
     display: flex;
     flex-direction: column;
     font-family: var(--font-primary);
-    font-weight: 600;
-    font-size: 20px;
+    font-weight: 500;
+    font-size: 16px;
     color: var(--muted);
-    line-height: 1.2;
+    line-height: 1.4;
     transition: color 0.3s ease;
 }
 
@@ -716,7 +620,7 @@
 
 .feature-block__title {
     margin: 0;
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 24px;
     color: #1a1a1a;
@@ -726,10 +630,10 @@
 .feature-block__text {
     margin: 0;
     font-family: var(--font-primary);
-    font-weight: 600;
-    font-size: 20px;
+    font-weight: 500;
+    font-size: 17px;
     color: var(--muted);
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 /* Calendar */
@@ -744,7 +648,7 @@
 }
 
 .reservation-calendar__title {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 32px;
     color: var(--black);
@@ -783,7 +687,7 @@
 }
 
 .calendar-nav__month {
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-size: 24px;
     font-weight: 600;
     min-width: 140px;
@@ -795,7 +699,7 @@
     padding: 6px 12px;
     border-radius: var(--radius);
     border: 1px solid #ddd;
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 18px;
     cursor: pointer;
@@ -829,7 +733,7 @@
 
 .calendar-grid__daynames span {
     text-align: center;
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 14px;
     color: #999;

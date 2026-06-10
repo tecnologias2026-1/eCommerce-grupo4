@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mock booked dates (more scattered across years for example)
     const venueBookedDates = {
-        'HACIENDA PAZ DEL RÍO': ['2026-04-11', '2026-05-16', '2027-06-12'],
-        'HACIENDA SAN JUAN': ['2026-04-10', '2027-01-20', '2027-04-24'],
+        'Hacienda Paz del Río': ['2026-04-11', '2026-05-16', '2027-06-12'],
+        'Hacienda San Juan': ['2026-04-10', '2027-01-20', '2027-04-24'],
         'Hacienda Las Marías': ['2026-04-12', '2027-05-19', '2027-09-26'],
         'Hacienda El Cedro': ['2026-04-04', '2026-04-11', '2027-03-11'],
         'Hacienda Arkadia': ['2026-04-17', '2027-08-18', '2027-12-19'],

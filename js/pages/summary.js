@@ -38,7 +38,7 @@ function renderSummary() {
         var section = document.createElement('div');
         section.className = 'summary-section';
         section.innerHTML =
-            '<h2 class="summary-section__title">LUGAR SELECCIONADO</h2>' +
+            '<h2 class="summary-section__title">Lugar seleccionado</h2>' +
             '<div class="summary-section__items">' +
                 '<div class="summary-item">' +
                     '<div class="summary-checkmark">' + checkIcon + '</div>' +
@@ -85,9 +85,9 @@ function renderSummary() {
         }
     }
 
-    addSimpleCategory('ceremony', 'CEREMONIA');
-    addSimpleCategory('reception', 'RECEPCIÓN');
-    addSimpleCategory('others', 'OTROS SERVICIOS');
+    addSimpleCategory('ceremony', 'Ceremonia');
+    addSimpleCategory('reception', 'Recepción');
+    addSimpleCategory('others', 'Otros servicios');
 
     if (cart.food && Object.keys(cart.food).length > 0) {
         var foodSection = document.createElement('div');
@@ -110,7 +110,7 @@ function renderSummary() {
         });
 
         foodSection.innerHTML =
-            '<h2 class="summary-section__title">COMIDA</h2>' +
+            '<h2 class="summary-section__title">Comida</h2>' +
             '<div class="summary-section__items">' + foodHtml + '</div>' +
             '<button class="summary-section__remove" data-remove-category="food">Eliminar</button>';
         summaryContainer.appendChild(foodSection);

@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var modal = document.getElementById('wedding-modal');
     var closeBtn = document.getElementById('wedding-modal-close');
     var content = document.getElementById('wedding-modal-content');
-    var viewBtns = document.querySelectorAll('.boda-card__view-btn, .nuestras-bodas__view-btn');
+    var viewBtns = document.querySelectorAll('.boda-card__link[data-wedding]');
 
     function buildFeaturedContent() {
         return (
@@ -236,10 +236,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 var pageUrl = w.page_url || 'assets/public/weding1.html';
                 return (
                     '<li class="boda-card">' +
-                    '<div class="boda-card__link">' +
+                    '<div class="boda-card__link" data-wedding="' + pageUrl + '">' +
                     '<div class="boda-card__image-container">' +
                     '<img src="' + imgSrc + '" alt="' + w.groom_name + ' y ' + w.bride_name + '" class="boda-card__image" loading="lazy" decoding="async">' +
-                    '<button class="boda-card__view-btn" data-wedding="' + pageUrl + '">Ver boda</button>' +
                     '</div>' +
                     '<div class="boda-card__content">' +
                     '<h5 class="boda-card__title">' + w.groom_name + ' y ' + w.bride_name + '</h5>' +
@@ -250,10 +249,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 );
             }).join('');
 
-            grid.querySelectorAll('.boda-card__view-btn').forEach(function (btn) {
-                btn.addEventListener('click', function (e) {
+            grid.querySelectorAll('.boda-card__link[data-wedding]').forEach(function (card) {
+                card.addEventListener('click', function (e) {
                     e.stopPropagation();
-                    var url = btn.getAttribute('data-wedding');
+                    var url = card.getAttribute('data-wedding');
                     if (typeof openModal === 'function') openModal(url);
                 });
             });

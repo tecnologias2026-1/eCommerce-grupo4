@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@400;600&family=Inter:wght@400;500;600&family=Syne:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Syne:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="stylesheet" href="../../css/media.css">
@@ -47,7 +47,7 @@
 
         /* ── Page section heading ── */
         .hero-selection {
-            padding: 44px 68px 36px;
+            padding: 44px var(--page-gutter) 36px;
             background: #fff;
             border-bottom: 1px solid #ebebeb;
             flex-direction: row;
@@ -56,7 +56,7 @@
         }
         .hero-selection__title {
             font-size: 30px;
-            letter-spacing: 2px;
+            letter-spacing: var(--title-letter-spacing);
             text-align: left;
             padding: 0;
             white-space: normal;
@@ -66,8 +66,8 @@
         #btn-logout { display: none; }
 
         /* ── Content area ── */
-        .res-filter-bar { padding: 28px 68px 0; max-width: none; }
-        .reservations-content { padding: 40px 68px 80px; }
+        .res-filter-bar { padding: 28px var(--page-gutter) 0; max-width: none; }
+        .reservations-content { padding: 40px var(--page-gutter) 80px; }
 
         /* ── Card refinements ── */
         .res-card { gap: 48px; }

@@ -4,13 +4,13 @@ function addToCart(venueData) {
 
     // FORCE date check
     if (!selectedDate) {
-        showCustomAlert('CONFIRMAR FECHA', 'Para confirmar disponibilidad debe seleccionar la fecha aproximada de la boda en el inicio.');
+        showCustomAlert('Confirmar fecha', 'Para confirmar disponibilidad debe seleccionar la fecha aproximada de la boda en el inicio.');
         return;
     }
 
     // Check if a venue is already selected
     if (currentCart.selectedVenue) {
-        showCustomAlert('SELECCIÓN YA EXISTENTE', 'Ya tienes un lugar seleccionado. Solo puedes agregar un venue a tu boda.');
+        showCustomAlert('Selección ya existente', 'Ya tienes un lugar seleccionado. Solo puedes agregar un venue a tu boda.');
         return;
     }
 
@@ -42,7 +42,7 @@ function showCustomAlert(title, message) {
         <div class="notification-modal">
             <h2 class="notification-modal__title">${title}</h2>
             <p class="notification-modal__text">${message}</p>
-            <button class="notification-modal__btn" id="close-alert-btn">ACEPTAR</button>
+            <button class="notification-modal__btn" id="close-alert-btn">Aceptar</button>
         </div>
     `;
 
@@ -79,8 +79,8 @@ function showCustomConfirm(title, message, onConfirm) {
             <h2 class="notification-modal__title">${title}</h2>
             <p class="notification-modal__text">${message}</p>
             <div style="display: flex; gap: 16px; justify-content: center;">
-                <button class="notification-modal__btn notification-modal__btn--danger" id="confirm-btn">ELIMINAR</button>
-                <button class="notification-modal__btn" id="cancel-btn" style="background: #666;">CANCELAR</button>
+                <button class="notification-modal__btn notification-modal__btn--danger" id="confirm-btn">Eliminar</button>
+                <button class="notification-modal__btn" id="cancel-btn" style="background: #666;">Cancelar</button>
             </div>
         </div>
     `;

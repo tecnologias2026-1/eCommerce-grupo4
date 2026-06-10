@@ -347,13 +347,11 @@
         max-height: none;
     }
 
-    .nuestras-bodas__title,
-    .nuestras-bodas__wedding-title {
+    .nuestras-bodas__title {
         font-size: 32px;
     }
 
-    .nuestras-bodas__subtitle,
-    .nuestras-bodas__wedding-info {
+    .nuestras-bodas__subtitle {
         font-size: 18px;
     }
 
@@ -1219,8 +1217,7 @@
         padding: 0 16px !important;
     }
 
-    .nuestras-bodas__title,
-    .nuestras-bodas__wedding-title {
+    .nuestras-bodas__title {
         font-size: 20px !important;
     }
 
@@ -1233,7 +1230,8 @@
         font-size: 20px !important;
     }
 
-    .boda-card__title {
+    .boda-card__title,
+    .nuestras-bodas__wedding-title {
         font-size: 16px !important;
     }
 
@@ -1414,25 +1412,33 @@
         flex-direction: column;
     }
 
-    /* Left nav → horizontal scrollable tab strip */
+    /* Left nav → sticky container only, no overflow */
     .planner-nav {
         order: 0;
         position: sticky;
         top: 48px;
         height: auto !important;
         padding: 0 !important;
-        flex-direction: row !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        -webkit-overflow-scrolling: touch;
+        display: block !important;
+        overflow: visible !important;
         border-right: none !important;
         border-bottom: 1px solid #ebebeb;
         z-index: 100;
         background: #fff;
-        gap: 0 !important;
-        scrollbar-width: none;
     }
-    .planner-nav::-webkit-scrollbar { display: none; }
+
+    /* Inner strip handles the horizontal scroll — isolated from page scroll */
+    .planner-nav__strip {
+        display: flex !important;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        touch-action: pan-x;
+        gap: 0;
+    }
+    .planner-nav__strip::-webkit-scrollbar { display: none; }
 
     .planner-nav__item {
         flex-shrink: 0;

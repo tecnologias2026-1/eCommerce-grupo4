@@ -6,7 +6,7 @@
   <title>Personaliza tu Boda - E&D</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&family=Spectral:wght@400;600;800&family=Inter:wght@400;500;600&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/global.css">
   <link rel="stylesheet" href="../../css/media.css">
   <script src="../../js/cookie-consent.js" defer></script>
@@ -31,8 +31,8 @@
     /* ── Nav section label ── */
     .planner-nav__section-label {
       font-family: var(--font-secondary);
-      font-size: 10px; font-weight: 700; letter-spacing: 1.8px;
-      text-transform: uppercase; color: #ccc;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.3px;
+      color: #bbb;
       margin: 0 0 4px 29px; padding: 0;
     }
     /* Fix first nav item line start when label is above it */
@@ -53,12 +53,12 @@
       justify-content: center;
     }
 
-    /* ── Adjust nav/cart sticky top for compact header ── */
-    .planner-nav,
-    .planner-cart { top: 48px; height: calc(100vh - 48px); }
-
-    /* ── Nav: always fixed, no internal scroll ── */
-    .planner-nav { overflow-y: hidden; }
+    /* ── Adjust nav/cart sticky top for compact header (desktop only) ── */
+    @media (min-width: 769px) {
+      .planner-nav,
+      .planner-cart { top: 48px; height: calc(100vh - 48px); }
+      .planner-nav { overflow-y: hidden; }
+    }
 
     /* ── Mobile: reset height/top so media.css takes over ── */
     @media (max-width: 768px) {
@@ -112,11 +112,11 @@
       background: linear-gradient(to top, rgba(0,0,0,0.72), transparent);
     }
     .vdp-hero__name {
-      font-family: var(--font-secondary); font-size: 24px; font-weight: 700;
-      color: #fff; margin: 0 0 6px; text-transform: uppercase; letter-spacing: 0.5px;
+      font-family: var(--font-primary); font-size: 24px; font-weight: 600;
+      color: #fff; margin: 0 0 6px;
     }
     .vdp-hero__meta { display: flex; align-items: center; gap: 10px; }
-    .vdp-hero__price { font-family: var(--font-secondary); font-size: 16px; font-weight: 700; color: #fff; }
+    .vdp-hero__price { font-family: var(--font-primary); font-size: 16px; font-weight: 700; color: #fff; }
     .vdp-hero__sep { color: rgba(255,255,255,0.5); }
     .vdp-hero__guests { font-family: var(--font-secondary); font-size: 13px; color: rgba(255,255,255,0.8); }
     .vdp-body { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 28px 36px 36px; }
@@ -132,8 +132,8 @@
       background: #f8f9ff; border-radius: 12px; padding: 18px 22px; margin-bottom: 24px;
     }
     .vdp-estimation__title {
-      font-family: var(--font-secondary); font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 1.2px; color: #aaa; margin: 0 0 14px;
+      font-family: var(--font-secondary); font-size: 12px; font-weight: 600;
+      letter-spacing: 0.3px; color: #999; margin: 0 0 14px;
     }
     .vdp-estimation__row {
       display: flex; justify-content: space-between; align-items: center;
@@ -142,12 +142,12 @@
     .vdp-estimation__row:last-child { border-bottom: none; }
     .vdp-estimation__row--total { margin-top: 4px; }
     .vdp-estimation__lbl { font-family: var(--font-secondary); font-size: 12px; color: #888; }
-    .vdp-estimation__val { font-family: var(--font-secondary); font-size: 13px; font-weight: 700; color: var(--black); }
+    .vdp-estimation__val { font-family: var(--font-primary); font-size: 13px; font-weight: 700; color: var(--black); }
     .vdp-estimation__val--total { font-size: 16px; color: var(--primary); }
     .vdp-select-btn {
       width: 100%; padding: 15px; background: var(--black); color: #fff;
-      border: none; border-radius: 10px; font-family: var(--font-secondary);
-      font-size: 13px; font-weight: 700; letter-spacing: 1px; cursor: pointer;
+      border: none; border-radius: var(--radius); font-family: var(--font-primary);
+      font-size: 14px; font-weight: 600; letter-spacing: 0.3px; cursor: pointer;
       transition: background 0.2s;
     }
     .vdp-select-btn:hover, .vdp-select-btn.vdp-select-btn--selected { background: var(--primary); }
@@ -194,8 +194,8 @@
       border-bottom: 1px solid #f0f0f0;
     }
     .planner-cart__drawer-title {
-      font-family: var(--font-secondary); font-size: 13px; font-weight: 700;
-      letter-spacing: 0.8px; text-transform: uppercase; color: var(--black);
+      font-family: var(--font-primary); font-size: 14px; font-weight: 600;
+      letter-spacing: 0.3px; color: var(--black);
     }
     .planner-cart__drawer-close {
       background: none; border: none; font-size: 22px; color: #aaa;
@@ -243,30 +243,32 @@
     <!-- ── LEFT: Section navigator ─────────────────── -->
     <aside class="planner-nav" id="planner-nav">
       <p class="planner-nav__section-label">Tu Boda</p>
-      <a class="planner-nav__item planner-nav__item--active" data-target="section-detalles" href="#section-detalles">
-        <span class="planner-nav__dot"></span>
-        <span class="planner-nav__label">Detalles</span>
-      </a>
-      <a class="planner-nav__item planner-nav__item--locked" data-target="section-lugar" href="#section-lugar">
-        <span class="planner-nav__dot"></span>
-        <span class="planner-nav__label">Lugar</span>
-      </a>
-      <a class="planner-nav__item planner-nav__item--locked" data-target="section-ceremonia" href="#section-ceremonia">
-        <span class="planner-nav__dot"></span>
-        <span class="planner-nav__label">Ceremonia</span>
-      </a>
-      <a class="planner-nav__item planner-nav__item--locked" data-target="section-recepcion" href="#section-recepcion">
-        <span class="planner-nav__dot"></span>
-        <span class="planner-nav__label">Recepción</span>
-      </a>
-      <a class="planner-nav__item planner-nav__item--locked" data-target="section-comida" href="#section-comida">
-        <span class="planner-nav__dot"></span>
-        <span class="planner-nav__label">Comida</span>
-      </a>
-      <a class="planner-nav__item planner-nav__item--locked" data-target="section-otros" href="#section-otros">
-        <span class="planner-nav__dot"></span>
-        <span class="planner-nav__label">Otros</span>
-      </a>
+      <div class="planner-nav__strip">
+        <a class="planner-nav__item planner-nav__item--active" data-target="section-detalles" href="#section-detalles">
+          <span class="planner-nav__dot"></span>
+          <span class="planner-nav__label">Detalles</span>
+        </a>
+        <a class="planner-nav__item planner-nav__item--locked" data-target="section-lugar" href="#section-lugar">
+          <span class="planner-nav__dot"></span>
+          <span class="planner-nav__label">Lugar</span>
+        </a>
+        <a class="planner-nav__item planner-nav__item--locked" data-target="section-ceremonia" href="#section-ceremonia">
+          <span class="planner-nav__dot"></span>
+          <span class="planner-nav__label">Ceremonia</span>
+        </a>
+        <a class="planner-nav__item planner-nav__item--locked" data-target="section-recepcion" href="#section-recepcion">
+          <span class="planner-nav__dot"></span>
+          <span class="planner-nav__label">Recepción</span>
+        </a>
+        <a class="planner-nav__item planner-nav__item--locked" data-target="section-comida" href="#section-comida">
+          <span class="planner-nav__dot"></span>
+          <span class="planner-nav__label">Comida</span>
+        </a>
+        <a class="planner-nav__item planner-nav__item--locked" data-target="section-otros" href="#section-otros">
+          <span class="planner-nav__dot"></span>
+          <span class="planner-nav__label">Otros</span>
+        </a>
+      </div>
     </aside>
 
     <!-- ── CENTER: Content ─────────────────────────── -->
@@ -320,7 +322,7 @@
             </div>
             <div class="planner-venue-card__body">
               <div class="planner-venue-card__name-row">
-                <h4 class="planner-venue-card__name">HACIENDA PAZ DEL RÍO</h4>
+                <h4 class="planner-venue-card__name">Hacienda Paz del Río</h4>
                 <button class="planner-venue-details-btn" data-action="details">Ver detalles</button>
               </div>
               <p class="planner-venue-card__guests">100 invitados aprox</p>
@@ -341,7 +343,7 @@
             </div>
             <div class="planner-venue-card__body">
               <div class="planner-venue-card__name-row">
-                <h4 class="planner-venue-card__name">HACIENDA SAN JUAN</h4>
+                <h4 class="planner-venue-card__name">Hacienda San Juan</h4>
                 <button class="planner-venue-details-btn" data-action="details">Ver detalles</button>
               </div>
               <p class="planner-venue-card__guests">300 invitados aprox</p>
@@ -362,7 +364,7 @@
             </div>
             <div class="planner-venue-card__body">
               <div class="planner-venue-card__name-row">
-                <h4 class="planner-venue-card__name">HACIENDA LAS MARÍAS</h4>
+                <h4 class="planner-venue-card__name">Hacienda Las Marías</h4>
                 <button class="planner-venue-details-btn" data-action="details">Ver detalles</button>
               </div>
               <p class="planner-venue-card__guests">170 invitados aprox</p>
@@ -383,7 +385,7 @@
             </div>
             <div class="planner-venue-card__body">
               <div class="planner-venue-card__name-row">
-                <h4 class="planner-venue-card__name">HACIENDA EL CEDRO</h4>
+                <h4 class="planner-venue-card__name">Hacienda El Cedro</h4>
                 <button class="planner-venue-details-btn" data-action="details">Ver detalles</button>
               </div>
               <p class="planner-venue-card__guests">200 invitados aprox</p>
@@ -405,7 +407,7 @@
             </div>
             <div class="planner-venue-card__body">
               <div class="planner-venue-card__name-row">
-                <h4 class="planner-venue-card__name">HACIENDA ARKADIA</h4>
+                <h4 class="planner-venue-card__name">Hacienda Arkadia</h4>
                 <button class="planner-venue-details-btn" data-action="details">Ver detalles</button>
               </div>
               <p class="planner-venue-card__guests">350 invitados aprox</p>
@@ -426,7 +428,7 @@
             </div>
             <div class="planner-venue-card__body">
               <div class="planner-venue-card__name-row">
-                <h4 class="planner-venue-card__name">HACIENDA BOTANIA</h4>
+                <h4 class="planner-venue-card__name">Hacienda Botania</h4>
                 <button class="planner-venue-details-btn" data-action="details">Ver detalles</button>
               </div>
               <p class="planner-venue-card__guests">100 invitados aprox</p>
@@ -948,7 +950,7 @@
         <p class="vdp-desc" id="vdp-desc"></p>
         <div class="vdp-features" id="vdp-features"></div>
         <div class="vdp-estimation" id="vdp-estimation"></div>
-        <button class="vdp-select-btn" id="vdp-select-btn">SELECCIONAR HACIENDA</button>
+        <button class="vdp-select-btn" id="vdp-select-btn">Seleccionar hacienda</button>
       </div>
     </div>
   </div>
@@ -969,7 +971,7 @@
           <input type="number" class="selection-modal__qty-input" id="pm-qty" value="1" min="1">
           <button class="selection-modal__qty-btn" id="pm-qty-plus">+</button>
         </div>
-        <button class="selection-modal__add-btn" id="pm-add-btn">AGREGAR AL CARRITO</button>
+        <button class="selection-modal__add-btn" id="pm-add-btn">Agregar al carrito</button>
       </div>
     </div>
   </div>

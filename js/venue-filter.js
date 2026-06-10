@@ -123,8 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     Sin embargo, aún puedes seleccionarlo si deseas una experiencia más espaciosa o una distribución diferente.
                 </p>
                 <div style="display: flex; gap: 12px; justify-content: center;">
-                    <button class="notification-modal__btn" id="spacious-cancel-btn" style="background: #999;">CANCELAR</button>
-                    <button class="notification-modal__btn" id="spacious-confirm-btn">SELECCIONAR</button>
+                    <button class="notification-modal__btn" id="spacious-cancel-btn" style="background: #999;">Cancelar</button>
+                    <button class="notification-modal__btn" id="spacious-confirm-btn">Seleccionar</button>
                 </div>
             </div>
         `;
@@ -173,8 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     Te recomendamos considerar otras opciones que se ajusten mejor a tu número de invitados.
                 </p>
                 <div style="display: flex; gap: 12px; justify-content: center;">
-                    <button class="notification-modal__btn" id="insufficient-cancel-btn" style="background: #999;">CANCELAR</button>
-                    <button class="notification-modal__btn" id="insufficient-confirm-btn">VER DE TODOS MODOS</button>
+                    <button class="notification-modal__btn" id="insufficient-cancel-btn" style="background: #999;">Cancelar</button>
+                    <button class="notification-modal__btn" id="insufficient-confirm-btn">Ver de todos modos</button>
                 </div>
             </div>
         `;

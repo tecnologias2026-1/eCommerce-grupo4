@@ -100,19 +100,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="res-card__media-grid">
                     <div class="media-slot">
                         <img src="${venueImg}" alt="${venue}" loading="lazy">
-                        <span>HACIENDA</span>
+                        <span>Hacienda</span>
                     </div>
                     <div class="media-slot">
                         <img src="../images/c1.png" alt="Ceremonia" loading="lazy">
-                        <span>CEREMONIA</span>
+                        <span>Ceremonia</span>
                     </div>
                     <div class="media-slot">
                         <img src="../images/r1.png" alt="Recepción" loading="lazy">
-                        <span>RECEPCIÓN</span>
+                        <span>Recepción</span>
                     </div>
                     <div class="media-slot">
                         <img src="../images/f1.png" alt="Decoración" loading="lazy">
-                        <span>DECORACIÓN</span>
+                        <span>Decoración</span>
                     </div>
                 </div>
             `;

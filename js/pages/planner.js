@@ -316,7 +316,7 @@
         qtySection.style.display = 'none';
       }
 
-      document.getElementById('pm-add-btn').textContent = isSelected ? 'QUITAR DEL CARRITO' : 'AGREGAR AL CARRITO';
+      document.getElementById('pm-add-btn').textContent = isSelected ? 'Quitar del carrito' : 'Agregar al carrito';
       document.getElementById('planner-modal').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
@@ -341,7 +341,7 @@
       } catch (e) { document.getElementById('pm-features').innerHTML = ''; }
 
       document.getElementById('pm-qty-section').style.display = 'none';
-      document.getElementById('pm-add-btn').textContent = isSelected ? 'QUITAR SELECCIÓN' : 'SELECCIONAR HACIENDA';
+      document.getElementById('pm-add-btn').textContent = isSelected ? 'Quitar selección' : 'Seleccionar hacienda';
       document.getElementById('planner-modal').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
@@ -539,7 +539,7 @@
 
       var isSelected = card.classList.contains('is-selected');
       var btn = document.getElementById('vdp-select-btn');
-      btn.textContent = isSelected ? 'QUITAR SELECCIÓN' : 'SELECCIONAR HACIENDA';
+      btn.textContent = isSelected ? 'Quitar selección' : 'Seleccionar hacienda';
       btn.classList.toggle('vdp-select-btn--selected', isSelected);
 
       document.getElementById('vdp-modal').classList.add('active');

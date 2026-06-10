@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Spectral+SC:wght@600&family=Spectral:wght@600;800&family=Syne:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Syne:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../../css/global.css" />
@@ -59,10 +59,11 @@
 
       /* ── Labels ── */
       .auth-form__label {
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        color: #aaa;
+        font-family: var(--font-secondary);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        color: #999;
       }
 
       /* ── Inputs ── */
@@ -101,9 +102,9 @@
       }
       .auth-form__submit:hover { background: var(--primary); }
       .auth-form__submit-text {
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 0.5px;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
       }
 
       /* ── Recovery modal ── */
@@ -117,8 +118,8 @@
         max-width: 420px; width: 90%; box-shadow: 0 24px 80px rgba(0,0,0,0.18);
       }
       .modal-title {
-        font-family: var(--font-secondary); font-size: 18px; font-weight: 700;
-        letter-spacing: 1px; margin: 0 0 10px; color: var(--black);
+        font-family: var(--font-primary); font-size: 18px; font-weight: 600;
+        letter-spacing: 0; text-transform: none; margin: 0 0 10px; color: var(--black);
       }
       .modal-description {
         font-family: var(--font-primary); font-size: 14px; color: #888;
@@ -135,8 +136,8 @@
       .modal-actions { display: flex; gap: 12px; }
       .modal-btn {
         padding: 11px 24px; border-radius: var(--radius); cursor: pointer;
-        font-family: var(--font-secondary); font-size: 12px; font-weight: 700;
-        letter-spacing: 0.5px; border: none; transition: background 0.2s;
+        font-family: var(--font-primary); font-size: 13px; font-weight: 600;
+        letter-spacing: 0.3px; border: none; transition: background 0.2s;
       }
       .modal-btn--primary { background: var(--black); color: #fff; }
       .modal-btn--primary:hover { background: var(--primary); }
@@ -217,7 +218,7 @@
     </main>
     <div id="recovery-modal" class="modal-overlay" aria-hidden="true">
       <div class="modal-content">
-        <h2 class="modal-title">RECUPERAR CONTRASEÑA</h2>
+        <h2 class="modal-title">Recuperar contraseña</h2>
         <p class="modal-description">Introduce tu dirección de correo electrónico</p>
         <div class="modal-form-group">
           <input type="email" class="modal-input" placeholder="Correo electrónico" id="recovery-email" />

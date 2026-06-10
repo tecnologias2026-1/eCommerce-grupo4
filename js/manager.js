@@ -314,7 +314,7 @@ function showCustomAlert(title, message) {
         <div class="notification-modal">
             <h2 class="notification-modal__title">${title}</h2>
             <p class="notification-modal__text">${message}</p>
-            <button class="notification-modal__btn" id="close-alert-btn">ACEPTAR</button>
+            <button class="notification-modal__btn" id="close-alert-btn">Aceptar</button>
         </div>
     `;
 
@@ -353,8 +353,8 @@ function showCustomConfirm(title, message, onConfirm) {
             <h2 class="notification-modal__title">${title}</h2>
             <p class="notification-modal__text">${message}</p>
             <div style="display: flex; gap: 16px; justify-content: center;">
-                <button class="notification-modal__btn notification-modal__btn--danger" id="confirm-btn">ELIMINAR</button>
-                <button class="notification-modal__btn" id="cancel-btn" style="background: #666;">CANCELAR</button>
+                <button class="notification-modal__btn notification-modal__btn--danger" id="confirm-btn">Eliminar</button>
+                <button class="notification-modal__btn" id="cancel-btn" style="background: #666;">Cancelar</button>
             </div>
         </div>
     `;

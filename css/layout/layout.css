@@ -37,7 +37,7 @@
 
 .hero-selection__title {
     margin: 0;
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
     font-size: 48px;
     line-height: 1.1;
@@ -86,9 +86,9 @@
 .feature-list__subtitle {
     margin: 0;
     font-family: var(--font-primary);
-    font-weight: 600;
-    font-size: 24px;
-    line-height: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.5;
     color: var(--muted);
     width: 627px;
     max-width: 100%;
@@ -132,9 +132,9 @@
 .feature__text {
     margin: 0;
     font-family: var(--font-primary);
-    font-weight: 600;
-    font-size: 24px;
-    line-height: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.5;
     color: var(--muted);
     white-space: nowrap;
 }
@@ -164,10 +164,10 @@
 
 .row-characteristic__title {
     margin: 0;
-    font-family: var(--font-secondary);
+    font-family: var(--font-primary);
     font-weight: 600;
-    font-size: 24px;
-    line-height: normal;
+    font-size: 22px;
+    line-height: 1.2;
     color: var(--black);
 }
 
@@ -183,8 +183,8 @@
     margin: 0;
     font-family: var(--font-primary);
     font-weight: 600;
-    font-size: 24px;
-    line-height: normal;
+    font-size: 18px;
+    line-height: 1.4;
     color: var(--black);
     white-space: nowrap;
 }
@@ -194,8 +194,8 @@
     flex-direction: column;
     font-family: var(--font-primary);
     font-weight: 600;
-    font-size: 24px;
-    line-height: normal;
+    font-size: 18px;
+    line-height: 1.4;
     color: var(--black);
     text-align: center;
     white-space: nowrap;
@@ -209,9 +209,9 @@
 .row-characteristic__description {
     margin: 0;
     font-family: var(--font-primary);
-    font-weight: 600;
-    font-size: 24px;
-    line-height: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
     color: var(--muted);
 }
 
