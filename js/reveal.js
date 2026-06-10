@@ -95,6 +95,9 @@
 
     selectors.forEach(function(sel) {
       document.querySelectorAll(sel).forEach(function(el) {
+        // Las tarjetas sticky del stack no llevan reveal propio: el
+        // transform/opacity de [data-reveal] rompería el apilado.
+        if (el.classList.contains('stack-card')) return;
         if (!el.hasAttribute('data-reveal')) {
           el.setAttribute('data-reveal', 'up');
         }

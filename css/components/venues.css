@@ -842,13 +842,6 @@ section.feature .feature__subtitle {
 .about-us__image-container,
 .mission-vision__image-container,
 .our-history__image-container,
-.our-trajectory__image-container {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-}
 
 .mission-vision__image-container {
     max-width: 1040px;
@@ -864,7 +857,7 @@ section.feature .feature__subtitle {
 
 .our-history,
 .our-trajectory {
-    background: var(--gray-light);
+    background: linear-gradient(145deg, #f4fcfd 0%, #eef7f9 100%);
     padding: var(--section-space) var(--page-gutter);
 }
 

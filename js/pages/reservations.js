@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var status = err.status || 0;
                 var msg = err.message || '';
                 if (status === 401 || status === 403 || msg.includes('401') || msg.includes('403')) {
-                    window.location.href = 'auth.html';
+                    window.location.href = 'reservcode.html';
                     return;
                 }
                 showRetryError(40);

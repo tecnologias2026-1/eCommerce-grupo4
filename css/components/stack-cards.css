@@ -1,0 +1,90 @@
+/* ================================================
+   STACK CARDS - Efecto de tarjetas apiladas (index)
+   Cada tarjeta se pega bajo el header sticky y la
+   siguiente la cubre al hacer scroll.
+   OJO: no poner overflow (hidden/auto) en .card-stack
+   ni transform/filter en .stack-card — romperían el
+   position: sticky del efecto.
+   ================================================ */
+
+.card-stack {
+    position: relative;
+}
+
+.card-stack .stack-card {
+    position: sticky;
+    /* js/stack-cards.js pone un top negativo inline en las tarjetas
+       más altas que el viewport, para que se peguen solo cuando
+       ya se recorrió todo su contenido */
+    top: var(--stack-top);
+    min-height: calc(100svh - var(--stack-top));
+    box-sizing: border-box;
+}
+
+@supports not (height: 100svh) {
+    .card-stack .stack-card {
+        min-height: calc(100vh - var(--stack-top));
+    }
+}
+
+/* Orden de apilado determinista: cada tarjeta pinta sobre la anterior */
+.card-stack .stack-card:nth-child(1) { z-index: 1; }
+.card-stack .stack-card:nth-child(2) { z-index: 2; }
+.card-stack .stack-card:nth-child(3) { z-index: 3; }
+.card-stack .stack-card:nth-child(4) { z-index: 4; }
+.card-stack .stack-card:nth-child(5) { z-index: 5; }
+
+/* Look de tarjeta en todas menos el hero (la base) */
+.card-stack .stack-card + .stack-card {
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    overflow: clip; /* recorta las esquinas sin afectar su propio sticky */
+    box-shadow: 0 -18px 45px rgba(0, 0, 0, 0.18);
+    /* lienzo opaco: el reveal interno anima opacity y no debe
+       dejar ver la tarjeta de abajo */
+    background: var(--bg);
+}
+
+.stack-card--bodas {
+    background: var(--gray-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Tarjeta de bodas compacta: título + las 3 bodas caben en una pantalla
+   de desktop (en pantallas bajas el JS aplica top negativo igualmente) */
+.stack-card--bodas .nuestras-bodas {
+    padding: var(--space-2xl) var(--page-gutter) var(--space-md);
+}
+
+.stack-card--bodas .bodas-ejemplares {
+    padding: var(--space-md) var(--page-gutter) var(--space-2xl);
+}
+
+/* Última tarjeta en flujo normal: los acordeones del FAQ crecen
+   libremente y el footer entra de forma natural después */
+.card-stack .stack-card--flow {
+    position: relative;
+    top: auto !important;
+}
+
+/* Hero: llenar exactamente el viewport bajo el header. Queda inmóvil
+   desde scroll 0; si fuera más alto, su parte baja nunca se vería */
+.card-stack .hero {
+    height: calc(100svh - var(--stack-top));
+    max-height: none;
+    min-height: 0;
+    border-bottom: 0;
+}
+
+/* Tarjetas de contenido corto: centrado vertical ("una cosa a la vez") */
+.card-stack .inspiration-quote {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Anclas internas (#nuestras-bodas): que no queden bajo el header sticky */
+.card-stack [id] {
+    scroll-margin-top: var(--stack-top);
+}

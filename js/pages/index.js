@@ -228,23 +228,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
             var fallbackImages = ['assets/images/boda1.jpg', 'assets/images/boda2.png', 'assets/images/boda3.jpg'];
             grid.innerHTML = others.map(function (w, idx) {
-                var dateStr = w.wedding_date
-                    ? new Date(w.wedding_date).toLocaleDateString('es-CO') : '';
                 var imgSrc = w.banner_image
                     ? 'assets/images/' + w.banner_image
                     : (fallbackImages[idx] || 'assets/images/boda1.jpg');
                 var pageUrl = w.page_url || 'assets/public/weding1.html';
+                var review = w.review || w.review_text || '';
                 return (
                     '<li class="boda-card">' +
                     '<div class="boda-card__link" data-wedding="' + pageUrl + '">' +
                     '<div class="boda-card__image-container">' +
                     '<img src="' + imgSrc + '" alt="' + w.groom_name + ' y ' + w.bride_name + '" class="boda-card__image" loading="lazy" decoding="async">' +
-                    '</div>' +
+                    '<div class="boda-card__overlay" aria-hidden="true"></div>' +
                     '<div class="boda-card__content">' +
+                    (review
+                        ? '<span class="boda-card__stars" aria-hidden="true">★★★★★</span>' +
+                          '<blockquote class="boda-card__review">"' + review + '"</blockquote>'
+                        : '') +
                     '<h5 class="boda-card__title">' + w.groom_name + ' y ' + w.bride_name + '</h5>' +
-                    '<div class="boda-card__info">' +
-                    '<span>' + dateStr + '</span>' +
-                    '<span>' + (w.venue_name || '') + '</span>' +
                     '</div></div></div></li>'
                 );
             }).join('');

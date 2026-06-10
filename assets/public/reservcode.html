@@ -4,24 +4,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revisa tu Reserva - Wedding Planner</title>
+    <title>Consultar Reserva - Wedding Planner</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Syne:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../../css/global.css">
-    
+
     <link rel="stylesheet" href="../../css/media.css">
     <script src="../../js/cookie-consent.js" defer></script>
     <script src="../../js/manager.js" defer></script>
     <script src="../../js/reveal.js" defer></script>
+    <style>
+        /* Already on this page — hide the header button that points here */
+        [data-header-btn="reserva"] { display: none !important; }
+
+        /* ── Secondary login section ── */
+        .login-divider {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            max-width: 400px;
+            margin: 44px auto 0;
+        }
+        .login-divider::before,
+        .login-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e7e7e7;
+        }
+        .login-divider__text {
+            font-family: var(--font-secondary);
+            font-size: 13px;
+            color: #aaa;
+            white-space: nowrap;
+        }
+
+        .login-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 16px;
+            padding: 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-primary);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: #888;
+            transition: color 0.2s;
+        }
+        .login-toggle:hover { color: var(--primary); }
+        .login-toggle__chevron {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.3s;
+        }
+        .login-toggle[aria-expanded="true"] .login-toggle__chevron { transform: rotate(180deg); }
+
+        .login-panel {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.35s ease !important;
+            /* Neutralize the auto scroll-reveal (reveal.js tags main > div) */
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        .login-panel.is-open { grid-template-rows: 1fr; }
+        .login-panel__inner { overflow: hidden; }
+
+        /* Compact, muted login form (secondary relevance) */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-width: 360px;
+            margin: 24px auto 4px;
+            text-align: left;
+        }
+        .login-form .auth-form__group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .login-form .auth-form__password-block {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .login-form .auth-form__label {
+            font-family: var(--font-secondary);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: #a5a5a5;
+        }
+        .login-form .auth-form__input {
+            min-height: unset;
+            max-width: 100%;
+            padding: 11px 13px;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.5;
+            border: 1.5px solid #e6e6e6;
+            border-radius: 8px;
+            background: #fafafa;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .login-form .auth-form__input:focus {
+            border-color: var(--primary);
+            background: #fff;
+            box-shadow: none;
+            outline: none;
+        }
+        .login-form .auth-form__input::placeholder { font-size: 13px; font-weight: 400; }
+        .login-form .auth-form__password-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .login-form .auth-form__password-row .auth-form__input { flex: 1; }
+        .login-form .auth-form__eye { width: 22px; height: 22px; }
+        .login-form .auth-form__eye-icon svg { width: 20px; height: 20px; }
+        .login-form .auth-form__forgot {
+            font-size: 12px;
+            color: var(--primary);
+            align-self: flex-start;
+        }
+        .login-form .auth-form__submit {
+            align-self: flex-start;
+            min-height: unset;
+            padding: 10px 28px;
+            border-radius: var(--radius);
+            background: transparent;
+            border: 1.5px solid var(--black);
+            color: var(--black);
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .login-form .auth-form__submit:hover {
+            background: var(--black);
+            color: #fff;
+        }
+        .login-form .auth-form__submit-text {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: inherit;
+        }
+
+        /* ── Recovery modal ── */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+            z-index: 9000; display: flex; align-items: center; justify-content: center;
+        }
+        .modal-overlay[aria-hidden="true"] { display: none; }
+        .modal-content {
+            background: #fff; border-radius: 16px; padding: 36px 40px;
+            max-width: 420px; width: 90%; box-shadow: 0 24px 80px rgba(0,0,0,0.18);
+        }
+        .modal-title {
+            font-family: var(--font-primary); font-size: 18px; font-weight: 600;
+            letter-spacing: 0; text-transform: none; margin: 0 0 10px; color: var(--black);
+        }
+        .modal-description {
+            font-family: var(--font-primary); font-size: 14px; color: #888;
+            margin: 0 0 22px; line-height: 1.5;
+        }
+        .modal-input {
+            width: 100%; padding: 12px 14px; border: 1.5px solid #e0e0e0;
+            border-radius: 8px; font-size: 15px; font-family: var(--font-primary);
+            background: #fafafa; box-sizing: border-box; outline: none;
+            transition: border-color 0.2s;
+        }
+        .modal-input:focus { border-color: var(--primary); background: #fff; }
+        .modal-form-group { margin-bottom: 22px; }
+        .modal-actions { display: flex; gap: 12px; }
+        .modal-btn {
+            padding: 11px 24px; border-radius: var(--radius); cursor: pointer;
+            font-family: var(--font-primary); font-size: 13px; font-weight: 600;
+            letter-spacing: 0.3px; border: none; transition: background 0.2s;
+        }
+        .modal-btn--primary { background: var(--black); color: #fff; }
+        .modal-btn--primary:hover { background: var(--primary); }
+        .modal-btn--secondary { background: transparent; border: 1.5px solid #ddd; color: #777; }
+        .modal-btn--secondary:hover { border-color: var(--primary); color: var(--primary); }
+    </style>
 </head>
 
 <body>
     <div id="header-placeholder"></div>
     <header class="hero-selection">
         <div class="hero-selection__top">
-            <h1 class="hero-selection__title">Resumen de tu Boda</h1>
+            <h1 class="hero-selection__title">Consulta tu Reserva</h1>
         </div>
     </header>
 
@@ -47,9 +224,104 @@
             <button id="verify-btn" class="btn-verify" type="submit">Verificar</button>
         </form>
 
+        <div class="login-divider">
+            <span class="login-divider__text">¿Tienes una cuenta?</span>
+        </div>
+        <button type="button" class="login-toggle" id="login-toggle" aria-expanded="false" aria-controls="login-panel">
+            Iniciar sesión
+            <svg class="login-toggle__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"/>
+            </svg>
+        </button>
+
+        <div class="login-panel" id="login-panel">
+            <div class="login-panel__inner" inert>
+                <form class="auth-form login-form" action="#" method="post" aria-label="Formulario de inicio de sesión">
+                    <div class="auth-form__group">
+                        <label class="auth-form__label" for="identifier">Correo/usuario</label>
+                        <input
+                            class="auth-form__input"
+                            id="identifier"
+                            name="identifier"
+                            type="text"
+                            placeholder="Email/User"
+                            autocomplete="username"
+                            inputmode="email"
+                            required
+                        />
+                    </div>
+
+                    <div class="auth-form__password-block">
+                        <div class="auth-form__group">
+                            <label class="auth-form__label" for="password">Contraseña</label>
+                            <div class="auth-form__password-row">
+                                <input
+                                    class="auth-form__input"
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    placeholder="Contraseña"
+                                    autocomplete="current-password"
+                                    required
+                                />
+                                <button
+                                    class="auth-form__eye"
+                                    type="button"
+                                    id="password-toggle"
+                                    aria-label="Mostrar contraseña"
+                                    aria-controls="password"
+                                    aria-pressed="false"
+                                >
+                                    <span class="auth-form__eye-icon auth-form__eye-icon--hidden" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" focusable="false">
+                                            <path
+                                                d="M12 5c4.418 0 8.18 2.909 9.5 7-1.32 4.091-5.082 7-9.5 7-4.418 0-8.18-2.909-9.5-7C3.82 7.909 7.582 5 12 5Zm0 2C8.785 7 5.794 9.039 4.62 12c1.174 2.961 4.165 5 7.38 5 3.215 0 6.206-2.039 7.38-5C18.206 9.039 15.215 7 12 7Zm0 2.5A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5Z"
+                                                fill="currentColor"
+                                            />
+                                            <path d="M4 4 20 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                                        </svg>
+                                    </span>
+                                    <span class="auth-form__eye-icon auth-form__eye-icon--visible" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" focusable="false">
+                                            <path
+                                                d="M12 5c4.418 0 8.18 2.909 9.5 7-1.32 4.091-5.082 7-9.5 7-4.418 0-8.18-2.909-9.5-7C3.82 7.909 7.582 5 12 5Zm0 2C8.785 7 5.794 9.039 4.62 12c1.174 2.961 4.165 5 7.38 5 3.215 0 6.206-2.039 7.38-5C18.206 9.039 15.215 7 12 7Zm0 2.5A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5Z"
+                                                fill="currentColor"
+                                            />
+                                        </svg>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        <a href="#" class="auth-form__forgot" id="auth-forgot-password">¿Olvidó su contraseña?</a>
+                    </div>
+
+                    <button class="auth-form__submit" type="submit">
+                        <span class="auth-form__submit-text">Ingresar</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
     </main>
 
+    <div id="recovery-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <h2 class="modal-title">Recuperar contraseña</h2>
+            <p class="modal-description">Introduce tu dirección de correo electrónico</p>
+            <div class="modal-form-group">
+                <input type="email" class="modal-input" placeholder="Correo electrónico" id="recovery-email" />
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="modal-btn modal-btn--primary" id="recovery-send">Enviar</button>
+                <button type="button" class="modal-btn modal-btn--secondary" id="recovery-back">Volver</button>
+            </div>
+        </div>
+    </div>
+
     <script src="../../js/pages/reservcode.js"></script>
+    <script src="../../js/auth-login.js" defer></script>
+    <script src="../../js/auth-password-toggle.js" defer></script>
+    <script src="../../js/auth-modal.js" defer></script>
     <div id="footer-placeholder"></div>
 </body>
 

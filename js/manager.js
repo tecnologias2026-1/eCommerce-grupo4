@@ -144,9 +144,6 @@ function updateHeaderState() {
 
     const reservBtn = header.querySelector("[data-header-btn='reserva']");
     if (reservBtn) reservBtn.setAttribute("href", getPublicPagePath("reservcode.html"));
-
-    const loginBtn = header.querySelector("[data-header-btn='login']");
-    if (loginBtn) loginBtn.setAttribute("href", getPublicPagePath("auth.html"));
 }
 
 function updateFooterState() {
@@ -159,8 +156,8 @@ function updateFooterState() {
     links.forEach((link) => {
         const href = (link.getAttribute("href") || "").toLowerCase();
 
-        if (href.includes("auth.html")) {
-            link.setAttribute("href", getPublicPagePath("auth.html"));
+        if (href.includes("auth.html") || href.includes("reservcode.html")) {
+            link.setAttribute("href", getPublicPagePath("reservcode.html"));
             return;
         }
     });

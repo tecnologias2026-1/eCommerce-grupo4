@@ -41,6 +41,7 @@
     --hero-max-height: calc(100vh - var(--space-xl));
 
     /* Layout */
+    --stack-top: 90px; /* altura del header sticky; js/stack-cards.js la actualiza con la altura real */
     --container-max: 1280px;
     --container-max-wide: 1920px;
     --content-shell-max: calc(var(--container-max) + (var(--page-gutter) * 2));

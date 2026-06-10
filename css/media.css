@@ -178,6 +178,11 @@
         --hero-max-height: calc(100vh - var(--space-md));
     }
 
+    .card-stack .stack-card + .stack-card {
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.16);
+    }
+
     .hero-selection {
         padding: 40px var(--space-md);
     }

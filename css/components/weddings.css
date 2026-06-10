@@ -525,10 +525,47 @@
     object-fit: cover;
 }
 
+/* Difuminado oscuro en la parte baja de la foto para que la opinión
+   y el nombre de los novios sean legibles sobre cualquier imagen */
+.boda-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+        rgba(0, 0, 0, 0.82) 0%,
+        rgba(0, 0, 0, 0.55) 28%,
+        rgba(0, 0, 0, 0.18) 55%,
+        rgba(0, 0, 0, 0) 75%);
+    pointer-events: none;
+}
+
+/* Todo el contenido vive dentro de la imagen, anclado abajo */
 .boda-card__content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
+    padding: var(--space-lg);
+    box-sizing: border-box;
+}
+
+.boda-card__stars {
+    color: var(--white);
+    font-size: 15px;
+    letter-spacing: 3px;
+    opacity: 0.95;
+}
+
+.boda-card__review {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--white);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
 }
 
 /* Al hacer hover, el nombre de los novios se convierte en un botón cyan
@@ -576,19 +613,22 @@
     opacity: 1;
 }
 
-.boda-card__info {
-    display: flex;
-    flex-direction: column;
-    font-family: var(--font-primary);
-    font-weight: 500;
-    font-size: 16px;
-    color: var(--muted);
-    line-height: 1.4;
-    transition: color 0.3s ease;
+/* Sobre la foto el nombre va en blanco (el hover cyan se mantiene) */
+.boda-card__title {
+    color: var(--white);
 }
 
-.boda-card__link:hover .boda-card__info {
-    color: var(--black);
+/* En táctil no hay hover: el nombre se muestra siempre como botón */
+@media (hover: none) {
+    .boda-card__title {
+        background: var(--primary);
+        color: var(--white);
+        padding: 10px 14px;
+    }
+
+    .boda-card__title::after {
+        opacity: 1;
+    }
 }
 
 /* FAQ */

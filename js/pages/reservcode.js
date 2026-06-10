@@ -3,6 +3,21 @@ document.addEventListener('DOMContentLoaded', function () {
     var verifyBtn = document.getElementById('verify-btn');
     var reserveCodeForm = document.getElementById('reserve-code-form');
 
+    var loginToggle = document.getElementById('login-toggle');
+    var loginPanel = document.getElementById('login-panel');
+    if (loginToggle && loginPanel) {
+        var loginInner = loginPanel.querySelector('.login-panel__inner');
+        loginToggle.addEventListener('click', function () {
+            var open = loginPanel.classList.toggle('is-open');
+            loginToggle.setAttribute('aria-expanded', String(open));
+            if (loginInner) loginInner.toggleAttribute('inert', !open);
+            if (open) {
+                var identifier = document.getElementById('identifier');
+                if (identifier) setTimeout(function () { identifier.focus(); }, 350);
+            }
+        });
+    }
+
     codeInput.addEventListener('input', function () {
         var value = codeInput.value.trim();
         if (value.length > 0) {

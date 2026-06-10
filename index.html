@@ -36,12 +36,15 @@
     <script src="js/cookie-consent.js" defer></script>
     <script src="js/manager.js" defer></script>
     <script src="js/reveal.js" defer></script>
+    <script src="js/stack-cards.js" defer></script>
 </head>
 
 <body>
     <div id="header-placeholder"></div>
+
+    <div class="card-stack">
     <!-- Hero Section (Figma 440:8454) -->
-    <section class="hero" data-name="Hero" data-node-id="440:8454">
+    <section class="hero stack-card" data-name="Hero" data-node-id="440:8454">
         <video id="hero-video" loop muted playsinline preload="metadata"
             poster="assets/public/fondo desktop.png" class="hero__video">
             <source src="assets/videos/hero-video.mp4" type="video/mp4">
@@ -71,51 +74,21 @@
         </a>
     </section>
 
-    <!-- Scroll indicator between Hero and Nuestras Bodas -->
-    <a href="#nuestras-bodas" class="section-scroll-indicator" aria-label="Desplazarse hacia abajo">
-        <svg class="section-scroll-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-            stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-    </a>
-
     <!-- Quote Section (Figma 440:8458) -->
-    <section class="inspiration-quote" data-name="Quote" data-node-id="440:8458">
+    <section class="inspiration-quote stack-card" data-name="Quote" data-node-id="440:8458">
         <figure class="inspiration-quote__container">
             <blockquote class="inspiration-quote__text">
                 Transformamos momentos en recuerdos eternos, cuidando cada detalle con amor y elegancia
             </blockquote>
-            <figcaption class="inspiration-quote__caption">
-                Porque tu amor merece ser recordado a detalle
-            </figcaption>
         </figure>
     </section>
 
+    <!-- Nuestras Bodas + Bodas Ejemplares: una sola tarjeta del stack -->
+    <div class="stack-card stack-card--bodas">
     <!-- Nuestras Bodas Section (Figma 440:8455) -->
     <section class="nuestras-bodas" id="nuestras-bodas" data-name="Feature" data-node-id="440:8455">
         <div class="nuestras-bodas__header">
             <h2 class="nuestras-bodas__title">Nuestras Bodas</h2>
-            <p class="nuestras-bodas__subtitle">Cada pareja tiene sus ideas de boda ideal y aca compartimos contigo y
-                con ellos algunas de sus eleciones para vivir el mejor dia de sus vidas a su completo gusto</p>
-        </div>
-
-        <div class="boda-card__link" data-wedding="featured"
-            style="text-decoration: none; color: inherit; display: block; width: 100%; max-width: var(--container-max); margin: 0 auto;">
-            <div class="nuestras-bodas__image-container">
-                <div class="slideshow-container"
-                    data-slideshow='["assets/images/anillos desktop.png","assets/images/juana y carlos.png","assets/images/juana y carlos2.png"]'
-                    data-speed="5000">
-                    <img src="assets/images/anillos desktop.png" alt="Anillos de boda" class="nuestras-bodas__image" decoding="async">
-                </div>
-            </div>
-
-            <div class="nuestras-bodas__details">
-                <h4 class="nuestras-bodas__wedding-title">Juana y Carlos</h4>
-                <div class="nuestras-bodas__wedding-info">
-                    <p>10/05/2018</p>
-                    <p>Hacienda Maria Clarita</p>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -126,12 +99,13 @@
                 <div class="boda-card__link" data-wedding="assets/public/weding1.html">
                     <div class="boda-card__image-container">
                         <img src="assets/images/boda1.jpg" alt="Vanessa y Pedro" class="boda-card__image" loading="lazy" decoding="async">
-                    </div>
-                    <div class="boda-card__content">
-                        <h5 class="boda-card__title">Vanessa y Pedro</h5>
-                        <div class="boda-card__info">
-                            <span>15/09/2025</span>
-                            <span>Hacienda San Juan</span>
+                        <div class="boda-card__overlay" aria-hidden="true"></div>
+                        <div class="boda-card__content">
+                            <span class="boda-card__stars" aria-hidden="true">★★★★★</span>
+                            <blockquote class="boda-card__review">"Nunca imaginamos que planear una boda pudiera ser
+                                tan emocionante y tan sencillo a la vez. Esta página nos devolvió la ilusión de
+                                celebrar el amor."</blockquote>
+                            <h5 class="boda-card__title">Vanessa y Pedro</h5>
                         </div>
                     </div>
                 </div>
@@ -140,12 +114,13 @@
                 <div class="boda-card__link" data-wedding="assets/public/weding2.html">
                     <div class="boda-card__image-container">
                         <img src="assets/images/boda2.png" alt="Tatiana y Felipe" class="boda-card__image" loading="lazy" decoding="async">
-                    </div>
-                    <div class="boda-card__content">
-                        <h5 class="boda-card__title">Tatiana y Felipe</h5>
-                        <div class="boda-card__info">
-                            <span>05/04/2023</span>
-                            <span>Hacienda Paz del Río</span>
+                        <div class="boda-card__overlay" aria-hidden="true"></div>
+                        <div class="boda-card__content">
+                            <span class="boda-card__stars" aria-hidden="true">★★★★★</span>
+                            <blockquote class="boda-card__review">"Soñábamos con una boda íntima rodeada de naturaleza
+                                y la Hacienda Paz del Río superó todo lo que imaginamos. El día de nuestra boda fue
+                                simplemente mágico."</blockquote>
+                            <h5 class="boda-card__title">Tatiana y Felipe</h5>
                         </div>
                     </div>
                 </div>
@@ -154,34 +129,23 @@
                 <div class="boda-card__link" data-wedding="assets/public/weding3.html">
                     <div class="boda-card__image-container">
                         <img src="assets/images/boda3.jpg" alt="Laura y Jorge" class="boda-card__image" loading="lazy" decoding="async">
-                    </div>
-                    <div class="boda-card__content">
-                        <h5 class="boda-card__title">Laura y Jorge</h5>
-                        <div class="boda-card__info">
-                            <span>14/06/2025</span>
-                            <span>Hacienda Arkadia</span>
+                        <div class="boda-card__overlay" aria-hidden="true"></div>
+                        <div class="boda-card__content">
+                            <span class="boda-card__stars" aria-hidden="true">★★★★★</span>
+                            <blockquote class="boda-card__review">"La Hacienda Arkadia nos robó el corazón desde que
+                                la vimos en la plataforma. Nuestros invitados aún hablan de esa noche. ¡Una
+                                experiencia que no tiene precio!"</blockquote>
+                            <h5 class="boda-card__title">Laura y Jorge</h5>
                         </div>
                     </div>
                 </div>
             </li>
         </ul>
     </section>
+    </div>
 
-    <!-- Nuestra Trayectoria Section (Figma 626:4868) -->
-    <section class="our-trajectory" data-name="Row characteristic" data-node-id="626:4868">
-        <div class="our-trajectory__container">
-            <div class="our-trajectory__content">
-                <h4 class="our-trajectory__title">Nuestra Trayectoria</h4>
-                <p class="our-trajectory__text">Eventos Decoraciones nació con el propósito de transformar celebraciones
-                    en experiencias únicas. Con años de experiencia en planeación y decoración de eventos, hemos
-                    acompañado a numerosas parejas en uno de los días más importantes de sus vidas, ofreciendo
-                    creatividad, compromiso y excelencia en cada boda.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq" data-name="FAQ">
+    <!-- FAQ Section: última tarjeta, en flujo normal (los acordeones cambian su altura) -->
+    <section class="faq stack-card stack-card--flow" data-name="FAQ">
         <div class="faq__container">
             <h2 class="faq__title">Preguntas Frecuentes</h2>
             <div class="faq__list">
@@ -215,6 +179,7 @@
             </div>
         </div>
     </section>
+    </div>
 
     <div id="footer-placeholder"></div>
 
