@@ -384,7 +384,9 @@ function showCustomConfirm(title, message, onConfirm) {
 }
 
 function initWeddingCardsModal() {
-    const weddingLinks = document.querySelectorAll(".boda-card__link");
+    // Solo enlaces con href: las tarjetas del index usan data-wedding
+    // y su modal lo maneja js/pages/index.js
+    const weddingLinks = document.querySelectorAll(".boda-card__link[href]");
     weddingLinks.forEach(link => {
         link.addEventListener("click", (e) => {
             e.preventDefault();

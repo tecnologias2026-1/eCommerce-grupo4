@@ -18,7 +18,7 @@
       '.feature',
       '.nuestras-bodas',
       '.bodas-ejemplares',
-      '.text-features',
+      '.faq',
       '.about-us',
       '.mission-vision',
       '.our-history',
@@ -53,7 +53,7 @@
       '.venue-card',
       '.selection-item',
       '.boda-card',
-      '.feature-block',
+      '.faq__item',
       '.wedding-feature-card',
       '.venue-feature-card',
       '.venue-estimation__card',
@@ -83,8 +83,8 @@
       '.summary-section__title',
       '.res-card__title',
       '.boda-card__title',
-      '.feature-block__title',
-      '.feature-block__text',
+      '.faq__title',
+      '.faq__question',
       '.summary-total-label',
       '.summary-total-value',
       '.summary-footer-note',
@@ -123,7 +123,7 @@
       el.setAttribute('data-reveal-delay', (i + 1) * 100);
     });
 
-    document.querySelectorAll('.text-features__grid .feature-block:not([data-reveal-delay])').forEach(function(el, i) {
+    document.querySelectorAll('.faq__list .faq__item:not([data-reveal-delay])').forEach(function(el, i) {
       el.setAttribute('data-reveal-delay', (i + 1) * 100);
     });
 

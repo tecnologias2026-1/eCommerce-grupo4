@@ -907,6 +907,10 @@ section.feature .feature__subtitle {
     justify-items: start;
 }
 
+.our-trajectory__title {
+    text-transform: none;
+}
+
 .our-history__image,
 .our-trajectory__image {
     width: 100%;

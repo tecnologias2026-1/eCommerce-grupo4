@@ -40,8 +40,8 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .text-features__grid {
-        gap: var(--space-xl);
+    .faq__title {
+        font-size: 40px;
     }
 
     .venue-header {
@@ -373,9 +373,12 @@
         gap: var(--space-md);
     }
 
-    .text-features__grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .faq__title {
+        font-size: 32px;
+    }
+
+    .faq__question {
+        font-size: 17px;
     }
 
     .venue-header {
@@ -508,17 +511,12 @@
         gap: var(--space-xl);
     }
 
-    .feature-block__title {
-        font-size: 18px;
+    .faq__question {
+        font-size: 16px;
     }
 
-    .feature-block__text {
+    .faq__answer {
         font-size: 15px;
-    }
-
-    .text-features__grid {
-        gap: 20px;
-        padding: 0 var(--space-md);
     }
 
     .venue-gallery__actions {
@@ -1243,16 +1241,15 @@
         font-size: 14px !important;
     }
 
-    .text-features__grid {
-        padding: 0 12px !important;
-        gap: 16px !important;
+    .faq__title {
+        font-size: 20px !important;
     }
 
-    .feature-block__title {
+    .faq__question {
         font-size: 14px !important;
     }
 
-    .feature-block__text {
+    .faq__answer {
         font-size: 12px !important;
     }
 
