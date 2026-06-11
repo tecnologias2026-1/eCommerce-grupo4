@@ -247,19 +247,23 @@
         width: 100%;
     }
 
+    /* Misma fila de 60px que en escritorio; solo se compacta el contenido */
     .header {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        height: auto;
-        justify-content: center;
-        align-items: center;
-        padding: var(--space-lg) var(--space-md);
-        width: 100%;
+        padding: 6px var(--space-md);
+    }
+
+    .logo {
+        width: 126px;
+        height: 34px;
     }
 
     .header-actions {
-        gap: 10px;
+        gap: 8px;
+    }
+
+    .header-btn {
+        padding: 8px 12px;
+        font-size: 12px;
     }
 
     .nav {
@@ -788,7 +792,7 @@
     .cart-modal {
         width: 95%;
         height: 90vh;
-        border-radius: 12px;
+        border-radius: 0;
     }
 
     /* Buttons smaller on mobile */
@@ -801,7 +805,7 @@
         padding: 8px 14px !important;
         font-size: 11px !important;
         min-height: 34px;
-        border-radius: 6px !important;
+        border-radius: 0;
     }
 
     .selection-modal__add-btn,
@@ -809,14 +813,14 @@
         padding: 8px 14px !important;
         font-size: 11px !important;
         min-height: 32px;
-        border-radius: 6px !important;
+        border-radius: 0;
     }
 
     .venue-card__overlay-text,
     .selection-item__overlay-text {
         font-size: 10px !important;
         padding: 6px 12px !important;
-        border-radius: 20px !important;
+        border-radius: 0;
     }
 
     .venue-card__content {
@@ -855,7 +859,7 @@
     .selection-modal {
         width: 92%;
         max-width: 360px;
-        border-radius: 12px !important;
+        border-radius: 0;
     }
 
     .selection-modal__qty-input {
@@ -1530,12 +1534,6 @@
         padding: 10px 18px !important;
         font-size: 11px !important;
         width: auto !important;
-    }
-
-    /* Keep header single row on planner/payment pages */
-    .planner-layout ~ * .header,
-    .pay-layout ~ * .header {
-        flex-direction: row;
     }
 }
 

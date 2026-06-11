@@ -16,9 +16,6 @@
     <script src="../../js/manager.js" defer></script>
     <script src="../../js/reveal.js" defer></script>
     <style>
-        /* Already on this page — hide the header button that points here */
-        [data-header-btn="reserva"] { display: none !important; }
-
         /* ── Secondary login section ── */
         .login-divider {
             display: flex;
@@ -110,7 +107,7 @@
             font-weight: 400;
             line-height: 1.5;
             border: 1.5px solid #e6e6e6;
-            border-radius: 8px;
+            border-radius: 0;
             background: #fafafa;
             transition: border-color 0.2s, background 0.2s;
         }
@@ -162,7 +159,7 @@
         }
         .modal-overlay[aria-hidden="true"] { display: none; }
         .modal-content {
-            background: #fff; border-radius: 16px; padding: 36px 40px;
+            background: #fff; border-radius: 0; padding: 36px 40px;
             max-width: 420px; width: 90%; box-shadow: 0 24px 80px rgba(0,0,0,0.18);
         }
         .modal-title {
@@ -175,7 +172,7 @@
         }
         .modal-input {
             width: 100%; padding: 12px 14px; border: 1.5px solid #e0e0e0;
-            border-radius: 8px; font-size: 15px; font-family: var(--font-primary);
+            border-radius: 0; font-size: 15px; font-family: var(--font-primary);
             background: #fafafa; box-sizing: border-box; outline: none;
             transition: border-color 0.2s;
         }

@@ -12,21 +12,11 @@
   <script src="../../js/cookie-consent.js" defer></script>
   <script src="../../js/manager.js" defer></script>
   <style>
-    /* ── No footer; header logo → back arrow ── */
+    /* ── No footer (header estándar global de 60px) ── */
     #footer-placeholder { display: none; min-height: 0; }
-    .logo {
-      display: inline-flex !important; align-items: center; justify-content: center;
-      width: 32px; height: 32px; border: 1.5px solid #ddd; border-radius: 50%;
-      text-decoration: none; transition: border-color 0.2s; flex-shrink: 0;
-    }
-    .logo:hover { border-color: #888; }
-    .logo img { display: none; }
-    .logo::before {
-      content: '';
-      display: block; width: 8px; height: 8px;
-      border-left: 2px solid #666; border-bottom: 2px solid #666;
-      transform: rotate(45deg) translateX(2px); flex-shrink: 0;
-    }
+
+    /* ── Volver: en el header, a la izquierda ── */
+    .header-back { display: inline-flex; }
 
     /* ── Nav section label ── */
     .planner-nav__section-label {
@@ -38,32 +28,16 @@
     /* Fix first nav item line start when label is above it */
     #planner-nav a:first-of-type::before { top: 50%; }
 
-    /* ── Compact header ── */
-    #header-placeholder { min-height: 48px; }
-    .header { min-height: 48px; padding: 6px 24px; }
-
-    /* ── Icon-only action buttons ── */
-    .header-btn__icon { display: block; }
-    .header-btn__text { display: none; }
-    .header-btn {
-      width: 36px;
-      height: 36px;
-      padding: 0;
-      border-radius: 50%;
-      justify-content: center;
-    }
-
-    /* ── Adjust nav/cart sticky top for compact header (desktop only) ── */
+    /* ── Nav/cart pegados bajo el header global de 60px ── */
     @media (min-width: 769px) {
       .planner-nav,
-      .planner-cart { top: 48px; height: calc(100vh - 48px); }
+      .planner-cart { top: 60px; height: calc(100vh - 60px); }
       .planner-nav { overflow-y: hidden; }
     }
 
     /* ── Mobile: reset height/top so media.css takes over ── */
     @media (max-width: 768px) {
-      .header { flex-direction: row !important; }
-      .planner-nav { height: auto !important; top: 48px !important; }
+      .planner-nav { height: auto !important; top: 60px !important; }
       .planner-cart { height: auto !important; top: auto !important; }
     }
 
@@ -71,7 +45,7 @@
     .planner-section--notes { border-bottom: none; margin-bottom: 60px; }
     .planner-notes-textarea {
       width: 100%; min-height: 130px; resize: vertical;
-      padding: 16px; border: 1.5px solid #e0e0e0; border-radius: 10px;
+      padding: 16px; border: 1.5px solid #e0e0e0; border-radius: 0;
       font-family: var(--font-primary); font-size: 15px; color: var(--black);
       background: #fafafa; transition: border-color 0.2s;
       box-sizing: border-box; line-height: 1.6;
@@ -90,7 +64,7 @@
     .vdp-popup {
       position: relative;
       width: 92%; max-width: 840px; max-height: 90vh; background: #fff;
-      border-radius: 20px; overflow: hidden; display: flex; flex-direction: column;
+      border-radius: 0; overflow: hidden; display: flex; flex-direction: column;
       min-height: 0;
       box-shadow: 0 32px 100px rgba(0,0,0,0.28);
       transform: translateY(24px) scale(0.97);
@@ -99,7 +73,7 @@
     .vdp-backdrop.active .vdp-popup { transform: none; }
     .vdp-close {
       position: absolute; top: 14px; right: 14px; z-index: 10;
-      width: 34px; height: 34px; border: none; border-radius: 50%;
+      width: 34px; height: 34px; border: none; border-radius: 0;
       background: rgba(0,0,0,0.45); color: #fff; font-size: 20px;
       cursor: pointer; display: flex; align-items: center; justify-content: center;
       line-height: 1;
@@ -124,12 +98,12 @@
     .vdp-features { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
     .vdp-feature { display: flex; align-items: flex-start; gap: 10px; font-family: var(--font-secondary); font-size: 12px; color: #444; }
     .vdp-feature__check {
-      width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+      width: 20px; height: 20px; border-radius: 0; flex-shrink: 0;
       background: var(--primary-light); display: flex; align-items: center; justify-content: center;
     }
     .vdp-feature__check svg { width: 10px; height: 10px; stroke: var(--primary); }
     .vdp-estimation {
-      background: #f8f9ff; border-radius: 12px; padding: 18px 22px; margin-bottom: 24px;
+      background: #f8f9ff; border-radius: 0; padding: 18px 22px; margin-bottom: 24px;
     }
     .vdp-estimation__title {
       font-family: var(--font-secondary); font-size: 12px; font-weight: 600;
@@ -174,7 +148,7 @@
       bottom: var(--cart-bar-height, 72px);
       max-height: 60vh;
       background: #fff;
-      border-radius: 18px 18px 0 0;
+      border-radius: 0;
       box-shadow: 0 -8px 40px rgba(0,0,0,0.14);
       z-index: 9100;
       flex-direction: column;
@@ -185,7 +159,7 @@
       transform: translateY(0);
     }
     .planner-cart__drawer-handle {
-      width: 36px; height: 4px; border-radius: 2px;
+      width: 36px; height: 4px; border-radius: 0;
       background: #ddd; margin: 10px auto 0; flex-shrink: 0;
     }
     .planner-cart__drawer-header {

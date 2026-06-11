@@ -27,7 +27,7 @@
     width: 90%;
     max-width: 380px;
     background: var(--white);
-    border-radius: 20px;
+    border-radius: 0;
     padding: 40px 36px;
     text-align: center;
     position: relative;
@@ -118,7 +118,7 @@ body.modal-open .venue-content {
     width: 40px;
     height: 40px;
     background: var(--white);
-    border-radius: 50%;
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -239,7 +239,7 @@ body.modal-open .venue-content {
 /* Selection Item Card — Premium Card Style */
 .selection-item {
     background: var(--white);
-    border-radius: 16px;
+    border-radius: 0;
     overflow: hidden;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     cursor: pointer;
@@ -327,7 +327,7 @@ body.modal-open .venue-content {
     max-width: 520px;
     max-height: 90vh;
     background: var(--white);
-    border-radius: 20px;
+    border-radius: 0;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -348,7 +348,7 @@ body.modal-open .venue-content {
     height: 36px;
     background: rgba(255, 255, 255, 0.9);
     border: none;
-    border-radius: 50%;
+    border-radius: 0;
     font-size: 20px;
     cursor: pointer;
     display: flex;
@@ -435,7 +435,7 @@ body.modal-open .venue-content {
     width: 8px;
     height: 8px;
     background: var(--primary);
-    border-radius: 50%;
+    border-radius: 0;
 }
 
 .selection-modal__qty {
@@ -456,7 +456,7 @@ body.modal-open .venue-content {
     width: 34px;
     height: 34px;
     border: 1px solid #ddd;
-    border-radius: 50%;
+    border-radius: 0;
     background: var(--white);
     cursor: pointer;
     font-size: 18px;
@@ -477,7 +477,7 @@ body.modal-open .venue-content {
     width: 48px;
     height: 34px;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 0;
     text-align: center;
     font-family: var(--font-primary);
     font-size: 15px;
@@ -515,7 +515,7 @@ body.modal-open .venue-content {
 .selection-modal__food-toggle button {
     padding: 8px 20px;
     border: 1px solid #ddd;
-    border-radius: 20px;
+    border-radius: 0;
     background: transparent;
     font-family: var(--font-primary);
     font-size: 14px;
@@ -550,7 +550,7 @@ body.modal-open .venue-content {
     right: 12px;
     width: 28px;
     height: 28px;
-    border-radius: 50%;
+    border-radius: 0;
     background: var(--primary);
     display: none;
     align-items: center;
@@ -574,7 +574,7 @@ body.modal-open .venue-content {
 /* Hide old row-characteristic styles inside ceremony-options when using new layout */
 .ceremony-options .row-characteristic {
     border: none;
-    border-radius: 16px;
+    border-radius: 0;
     background: var(--white);
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     cursor: pointer;
@@ -626,7 +626,7 @@ body.modal-open .venue-content {
 .ceremony-options .row-characteristic__image-frame {
     width: 100% !important;
     height: 100% !important;
-    border-radius: 0 !important;
+    border-radius: 0;
     overflow: hidden;
 }
 
@@ -656,7 +656,7 @@ body.modal-open .venue-content {
 .food-toggle-btn {
     padding: 6px 16px;
     border: 1px solid var(--gray-border);
-    border-radius: 20px;
+    border-radius: 0;
     background: transparent;
     font-family: var(--font-primary);
     font-size: 14px;
@@ -688,7 +688,7 @@ body.modal-open .venue-content {
     width: 60px;
     padding: 4px;
     border: 1px solid var(--gray-border);
-    border-radius: 4px;
+    border-radius: 0;
     text-align: center;
 }
 

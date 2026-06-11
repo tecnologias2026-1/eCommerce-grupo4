@@ -41,16 +41,18 @@
     --hero-max-height: calc(100vh - var(--space-xl));
 
     /* Layout */
-    --stack-top: 90px; /* altura del header sticky; js/stack-cards.js la actualiza con la altura real */
+    --stack-top: 60px; /* altura del header sticky; js/stack-cards.js la actualiza con la altura real */
     --container-max: 1280px;
     --container-max-wide: 1920px;
     --content-shell-max: calc(var(--container-max) + (var(--page-gutter) * 2));
     --content-inline-space: max(var(--page-gutter), calc((100% - var(--container-max)) / 2));
     --content-reading-max: 680px;
-    --radius: 6px;
-    --radius-sm: 6px;
-    --radius-lg: 12px;
-    --radius-xl: 20px;
+    /* Regla de diseño del sitio: esquinas rectas en todo (sin bordes
+       redondeados) y bordes de máximo 2px de grosor */
+    --radius: 0;
+    --radius-sm: 0;
+    --radius-lg: 0;
+    --radius-xl: 0;
     --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
     --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.05);

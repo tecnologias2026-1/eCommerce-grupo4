@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Boda - Eventos Decoraciones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Syne:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/media.css">
+    <script src="../../js/cookie-consent.js" defer></script>
+    <script src="../../js/manager.js" defer></script>
+    <script src="../../js/reveal.js" defer></script>
+    <script src="../../js/pages/weding.js" defer></script>
+</head>
+
+<body>
+    <div id="header-placeholder"></div>
+
+    <!-- Cabecera: nombres, fecha y lugar (los llena js/pages/weding.js) -->
+    <header class="wedding-header">
+        <div class="wedding-header__details">
+            <h1 class="wedding-header__title" id="wedding-title"></h1>
+            <div class="wedding-header__info">
+                <p class="wedding-header__date" id="wedding-date"></p>
+                <p class="wedding-header__location" id="wedding-location"></p>
+            </div>
+        </div>
+
+        <a class="wedding-header__close" href="../../index.html" aria-label="Cerrar">
+            <svg class="wedding-header__close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </a>
+    </header>
+
+    <!-- Carrusel principal: imágenes y/o video de la boda -->
+    <section class="wedding-banner">
+        <div class="wedding-carousel">
+            <div class="wedding-carousel__track" id="wedding-carousel-track"></div>
+            <div class="wedding-carousel__nav">
+                <button class="wedding-carousel__btn" id="carousel-prev" aria-label="Anterior">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <button class="wedding-carousel__btn" id="carousel-next" aria-label="Siguiente">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aspectos de la boda (los llena js/pages/weding.js) -->
+    <section class="wedding-features" id="wedding-features"></section>
+
+    <div id="footer-placeholder"></div>
+</body>
+
+</html>

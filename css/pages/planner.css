@@ -12,8 +12,8 @@
 /* ── Left nav ── */
 .planner-nav {
     position: sticky;
-    top: 80px;
-    height: calc(100vh - 80px);
+    top: 60px;
+    height: calc(100vh - 60px);
     padding: 56px 28px 56px 40px;
     border-right: 1px solid #ebebeb;
     display: flex;
@@ -52,7 +52,7 @@
 .planner-nav__dot {
     width: 15px;
     height: 15px;
-    border-radius: 50%;
+    border-radius: 0;
     border: 2px solid #ccc;
     background: #fff;
     flex-shrink: 0;
@@ -115,7 +115,7 @@
     z-index: 5;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    border-radius: 0;
     pointer-events: all;
 }
 
@@ -240,7 +240,7 @@
     font-weight: 600;
     letter-spacing: 0.3px;
     padding: 4px 10px;
-    border-radius: 20px;
+    border-radius: 0;
 }
 
 .planner-venue-card__check {
@@ -249,7 +249,7 @@
     right: 10px;
     width: 28px;
     height: 28px;
-    border-radius: 50%;
+    border-radius: 0;
     background: var(--primary);
     display: flex;
     align-items: center;
@@ -316,8 +316,8 @@
 /* ── Right cart ── */
 .planner-cart {
     position: sticky;
-    top: 80px;
-    height: calc(100vh - 80px);
+    top: 60px;
+    height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -470,7 +470,7 @@
     width: 24px;
     height: 24px;
     border: 1px solid var(--primary);
-    border-radius: 50%;
+    border-radius: 0;
     background: transparent;
     color: var(--primary);
     font-size: 16px;

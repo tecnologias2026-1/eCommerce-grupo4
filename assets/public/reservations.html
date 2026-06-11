@@ -16,34 +16,9 @@
     <script src="../../js/manager.js" defer></script>
     <script src="../../js/reveal.js" defer></script>
     <style>
-        /* ── Compact header matching planner ── */
-        #header-placeholder { min-height: 48px; }
-        .header { min-height: 48px; padding: 6px 24px; }
-
-        /* ── Logo → back arrow ── */
-        .logo {
-            display: inline-flex !important; align-items: center; justify-content: center;
-            width: 32px; height: 32px; border: 1.5px solid #ddd; border-radius: 50%;
-            text-decoration: none; transition: border-color 0.2s; flex-shrink: 0;
-        }
-        .logo:hover { border-color: #888; }
-        .logo img { display: none; }
-        .logo::before {
-            content: '';
-            display: block; width: 8px; height: 8px;
-            border-left: 2px solid #666; border-bottom: 2px solid #666;
-            transform: rotate(45deg) translateX(2px);
-        }
-
-        /* ── Show only logout, hide other header buttons ── */
-        [data-header-btn="reserva"],
-        [data-header-btn="login"] { display: none !important; }
-        [data-header-btn="logout"] {
-            display: inline-flex !important;
-            width: 36px; height: 36px; padding: 0; border-radius: 50%; justify-content: center;
-        }
-        [data-header-btn="logout"] .header-btn__icon { display: block; }
-        [data-header-btn="logout"] .header-btn__text { display: none; }
+        /* ── Sesión iniciada: header estándar con "Ver reserva" y
+           "Cerrar sesión" visibles ── */
+        [data-header-btn="logout"] { display: inline-flex !important; }
 
         /* ── Page section heading ── */
         .hero-selection {
@@ -76,7 +51,6 @@
 
         /* ── Mobile: reduce wide paddings ── */
         @media (max-width: 768px) {
-            .header { flex-direction: row !important; }
             .hero-selection { padding: 24px 16px 20px !important; }
             .hero-selection__title { font-size: 22px !important; }
             .res-filter-bar { padding: 16px 16px 0 !important; }
@@ -99,7 +73,7 @@
             height: 48px;
             border: 3px solid #e0e0e0;
             border-top-color: var(--primary);
-            border-radius: 50%;
+            border-radius: 0;
             animation: spin 0.9s linear infinite;
             flex-shrink: 0;
         }

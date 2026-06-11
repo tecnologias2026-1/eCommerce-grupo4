@@ -142,8 +142,22 @@ function updateHeaderState() {
     const logoLink = header.querySelector(".logo");
     if (logoLink) logoLink.setAttribute("href", getHomePath());
 
+    const backBtn = header.querySelector("[data-header-btn='back']");
+    if (backBtn) backBtn.setAttribute("href", getHomePath());
+
     const reservBtn = header.querySelector("[data-header-btn='reserva']");
-    if (reservBtn) reservBtn.setAttribute("href", getPublicPagePath("reservcode.html"));
+    if (reservBtn) {
+        reservBtn.setAttribute("href", getPublicPagePath("reservcode.html"));
+
+        // Dentro de la propia sección de consulta de reservas el botón
+        // se muestra "ya pulsado" (relleno transparente). Se compara sin
+        // extensión: algunos servidores sirven las páginas sin ".html"
+        const page = getCurrentPageName().replace(/\.html$/, "");
+        if (page === "reservcode" || page === "reserview_user") {
+            reservBtn.classList.add("header-btn--current");
+            reservBtn.setAttribute("aria-current", "page");
+        }
+    }
 }
 
 function updateFooterState() {

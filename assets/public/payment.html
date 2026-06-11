@@ -12,40 +12,21 @@
   <script src="../../js/cookie-consent.js" defer></script>
   <script src="../../js/manager.js" defer></script>
   <style>
-    /* ── Planner chrome reuse ── */
+    /* ── Sin footer (header estándar global de 60px) ── */
     #footer-placeholder { display: none; min-height: 0; }
-    #header-placeholder { min-height: 48px; }
-    .header { min-height: 48px; padding: 6px 24px; }
-    /* Back arrow */
-    .logo {
-      display: inline-flex !important; align-items: center; justify-content: center;
-      width: 32px; height: 32px; border: 1.5px solid #ddd; border-radius: 50%;
-      text-decoration: none; transition: border-color 0.2s; flex-shrink: 0;
-    }
-    .logo:hover { border-color: #888; }
-    .logo img { display: none; }
-    .logo::before {
-      content: '';
-      display: block; width: 8px; height: 8px;
-      border-left: 2px solid #666; border-bottom: 2px solid #666;
-      transform: rotate(45deg) translateX(2px); flex-shrink: 0;
-    }
-    .header-btn__icon { display: block; }
-    .header-btn__text { display: none; }
-    .header-btn { width: 36px; height: 36px; padding: 0; border-radius: 50%; justify-content: center; }
 
     /* ── Payment layout ── */
     .pay-layout {
       display: grid;
       grid-template-columns: 200px 1fr 460px;
-      min-height: calc(100vh - 48px);
+      min-height: calc(100vh - 60px);
     }
 
     /* ── Left nav (reuses planner-nav) ── */
     .pay-nav {
       position: sticky;
-      top: 48px;
-      height: calc(100vh - 48px);
+      top: 60px;
+      height: calc(100vh - 60px);
       padding: 40px 24px 40px 36px;
       border-right: 1px solid #ebebeb;
       display: flex;
@@ -162,7 +143,7 @@
     /* ── Pago step ── */
     .pay-deposit-info {
       background: #f8f9ff;
-      border-radius: 12px;
+      border-radius: 0;
       padding: 20px 24px;
       margin-bottom: 32px;
     }
@@ -198,7 +179,7 @@
     /* ── Confirmation step ── */
     .pay-confirm-summary {
       background: #f8f9ff;
-      border-radius: 14px;
+      border-radius: 0;
       overflow: hidden;
       margin-bottom: 32px;
     }
@@ -237,8 +218,8 @@
     /* ── Right summary panel ── */
     .pay-summary {
       position: sticky;
-      top: 48px;
-      height: calc(100vh - 48px);
+      top: 60px;
+      height: calc(100vh - 60px);
       display: flex;
       flex-direction: column;
       border-left: 1px solid #ebebeb;
@@ -362,8 +343,7 @@
 
     /* ── Mobile: reset sticky height/top so media.css takes over ── */
     @media (max-width: 768px) {
-      .header { flex-direction: row !important; }
-      .pay-nav { height: auto !important; top: 48px !important; }
+      .pay-nav { height: auto !important; top: 60px !important; }
       .pay-summary { height: auto !important; top: auto !important; }
     }
 
@@ -372,12 +352,12 @@
       text-align: center;
       padding: 48px 32px 36px;
       background: linear-gradient(135deg, #f0fafb 0%, #e6f7f8 100%);
-      border-radius: 20px;
+      border-radius: 0;
       margin-bottom: 28px;
     }
     .pay-success-banner__icon {
       width: 72px; height: 72px;
-      border-radius: 50%;
+      border-radius: 0;
       background: var(--primary);
       display: flex; align-items: center; justify-content: center;
       margin: 0 auto 22px;
@@ -395,7 +375,7 @@
     .pay-success-code {
       text-align: center;
       background: var(--primary);
-      border-radius: 16px;
+      border-radius: 0;
       padding: 26px 32px;
       margin-bottom: 32px;
     }

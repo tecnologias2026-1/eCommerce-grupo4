@@ -18,20 +18,6 @@
         #global-guest-container {
             display: none !important;
         }
-
-        /* Fix header buttons: show text + icon for login */
-        .header-btn__text { display: inline !important; }
-        .header-btn__icon { display: none !important; }
-        .header-btn--fill .header-btn__icon { display: block !important; }
-        .header-btn {
-            padding: 10px 24px !important;
-            font-size: 15px !important;
-        }
-        .header-btn--fill {
-            background: #000 !important;
-            color: #fff !important;
-        }
-        .header-btn--outline { color: #000 !important; }
     </style>
     <script src="js/cookie-consent.js" defer></script>
     <script src="js/manager.js" defer></script>
@@ -96,49 +82,46 @@
     <section class="bodas-ejemplares" id="bodas-ejemplares">
         <ul class="bodas-ejemplares__grid" data-name="Cards" data-node-id="440:8456">
             <li class="boda-card" data-name="Card" data-node-id="I440:8456;356:17132">
-                <div class="boda-card__link" data-wedding="assets/public/weding1.html">
+                <a class="boda-card__link" href="assets/public/weding.html?id=1">
                     <div class="boda-card__image-container">
                         <img src="assets/images/boda1.jpg" alt="Vanessa y Pedro" class="boda-card__image" loading="lazy" decoding="async">
                         <div class="boda-card__overlay" aria-hidden="true"></div>
                         <div class="boda-card__content">
-                            <span class="boda-card__stars" aria-hidden="true">★★★★★</span>
                             <blockquote class="boda-card__review">"Nunca imaginamos que planear una boda pudiera ser
                                 tan emocionante y tan sencillo a la vez. Esta página nos devolvió la ilusión de
                                 celebrar el amor."</blockquote>
                             <h5 class="boda-card__title">Vanessa y Pedro</h5>
                         </div>
                     </div>
-                </div>
+                </a>
             </li>
             <li class="boda-card" data-name="Card" data-node-id="I440:8456;356:17138">
-                <div class="boda-card__link" data-wedding="assets/public/weding2.html">
+                <a class="boda-card__link" href="assets/public/weding.html?id=2">
                     <div class="boda-card__image-container">
                         <img src="assets/images/boda2.png" alt="Tatiana y Felipe" class="boda-card__image" loading="lazy" decoding="async">
                         <div class="boda-card__overlay" aria-hidden="true"></div>
                         <div class="boda-card__content">
-                            <span class="boda-card__stars" aria-hidden="true">★★★★★</span>
                             <blockquote class="boda-card__review">"Soñábamos con una boda íntima rodeada de naturaleza
                                 y la Hacienda Paz del Río superó todo lo que imaginamos. El día de nuestra boda fue
                                 simplemente mágico."</blockquote>
                             <h5 class="boda-card__title">Tatiana y Felipe</h5>
                         </div>
                     </div>
-                </div>
+                </a>
             </li>
             <li class="boda-card" data-name="Card" data-node-id="I440:8456;356:17145">
-                <div class="boda-card__link" data-wedding="assets/public/weding3.html">
+                <a class="boda-card__link" href="assets/public/weding.html?id=3">
                     <div class="boda-card__image-container">
                         <img src="assets/images/boda3.jpg" alt="Laura y Jorge" class="boda-card__image" loading="lazy" decoding="async">
                         <div class="boda-card__overlay" aria-hidden="true"></div>
                         <div class="boda-card__content">
-                            <span class="boda-card__stars" aria-hidden="true">★★★★★</span>
                             <blockquote class="boda-card__review">"La Hacienda Arkadia nos robó el corazón desde que
                                 la vimos en la plataforma. Nuestros invitados aún hablan de esa noche. ¡Una
                                 experiencia que no tiene precio!"</blockquote>
                             <h5 class="boda-card__title">Laura y Jorge</h5>
                         </div>
                     </div>
-                </div>
+                </a>
             </li>
         </ul>
     </section>
@@ -183,20 +166,8 @@
 
     <div id="footer-placeholder"></div>
 
-    <!-- Wedding Detail Modal -->
-    <div class="wedding-modal-overlay" id="wedding-modal">
-        <div class="wedding-modal">
-            <button class="wedding-modal__close" id="wedding-modal-close" aria-label="Cerrar">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-            <div class="wedding-modal__content" id="wedding-modal-content"></div>
-        </div>
-    </div>
-
+    <!-- El detalle de boda se abre en el popup iframe de manager.js
+         (weding.html?id=N), igual que las páginas de haciendas -->
 
     <script src="js/pages/index.js" defer></script>
 

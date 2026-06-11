@@ -91,6 +91,77 @@
     object-position: center 15%;
 }
 
+/* ── Carrusel del detalle de boda ──
+   Foto principal con scroll horizontal + botones dentro de la imagen
+   (abajo a la derecha); cada slide puede ser imagen o video */
+.wedding-carousel {
+    position: relative;
+    width: 100%;
+    max-width: var(--container-max);
+    aspect-ratio: 1040 / 480;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.wedding-carousel__track {
+    display: flex;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.wedding-carousel__track::-webkit-scrollbar {
+    display: none;
+}
+
+.wedding-carousel__slide {
+    flex: 0 0 100%;
+    height: 100%;
+    scroll-snap-align: start;
+}
+
+.wedding-carousel__slide img,
+.wedding-carousel__slide video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.wedding-carousel__nav {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.wedding-carousel__btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--white);
+    background: rgba(0, 0, 0, 0.35);
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    padding: 0;
+}
+
+.wedding-carousel__btn:hover {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.wedding-carousel__btn svg {
+    width: 18px;
+    height: 18px;
+}
+
 .wedding-features {
     background-color: var(--gray-light);
     padding: 80px var(--content-inline-space);
@@ -120,7 +191,7 @@
     width: 100%;
     height: 360px;
     overflow: hidden;
-    border-radius: 12px;
+    border-radius: 0;
     box-shadow: var(--shadow-sm);
 }
 
@@ -250,7 +321,8 @@
     opacity: 1;
 }
 
-/* Desktop Hero */
+/* Desktop Hero — contenido centrado y anclado abajo; el padding
+   inferior iguala el lateral para un margen simétrico del botón */
 .hero {
     position: relative;
     width: 100%;
@@ -258,13 +330,12 @@
     max-height: var(--hero-max-height);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-end;
-    padding: var(--space-4xl) var(--page-gutter);
+    padding: var(--space-4xl) var(--page-gutter) var(--page-gutter);
     box-sizing: border-box;
     overflow: hidden;
     gap: 16px;
-    border-bottom: 6px solid #effdff;
 }
 
 .hero::after {
@@ -293,9 +364,9 @@
 .hero__text-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-    max-width: 320px;
+    align-items: center;
+    text-align: center;
+    max-width: 720px;
     position: relative;
     z-index: 1;
 }
@@ -310,34 +381,40 @@
     letter-spacing: 0;
 }
 
+/* Mismo diseño que el botón "Ver detalles" del planner (outline):
+   relleno transparente y borde fino primary; abarca todo el ancho
+   del hero a propósito */
 .hero__button {
-    background-color: #54c0cb;
-    border: none;
-    border-radius: var(--radius);
+    background-color: var(--primary);
+    border: 1px solid var(--primary);
     padding: 16px 24px;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: border-color 0.2s, color 0.2s, border-color 0.2s;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    width: 320px;
+    justify-content: center;
+    width: 100%;
     box-sizing: border-box;
     position: relative;
     z-index: 1;
 }
 
 .hero__button:hover {
-    background-color: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    border-color: #fff;
 }
 
 .hero__button-text {
     font-family: var(--font-primary);
     font-weight: 600;
     font-size: 18px;
+    color: #fff;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+}
+
+.hero__button:hover .hero__button-text {
     color: var(--white);
-    letter-spacing: 0;
 }
 
 /* Section Scroll Indicator */
@@ -347,7 +424,7 @@
     justify-content: center;
     width: 52px;
     height: 52px;
-    border-radius: 50%;
+    border-radius: 0;
     background-color: var(--primary);
     color: var(--white);
     text-decoration: none;
@@ -513,7 +590,7 @@
 .boda-card__image-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 2/3;
+    aspect-ratio: 5/6;
     overflow: hidden;
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
@@ -551,18 +628,10 @@
     box-sizing: border-box;
 }
 
-.boda-card__stars {
-    color: var(--white);
-    font-size: 15px;
-    letter-spacing: 3px;
-    opacity: 0.95;
-}
-
 .boda-card__review {
     margin: 0;
-    font-family: var(--font-secondary);
-    font-style: italic;
-    font-size: 16px;
+    font-family: var(--font-primary);
+    font-size: 15px;
     line-height: 1.45;
     color: var(--white);
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
@@ -744,7 +813,7 @@
     max-width: 800px;
     margin: 0 auto;
     background: var(--white);
-    border-radius: 12px;
+    border-radius: 0;
     padding: 32px;
     box-shadow: var(--shadow-sm);
 }
@@ -790,7 +859,7 @@
 }
 
 .calendar-nav__btn {
-    border-radius: 50%;
+    border-radius: 0;
     width: 40px;
     height: 40px;
     cursor: pointer;

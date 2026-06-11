@@ -137,7 +137,7 @@
     z-index: 10;
     background: rgba(255, 255, 255, 0.8);
     border: none;
-    border-radius: 50%;
+    border-radius: 0;
     width: 40px;
     height: 40px;
     display: flex;
@@ -197,7 +197,7 @@ body.is-popup .back-btn {
     padding: 10px 15px;
     cursor: pointer;
     z-index: 10;
-    border-radius: 50%;
+    border-radius: 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: background 0.3s ease;
 }
@@ -262,7 +262,7 @@ body.is-popup .back-btn {
     margin-right: 20px;
     width: 44px;
     height: 44px;
-    border-radius: 50%;
+    border-radius: 0;
     border: 0;
     background: rgba(0, 0, 0, 0.08);
     backdrop-filter: blur(4px);

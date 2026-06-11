@@ -1,141 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var modal = document.getElementById('wedding-modal');
-    var closeBtn = document.getElementById('wedding-modal-close');
-    var content = document.getElementById('wedding-modal-content');
-    var viewBtns = document.querySelectorAll('.boda-card__link[data-wedding]');
-
-    function buildFeaturedContent() {
-        return (
-            '<header class="wedding-header">' +
-            '<div class="wedding-header__details">' +
-            '<h1 class="wedding-header__title">Juana y Carlos</h1>' +
-            '<div class="wedding-header__info">' +
-            '<p class="wedding-header__date">10 de Mayo, 2018</p>' +
-            '<p class="wedding-header__location">Hacienda Maria Clarita</p>' +
-            '</div>' +
-            '</div>' +
-            '</header>' +
-            '<section class="wedding-banner">' +
-            '<div class="wedding-banner__image-container">' +
-            '<img src="assets/images/imagen novios.png" alt="Juana y Carlos" class="wedding-banner__image">' +
-            '</div>' +
-            '</section>' +
-            '<section class="wedding-features">' +
-            '<div class="wedding-feature-card">' +
-            '<div class="wedding-feature-card__image-container">' +
-            '<img src="assets/images/el cedro.png" alt="Lugar y Hacienda" class="wedding-feature-card__image">' +
-            '<div class="wedding-feature-card__overlay"></div>' +
-            '<div class="wedding-feature-card__info-panel">' +
-            '<h4 class="wedding-feature-card__info-title">Lugar y Hacienda</h4>' +
-            '<p class="wedding-feature-card__info-desc">La Hacienda Maria Clarita nos enamoró con sus jardines y su capilla al aire libre.</p>' +
-            '</div>' +
-            '</div>' +
-            '<h5 class="wedding-feature-card__title">Lugar y Hacienda</h5>' +
-            '</div>' +
-            '<div class="wedding-feature-card">' +
-            '<div class="wedding-feature-card__image-container">' +
-            '<img src="assets/images/c1.png" alt="Experiencia Gastronómica" class="wedding-feature-card__image">' +
-            '<div class="wedding-feature-card__overlay"></div>' +
-            '<div class="wedding-feature-card__info-panel">' +
-            '<h4 class="wedding-feature-card__info-title">Experiencia Gastronómica</h4>' +
-            '<p class="wedding-feature-card__info-desc">Un banquete con sabores tradicionales que sorprendió a todos nuestros invitados.</p>' +
-            '</div>' +
-            '</div>' +
-            '<h5 class="wedding-feature-card__title">Experiencia Gastronómica</h5>' +
-            '</div>' +
-            '<div class="wedding-feature-card">' +
-            '<div class="wedding-feature-card__image-container">' +
-            '<img src="assets/images/r1.png" alt="Recepción" class="wedding-feature-card__image">' +
-            '<div class="wedding-feature-card__overlay"></div>' +
-            '<div class="wedding-feature-card__info-panel">' +
-            '<h4 class="wedding-feature-card__info-title">Recepción</h4>' +
-            '<p class="wedding-feature-card__info-desc">Una fiesta llena de música, baile y momentos que recordaremos por siempre.</p>' +
-            '</div>' +
-            '</div>' +
-            '<h5 class="wedding-feature-card__title">Recepción</h5>' +
-            '</div>' +
-            '<div class="wedding-feature-card">' +
-            '<div class="wedding-feature-card__image-container">' +
-            '<img src="assets/images/f1.png" alt="Decoraciones" class="wedding-feature-card__image">' +
-            '<div class="wedding-feature-card__overlay"></div>' +
-            '<div class="wedding-feature-card__info-panel">' +
-            '<h4 class="wedding-feature-card__info-title">Decoraciones</h4>' +
-            '<p class="wedding-feature-card__info-desc">Arreglos florales y detalles que reflejaron nuestra esencia y estilo único.</p>' +
-            '</div>' +
-            '</div>' +
-            '<h5 class="wedding-feature-card__title">Decoraciones</h5>' +
-            '</div>' +
-            '</section>' +
-            '<section class="wedding-review" style="background-color:var(--white);padding:60px var(--page-gutter);text-align:center;">' +
-            '<div style="max-width:850px;margin:0 auto;background:var(--gray-light);padding:45px var(--space-2xl);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--border);">' +
-            '<div style="color:var(--primary);font-size:26px;margin-bottom:15px;letter-spacing:2px;">★★★★★</div>' +
-            '<blockquote style="font-family:var(--font-secondary);font-size:30px;line-height:1.35;color:#25393b;font-style:italic;margin:0 0 20px 0;">' +
-            '"Encontrar esta página fue un verdadero regalo. Desde el primer momento nos sentimos guiados: elegimos la Hacienda Maria Clarita viendo cada detalle en fotos y videos reales, comparamos opciones sin presión y armamos todo a nuestro ritmo. El día de la boda cada cosa estaba exactamente como la habíamos soñado. Nuestros invitados quedaron maravillados y nosotros sentimos que vivimos cada segundo al máximo, sin estrés, porque la plataforma ya había resuelto todo. Sin duda, la mejor decisión fue confiar en este equipo."' +
-            '</blockquote>' +
-            '<cite style="font-family:var(--font-primary);font-weight:600;font-size:18px;color:var(--black);font-style:normal;display:block;">&mdash; Juana &amp; Carlos</cite>' +
-            '<span style="font-family:var(--font-primary);font-size:14px;color:var(--muted);display:block;margin-top:5px;">Casados el 10 de Mayo de 2018</span>' +
-            '</div>' +
-            '</section>'
-        );
-    }
-
-    function openModal(url) {
-        content.innerHTML = '<div style="text-align:center;padding:80px 20px;font-family:var(--font-secondary);color:var(--muted);font-size:20px;">Cargando...</div>';
-        modal.classList.add('is-active');
-        document.body.style.overflow = 'hidden';
-
-        if (url === 'featured') {
-            content.innerHTML = buildFeaturedContent();
-            return;
-        }
-
-        fetch(url)
-            .then(function (res) {
-                if (!res.ok) throw new Error();
-                return res.text();
-            })
-            .then(function (html) {
-                var parser = new DOMParser();
-                var doc = parser.parseFromString(html, 'text/html');
-                var body = doc.body;
-                var h = body.querySelector('#header-placeholder');
-                var f = body.querySelector('#footer-placeholder');
-                if (h) h.remove();
-                if (f) f.remove();
-                content.innerHTML = body.innerHTML.replace(/src="\.\.\//g, 'src="assets/');
-            })
-            .catch(function () {
-                content.innerHTML = '<div style="text-align:center;padding:80px 20px;font-family:var(--font-secondary);color:var(--error);font-size:20px;">Error al cargar la información.</div>';
-            });
-    }
-
-    function closeModal() {
-        modal.classList.remove('is-active');
-        document.body.style.overflow = '';
-        setTimeout(function () { content.innerHTML = ''; }, 400);
-    }
-
-    for (var i = 0; i < viewBtns.length; i++) {
-        viewBtns[i].addEventListener('click', function (e) {
-            e.stopPropagation();
-            openModal(this.getAttribute('data-wedding'));
-        });
-    }
-
-    window.openModal = openModal;
-    window.closeModal = closeModal;
-
-    closeBtn.addEventListener('click', closeModal);
-
-    modal.addEventListener('click', function (e) {
-        if (e.target === modal) closeModal();
-    });
-
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && modal.classList.contains('is-active')) {
-            closeModal();
-        }
-    });
+    // Las tarjetas de boda son enlaces a weding.html?id=N; manager.js
+    // (initWeddingCardsModal) las abre en el popup iframe compartido.
 
     var slideshows = document.querySelectorAll('.slideshow-container');
     var supportsObserver = 'IntersectionObserver' in window;
@@ -231,29 +96,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 var imgSrc = w.banner_image
                     ? 'assets/images/' + w.banner_image
                     : (fallbackImages[idx] || 'assets/images/boda1.jpg');
-                var pageUrl = w.page_url || 'assets/public/weding1.html';
+                var pageUrl = 'assets/public/weding.html?id=' + (w.id || idx + 1);
                 var review = w.review || w.review_text || '';
                 return (
                     '<li class="boda-card">' +
-                    '<div class="boda-card__link" data-wedding="' + pageUrl + '">' +
+                    '<a class="boda-card__link" href="' + pageUrl + '">' +
                     '<div class="boda-card__image-container">' +
                     '<img src="' + imgSrc + '" alt="' + w.groom_name + ' y ' + w.bride_name + '" class="boda-card__image" loading="lazy" decoding="async">' +
                     '<div class="boda-card__overlay" aria-hidden="true"></div>' +
                     '<div class="boda-card__content">' +
-                    (review
-                        ? '<span class="boda-card__stars" aria-hidden="true">★★★★★</span>' +
-                          '<blockquote class="boda-card__review">"' + review + '"</blockquote>'
-                        : '') +
+                    (review ? '<blockquote class="boda-card__review">"' + review + '"</blockquote>' : '') +
                     '<h5 class="boda-card__title">' + w.groom_name + ' y ' + w.bride_name + '</h5>' +
-                    '</div></div></div></li>'
+                    '</div></div></a></li>'
                 );
             }).join('');
 
-            grid.querySelectorAll('.boda-card__link[data-wedding]').forEach(function (card) {
+            // El listener de manager.js se enganchó a las tarjetas estáticas;
+            // las re-renderizadas necesitan el suyo
+            grid.querySelectorAll('.boda-card__link[href]').forEach(function (card) {
                 card.addEventListener('click', function (e) {
-                    e.stopPropagation();
-                    var url = card.getAttribute('data-wedding');
-                    if (typeof openModal === 'function') openModal(url);
+                    e.preventDefault();
+                    if (typeof showWeddingModal === 'function') {
+                        showWeddingModal(card.getAttribute('href'));
+                    }
                 });
             });
         })

@@ -55,17 +55,22 @@
 
 /* Reserve space for async-loaded header/footer to prevent layout shift */
 #header-placeholder {
-    min-height: 90px;
+    min-height: 60px;
     display: block;
 }
 
 #footer-placeholder {
-    min-height: 140px;
     display: block;
 }
 
+/* La reserva solo aplica mientras el footer no ha cargado; después
+   la altura real manda y no queda un vacío bajo el footer */
+#footer-placeholder:empty {
+    min-height: 140px;
+}
+
 @media (max-width: 768px) {
-    #footer-placeholder {
+    #footer-placeholder:empty {
         min-height: 280px;
     }
 }
