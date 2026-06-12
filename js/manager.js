@@ -414,12 +414,18 @@ function initWeddingCardsModal() {
     });
 }
 
+// Añade popup=true respetando si la URL ya trae query (?id=N → &popup=true).
+// Sin esto la URL quedaría "weding.html?id=1?popup=true" y el id no se parsea.
+function withPopupParam(url) {
+    return url + (url.indexOf("?") > -1 ? "&" : "?") + "popup=true";
+}
+
 function showWeddingModal(url) {
     let backdrop = document.querySelector(".wedding-modal-backdrop");
     if (backdrop) {
         const iframe = backdrop.querySelector('iframe');
         if (iframe) {
-            iframe.src = `${url}?popup=true`;
+            iframe.src = withPopupParam(url);
         }
         backdrop.classList.add("active");
         document.body.classList.add("modal-open");
@@ -434,7 +440,7 @@ function showWeddingModal(url) {
         <div class="wedding-popup">
             <button class="wedding-popup__close" id="close-wedding-btn" aria-label="Cerrar">&times;</button>
             <div class="wedding-popup__content">
-                <iframe src="${url}?popup=true" class="wedding-popup__iframe"></iframe>
+                <iframe src="${withPopupParam(url)}" class="wedding-popup__iframe"></iframe>
             </div>
         </div>
     `;

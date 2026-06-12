@@ -321,8 +321,8 @@
     opacity: 1;
 }
 
-/* Desktop Hero — contenido centrado y anclado abajo; el padding
-   inferior iguala el lateral para un margen simétrico del botón */
+/* Desktop Hero — dos franjas verticales: video (70%) con la cita
+   anclada al pie, y franja blanca (30%) con el título y el botón */
 .hero {
     position: relative;
     width: 100%;
@@ -330,22 +330,32 @@
     max-height: var(--hero-max-height);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    padding: var(--space-4xl) var(--page-gutter) var(--page-gutter);
+    padding: 0;
     box-sizing: border-box;
     overflow: hidden;
-    gap: 16px;
 }
 
-.hero::after {
+/* Franja de video (70%): contiene el video, su degradado y la cita */
+.hero__media {
+    position: relative;
+    flex: 1 1 70%;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-4xl) var(--page-gutter) var(--space-2xl);
+    box-sizing: border-box;
+}
+
+.hero__media::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0) 100%);
     z-index: 0;
     pointer-events: none;
 }
@@ -361,14 +371,40 @@
     z-index: -1;
 }
 
-.hero__text-content {
+/* Cita: conserva la tipografía/forma de la antigua quote, en blanco
+   para legibilidad sobre el video, anclada al pie de la franja */
+.hero__quote {
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    max-width: var(--container-max);
+    margin-inline: 0;
+}
+
+.hero__quote-text {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-size: 42px;
+    line-height: 1.2;
+    color: var(--white);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* Franja inferior (30%): degradado cian (color primary) con el botón */
+.hero__cta {
+    flex: 0 0 30%;
+    background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary) 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    max-width: 720px;
-    position: relative;
-    z-index: 1;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: var(--space-lg) var(--page-gutter);
+    box-sizing: border-box;
 }
 
 .hero__title {
@@ -376,32 +412,34 @@
     font-family: var(--font-primary);
     font-weight: 500;
     font-size: 24px;
-    line-height: 1.5;
-    color: var(--white);
+    line-height: 1.4;
+    color: var(--black);
     letter-spacing: 0;
+    text-align: center;
+    max-width: 720px;
 }
 
-/* Mismo diseño que el botón "Ver detalles" del planner (outline):
-   relleno transparente y borde fino primary; abarca todo el ancho
-   del hero a propósito */
+/* Borde blanco sobre el degradado; se pinta de negro en hover.
+   Abarca todo el ancho de la franja a propósito */
 .hero__button {
-    background-color: var(--primary);
-    border: 1px solid var(--primary);
+    background-color: transparent;
+    border: 1px solid #fff;
     padding: 16px 24px;
     cursor: pointer;
-    transition: border-color 0.2s, color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    height: 50%;
     width: 100%;
+    max-width: var(--container-max);
     box-sizing: border-box;
-    position: relative;
-    z-index: 1;
 }
 
 .hero__button:hover {
-    border-color: #fff;
+    background-color: var(--black);
+    border-color: var(--black);
 }
 
 .hero__button-text {
@@ -411,10 +449,6 @@
     color: #fff;
     letter-spacing: 0.3px;
     transition: color 0.2s;
-}
-
-.hero__button:hover .hero__button-text {
-    color: var(--white);
 }
 
 /* Section Scroll Indicator */
@@ -594,6 +628,14 @@
     overflow: hidden;
     border-radius: var(--radius);
     box-shadow: var(--shadow-sm);
+    /* borde reservado (transparente) para que el hover no desplace la imagen */
+    border: 2px solid transparent;
+    transition: border-color 0.25s ease;
+}
+
+/* En hover, además del botón "Ver detalles", la foto se enmarca en cyan */
+.boda-card__link:hover .boda-card__image-container {
+    border-color: var(--primary);
 }
 
 .boda-card__image {
@@ -687,7 +729,8 @@
     color: var(--white);
 }
 
-/* En táctil no hay hover: el nombre se muestra siempre como botón */
+/* En táctil no hay hover: el nombre se muestra siempre como botón
+   y la foto siempre enmarcada en cyan */
 @media (hover: none) {
     .boda-card__title {
         background: var(--primary);
@@ -697,6 +740,10 @@
 
     .boda-card__title::after {
         opacity: 1;
+    }
+
+    .boda-card__image-container {
+        border-color: var(--primary);
     }
 }
 

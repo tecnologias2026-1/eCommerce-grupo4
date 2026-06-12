@@ -92,13 +92,6 @@ html:has(.card-stack) {
     border-bottom: 0;
 }
 
-/* Tarjetas de contenido corto: centrado vertical ("una cosa a la vez") */
-.card-stack .inspiration-quote {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
 /* Anclas internas (#nuestras-bodas): que no queden bajo el header sticky */
 .card-stack [id] {
     scroll-margin-top: var(--stack-top);

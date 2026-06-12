@@ -29,44 +29,44 @@
     <div id="header-placeholder"></div>
 
     <div class="card-stack">
-    <!-- Hero Section (Figma 440:8454) -->
+    <!-- Hero Section (Figma 440:8454) — video con la cita fusionada abajo
+         + franja blanca inferior con el botón -->
     <section class="hero stack-card" data-name="Hero" data-node-id="440:8454">
-        <video id="hero-video" loop muted playsinline preload="metadata"
-            poster="assets/public/fondo desktop.png" class="hero__video">
-            <source src="assets/videos/hero-video.mp4" type="video/mp4">
-            Tu navegador no soporta videos.
-        </video>
-        <script>
-            (function () {
-                var v = document.getElementById('hero-video');
-                if (!v) return;
-                var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                if (!reduced) {
-                    var tryPlay = function () {
-                        v.play().catch(function () { });
-                    };
-                    if (v.readyState >= 2) tryPlay();
-                    else v.addEventListener('loadeddata', tryPlay, { once: true });
-                }
-            })();
-        </script>
+        <div class="hero__media">
+            <video id="hero-video" loop muted playsinline preload="metadata"
+                poster="assets/public/fondo desktop.png" class="hero__video">
+                <source src="assets/videos/hero-video.mp4" type="video/mp4">
+                Tu navegador no soporta videos.
+            </video>
+            <script>
+                (function () {
+                    var v = document.getElementById('hero-video');
+                    if (!v) return;
+                    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    if (!reduced) {
+                        var tryPlay = function () {
+                            v.play().catch(function () { });
+                        };
+                        if (v.readyState >= 2) tryPlay();
+                        else v.addEventListener('loadeddata', tryPlay, { once: true });
+                    }
+                })();
+            </script>
 
-        <div class="hero__text-content">
-            <p class="hero__title">Empieza ahora y dale forma a tu boda soñada</p>
+            <!-- Cita (antes una stack card propia), ahora anclada al pie del video -->
+            <figure class="hero__quote">
+                <blockquote class="hero__quote-text">
+                    Transformamos momentos en recuerdos eternos, cuidando cada detalle con amor y elegancia
+                </blockquote>
+            </figure>
         </div>
 
-        <a href="assets/public/planner.html" class="hero__button">
-            <span class="hero__button-text">Personaliza tu boda</span>
-        </a>
-    </section>
-
-    <!-- Quote Section (Figma 440:8458) -->
-    <section class="inspiration-quote stack-card" data-name="Quote" data-node-id="440:8458">
-        <figure class="inspiration-quote__container">
-            <blockquote class="inspiration-quote__text">
-                Transformamos momentos en recuerdos eternos, cuidando cada detalle con amor y elegancia
-            </blockquote>
-        </figure>
+        <!-- Franja blanca (30%) con el título y el botón -->
+        <div class="hero__cta">
+            <a href="assets/public/planner.html" class="hero__button">
+                <span class="hero__button-text">Diseña tu boda</span>
+            </a>
+        </div>
     </section>
 
     <!-- Nuestras Bodas + Bodas Ejemplares: una sola tarjeta del stack -->

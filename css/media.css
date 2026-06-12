@@ -345,8 +345,11 @@
 
     .hero {
         min-height: 400px;
-        padding: 60px 40px;
-        gap: 16px;
+        padding: 0;
+    }
+
+    .hero__quote-text {
+        font-size: 32px;
     }
 
     section.feature {
@@ -1311,8 +1314,16 @@
     .hero {
         min-height: auto !important;
         max-height: none !important;
+        padding: 0 !important;
+    }
+
+    .hero__media {
         padding: 40px 24px !important;
-        gap: 16px !important;
+    }
+
+    .hero__cta {
+        padding: 24px !important;
+        gap: 12px !important;
     }
 
     .hero__button {
